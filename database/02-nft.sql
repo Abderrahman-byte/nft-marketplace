@@ -32,3 +32,10 @@ CREATE TABLE IF NOT EXISTS historique_trx (
 
     created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 );
+
+CREATE TABLE IF NOT EXISTS nft_token_likes (
+    token_id VARCHAR(25) NOT NULL REFERENCES nft_token (id),
+    account_id VARCHAR(25) NOT NULL REFERENCES account (id),
+    
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
+);
