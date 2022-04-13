@@ -1,4 +1,4 @@
-CREATE TABLE account (
+CREATE TABLE IF NOT EXISTS account (
     id VARCHAR(25) PRIMARY KEY,
     username VARCHAR (200) NOT NULL UNIQUE,
     email VARCHAR (200) NOT NULL UNIQUE,
@@ -7,6 +7,6 @@ CREATE TABLE account (
     is_artist BOOLEAN NOT NULL DEFAULT false,
     avatar_url TEXT,
 
-    created_date TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-    updated_date TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
+    updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 ); 

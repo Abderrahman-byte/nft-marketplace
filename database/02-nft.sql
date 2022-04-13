@@ -1,13 +1,13 @@
-CREATE TABLE nft_collection (
+CREATE TABLE IF NOT EXISTS nft_collection (
     id VARCHAR (25) PRIMARY KEY,
     name VARCHAR (200) NOT NULL,
     created_by VARCHAR(25) NOT NULL REFERENCES account (id),
     description TEXT,
 
-    created_date TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 );
 
-CREATE TABLE nft_token (
+CREATE TABLE IF NOT EXISTS nft_token (
     id VARCHAR (25) PRIMARY KEY,
     title VARCHAR (200) NOT NULL,
 
@@ -19,15 +19,16 @@ CREATE TABLE nft_token (
     preview_url TEXT NOT NULL,
     files_zip_url TEXT ,
     is_for_sall BOOLEAN NOT NULL DEFAULT false,
-    collection_id VARCHAR NOT NULL REFERENCES nft_collection(id),
+    collection_id VARCHAR(25) NOT NULL REFERENCES nft_collection(id),
 
-    created_date TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 );
 
-CREATE TABLE historique_trx (
-    id VARCHAR PRIMARY KEY,
-    created_date TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-    account_from VARCHAR NOT NULL REFERENCES account (id),
-    account_to VARCHAR NOT NULL REFERENCES account (id),
-    nft_id VARCHAR NOT NULL REFERENCES nft_token(id)
+CREATE TABLE IF NOT EXISTS historique_trx (
+    id VARCHAR(25) PRIMARY KEY,
+    account_from VARCHAR(25) NOT NULL REFERENCES account (id),
+    account_to VARCHAR(25) NOT NULL REFERENCES account (id),
+    nft_id VARCHAR(25) NOT NULL REFERENCES nft_token(id),
+
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 );
