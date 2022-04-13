@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS account (
     password TEXT,
     is_admin BOOLEAN NOT NULL DEFAULT false,
     is_artist BOOLEAN NOT NULL DEFAULT false,
+    is_verified BOOLEAN NOT NULL DEFAULT false,
     avatar_url TEXT,
 
     created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
