@@ -7,6 +7,6 @@ CREATE TABLE account (
     is_artist BOOLEAN NOT NULL DEFAULT false,
     avatar_url TEXT,
 
-    created_date TIMESTAMP WITH TIME ZONE DEFAULT NOW,
-    updated_date TIMESTAMP WITH TIME ZONE DEFAULT NOW
+    created_date TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_date TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 ); 
