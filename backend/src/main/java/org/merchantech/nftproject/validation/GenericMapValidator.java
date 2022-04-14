@@ -3,8 +3,14 @@ package org.merchantech.nftproject.validation;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.validation.Errors;
+
+/**
+ * Common utils functions between Map validators
+ */
 
 public abstract class GenericMapValidator extends GenericValidator {
     @Override
@@ -12,11 +18,11 @@ public abstract class GenericMapValidator extends GenericValidator {
         return clazz.equals(Map.class) || Map.class.isAssignableFrom(clazz);
     }
 
-    protected void checkAllowedFields (Map<String, Object> data, Errors errors) {
+    protected void checkAllowedFields(Map<String, Object> data, Errors errors) {
         List<String> allowedFields = this.getAllowedFields();
         List<String> requiredFields = this.getRequiredFields();
         Set<String> dataKeys = data.keySet();
-        
+
         for (String key : dataKeys) {
             if (!allowedFields.contains(key) && !requiredFields.contains(key)) {
                 String defaultMessage = "The field " + key + " is not allowed";
@@ -25,7 +31,7 @@ public abstract class GenericMapValidator extends GenericValidator {
         }
     }
 
-    protected void checkRequiredFields (Map<String, Object> data, Errors errors) {
+    protected void checkRequiredFields(Map<String, Object> data, Errors errors) {
         List<String> requiredFields = this.getRequiredFields();
 
         for (String field : requiredFields) {
@@ -33,6 +39,33 @@ public abstract class GenericMapValidator extends GenericValidator {
                 String defaultMessage = "The field " + field + " is required";
                 errors.rejectValue(field, "requiredField", new Object[] { field }, defaultMessage);
             }
+        }
+    }
+
+    protected void checkStringValues(Map<String, Object> data, List<String> stringFields, Errors errors) {
+        this.checkFieldsType(data, stringFields, String.class, errors);
+    }
+
+    protected void checkBooleanValues (Map<String, Object> data, List<String> booleanFields, Errors errors) {
+        this.checkFieldsType(data, booleanFields, Boolean.class, errors);
+    }
+
+    protected void testRegex (Pattern pattern, String field, Object value, Errors errors) {
+        this.testRegex(pattern, field, (String)value, errors);
+    }
+
+    protected void testRegex (Pattern pattern, String field, String value, Errors errors) {
+        Matcher matcher = pattern.matcher(value);
+
+        if (!matcher.matches()) errors.rejectValue(field, "invalidValue");
+    }
+
+    private void checkFieldsType(Map<String, Object> data, List<String> fields, Class<?> typeClass, Errors errors) {
+        for (String field : fields) {
+            if (!data.containsKey(field)) return;
+
+            if (data.get(field) == null || !data.get(field).getClass().equals(typeClass))
+                errors.rejectValue(field, "invalidType");
         }
     }
 }

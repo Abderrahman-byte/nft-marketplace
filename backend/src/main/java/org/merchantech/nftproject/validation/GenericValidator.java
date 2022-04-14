@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.springframework.validation.Validator;
 
+/** 
+ * This class is an abstraction that hold common desired functionalities between All Validators 
+*/
+
 public abstract class GenericValidator implements Validator {
     private List<String> requiredFields = new ArrayList<>();
     private List<String> allowedFields = new ArrayList<>();
