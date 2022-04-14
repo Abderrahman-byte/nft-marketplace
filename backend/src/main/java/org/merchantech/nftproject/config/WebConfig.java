@@ -7,10 +7,12 @@ import javax.sql.DataSource;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -23,6 +25,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
     @Autowired
     Environment environment;
+
+    @Bean
+    public MessageSource messageSource () {
+        ReloadableResourceBundleMessageSource messageSource =
+            new ReloadableResourceBundleMessageSource();
+        messageSource.addBasenames("classpath:messages");
+        messageSource.setDefaultEncoding("UTF-8");
+
+        return messageSource;
+    }
 
     @Bean
     public DataSource dataSource () {
@@ -41,7 +53,7 @@ public class WebConfig implements WebMvcConfigurer {
         entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         entityManagerFactoryBean.setDataSource(dataSource());
         entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
-        entityManagerFactoryBean.setPackagesToScan("org.merchantech.nftproject.models");
+        entityManagerFactoryBean.setPackagesToScan("org.merchantech.nftproject.model.bo");
         entityManagerFactoryBean.setJpaProperties(addProperties());
 
         return entityManagerFactoryBean;
