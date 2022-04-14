@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/${api.version}/auth/register")
-public class RegisterController {
+@RequestMapping("/api/${api.version}/auth/login")
+public class LoginController {
     
 }
