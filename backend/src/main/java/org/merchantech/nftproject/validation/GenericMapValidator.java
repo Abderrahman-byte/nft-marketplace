@@ -8,9 +8,7 @@ import java.util.regex.Pattern;
 
 import org.springframework.validation.Errors;
 
-/**
- * Common utils functions between Map validators
- */
+
 
 public abstract class GenericMapValidator extends GenericValidator {
     @Override

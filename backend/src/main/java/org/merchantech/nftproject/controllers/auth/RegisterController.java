@@ -20,11 +20,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-// TODO : Send email verification
-
 @RestController
 @RequestMapping("/api/${api.version}/auth/register")
 public class RegisterController {
+	
     @Autowired
     private RegisterFormValidator formValidator;
 
@@ -38,16 +37,13 @@ public class RegisterController {
     Map<String, Object> handlePostRequest (@RequestBody Map<String, Object> data) {
         Map<String, Object> response = new HashMap<>();
         MapBindingResult errors = new MapBindingResult(data, "register");
-
         response.put("ok", true);
         formValidator.validate(data, errors);
-
         if (errors.hasErrors()) {
             response.put("errors", this.getErrorList(errors));
             response.put("ok", false);
             return response;
         }
-
         try {
             accountDAO.insertAccount(data);
         } catch (DataIntegrityViolationException ex) {
@@ -57,20 +53,15 @@ public class RegisterController {
             response.put("ok", false);
             response.put("errors", List.of("unkown_errors"));
         }
-
-
         return response;
     }
 
-    // TODO : must be replaced with Probelem details
     private List<String> getErrorList (Errors errors) {
         List<String> errorsString = new ArrayList<>();
         List<FieldError> fieldErrors = errors.getFieldErrors();
-
         for (FieldError error: fieldErrors) {
             errorsString.add(messageSource.getMessage(error, Locale.US));
         }
-
         return errorsString;
     }
 
@@ -80,11 +71,9 @@ public class RegisterController {
         if (message.contains("email")) {
             return List.of("An account with same email already exists.");
         } 
-        
         if (message.contains("username")) {
             return List.of("An account with same username already exists.");
         }
-
         return List.of("unkown_error");
     }
 }
