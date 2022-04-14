@@ -49,7 +49,7 @@ public class Account {
     @UpdateTimestamp
     private Calendar updatedDate = Calendar.getInstance();
 
-    private Account () {}
+    public Account () {}
 
     public String getId() {
         return id;
