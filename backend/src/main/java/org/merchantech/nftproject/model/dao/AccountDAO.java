@@ -1,4 +1,4 @@
-package org.merchantech.nftproject.repositories;
+package org.merchantech.nftproject.model.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
