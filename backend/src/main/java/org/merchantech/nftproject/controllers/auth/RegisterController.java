@@ -53,6 +53,7 @@ public class RegisterController {
             response.put("ok", false);
             response.put("errors", List.of("unkown_errors"));
         }
+
         return response;
     }
 
