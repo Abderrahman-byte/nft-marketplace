@@ -8,7 +8,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.merchantech.nftproject.models.Account;
+import org.merchantech.nftproject.model.bo.Account;
 import org.springframework.stereotype.Repository;
 
 @Repository
