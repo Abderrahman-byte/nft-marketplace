@@ -57,7 +57,11 @@ public abstract class GenericMapValidator extends GenericValidator {
     protected void testRegex (Pattern pattern, String field, String value, Errors errors) {
         Matcher matcher = pattern.matcher(value);
 
-        if (!matcher.matches()) errors.rejectValue(field, "invalidValue");
+        if (matcher.find()) return ;
+        
+        if (matcher.matches()) return ;
+
+        errors.rejectValue(field, "invalidValue");
     }
 
     private void checkFieldsType(Map<String, Object> data, List<String> fields, Class<?> typeClass, Errors errors) {

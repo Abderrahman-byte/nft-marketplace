@@ -58,7 +58,6 @@ public class RegisterController {
             response.put("errors", List.of("unkown_errors"));
         }
 
-
         return response;
     }
 

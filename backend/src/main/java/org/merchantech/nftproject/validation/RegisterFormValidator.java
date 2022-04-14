@@ -12,10 +12,10 @@ import org.springframework.validation.Errors;
 @Component
 public class RegisterFormValidator extends GenericMapValidator {
     List<String> stringFields = List.of("username", "email", "password", "password2");
+
     Pattern usernamePattern = Pattern.compile("^[A-Za-z].{4,}$");
     Pattern emailPattern = Pattern.compile("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-\\.][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$");
-    Pattern passwordRegex = Pattern.compile(".{8,}");
-    // Pattern passwordRegex = Pattern.compile("(?=.*[A-Z].*)(?=.*[a-z].*)(?=.*[0-9].*)(?=.{8,})");
+    Pattern passwordRegex = Pattern.compile("(?=.*[A-Z].*)(?=.*[a-z].*)(?=.*[0-9].*)(?=.{8,})");
 
     public RegisterFormValidator () {
         // ! isArtist field may be move to update profile form
