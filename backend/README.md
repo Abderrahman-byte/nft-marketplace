@@ -1,5 +1,5 @@
 # NFT marketplace
 
-## TODO :
+## Tasks :
 
  - [ ] Implement Problem Details for HTTP API
