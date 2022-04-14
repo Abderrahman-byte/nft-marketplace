@@ -4,11 +4,11 @@ import java.util.Collection;
 
 public class NftCollection {
 
-	String id;
-	String name;
-	String description;
-	String  created_date;
-	Collection<NFT_Token> NFTS;
+	private String id;
+	private String name;
+	private String description;
+	private String  created_date;
+	private Collection<NFT_Token> NFTS;
 	public String getId() {
 		return id;
 	}

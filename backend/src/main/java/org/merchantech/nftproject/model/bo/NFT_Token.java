@@ -1,15 +1,16 @@
 package org.merchantech.nftproject.model.bo;
 
 public class NFT_Token {
-	String id;
-	String title;
-	Double price;
-	String preview_url;
-	String files_zip_url;
-	boolean is_for_sell;
-	NftCollection collection;
-	String date;
-	public NFT_Token(String id, String title, Double price, String preview_url, String files_zip_url,
+	private String id;
+	private String title;
+	private Double price;
+	private String preview_url;
+	private String files_zip_url;
+	private boolean is_for_sell;
+	private NftCollection collection;
+	private String date;
+	
+     public NFT_Token(String id, String title, Double price, String preview_url, String files_zip_url,
 			boolean is_for_sell, NftCollection collection, String date) {
 		super();
 		this.id = id;
