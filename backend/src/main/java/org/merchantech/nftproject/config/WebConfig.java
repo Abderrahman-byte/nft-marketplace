@@ -53,7 +53,7 @@ public class WebConfig implements WebMvcConfigurer {
         entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         entityManagerFactoryBean.setDataSource(dataSource());
         entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
-        entityManagerFactoryBean.setPackagesToScan("org.merchantech.nftproject.models");
+        entityManagerFactoryBean.setPackagesToScan("org.merchantech.nftproject.model.bo");
         entityManagerFactoryBean.setJpaProperties(addProperties());
 
         return entityManagerFactoryBean;
