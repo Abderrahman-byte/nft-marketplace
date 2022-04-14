@@ -2,10 +2,11 @@ package org.merchantech.nftproject.validation;
 
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 
+@Component
 public class LoginFormValidator extends GenericMapValidator {
     List<String> stringFields = List.of("username", "password");
     
@@ -24,9 +25,6 @@ public class LoginFormValidator extends GenericMapValidator {
 	    if (errors.hasErrors()) return ;
 	    
 	    this.checkStringValues(data, stringFields, errors);
-		
-	    if(errors.hasErrors()) return;
-	   
 	}
 
 }
