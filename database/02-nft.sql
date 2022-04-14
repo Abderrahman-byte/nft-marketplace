@@ -3,7 +3,6 @@ CREATE TABLE nft_collection (
     name VARCHAR (200) NOT NULL,
     created_by VARCHAR(25) NOT NULL REFERENCES account (id),
     description TEXT,
-
     created_date TIMESTAMP WITH TIME ZONE DEFAULT NOW
 );
 
