@@ -20,12 +20,9 @@ public class ValidationError extends ApiError {
     public ValidationError () {}
 
     public ValidationError (Errors results, MessageSource messageSource) {
-        List<FieldError> fieldErrors = results.getFieldErrors();
+        super("invalid_data", "Invalid recieved data", HttpStatus.BAD_REQUEST);
 
-        this.setTitle("invalid_data");
-        this.setStatus(HttpStatus.BAD_REQUEST);
-        this.setTimestamp(System.currentTimeMillis());
-        this.setDetail("Invalid recieved data");
+        List<FieldError> fieldErrors = results.getFieldErrors();
 
         for (FieldError error: fieldErrors) {
             String message = messageSource.getMessage(error, Locale.US);

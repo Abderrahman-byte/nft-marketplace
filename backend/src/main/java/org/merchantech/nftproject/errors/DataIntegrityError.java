@@ -9,10 +9,7 @@ public class DataIntegrityError extends ApiError {
     private String field;
     
     public DataIntegrityError (String message, String field) {
-        this.setDetail(message);
-        this.setTitle("data_integrety_error");
-        this.setStatus(HttpStatus.BAD_REQUEST);
-        this.setTimestamp(System.currentTimeMillis());
+        super("data_integrety_error", message, HttpStatus.BAD_REQUEST);
         this.field = field;
     }
 

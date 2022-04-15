@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.merchantech.nftproject.errors.ApiError;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -16,6 +17,6 @@ public class RestErrorHandler {
         response.put("success", false);
         response.put("error", error);
 
-        return new ResponseEntity<>(response, error.getStatus());
+        return new ResponseEntity<>(response, HttpStatus.valueOf(error.getStatus()));
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 @JsonIncludeProperties({ "title", "status", "detail" , "timestamp" })
 public class ApiError extends Throwable {
     private String title;
-    private HttpStatus status;
+    private int status;
     private String detail;
     private long timestamp;
 
@@ -16,7 +16,7 @@ public class ApiError extends Throwable {
     public ApiError (String title, String detail, HttpStatus status) {
         this.title = title;
         this.detail = detail;
-        this.status = status;
+        this.status = status.value();
         this.timestamp = System.currentTimeMillis();
     }
 
@@ -28,14 +28,14 @@ public class ApiError extends Throwable {
         this.title = title;
     }
 
-    public HttpStatus getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(HttpStatus status) {
+    public void setStatus(int status) {
         this.status = status;
     }
-
+    
     public long getTimestamp() {
         return timestamp;
     }
