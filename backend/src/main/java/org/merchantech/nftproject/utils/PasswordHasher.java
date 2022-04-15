@@ -9,9 +9,5 @@ public class PasswordHasher {
 
     public static boolean checkHash (String hash, String password) {
         return BCrypt.verifyer().verify(password.toCharArray(), hash.toCharArray()).verified;
-    }
-  
-    
-    
-   
+    }  
 }
