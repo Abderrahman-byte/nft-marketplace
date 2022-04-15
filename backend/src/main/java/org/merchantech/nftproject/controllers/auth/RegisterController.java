@@ -3,6 +3,12 @@ package org.merchantech.nftproject.controllers.auth;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTCreationException;
+
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.merchantech.nftproject.errors.ApiError;
@@ -23,6 +29,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping("/api/${api.version}/auth/register")
@@ -44,7 +51,7 @@ public class RegisterController {
     private MailService mailService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    Map<String, Object> handlePostRequest (@RequestBody Map<String, Object> data) throws ApiError {
+    Map<String, Object> handlePostRequest (@RequestBody Map<String, Object> data, HttpServletRequest request) throws ApiError {
         Map<String, Object> response = new HashMap<>();
         MapBindingResult errors = new MapBindingResult(data, "register");
 
@@ -55,7 +62,7 @@ public class RegisterController {
 
         try {
             Account account = accountDAO.insertAccount(data);
-            this.sendVerificationEmail(account);
+            this.sendVerificationEmail(request, account);
         } catch (DataIntegrityViolationException ex) {
             throw this.translateDataIntegrityError(ex);
         } catch (Exception ex) {
@@ -65,13 +72,37 @@ public class RegisterController {
         return response;
     }
 
-    private void sendVerificationEmail (Account account) {
+    private void sendVerificationEmail (HttpServletRequest request, Account account) {
         Context ctx = new Context();
         ctx.setVariable("account", account);
+        ctx.setVariable("verificationUrl", this.generateVerificationUrl(account, request));
 
         String content = templateEngine.process("email-verification", ctx);
 
         mailService.sendMail(account.getEmail(), "Verify Email", content, "text/html; charset=utf-8");
+    }
+
+    private String generateVerificationUrl (Account account, HttpServletRequest request) {
+        return ServletUriComponentsBuilder
+            .fromRequest(request)
+            .replacePath("/verify-email")
+            .queryParam("tq", this.generateToken(account))
+            .build()
+            .toUriString();
+    }
+
+    private String generateToken(Account account) {
+        try {
+            Algorithm algorithm = Algorithm.HMAC256("secret");
+            Map<String, Object> payloadClaims = new HashMap<>();
+            payloadClaims.put("accountId", account.getId());
+            payloadClaims.put("email", account.getEmail());
+            payloadClaims.put("action", "verifyEmail");
+
+            return JWT.create().withPayload(payloadClaims).sign(algorithm);
+        } catch (JWTCreationException ex) {
+            return "";
+        }
     }
 
     private ApiError translateDataIntegrityError (DataIntegrityViolationException ex) {

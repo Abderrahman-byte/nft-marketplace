@@ -9,6 +9,6 @@
 <body>
     <h1 th:text="${account.username}"></h1>
     <p>Please verify your email</p>
-    <a>verify email</a>
+    <a th:text="${verificationUrl}" th:href="${verificationUrl}" >verify email</a>
 </body>
 </html>
