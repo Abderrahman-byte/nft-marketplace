@@ -1,13 +1,19 @@
 package org.merchantech.nftproject.controllers.auth;
 
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import org.merchantech.nftproject.errors.ApiError;
 import org.merchantech.nftproject.errors.ValidationError;
 import org.merchantech.nftproject.model.bo.Account;
+import org.merchantech.nftproject.model.bo.Session;
 import org.merchantech.nftproject.model.dao.AccountDAO;
+import org.merchantech.nftproject.model.dao.SessionDAO;
 import org.merchantech.nftproject.utils.PasswordHasher;
+import org.merchantech.nftproject.utils.RandomGenerator;
 import org.merchantech.nftproject.validation.LoginFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -32,26 +38,61 @@ public class LoginController {
 
 	@Autowired
 	private AccountDAO accountDAO;
+	
+	@Autowired 
+	private SessionDAO sessionDAO;
 
 	private Account temp = new Account();
+	
+	@Autowired
+    private RandomGenerator randomGenerator;
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	Map<String, Object> handlePostRequest(@RequestBody Map<String, Object> data) throws ApiError {
+	Map<String, Object> handlePostRequest(@RequestBody Map<String, Object> data,HttpServletResponse httpResponse) throws ApiError {
 		Map<String, Object> response = new HashMap<>();
 		MapBindingResult errors = new MapBindingResult(data, "login");
-
-		response.put("success", true);
+	
+		//response.put("success", true);
 		formValidator.validate(data, errors);
 
 		if (errors.hasErrors()) throw new ValidationError(errors, messageSource);
 
-		temp = accountDAO.getAccountByUsername(String.valueOf(data.get("username")));
-		
-		if (temp == null || PasswordHasher.checkHash(temp.getPassword(), String.valueOf(data.get("password"))) == false) {
-			response.put("ok", false);
-			return response;
+		temp = authenticate(String.valueOf(data.get("username")), String.valueOf(data.get("password")));
+		if(temp == null) {
+			response.put("feild", false);
+		    response.put("errors", List.of("Username or password is incorrect"));
+		    return response;
+		}else {
+			 response.put("success", true);
+		     saveSession(httpResponse, temp);	
+		     return response;
 		}
-
-		return response;
+		
 	}
+	
+	private void saveSession(HttpServletResponse httpResponse, Account temp2) {
+		Map<String, Object> payload = new HashMap<>();
+		Session session = new Session();
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.MONTH, 1);
+		 payload.put("currentUser", temp2.getId());
+		 session.setPayload(payload);
+	     session.setSid(randomGenerator.generateRandomStr(15));
+	     session.setExpires(c);
+	     sessionDAO.insertSession(session);
+	     if (session != null) {
+	            Cookie cookie = new Cookie("sessionId", session.getSid());
+	            
+	            cookie.setMaxAge((int)session.getMaxAge());    
+	            cookie.setPath("/");
+	            httpResponse.addCookie(cookie);
+	        }
+	}
+	public Account authenticate(String username, String password) {
+        Account account = accountDAO.getAccountByUsername(username);
+
+        return account == null || !PasswordHasher.checkHash(account.getPassword(), password) ? null : account;
+    }
+	
+	
 }
