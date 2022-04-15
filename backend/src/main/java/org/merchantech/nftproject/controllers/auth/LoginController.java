@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import org.merchantech.nftproject.errors.ApiError;
+import org.merchantech.nftproject.errors.UnverifiedEmailError;
 import org.merchantech.nftproject.errors.ValidationError;
 import org.merchantech.nftproject.errors.WrongCredentialsError;
 import org.merchantech.nftproject.model.bo.Account;
@@ -23,8 +24,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-// TODO : Prevent unverified users from loggin
 
 //http://localhost:8080/api/v1/auth/login
 @RestController
@@ -57,6 +56,8 @@ public class LoginController {
 		Account temp = authenticate(String.valueOf(data.get("username")), String.valueOf(data.get("password")));
 
 		if (temp == null) throw new WrongCredentialsError();
+
+		if (!temp.isVerified()) throw new UnverifiedEmailError();
 
 		response.put("success", true);
 		saveSession(httpResponse, temp);
