@@ -69,4 +69,12 @@ public class AccountDAO {
         return account;
     }
 
+    @Transactional
+    public boolean setAccountAsVerified (String accountId) {
+        Query query = entityManager.createQuery("Update Account a set a.isVerified = true where a.id = :id");
+        query.setParameter("id", accountId);
+
+        return query.executeUpdate() > 0;
+    }
+
 }

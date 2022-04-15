@@ -9,8 +9,8 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 
-import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.merchantech.nftproject.errors.ApiError;
 import org.merchantech.nftproject.errors.DataIntegrityError;
 import org.merchantech.nftproject.errors.UnknownError;
@@ -20,7 +20,6 @@ import org.merchantech.nftproject.model.bo.Account;
 import org.merchantech.nftproject.model.dao.AccountDAO;
 import org.merchantech.nftproject.validation.RegisterFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.MediaType;
@@ -35,8 +34,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RequestMapping("/api/${api.version}/auth/register")
 public class RegisterController {
     @Autowired
-    @Qualifier("emailTemplateEngine")
-    private TemplateEngine templateEngine;
+    private SpringTemplateEngine templateEngine;
 	
     @Autowired
     private RegisterFormValidator formValidator;
