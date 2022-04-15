@@ -25,9 +25,6 @@ public class LoginFormValidator extends GenericMapValidator {
 	    if (errors.hasErrors()) return ;
 	    
 	    this.checkStringValues(data, stringFields, errors);
-		
-	    if(errors.hasErrors()) return;
-	   
 	}
 
 }

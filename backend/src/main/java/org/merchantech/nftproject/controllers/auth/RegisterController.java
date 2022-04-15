@@ -1,19 +1,18 @@
 package org.merchantech.nftproject.controllers.auth;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
+import org.merchantech.nftproject.errors.ApiError;
+import org.merchantech.nftproject.errors.DataIntegrityError;
+import org.merchantech.nftproject.errors.UnknownError;
+import org.merchantech.nftproject.errors.ValidationError;
 import org.merchantech.nftproject.model.dao.AccountDAO;
 import org.merchantech.nftproject.validation.RegisterFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.MediaType;
-import org.springframework.validation.Errors;
-import org.springframework.validation.FieldError;
 import org.springframework.validation.MapBindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,47 +33,37 @@ public class RegisterController {
     private AccountDAO accountDAO;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    Map<String, Object> handlePostRequest (@RequestBody Map<String, Object> data) {
+    Map<String, Object> handlePostRequest (@RequestBody Map<String, Object> data) throws ApiError {
         Map<String, Object> response = new HashMap<>();
         MapBindingResult errors = new MapBindingResult(data, "register");
-        response.put("ok", true);
+
+        response.put("success", true);
         formValidator.validate(data, errors);
-        if (errors.hasErrors()) {
-            response.put("errors", this.getErrorList(errors));
-            response.put("ok", false);
-            return response;
-        }
+
+        if (errors.hasErrors()) throw new ValidationError(errors, messageSource);
+
         try {
             accountDAO.insertAccount(data);
         } catch (DataIntegrityViolationException ex) {
-            response.put("ok", false);
-            response.put("errors", this.getTransactionsErrors(ex));
+            throw this.translateDataIntegrityError(ex);
         } catch (Exception ex) {
-            response.put("ok", false);
-            response.put("errors", List.of("unkown_errors"));
+            throw new UnknownError();
         }
 
         return response;
     }
 
-    private List<String> getErrorList (Errors errors) {
-        List<String> errorsString = new ArrayList<>();
-        List<FieldError> fieldErrors = errors.getFieldErrors();
-        for (FieldError error: fieldErrors) {
-            errorsString.add(messageSource.getMessage(error, Locale.US));
-        }
-        return errorsString;
-    }
-
-    private List<String> getTransactionsErrors (DataIntegrityViolationException ex) {
+    private ApiError translateDataIntegrityError (DataIntegrityViolationException ex) {
         String message = ex.getMessage();
 
         if (message.contains("email")) {
-            return List.of("An account with same email already exists.");
+            return new DataIntegrityError("An account with same email already exists.", "email");
         } 
+        
         if (message.contains("username")) {
-            return List.of("An account with same username already exists.");
+            return new DataIntegrityError("An account with same email already exists.", "username");
         }
-        return List.of("unkown_error");
+
+        return new UnknownError();
     }
 }
