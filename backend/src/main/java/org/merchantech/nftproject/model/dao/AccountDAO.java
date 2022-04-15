@@ -26,6 +26,10 @@ public class AccountDAO {
     @Autowired
     private RandomGenerator randomGenerator;
 
+    public Account getAccountById (String id) {
+        return entityManager.find(Account.class, id);
+    }
+
     public Account getAccountByUsername (String username) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Account> cq = cb.createQuery(Account.class);

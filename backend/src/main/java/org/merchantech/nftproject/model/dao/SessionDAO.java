@@ -15,7 +15,11 @@ public class SessionDAO {
 	
 	@Transactional
     public void insertSession (Session s) {
-        
         entityManager.persist(s);
+    }
+    
+    // TODO : filter Expired session
+    public Session getSessionById (String sid) {
+        return entityManager.find(Session.class, sid);
     }
 }
