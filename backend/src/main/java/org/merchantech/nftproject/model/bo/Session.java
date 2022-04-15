@@ -23,7 +23,6 @@ import com.vladmihalcea.hibernate.type.json.JsonType;
 	@TypeDef(name="json", typeClass = JsonType.class)
 })
 public class Session {
-
 	@Id
 	private String id;
 	
@@ -34,7 +33,6 @@ public class Session {
 	@Temporal( TemporalType.TIMESTAMP)
 	@Column(nullable = false)
 	private Calendar expires = Calendar.getInstance();
-	
 	
     public Session() {}
 
@@ -62,9 +60,10 @@ public class Session {
 	public void setExpires(Calendar expires) {
 		this.expires = expires;
 	}
-	 public long getMaxAge () {
-	        if (this.expires == null) return 0;
 
-	        return (this.expires.getTimeInMillis() - Calendar.getInstance().getTimeInMillis()) / 1000;
-	    }
+	public long getMaxAge () {
+		if (this.expires == null) return 0;
+
+		return (this.expires.getTimeInMillis() - Calendar.getInstance().getTimeInMillis()) / 1000;
+	}
 }
