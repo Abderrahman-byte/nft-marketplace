@@ -2,4 +2,4 @@
 
 ## Tasks :
 
- - [ ] Implement Problem Details for HTTP API
+ - [ ] Logout
