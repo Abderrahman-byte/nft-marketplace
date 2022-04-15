@@ -11,3 +11,11 @@ CREATE TABLE IF NOT EXISTS account (
     created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
     updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 ); 
+
+CREATE TABLE IF NOT EXISTS `session` (
+    id VARCHAR (25) PRIMARY KEY,
+    payload JSON NOT NULL,
+    expires TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS session_expires_idx ON session (expires);
