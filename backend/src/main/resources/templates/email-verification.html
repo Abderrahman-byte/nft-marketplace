@@ -7,7 +7,7 @@
     <title>EMAIL VERIFICATION</title>
 </head>
 <body>
-    <h1 th:text="${account.username}"></h1>
+    <h1 th:text="|Hi ${account.username},|"></h1>
     <p>Please verify your email</p>
     <a th:text="${verificationUrl}" th:href="${verificationUrl}" >verify email</a>
 </body>
