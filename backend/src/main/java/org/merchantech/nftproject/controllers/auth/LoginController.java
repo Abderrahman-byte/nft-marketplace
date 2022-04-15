@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+// TODO : Prevent unverified users from loggin
+
 //http://localhost:8080/api/v1/auth/login
 @RestController
 @RequestMapping("/api/${api.version}/auth/login")
