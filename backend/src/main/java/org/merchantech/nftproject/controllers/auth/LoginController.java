@@ -8,21 +8,23 @@ import java.util.Map;
 
 import org.merchantech.nftproject.model.bo.Account;
 import org.merchantech.nftproject.model.dao.AccountDAO;
+import org.merchantech.nftproject.utils.PasswordHasher;
 import org.merchantech.nftproject.validation.LoginFormValidator;
-import org.merchantech.nftproject.validation.RegisterFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.MediaType;
-import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.MapBindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
+import at.favre.lib.crypto.bcrypt.BCryptFormatter;
+
+//http://localhost:8080/api/v1/auth/login
 @RestController
 @RequestMapping("/api/${api.version}/auth/login")
 public class LoginController {
@@ -37,6 +39,7 @@ public class LoginController {
 	    
 	    private Account temp = new Account();
 	   
+   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	Map<String, Object> handlePostRequest(@RequestBody Map<String, Object> data){
 		Map<String, Object> response = new HashMap<>();
 		MapBindingResult errors = new MapBindingResult(data, "login");
@@ -49,10 +52,11 @@ public class LoginController {
 	            response.put("ok", false);
 	            return response;
 	        }
-		  temp = accountDAO.getAccountByUsername(String.valueOf(data.get("username")));
-		// if(temp!=null || temp.getPassword())
-		  
-		  
+		  temp = accountDAO.getAccountByUsername(String.valueOf(data.get("username"))); 
+		 if(temp==null || PasswordHasher.checkHash(temp.getPassword(), String.valueOf(data.get("password")))== false) {
+			   response.put("ok", false);
+	            return response;
+		 }
 		  return response;
 	}
 	
@@ -64,7 +68,9 @@ public class LoginController {
 	        }
 	        return errorsString;
 	    }
+	 
 }
+
 
 
 
