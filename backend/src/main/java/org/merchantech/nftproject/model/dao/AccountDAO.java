@@ -45,8 +45,8 @@ public class AccountDAO {
 
     
     @Transactional
-    public void insertAccount (Map<String, Object> data) {
-        this.insertAccount(
+    public Account insertAccount (Map<String, Object> data) {
+        return this.insertAccount(
             (String) data.get("username"),
             (String) data.get("email"), 
             (String) data.get("password"),
@@ -55,7 +55,7 @@ public class AccountDAO {
     }
 
     @Transactional
-    public void insertAccount (String username, String email, String password, boolean isArtist) {
+    public Account insertAccount (String username, String email, String password, boolean isArtist) {
         Account account = new Account();
 
         account.setUsername(username);
@@ -65,6 +65,8 @@ public class AccountDAO {
         account.setId(randomGenerator.generateRandomStr(25));
 
         entityManager.persist(account);
+
+        return account;
     }
 
 }

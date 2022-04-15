@@ -3,13 +3,18 @@ package org.merchantech.nftproject.controllers.auth;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 import org.merchantech.nftproject.errors.ApiError;
 import org.merchantech.nftproject.errors.DataIntegrityError;
 import org.merchantech.nftproject.errors.UnknownError;
 import org.merchantech.nftproject.errors.ValidationError;
+import org.merchantech.nftproject.helpers.MailService;
+import org.merchantech.nftproject.model.bo.Account;
 import org.merchantech.nftproject.model.dao.AccountDAO;
 import org.merchantech.nftproject.validation.RegisterFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.MediaType;
@@ -22,6 +27,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/${api.version}/auth/register")
 public class RegisterController {
+    @Autowired
+    @Qualifier("emailTemplateEngine")
+    private TemplateEngine templateEngine;
 	
     @Autowired
     private RegisterFormValidator formValidator;
@@ -31,6 +39,9 @@ public class RegisterController {
 
     @Autowired
     private AccountDAO accountDAO;
+
+    @Autowired
+    private MailService mailService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     Map<String, Object> handlePostRequest (@RequestBody Map<String, Object> data) throws ApiError {
@@ -43,7 +54,8 @@ public class RegisterController {
         if (errors.hasErrors()) throw new ValidationError(errors, messageSource);
 
         try {
-            accountDAO.insertAccount(data);
+            Account account = accountDAO.insertAccount(data);
+            this.sendVerificationEmail(account);
         } catch (DataIntegrityViolationException ex) {
             throw this.translateDataIntegrityError(ex);
         } catch (Exception ex) {
@@ -51,6 +63,15 @@ public class RegisterController {
         }
 
         return response;
+    }
+
+    private void sendVerificationEmail (Account account) {
+        Context ctx = new Context();
+        ctx.setVariable("account", account);
+
+        String content = templateEngine.process("email-verification", ctx);
+
+        mailService.sendMail(account.getEmail(), "Verify Email", content, "text/html; charset=utf-8");
     }
 
     private ApiError translateDataIntegrityError (DataIntegrityViolationException ex) {
