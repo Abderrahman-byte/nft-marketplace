@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -41,5 +42,18 @@ public class SessionDAO {
         } catch (NoResultException ex) {
             return null;
         }
+    }
+
+    @Transactional
+    public boolean deleteSession (String sid) {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaDelete<Session> cd = cb.createCriteriaDelete(Session.class);
+        Root<Session> root = cd.from(Session.class);
+
+        cd.where(
+            cb.equal(root.get("id"), sid)
+        );
+
+        return entityManager.createQuery(cd).executeUpdate() > 0;
     }
 }
