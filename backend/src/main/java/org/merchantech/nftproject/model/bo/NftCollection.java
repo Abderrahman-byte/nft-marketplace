@@ -1,14 +1,63 @@
 package org.merchantech.nftproject.model.bo;
 
+import java.util.Calendar;
 import java.util.Collection;
+import javax.persistence.*;
 
+import org.hibernate.annotations.CreationTimestamp;
+
+
+@Entity
+@Table(name="nft_collection")
 public class NftCollection {
 
+	@Id
 	private String id;
+	@Column(name="name", nullable=false, unique=true)
 	private String name;
+	@Column(name="description")
 	private String description;
-	private String  created_date;
+	
+	@Column(name = "created_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
+    private Calendar createdDate = Calendar.getInstance();
+	
+	@OneToMany(mappedBy="collection", fetch= FetchType.LAZY)
 	private Collection<NFT_Token> NFTS;
+	
+	@ManyToOne
+	@JoinColumn(name="created_by")
+	private Account account;
+	
+	
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	public NftCollection() {
+		
+	}
+	
+	public NftCollection(String name, String description) {
+		super();
+		this.name = name;
+		this.description = description;
+	}
+	
+	
+	public Calendar getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Calendar createdDate) {
+		this.createdDate = createdDate;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -27,25 +76,21 @@ public class NftCollection {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getCreated_date() {
-		return created_date;
-	}
-	public void setCreated_date(String created_date) {
-		this.created_date = created_date;
-	}
+	
 	public Collection<NFT_Token> getNFTS() {
 		return NFTS;
 	}
 	public void setNFTS(Collection<NFT_Token> nFTS) {
 		NFTS = nFTS;
 	}
-	public NftCollection(String id, String name, String description, String created_date, Collection<NFT_Token> nFTS) {
+	/*public NftCollection(String id, String name, String description, String created_date, Collection<NFT_Token> nFTS) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.created_date = created_date;
+		//this.created_date = created_date;
 		NFTS = nFTS;
-	}
+	}*/
+	
 	
 }

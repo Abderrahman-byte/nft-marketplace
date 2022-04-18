@@ -19,6 +19,7 @@ import javax.mail.internet.MimeMultipart;
 
 @Component
 public class MailService {
+	
     private Session mailSession;
     private Environment environment;
 

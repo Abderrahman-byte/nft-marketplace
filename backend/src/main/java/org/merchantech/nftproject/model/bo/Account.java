@@ -1,6 +1,7 @@
 package org.merchantech.nftproject.model.bo;
 
 import java.util.Calendar;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -48,7 +50,13 @@ public class Account {
     @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
     private Calendar updatedDate = Calendar.getInstance();
+     
+    @OneToMany(mappedBy="account", fetch= FetchType.LAZY)
+    private Collection<NFT_Token> nfts;
 
+    @OneToMany(mappedBy="account", fetch= FetchType.LAZY)
+    private Collection<NftCollection> nftcollection;
+    
     public Account () {}
 
     public String getId() {
