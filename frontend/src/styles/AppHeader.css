@@ -1,26 +1,40 @@
 .AppHeader {
     padding: 1.25em 11%;
-    /* background-color: red; */
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     border-bottom: 1px solid var(--divider-clr);
 }
 
 .AppHeader .horizontal-divider {
-    margin-right: 25px;
-    margin-left: 25px;
     align-self: stretch;
 }
 
-.Left-content {
+.AppHeader .Left-content, .AppHeader .Actions {
     display: flex;
     align-items: center;
 }
 
-.Left-content .nav-link {
+.AppHeader .Left-content {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    gap: 2.3vw;
+}
+
+.AppHeader .Left-content .nav-link {
     display: block;
-    margin-left: 32px;
+    font-size: .9rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--secondary-text-clr);
+}
+
+.AppHeader .Actions {
+    gap: 1.5em;
+}
+
+.AppHeader .Actions .buttons {
+    display: flex;
+    gap: .95em;
+    align-items: center;
 }

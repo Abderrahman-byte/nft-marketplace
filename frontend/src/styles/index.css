@@ -5,6 +5,7 @@
 	--divider-clr: #e6e8ec;
 	--primary-text-clr: #23262f;
 	--secondary-text-clr: #777e90;
+	--blue-btn-clr: #3772ff;
 }
 
 * {
@@ -23,4 +24,25 @@ body {
     min-height: 100%;
     border-radius: 2px;
     background-color: var(--divider-clr);
+}
+
+.btn {
+	border-radius: 90px;
+	padding: .85em 1.15em;
+	border: none;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.btn-blue {
+	background-color: var(--blue-btn-clr);
+	color: #fcfcfd;
+}
+
+.btn-white {
+	background-color: transparent;
+	border: solid 2px var(--divider-clr);
+	color: var(--primary-text-clr);
 }
