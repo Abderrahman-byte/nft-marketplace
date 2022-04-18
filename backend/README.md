@@ -2,4 +2,5 @@
 
 ## Tasks :
 
- - [ ] Logout
+ - [ ] Adapt Account table with frontend requirements 
+ - [ ] Add account profile
