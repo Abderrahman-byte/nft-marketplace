@@ -1,27 +1,83 @@
 package org.merchantech.nftproject.model.bo;
+import java.util.Calendar;
 
+import javax.persistence.*;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+
+@Entity
+@Table(name="nft_token")
 public class NFT_Token {
-	private String id;
-	private String title;
-	private Double price;
-	private String preview_url;
-	private String files_zip_url;
-	private boolean is_for_sell;
-	private NftCollection collection;
-	private String date;
 	
-     public NFT_Token(String id, String title, Double price, String preview_url, String files_zip_url,
-			boolean is_for_sell, NftCollection collection, String date) {
+	@Id
+	private String id;
+	
+	@Column (name="title", nullable=false, unique=true)
+	private String title;
+	@Column(name="price",nullable=false)
+	private Double price;
+	@Column(name="preview_url", nullable=false, unique=true)
+	private String preview_url;
+	@Column(name="files_zip_url", nullable=false, unique=true)
+	private String files_zip_url;
+	@Column(name="is_for_sell", nullable=false)
+	private boolean is_for_sell;
+	
+	@Column(name = "created_date", nullable=false)
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreationTimestamp
+	private Calendar createdDate = Calendar.getInstance();
+	
+	
+	@ManyToOne
+	@JoinColumn(name="artist_id")
+	private Account account;
+	
+	@ManyToOne
+	@JoinColumn(name="owner_id", nullable = true)
+	private Account owner;
+	
+	@ManyToOne
+	@JoinColumn(name="collection_id",nullable=true)
+	private NftCollection collection;
+
+	
+	
+	
+	public NFT_Token() {
+		
+	}
+	
+	public NFT_Token(String title, Double price, String preview_url, String files_zip_url, boolean is_for_sell,Account account ) {
 		super();
-		this.id = id;
 		this.title = title;
 		this.price = price;
 		this.preview_url = preview_url;
 		this.files_zip_url = files_zip_url;
 		this.is_for_sell = is_for_sell;
-		this.collection = collection;
-		this.date = date;
+		this.account = account;
+		
 	}
+	
+	
+	
+	public Calendar getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Calendar createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public Account getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Account owner) {
+		this.owner = owner;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -64,11 +120,12 @@ public class NFT_Token {
 	public void setCollection(NftCollection collection) {
 		this.collection = collection;
 	}
-	public String getDate() {
-		return date;
+	
+	public Account getAccount() {
+		return account;
 	}
-	public void setDate(String date) {
-		this.date = date;
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 
 }
