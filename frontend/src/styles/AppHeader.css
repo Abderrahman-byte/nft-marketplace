@@ -1,0 +1,26 @@
+.AppHeader {
+    padding: 1.25em 11%;
+    /* background-color: red; */
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 1px solid var(--divider-clr);
+}
+
+.AppHeader .horizontal-divider {
+    margin-right: 25px;
+    margin-left: 25px;
+    align-self: stretch;
+}
+
+.Left-content {
+    display: flex;
+    align-items: center;
+}
+
+.Left-content .nav-link {
+    display: block;
+    margin-left: 32px;
+}
