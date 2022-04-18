@@ -28,3 +28,11 @@
     top: -40px;
     right: -40px;
 } 
+
+.arrow-right-icon::before {
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Arrow\ Right\ 2_Line.svg') no-repeat center;
+    width: 14px;
+    height: 9px;
+}
