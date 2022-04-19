@@ -1,9 +1,6 @@
 import React , {useState}from "react";
-import { Link } from "react-router-dom";
-
 
 const LoginForm = () => {
-
 	const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 	const [errorMessages, setErrorMessages] = useState({});
@@ -24,6 +21,7 @@ const LoginForm = () => {
             credentials: "include"
 
         });
+		
         result = await result.json();
 		//console.log(result["error"].detail)
         
