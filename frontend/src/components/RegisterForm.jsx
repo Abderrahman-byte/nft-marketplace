@@ -26,7 +26,7 @@ const RegisterForm = () => {
 
 			<div className='buttons'>
             	<button className='btn btn-blue'>Sign Up</button>
-				<Link className='btn btn-white' to='#'>Sign In</Link>
+				<Link className='btn btn-white' to='/sign-in'>Sign In</Link>
 			</div>
 
 		</form>
