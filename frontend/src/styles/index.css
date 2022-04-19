@@ -85,3 +85,13 @@ textarea {
 	background-color: #fcfcfd;
 	padding: 2em;
 }
+
+.center-container {
+	padding-left: 11%;
+	padding-right: 11%;
+}
+
+.page {
+	padding-top: 2em;
+	padding-bottom: 3em;
+}
