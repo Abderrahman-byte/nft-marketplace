@@ -5,7 +5,7 @@ import '../styles/LoadingCard.css'
 const LoadingCard = () => {
 	return (
 		<div className='LoadingCard card'>
-			<div class='lds-spinner'>
+			<div className='lds-spinner'>
 				<div></div>
 				<div></div>
 				<div></div>
