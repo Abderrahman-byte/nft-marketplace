@@ -6,7 +6,6 @@ import AppHeader from './components/AppHeader'
 import RegisterPage from './pages/register.page'
 import LoginPage from './pages/login.page'
 
-
 import './styles/App.css'
 
 function App() {
@@ -15,8 +14,6 @@ function App() {
 			<AppHeader />
 			<Routes>
 				<Route path='/sign-up' element={<RegisterPage />} />
-			</Routes>
-			<Routes>
 				<Route path='/sign-in' element={<LoginPage />} />
 			</Routes>
 		
