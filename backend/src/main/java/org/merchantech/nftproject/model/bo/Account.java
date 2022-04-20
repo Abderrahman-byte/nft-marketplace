@@ -1,15 +1,17 @@
 package org.merchantech.nftproject.model.bo;
 
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -48,11 +50,11 @@ public class Account {
     @UpdateTimestamp
     private Calendar updatedDate = Calendar.getInstance();
      
-    @OneToMany(mappedBy="account", fetch= FetchType.LAZY)
-    private Collection<NFT_Token> nfts;
+    @OneToMany(mappedBy="owner", fetch= FetchType.LAZY)
+    private List<NftToken> nfts = new ArrayList<>();
 
     @OneToMany(mappedBy="account", fetch= FetchType.LAZY)
-    private Collection<NftCollection> nftcollection;
+    private List<NftCollection> nftcollection = new ArrayList<>();
     
     public Account () {}
 
@@ -126,5 +128,21 @@ public class Account {
 
     public void setUpdatedDate(Calendar updatedDate) {
         this.updatedDate = updatedDate;
+    }
+
+    public List<NftToken> getNfts() {
+        return nfts;
+    }
+
+    public void setNfts(List<NftToken> nfts) {
+        this.nfts = nfts;
+    }
+
+    public List<NftCollection> getNftcollection() {
+        return nftcollection;
+    }
+
+    public void setNftcollection(List<NftCollection> nftcollection) {
+        this.nftcollection = nftcollection;
     }
 }

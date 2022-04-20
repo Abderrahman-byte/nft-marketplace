@@ -4,7 +4,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.merchantech.nftproject.model.bo.Account;
-import org.merchantech.nftproject.model.bo.NFT_Token;
 import org.merchantech.nftproject.model.bo.NftCollection;
 import org.merchantech.nftproject.utils.RandomGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
