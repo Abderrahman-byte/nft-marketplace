@@ -38,9 +38,6 @@ public class Account {
     @Column(name = "is_verified", nullable = false)
     private boolean isVerified = false;
 
-    @Column(name = "avatar_url")
-    private String avatarUrl;
-
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
@@ -89,14 +86,6 @@ public class Account {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getAvatarUrl() {
-        return avatarUrl;
-    }
-
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
     }
 
     public boolean isAdmin() {
