@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS nft_token (
 
     preview_url TEXT NOT NULL,
     files_zip_url TEXT ,
-    is_for_sall BOOLEAN NOT NULL DEFAULT false,
+    is_for_sell BOOLEAN NOT NULL DEFAULT false,
     collection_id VARCHAR(25) NOT NULL REFERENCES nft_collection(id),
 
     created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP()

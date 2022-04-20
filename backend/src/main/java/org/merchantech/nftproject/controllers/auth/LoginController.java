@@ -57,7 +57,7 @@ public class LoginController {
 
 		if (temp == null) throw new WrongCredentialsError();
 
-		if (!temp.isVerified()) throw new UnverifiedEmailError();
+	//	if (!temp.isVerified()) throw new UnverifiedEmailError();
 
 		response.put("success", true);
 		saveSession(httpResponse, temp);
@@ -79,7 +79,6 @@ public class LoginController {
 
 		if (session != null) {
 			Cookie cookie = new Cookie("sessionId", session.getSid());
-
 			cookie.setMaxAge((int) session.getMaxAge());
 			cookie.setPath("/");
 			httpResponse.addCookie(cookie);

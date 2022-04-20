@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router'
 
 import AppFooter from './components/AppFooter'
 import AppHeader from './components/AppHeader'
-import RegisterPage from './pages/register.page'
+import RegisterPage from './pages/Register.page'
 import LoginPage from './pages/login.page'
 
 import './styles/App.css'
