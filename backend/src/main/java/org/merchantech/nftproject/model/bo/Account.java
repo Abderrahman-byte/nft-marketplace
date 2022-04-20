@@ -28,7 +28,15 @@ public class Account {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password", nullable = false)
+    public Profile getProfile() {
+		return profile;
+	}
+
+	public void setProfile(Profile profile) {
+		this.profile = profile;
+	}
+
+	@Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "is_admin", nullable = false)
@@ -55,6 +63,10 @@ public class Account {
 
     @OneToMany(mappedBy="account", fetch= FetchType.LAZY)
     private List<NftCollection> nftcollection = new ArrayList<>();
+    
+    @OneToOne(mappedBy = "account")
+    private Profile profile;
+    
     
     public Account () {}
 

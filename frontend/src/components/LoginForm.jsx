@@ -23,11 +23,11 @@ const LoginForm = () => {
         });
 		
         result = await result.json();
-		//console.log(result["error"].detail)
+		
         
 		if( "error" in result && "invalidFields" in result["error"])
 		{
-			//console.log("there is invalidFields")
+			
 			setErrorMessages({ name: result["error"].invalidFields[0].name, message: result["error"].invalidFields[0].reason  });
 		}
 		else if("error" in result)
@@ -38,9 +38,6 @@ const LoginForm = () => {
 		else{
 			console.log("loggedin")
 		}
-
-
-       // localStorage.setItem("Keys",JSON.stringify(result))
     }
 	const renderErrorMessage = (name) =>
 	name === errorMessages.name && (
@@ -51,12 +48,12 @@ const LoginForm = () => {
 		// Prevent page reload
 		event.preventDefault();
         login(event)
-	  };
+	};
 
 	return (
 
 		<form className='form' method="post" onSubmit={handleSubmit}>
-			<div className='form-div error'>
+			<div className='form-div '>
 				<label className='form-label'>Username</label>
 				<input name='username' className='form-input' onChange={(e)=> setUsername(e.target.value)} type='text' placeholder='Enter your username' autoComplete='off' />
 				{renderErrorMessage("username")}

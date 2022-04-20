@@ -61,7 +61,6 @@ public class AccountDAO {
     @Transactional
     public Account insertAccount (String username, String email, String password, boolean isArtist) {
         Account account = new Account();
-
         account.setUsername(username);
         account.setArtist(isArtist);
         account.setEmail(email);

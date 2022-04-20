@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS nft_token (
     description TEXT,
 
     preview_url TEXT NOT NULL,
-    is_for_sall BOOLEAN NOT NULL DEFAULT false,
+    is_for_sell BOOLEAN NOT NULL DEFAULT false,
     collection_id VARCHAR(25) REFERENCES nft_collection(id) ON DELETE CASCADE,
 
     created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
@@ -34,8 +34,14 @@ CREATE TABLE IF NOT EXISTS historique_trx (
 );
 
 CREATE TABLE IF NOT EXISTS nft_token_likes (
+<<<<<<< HEAD
     token_id VARCHAR(25) NOT NULL REFERENCES nft_token (id) ON DELETE CASCADE,
     account_id VARCHAR(25) NOT NULL REFERENCES account (id) ON DELETE CASCADE,
     
+=======
+    token_id VARCHAR(25) NOT NULL REFERENCES nft_token (id),
+    account_id VARCHAR(25) NOT NULL REFERENCES account (id),
+
+>>>>>>> master
     created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 );
