@@ -57,7 +57,7 @@ public class LoginController {
 
 		if (temp == null) throw new WrongCredentialsError();
 
-	//	if (!temp.isVerified()) throw new UnverifiedEmailError();
+	if (!temp.isVerified()) throw new UnverifiedEmailError();
 
 		response.put("success", true);
 		saveSession(httpResponse, temp);

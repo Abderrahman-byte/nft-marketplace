@@ -26,7 +26,15 @@ public class Account {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password", nullable = false)
+    public Profile getProfile() {
+		return profile;
+	}
+
+	public void setProfile(Profile profile) {
+		this.profile = profile;
+	}
+
+	@Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "is_admin", nullable = false)
@@ -37,9 +45,6 @@ public class Account {
 
     @Column(name = "is_verified", nullable = false)
     private boolean isVerified = false;
-
-    @Column(name = "avatar_url")
-    private String avatarUrl;
 
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
@@ -56,6 +61,10 @@ public class Account {
 
     @OneToMany(mappedBy="account", fetch= FetchType.LAZY)
     private Collection<NftCollection> nftcollection;
+    
+    @OneToOne(mappedBy = "account")
+    private Profile profile;
+    
     
     public Account () {}
 
@@ -89,14 +98,6 @@ public class Account {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getAvatarUrl() {
-        return avatarUrl;
-    }
-
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
     }
 
     public boolean isAdmin() {

@@ -20,7 +20,6 @@ CREATE TABLE IF NOT EXISTS nft_token (
     files_zip_url TEXT ,
     is_for_sell BOOLEAN NOT NULL DEFAULT false,
     collection_id VARCHAR(25) NOT NULL REFERENCES nft_collection(id),
-
     created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 );
 
@@ -36,6 +35,6 @@ CREATE TABLE IF NOT EXISTS historique_trx (
 CREATE TABLE IF NOT EXISTS nft_token_likes (
     token_id VARCHAR(25) NOT NULL REFERENCES nft_token (id),
     account_id VARCHAR(25) NOT NULL REFERENCES account (id),
-    
+
     created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 );

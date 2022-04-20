@@ -1,14 +1,25 @@
 package org.merchantech.nftproject.model.bo;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="account_profile")
 public class Profile {
 
-	private String id;
-	private Account account;
-	private String fullName;
-	private String photo;
-	private String customUrl;
+	
+	@Id
+    @Column(name = "account_id")
+    private String id;
+
+    @MapsId
+    @OneToOne(targetEntity = Account.class)
+    @JoinColumn(name = "account_id")
+    private Account account;
+	
+	private String display_name;
 	private String bio;
-	private String socialUrl;
+	private String custom_url;
+	private String avatar_url;
 	
 	
 	public String getId() {
@@ -17,36 +28,6 @@ public class Profile {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getFullName() {
-		return fullName;
-	}
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
-	public String getPhoto() {
-		return photo;
-	}
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
-	public String getCustomUrl() {
-		return customUrl;
-	}
-	public void setCustomUrl(String customUrl) {
-		this.customUrl = customUrl;
-	}
-	public String getBio() {
-		return bio;
-	}
-	public void setBio(String bio) {
-		this.bio = bio;
-	}
-	public String getSocialUrl() {
-		return socialUrl;
-	}
-	public void setSocialUrl(String socialUrl) {
-		this.socialUrl = socialUrl;
-	}
 	
 	public Account getAccount() {
 		return account;
@@ -54,6 +35,33 @@ public class Profile {
 	public void setAccount(Account account) {
 		this.account = account;
 	}
+	public String getDisplay_name() {
+		return display_name;
+	}
+	public void setDisplay_name(String display_name) {
+		this.display_name = display_name;
+	}
+	public String getAvatar_url() {
+		return avatar_url;
+	}
+	public void setAvatar_url(String avatar_url) {
+		this.avatar_url = avatar_url;
+	}
+	public String getCustom_url() {
+		return custom_url;
+	}
+	public void setCustom_url(String custom_url) {
+		this.custom_url = custom_url;
+	}
+	public String getBio() {
+		return bio;
+	}
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
+	
+	
+	
 	
 	
 	

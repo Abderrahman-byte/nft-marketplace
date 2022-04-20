@@ -25,3 +25,14 @@ export const register = async (data) => {
 
     return [false, null]
 }
+
+export const sendLogin = async (username, password) => {
+    try {
+        const response = await postRequest(buildApiUrl('/auth/register'), JSON.stringify({ username, password }))
+        
+        if (response && response.success) return [true, null]
+        else if (response && response.error) return [false, response.error]
+    } catch {}
+
+    return [false, null]
+}
