@@ -17,10 +17,12 @@ import org.springframework.validation.FieldError;
 public class ValidationError extends ApiError {
     private List<Map<String,String>> invalidFields = new ArrayList<>();
     
-    public ValidationError () {}
+    public ValidationError () {
+        super("invalid_data", "Invalid recieved data", HttpStatus.BAD_REQUEST);
+    }
 
     public ValidationError (Errors results, MessageSource messageSource) {
-        super("invalid_data", "Invalid recieved data", HttpStatus.BAD_REQUEST);
+        this();
 
         List<FieldError> fieldErrors = results.getFieldErrors();
 

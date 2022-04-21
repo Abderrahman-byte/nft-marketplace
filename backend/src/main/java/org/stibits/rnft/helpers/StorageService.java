@@ -54,10 +54,12 @@ public class StorageService {
             MagicMatch match = Magic.getMagicMatch(file.getBytes());
             String contentType = match.getMimeType();
             String ext = match.getExtension();
-            
+
             if (accept != null && !accept.matcher(contentType).matches()) {
                 throw new StorageUnacceptedMediaType(contentType);
             }
+
+            if (ext == null || ext.isEmpty()) ext = contentType.split("\\/")[1];
             
             String filename = StringUtils.cleanPath(this.randomGenerator.generateRandomStr(50) + "." + ext);
             Path targetLocation = subdir != null ? this.uploadDirPath.resolve(subdir).resolve(filename) : this.uploadDirPath.resolve(filename);

@@ -18,6 +18,8 @@ import org.springframework.http.MediaType;
 import org.springframework.validation.MapBindingResult;
 import org.springframework.web.bind.annotation.*;
 
+// TODO : refactor
+
 @RestController
 @RequestMapping("/api/${api.version}/profile")
 public class ProfileController {
@@ -32,24 +34,18 @@ public class ProfileController {
 	private MessageSource messageSource;
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	Map<String, Object> handlePostRequest(@RequestBody Map<String, Object> data,
-			@RequestAttribute(name = "account", required = true) Account account, HttpServletRequest request)
-			throws ApiError {
+	Map<String, Object> handlePostRequest(@RequestBody Map<String, Object> data, @RequestAttribute(name = "account", required = true) Account account, HttpServletRequest request) throws ApiError {
 		Map<String, Object> response = new HashMap<>();
 		MapBindingResult errors = new MapBindingResult(data, "profile");
 
 		response.put("success", true);
 		formValidator.validate(data, errors);
 
-		if (errors.hasErrors())
-			throw new ValidationError(errors, messageSource);
+		if (errors.hasErrors()) throw new ValidationError(errors, messageSource);
 
 		try {
-
 			profiledao.insertprofile(data, account);
-
 		} catch (Exception ex) {
-			System.out.println(ex);
 			throw new UnknownError();
 		}
 
@@ -57,16 +53,14 @@ public class ProfileController {
 	}
 
 	@GetMapping
-	Map<String, Object> handleGetRequest(@RequestAttribute(name = "account", required = true) Account account,
-			HttpServletRequest request) throws ApiError {
+	Map<String, Object> handleGetRequest(@RequestAttribute(name = "account", required = true) Account account)throws ApiError {
 		Map<String, Object> response = new HashMap<>();
 
 		response.put("success", true);
-		try {
 
+		try {
 			Profile profile = profiledao.getProfilebyId(account.getId());
 			response.put("profile", profile);
-
 		} catch (Exception ex) {
 			System.out.println(ex);
 			throw new UnknownError();

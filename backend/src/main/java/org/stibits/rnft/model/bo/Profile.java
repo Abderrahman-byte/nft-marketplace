@@ -2,6 +2,9 @@ package org.stibits.rnft.model.bo;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.Id;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
@@ -18,6 +21,7 @@ public class Profile {
     @MapsId
     @OneToOne(targetEntity = Account.class)
     @JoinColumn(name = "account_id")
+    @JsonBackReference
     private Account account;
 	
 	@Column(name = "display_name", nullable = false)
