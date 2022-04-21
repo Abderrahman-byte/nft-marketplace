@@ -1,4 +1,4 @@
-/*package org.merchantech.nftproject.helpers;
+package org.merchantech.nftproject.helpers;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -73,4 +73,4 @@ public class StorageService {
         
         return null;
     }
-}*/
+}
