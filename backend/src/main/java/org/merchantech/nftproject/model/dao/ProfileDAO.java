@@ -12,6 +12,7 @@ import org.springframework.stereotype.*;
 
 @Repository
 public class ProfileDAO {
+
 	@PersistenceContext
 	private EntityManager entityManager;
 
@@ -20,17 +21,21 @@ public class ProfileDAO {
 	}
 
 	@Transactional
-	public Profile insertProfile(Account acc, String display_name, String bio, String custom_url, String avatar_url) {
-		Profile profile = new Profile();
-		
-		profile.setId(acc.getId());
-		profile.setDisplayName(display_name);
-		profile.setBio(bio);
-		profile.setCustomUrl(custom_url);
-		profile.setAvatarUrl(avatar_url);
-		profile.setAccount(acc);
-		acc.setProfile(profile);
+	public Profile insertProfile(Account acc, String displayName, String bio, String customUrl, String avatarUrl) {
+		Profile profile = entityManager.find(Profile.class, acc.getId());
 
+		if (profile == null) {
+			profile = new Profile();
+			profile.setId(acc.getId());
+			profile.setAccount(acc);
+		}
+		
+		if (displayName != null) profile.setDisplayName(displayName);
+		if (bio != null) profile.setBio(bio);
+		if (customUrl != null) profile.setCustomUrl(customUrl);
+		if (avatarUrl != null) profile.setAvatarUrl(avatarUrl);
+		
+		acc.setProfile(profile);
 		entityManager.merge(acc);
 
 		return profile;
@@ -39,11 +44,11 @@ public class ProfileDAO {
 	@Transactional
 	public Profile insertprofile(Map<String, Object> data, Account account) {
 		return this.insertProfile(
-			account,
-			(String) data.get("displayName"),
-			(String) data.get("bio"),
-			(String) data.get("customUrl"),
-			(String) data.get("avatarUrl")
-		);
+				account,
+				(String) data.get("displayName"),
+				(String) data.get("bio"),
+				(String) data.get("customUrl"),
+				(String) data.get("avatarUrl"));
 	}
+
 }
