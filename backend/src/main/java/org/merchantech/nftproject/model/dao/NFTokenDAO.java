@@ -1,5 +1,7 @@
 package org.merchantech.nftproject.model.dao;
 
+import java.util.Map;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -17,6 +19,17 @@ public class NFTokenDAO {
 
     @Autowired
     private RandomGenerator randomGenerator;
+
+    @Transactional
+    public NFToken insertNFT (Account creator, Map<String, Object> data, String contentUrl) {
+        Boolean isForSell = (Boolean)data.get("isForSell");
+
+        if (isForSell) {
+            return this.insertNFT(creator, (String)data.get("title"), (String)data.get("title"), contentUrl, (Double)data.get("price"));
+        }
+
+        return this.insertNFT(creator, (String)data.get("title"), (String)data.get("title"), contentUrl);
+    }
 
     public NFToken insertNFT (Account creator, String title, String description, String contentUrl, double price) {
         return this.insertNFT(creator, title, description, contentUrl, true, price);
