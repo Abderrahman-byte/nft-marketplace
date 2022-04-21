@@ -7,8 +7,6 @@ import java.util.regex.Pattern;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 
-// TODO : Fix password regex
-
 @Component
 public class RegisterFormValidator extends GenericMapValidator {
     List<String> stringFields = List.of("username", "email", "password", "password2");

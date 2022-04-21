@@ -5,6 +5,7 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.hibernate.jpa.HibernatePersistenceProvider;
+import org.merchantech.nftproject.handlers.AuthenticatedOnly;
 import org.merchantech.nftproject.handlers.AuthenticationHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -86,12 +87,14 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authenticationHandler()).addPathPatterns("/**").order(0);
+        registry.addInterceptor(new AuthenticatedOnly()).addPathPatterns("/api/*/marketplace/create", "/api/*/profile").order(1);
     }
 
     // Serving static content just in case of using css
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/media/**").addResourceLocations("file://" + environment.getProperty("file.uploadDir") );
     }
     
     @Override

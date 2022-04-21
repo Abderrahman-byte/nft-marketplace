@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+// TODO : Refactor
 
 @Entity
 @Table(name="nft_collection")
@@ -24,7 +25,7 @@ public class NftCollection {
     private Calendar createdDate = Calendar.getInstance();
 	
 	@OneToMany(mappedBy="collection", fetch= FetchType.LAZY)
-	private Collection<NFT_Token> NFTS;
+	private Collection<NftToken> NFTS;
 	
 	@ManyToOne
 	@JoinColumn(name="created_by")
@@ -77,10 +78,10 @@ public class NftCollection {
 		this.description = description;
 	}
 	
-	public Collection<NFT_Token> getNFTS() {
+	public Collection<NftToken> getNFTS() {
 		return NFTS;
 	}
-	public void setNFTS(Collection<NFT_Token> nFTS) {
+	public void setNFTS(Collection<NftToken> nFTS) {
 		NFTS = nFTS;
 	}
 	/*public NftCollection(String id, String name, String description, String created_date, Collection<NFT_Token> nFTS) {
