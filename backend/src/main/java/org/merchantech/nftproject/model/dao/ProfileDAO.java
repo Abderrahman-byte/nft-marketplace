@@ -21,7 +21,7 @@ public class ProfileDAO {
      public Profile getProfilebyId(String id) {
     	 return entityManager.find(Profile.class, id);
      }
-     
+   
      @Transactional
      public Profile insertProfile(Account acc , String display_name, String bio, String custom_url, String avatar_url)
      {
