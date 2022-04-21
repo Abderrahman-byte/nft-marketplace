@@ -87,7 +87,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authenticationHandler()).addPathPatterns("/**").order(0);
-        registry.addInterceptor(new AuthenticatedOnly()).addPathPatterns("/api/*/marketplace/create", "/api/*/auth/profile").order(1);
+        registry.addInterceptor(new AuthenticatedOnly()).addPathPatterns("/api/*/marketplace/create", "/api/*/profile").order(1);
     }
 
     // Serving static content just in case of using css

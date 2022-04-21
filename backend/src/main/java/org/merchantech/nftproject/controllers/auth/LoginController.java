@@ -61,6 +61,7 @@ public class LoginController {
 
 		response.put("success", true);
 		saveSession(httpResponse, temp);
+
 		return response;
 	}
 	
@@ -70,8 +71,8 @@ public class LoginController {
 		Calendar c = Calendar.getInstance();
 
 		c.add(Calendar.MONTH, 1);
-
 		payload.put("currentUser", temp2.getId());
+
 		session.setPayload(payload);
 		session.setSid(randomGenerator.generateRandomStr(15));
 		session.setExpires(c);
@@ -79,7 +80,6 @@ public class LoginController {
 
 		if (session != null) {
 			Cookie cookie = new Cookie("sessionId", session.getSid());
-
 			cookie.setMaxAge((int) session.getMaxAge());
 			cookie.setPath("/");
 			httpResponse.addCookie(cookie);

@@ -7,22 +7,15 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 
 @Component
-public class LoginFormValidator extends GenericMapValidator {
-	public LoginFormValidator() {
-		this.addRequiredFields("username", "password");	
-	}
-  
+public class ProfileFormValidator extends GenericMapValidator{
+	 List<String> stringFields = List.of("display_name", "bio", "custom_url", "avatar_url");
+
 	@Override
 	@SuppressWarnings("unchecked")
 	public void validate(Object target, Errors errors) {
 		Map<String, Object> data = (Map<String, Object>)target;
 		
-		this.checkAllowedFields(data, errors);
-	    this.checkRequiredFields(data, errors);
-	    
-	    if (errors.hasErrors()) return ;
-	    
-	    this.checkStringValues(data, List.of("username", "password"), errors);
+		this.checkStringValues(data, stringFields, errors);
+		if(errors.hasErrors()) return;
 	}
-
 }

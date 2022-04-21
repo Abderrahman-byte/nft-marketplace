@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -28,7 +30,15 @@ public class Account {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password", nullable = false)
+    public Profile getProfile() {
+		return profile;
+	}
+
+	public void setProfile(Profile profile) {
+		this.profile = profile;
+	}
+
+	@Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "is_admin", nullable = false)
@@ -55,6 +65,9 @@ public class Account {
 
     @OneToMany(mappedBy="account", fetch= FetchType.LAZY)
     private List<NftCollection> nftcollection = new ArrayList<>();
+    
+    @OneToOne(targetEntity = Profile.class, mappedBy = "account", optional = true, cascade = CascadeType.MERGE)
+    private Profile profile;
     
     public Account () {}
 
