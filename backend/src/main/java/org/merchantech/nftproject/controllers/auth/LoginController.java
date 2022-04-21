@@ -57,10 +57,11 @@ public class LoginController {
 
 		if (temp == null) throw new WrongCredentialsError();
 
-	if (!temp.isVerified()) throw new UnverifiedEmailError();
+		if (!temp.isVerified()) throw new UnverifiedEmailError();
 
 		response.put("success", true);
 		saveSession(httpResponse, temp);
+
 		return response;
 	}
 	
@@ -70,8 +71,8 @@ public class LoginController {
 		Calendar c = Calendar.getInstance();
 
 		c.add(Calendar.MONTH, 1);
-
 		payload.put("currentUser", temp2.getId());
+
 		session.setPayload(payload);
 		session.setSid(randomGenerator.generateRandomStr(15));
 		session.setExpires(c);

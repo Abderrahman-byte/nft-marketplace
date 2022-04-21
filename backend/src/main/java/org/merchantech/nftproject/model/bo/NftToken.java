@@ -13,6 +13,8 @@ import javax.persistence.Column;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+// TODO : Refactor
+
 @Entity
 @Table(name = "nft_token")
 public class NftToken {

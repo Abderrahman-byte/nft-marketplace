@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+// TODO : Refactor
 
 @Entity
 @Table(name="nft_collection")
