@@ -60,11 +60,14 @@ public class Account {
     @UpdateTimestamp
     private Calendar updatedDate = Calendar.getInstance();
      
-    @OneToMany(mappedBy="owner", fetch= FetchType.LAZY)
-    private List<NftToken> nfts = new ArrayList<>();
+    @OneToMany(mappedBy="owner", fetch= FetchType.LAZY, cascade = CascadeType.MERGE)
+    private List<NFToken> nfts = new ArrayList<>();
 
-    @OneToMany(mappedBy="account", fetch= FetchType.LAZY)
-    private List<NftCollection> nftcollection = new ArrayList<>();
+    @OneToMany(mappedBy="creator", fetch= FetchType.LAZY, cascade = CascadeType.MERGE)
+    private List<NFToken> createdNfts = new ArrayList<>();
+
+    // @OneToMany(mappedBy="account", fetch= FetchType.LAZY)
+    // private List<NftCollection> nftcollection = new ArrayList<>();
     
     @OneToOne(targetEntity = Profile.class, mappedBy = "account", optional = true, cascade = CascadeType.MERGE)
     private Profile profile;
@@ -143,19 +146,27 @@ public class Account {
         this.updatedDate = updatedDate;
     }
 
-    public List<NftToken> getNfts() {
+    public List<NFToken> getNfts() {
         return nfts;
     }
 
-    public void setNfts(List<NftToken> nfts) {
+    public void setNfts(List<NFToken> nfts) {
         this.nfts = nfts;
     }
 
-    public List<NftCollection> getNftcollection() {
-        return nftcollection;
+    public List<NFToken> getCreatedNfts() {
+        return createdNfts;
     }
 
-    public void setNftcollection(List<NftCollection> nftcollection) {
-        this.nftcollection = nftcollection;
+    public void setCreatedNfts(List<NFToken> createdNfts) {
+        this.createdNfts = createdNfts;
     }
+
+    // public List<NftCollection> getNftcollection() {
+    //     return nftcollection;
+    // }
+
+    // public void setNftcollection(List<NftCollection> nftcollection) {
+    //     this.nftcollection = nftcollection;
+    // }
 }

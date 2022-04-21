@@ -75,6 +75,7 @@ public class WebConfig implements WebMvcConfigurer {
     public Properties addProperties () {
         Properties properties = new Properties();
         properties.setProperty("javax.persistence.schema-generation.database.action", "none");
+        properties.setProperty("hibernate.enable_lazy_load_no_trans", "true");
 
         return properties;
     }

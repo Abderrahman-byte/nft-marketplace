@@ -13,19 +13,17 @@ import javax.persistence.Column;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-// TODO : Refactor
-
 @Entity
 @Table(name = "nft_token")
-public class NftToken {
+public class NFToken {
 	@Id
 	private String id;
-
-	@Column(name = "title", nullable = false)
+	
+	@Column(name = "title", nullable = false, unique = true)
 	private String title;
 
 	@Column(name = "price", nullable = false)
-	private Double price;
+	private double price = 0;
 
 	@Column(name = "description")
 	private String description;
@@ -42,18 +40,18 @@ public class NftToken {
 	private Calendar createdDate = Calendar.getInstance();
 
 	@ManyToOne(targetEntity = Account.class, optional = false)
-	@JoinColumn(name = "artist_id")
+	@JoinColumn(name = "artist_id", nullable = false)
 	private Account creator;
 
 	@ManyToOne(targetEntity = Account.class, optional = false)
-	@JoinColumn(name = "owner_id", nullable = true)
+	@JoinColumn(name = "owner_id", nullable = false)
 	private Account owner;
 
 	@ManyToOne(targetEntity = NftCollection.class, optional = true)
 	@JoinColumn(name = "collection_id", nullable = true)
 	private NftCollection collection;
 
-	public NftToken() {
+	public NFToken() {
 	}
 
 	public Calendar getCreatedDate() {
@@ -88,11 +86,11 @@ public class NftToken {
 		this.title = title;
 	}
 
-	public Double getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
@@ -119,7 +117,6 @@ public class NftToken {
 	public void setCreator(Account creator) {
 		this.creator = creator;
 	}
-
 
 	public String getDescription() {
 		return description;

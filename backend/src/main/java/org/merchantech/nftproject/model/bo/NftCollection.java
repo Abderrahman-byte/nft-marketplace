@@ -25,7 +25,7 @@ public class NftCollection {
     private Calendar createdDate = Calendar.getInstance();
 	
 	@OneToMany(mappedBy="collection", fetch= FetchType.LAZY)
-	private Collection<NftToken> NFTS;
+	private Collection<NFToken> NFTS;
 	
 	@ManyToOne
 	@JoinColumn(name="created_by")
@@ -78,10 +78,10 @@ public class NftCollection {
 		this.description = description;
 	}
 	
-	public Collection<NftToken> getNFTS() {
+	public Collection<NFToken> getNFTS() {
 		return NFTS;
 	}
-	public void setNFTS(Collection<NftToken> nFTS) {
+	public void setNFTS(Collection<NFToken> nFTS) {
 		NFTS = nFTS;
 	}
 	/*public NftCollection(String id, String name, String description, String created_date, Collection<NFT_Token> nFTS) {
