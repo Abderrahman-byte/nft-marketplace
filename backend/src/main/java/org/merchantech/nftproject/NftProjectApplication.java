@@ -22,8 +22,8 @@ public class NftProjectApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Account acc = accountDao.getAccountById("wa0K5Rusc4k5soVdEOXLJkRHn");
+		/*Account acc = accountDao.getAccountById("wa0K5Rusc4k5soVdEOXLJkRHn");
 
-		profileDao.insertProfile(acc, "Account1", "Bio", "costumurl", "avatarurl");
+		profileDao.insertProfile(acc, "Account1", "Bio", "costumurl", "avatarurl");*/
 	}
 }

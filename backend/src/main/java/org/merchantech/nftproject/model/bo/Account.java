@@ -18,6 +18,8 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "account")
 public class Account {
@@ -66,6 +68,7 @@ public class Account {
     @OneToMany(mappedBy="account", fetch= FetchType.LAZY)
     private List<NftCollection> nftcollection = new ArrayList<>();
     
+    @JsonManagedReference
     @OneToOne(targetEntity = Profile.class, mappedBy = "account", optional = true, cascade = CascadeType.MERGE)
     private Profile profile;
     

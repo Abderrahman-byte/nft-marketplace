@@ -45,28 +45,22 @@ public class ProfileController {
 			throw new ValidationError(errors, messageSource);
 
 		try {
-
 			profiledao.insertprofile(data, account);
-
 		} catch (Exception ex) {
 			System.out.println(ex);
 			throw new UnknownError();
 		}
-
 		return response;
 	}
 
 	@GetMapping
-	Map<String, Object> handleGetRequest(@RequestAttribute(name = "account", required = true) Account account,
-			HttpServletRequest request) throws ApiError {
+	Map<String, Object> handleGetRequest(@RequestAttribute(name = "account", required = true) Account account)throws ApiError {
 		Map<String, Object> response = new HashMap<>();
 
 		response.put("success", true);
 		try {
-
 			Profile profile = profiledao.getProfilebyId(account.getId());
 			response.put("profile", profile);
-
 		} catch (Exception ex) {
 			System.out.println(ex);
 			throw new UnknownError();
