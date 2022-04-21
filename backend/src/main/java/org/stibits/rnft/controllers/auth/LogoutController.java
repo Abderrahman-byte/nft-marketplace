@@ -19,7 +19,11 @@ public class LogoutController {
     private SessionDAO sessionDAO;
 
     @GetMapping
-    public void handleGetRequest (@RequestAttribute("account") Account account, @RequestAttribute("session") Session session, HttpServletResponse response) {
+    public void handleGetRequest (@RequestAttribute(name = "account", required = false) Account account, @RequestAttribute(name = "session", required = false) Session session, HttpServletResponse response) {
+        response.setStatus(204);
+        
+        if (account == null || session == null) return ;
+
         sessionDAO.deleteSession(session.getSid());
 
         Cookie cookie = new Cookie("sessionId", null);
@@ -27,6 +31,5 @@ public class LogoutController {
         cookie.setMaxAge(0);
 
         response.addCookie(cookie);
-        response.setStatus(204);
     }
 }
