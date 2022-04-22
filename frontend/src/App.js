@@ -8,7 +8,6 @@ import LoginPage from './pages/login.page'
 import Profile from './components/Profile'
 import AuthenticationOnly from './components/AuthenticatedOnly'
 import CreatePages from './pages/upload.pages'
-import Profile from './components/Profile'
 
 import './styles/App.css'
 
