@@ -21,7 +21,6 @@ function App() {
 				<Route path='/sign-in' element={<LoginPage />} />
 				<Route path='/profile' element={<Profile />} />
 				<Route path='create' element={<AuthenticationOnly><CreatePages /></AuthenticationOnly>} />
-				<Route path='/profile' element={<Profile />} />
 			</Routes>
 		
 			<AppFooter />
