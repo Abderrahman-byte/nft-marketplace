@@ -30,7 +30,6 @@ export const AuthProvider = ({ children }) => {
     }
     
     useEffect(() => {
-        console.log('isLoggedIn')
         getAuthState()
     }, [])
 

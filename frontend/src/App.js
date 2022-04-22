@@ -5,6 +5,8 @@ import AppFooter from './components/AppFooter'
 import AppHeader from './components/AppHeader'
 import RegisterPage from './pages/Register.page'
 import LoginPage from './pages/login.page'
+import AuthenticationOnly from './components/AuthenticatedOnly'
+import CreatePages from './pages/upload.pages'
 
 import './styles/App.css'
 
@@ -15,6 +17,7 @@ function App() {
 			<Routes>
 				<Route path='/sign-up' element={<RegisterPage />} />
 				<Route path='/sign-in' element={<LoginPage />} />
+				<Route path='create' element={<AuthenticationOnly><CreatePages /></AuthenticationOnly>} />
 			</Routes>
 		
 			<AppFooter />
