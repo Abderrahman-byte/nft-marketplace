@@ -1,0 +1,11 @@
+.ProfileSettings {
+	height: 865px;
+	align-self: stretch;
+	flex-grow: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 32px;
+	padding: 0;
+}
