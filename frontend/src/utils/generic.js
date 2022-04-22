@@ -27,5 +27,9 @@ export const translateError = (error) => {
         return [{ field: error.field, message: error.detail }]
     }
 
+    if (error.detail) {
+        return [{ field: null, message: error.detail}]
+    }
+
     return [DEFAULT_ERROR]
 }

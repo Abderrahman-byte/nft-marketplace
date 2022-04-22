@@ -6,6 +6,8 @@ import AppHeader from './components/AppHeader'
 import RegisterPage from './pages/Register.page'
 import LoginPage from './pages/login.page'
 import Profile from './components/Profile'
+import AuthenticationOnly from './components/AuthenticatedOnly'
+import CreatePages from './pages/upload.pages'
 
 import './styles/App.css'
 
@@ -17,6 +19,7 @@ function App() {
 				<Route path='/sign-up' element={<RegisterPage />} />
 				<Route path='/sign-in' element={<LoginPage />} />
 				<Route path='/profile' element={<Profile />} />
+				<Route path='create' element={<AuthenticationOnly><CreatePages /></AuthenticationOnly>} />
 			</Routes>
 		
 			<AppFooter />

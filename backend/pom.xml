@@ -8,10 +8,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>org.merchantech</groupId>
-	<artifactId>nft-project</artifactId>
+	<groupId>org.stibits</groupId>
+	<artifactId>rnft</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>nft-project</name>
+	<name>nftmarketplace</name>
 	<description>Nft Market place</description>
 
 	<properties>
