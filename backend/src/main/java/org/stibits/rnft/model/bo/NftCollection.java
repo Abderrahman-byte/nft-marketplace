@@ -1,56 +1,67 @@
 package org.stibits.rnft.model.bo;
 
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
-import javax.persistence.*;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
-
-// TODO : Refactor
 
 @Entity
 @Table(name="nft_collection")
 public class NftCollection {
-
 	@Id
 	private String id;
-	@Column(name="name", nullable=false, unique=true)
+
+	@Column(name = "name", nullable = false, unique = true)
 	private String name;
-	@Column(name="description")
+
+	@Column(name = "description")
 	private String description;
-	
+
+	@Column(name = "image_url")
+	private String imageUrl;
+
+	@ManyToOne(targetEntity = Account.class, optional = false)
+	@JoinColumn(name = "created_by", nullable = false)
+	private Account createdBy;
+
 	@Column(name = "created_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreationTimestamp
-    private Calendar createdDate = Calendar.getInstance();
-	
-	@OneToMany(mappedBy="collection", fetch= FetchType.LAZY)
-	private Collection<NFToken> NFTS;
-	
-	@ManyToOne
-	@JoinColumn(name="created_by")
-	private Account account;
-	
-	
-	public Account getAccount() {
-		return account;
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreationTimestamp
+	private Calendar createdDate = Calendar.getInstance();
+
+	@OneToMany(targetEntity = NFToken.class, mappedBy = "collection", fetch = FetchType.LAZY)
+	private List<NFToken> nfts = new ArrayList<>();
+
+	public NftCollection () {}
+
+	public String getId() {
+		return id;
 	}
 
-	public void setAccount(Account account) {
-		this.account = account;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public NftCollection() {
-		
+	public Account getCreatedBy() {
+		return createdBy;
 	}
-	
-	public NftCollection(String name, String description) {
-		super();
-		this.name = name;
-		this.description = description;
+
+	public void setCreatedBy(Account createdBy) {
+		this.createdBy = createdBy;
 	}
-	
-	
+
 	public Calendar getCreatedDate() {
 		return createdDate;
 	}
@@ -59,39 +70,27 @@ public class NftCollection {
 		this.createdDate = createdDate;
 	}
 
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	public Collection<NFToken> getNFTS() {
-		return NFTS;
+
+	public String getImageUrl() {
+		return imageUrl;
 	}
-	public void setNFTS(Collection<NFToken> nFTS) {
-		NFTS = nFTS;
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
-	/*public NftCollection(String id, String name, String description, String created_date, Collection<NFT_Token> nFTS) {
-		super();
-		this.id = id;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
 		this.name = name;
-		this.description = description;
-		//this.created_date = created_date;
-		NFTS = nFTS;
-	}*/
-	
-	
+	}
 }

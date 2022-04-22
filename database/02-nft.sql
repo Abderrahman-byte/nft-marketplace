@@ -1,8 +1,9 @@
 CREATE TABLE IF NOT EXISTS nft_collection (
     id VARCHAR (25) PRIMARY KEY,
-    name VARCHAR (200) NOT NULL,
+    name VARCHAR (200) NOT NULL UNIQUE,
     created_by VARCHAR(25) NOT NULL REFERENCES account (id),
     description TEXT,
+    image_url TEXT,
 
     created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 );

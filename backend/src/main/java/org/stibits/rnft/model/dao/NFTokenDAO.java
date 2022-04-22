@@ -24,9 +24,8 @@ public class NFTokenDAO {
     public NFToken insertNFT (Account creator, Map<String, Object> data, String contentUrl) {
         Boolean isForSell = (Boolean)data.get("isForSell");
 
-        if (isForSell) {
+        if (isForSell)
             return this.insertNFT(creator, (String)data.get("title"), (String)data.get("title"), contentUrl, (Double)data.get("price"));
-        }
 
         return this.insertNFT(creator, (String)data.get("title"), (String)data.get("title"), contentUrl);
     }

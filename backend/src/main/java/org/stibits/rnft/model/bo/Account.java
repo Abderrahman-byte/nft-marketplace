@@ -68,8 +68,8 @@ public class Account {
     @OneToMany(mappedBy="creator", fetch= FetchType.LAZY, cascade = CascadeType.MERGE)
     private List<NFToken> createdNfts = new ArrayList<>();
 
-    // @OneToMany(mappedBy="account", fetch= FetchType.LAZY)
-    // private List<NftCollection> nftcollection = new ArrayList<>();
+    @OneToMany(mappedBy="createdBy", fetch= FetchType.LAZY)
+    private List<NftCollection> collections = new ArrayList<>();
     
     @JsonManagedReference
     @OneToOne(targetEntity = Profile.class, mappedBy = "account", optional = true, cascade = CascadeType.MERGE)
@@ -165,11 +165,11 @@ public class Account {
         this.createdNfts = createdNfts;
     }
 
-    // public List<NftCollection> getNftcollection() {
-    //     return nftcollection;
-    // }
+    public List<NftCollection> getCollections() {
+        return collections;
+    }
 
-    // public void setNftcollection(List<NftCollection> nftcollection) {
-    //     this.nftcollection = nftcollection;
-    // }
+    public void setCollections(List<NftCollection> collections) {
+        this.collections = collections;
+    }
 }
