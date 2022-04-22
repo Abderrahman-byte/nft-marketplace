@@ -1,6 +1,5 @@
 package org.stibits.rnft.controllers.marketplace;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.stibits.rnft.converters.CollectionCreatedResponseConverter;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.AuthenticationRequiredError;
 import org.stibits.rnft.errors.DataIntegrityError;
@@ -36,7 +36,6 @@ import org.stibits.rnft.model.dao.NftCollectionDAO;
 import org.stibits.rnft.validation.CreateCollectionValidator;
 
 // TODO : Check collection image max size
-// TODO : Build response automatically using a converter or an POJO
 
 @RestController
 @RequestMapping("/api/${api.version}/marketplace/collections")
@@ -56,12 +55,13 @@ public class CreateCollection {
     @Autowired
     private CreateCollectionValidator validator;
 
+    @Autowired
+    private CollectionCreatedResponseConverter responseConverter;
+
     private Pattern imageTypePattern = Pattern.compile("^image+/(png|gif|webp|jpeg)+$");
 
     @PostMapping
     Map<String, Object> handlePostRequest (@ModelAttribute Account account, @ModelAttribute("metadata") Map<String, Object> data, @RequestParam(name = "image", required = false) MultipartFile file, HttpServletRequest request) throws ApiError {
-        Map<String, Object> response = new HashMap<>();
-        Map<String, Object> createdData = new HashMap<>();
         MapBindingResult errors = new MapBindingResult(data, "collection");
         String imageUrl = null;
 
@@ -80,13 +80,7 @@ public class CreateCollection {
 
         try {
             NftCollection collection = collectionDAO.insertCollection(account, data, imageUrl);
-
-            response.put("success", true);
-            createdData.put("id", collection.getId());
-            createdData.put("imageUrl", collection.getImageUrl());
-            response.put("data", createdData);
-
-            return response;
+            return responseConverter.convert(collection);
         } catch (DataIntegrityViolationException ex) {
             throw new DataIntegrityError("Collection with same name already exist", "name");
         } catch (Exception ex) {

@@ -1,6 +1,5 @@
 package org.stibits.rnft.controllers.marketplace;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -14,6 +13,7 @@ import org.stibits.rnft.errors.StorageUnacceptedMediaType;
 import org.stibits.rnft.errors.UnacceptedMediaTypeError;
 import org.stibits.rnft.errors.UnknownError;
 import org.stibits.rnft.helpers.StorageService;
+import org.stibits.rnft.converters.NftCreatedResponseConverter;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.CollectionNotFound;
 import org.stibits.rnft.errors.DataIntegrityError;
@@ -68,6 +68,9 @@ public class CreateNFTController {
     @Autowired
     private NftCollectionDAO collectionDAO;
 
+    @Autowired
+    private NftCreatedResponseConverter responseConverter;
+
     private Pattern acceptedFiles = Pattern.compile("^(image|video|audio)+/(png|gif|webp|mp4|mp3|jpeg)+$");
 
     @PostMapping
@@ -86,23 +89,8 @@ public class CreateNFTController {
 
     public Map<String, Object> createMultipleNFT(Map<String, Object> metadata, String contentUrl, Account account, NftCollection collection) throws ApiError {
         try {
-            Map<String, Object> response = new HashMap<>();
-            Map<String, Object> nftData = new HashMap<>();
-
             List<NFToken> nfts = nftokenDAO.insertMultipleNFT(account, collection, metadata, contentUrl);
-
-            nftData.put("items", nfts.stream().map(nft -> {
-                Map<String, String> item = new HashMap<>();
-                item.put("id", nft.getId());
-                item.put("title", nft.getTitle());
-                return item;
-            }).toList());
-            
-            nftData.put("contentUrl", contentUrl);
-            response.put("success", true);
-            response.put("data", nftData);
-
-            return response;
+            return responseConverter.convert(nfts, contentUrl);
         } catch (Exception ex) {
             System.out.println("[" + ex.getClass().getName() + "] " + ex.getMessage());
             throw new UnknownError();
@@ -111,16 +99,8 @@ public class CreateNFTController {
 
     public Map<String, Object> createSingleNFT(Map<String, Object> metadata, String contentUrl, Account account, NftCollection collection) throws ApiError {
         try {
-            Map<String, Object> response = new HashMap<>();
-            Map<String, Object> nftData = new HashMap<>();
-
             NFToken nft = nftokenDAO.insertNFT(account, collection, metadata, contentUrl);
-            nftData.put("id", nft.getId());
-            nftData.put("contentUrl", contentUrl);
-            response.put("success", true);
-            response.put("data", nftData);
-
-            return response;
+            return responseConverter.convert(nft);
         } catch (DataIntegrityViolationException ex) {
             throw new DataIntegrityError("Item with the same title already exists", "title");
         }

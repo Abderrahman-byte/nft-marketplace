@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 
+// TODO : refactor
+
 @Component("singleNftValidator")
 public class CreateSingleNFTValidator extends GenericMapValidator {
     public CreateSingleNFTValidator () {
