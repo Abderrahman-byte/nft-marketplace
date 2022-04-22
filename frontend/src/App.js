@@ -17,7 +17,7 @@ function App() {
 			<Routes>
 				<Route path='/sign-up' element={<RegisterPage />} />
 				<Route path='/sign-in' element={<LoginPage />} />
-				<Route path='create' element={<AuthenticationOnly><CreatePages /></AuthenticationOnly>} />
+				<Route path='upload/*' element={<AuthenticationOnly><CreatePages /></AuthenticationOnly>} />
 			</Routes>
 		
 			<AppFooter />

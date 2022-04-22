@@ -1,0 +1,27 @@
+.UploadItem {
+    padding-bottom: 4.7em;
+    padding-top: 8em;
+}
+
+.UploadItem .container {
+    display: flex;
+    justify-content: space-between;
+    width: 78%;
+    border: 1px solid green;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.UploadItem .container .left-side {
+    width: 56%;
+    border: 1px solid red;
+}
+
+.UploadItem .container .preview {
+    width: 32%;
+    border: 1px solid red;
+}
+
+.UploadItem .container .left-side .btn {
+    display: inline-block;
+}
