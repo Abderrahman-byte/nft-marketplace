@@ -10,7 +10,7 @@ const ProfilePhoto = () => {
 
 
     return (
-        <div className="Frame-946">
+        <div className="ProfilePhoto">
 
             <div className="Avatar">
             <div className="Pic">

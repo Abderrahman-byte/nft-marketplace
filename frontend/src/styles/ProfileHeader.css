@@ -1,85 +1,80 @@
-.container{
-   
-        height: 89px;
-        align-self: stretch;
-        flex-grow: 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: stretch;
-        padding: 0;
+.ProfileHeader.container {
+	height: 89px;
+	align-self: stretch;
+	flex-grow: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: stretch;
+	padding: 0;
 }
-.container .Breadcrumb-wrap {
-    height: 88px;
-    align-self: stretch;
-    flex-grow: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 24px 160px;
-}  
 
-.container .Breadcrumb-wrap button{
-    width: 159px;
-    height: 40px;
-    flex-grow: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    border-radius: 90px;
-    border: solid 2px #e6e8ec;
-}  
-.container .Breadcrumb-wrap button .backtoprofile {
-    width: 99px;
-    height: 16px;
-    flex-grow: 0;
-    font-family: Inter;
-    font-size: 14px;
-    font-weight: bold;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.14;
-    letter-spacing: normal;
-    text-align: left;
-    color: #23262f;
-  }
-  .container .Breadcrumb-wrap 
-    .Breadcrumb {
-        width: 192px;
-        height: 24px;
-        flex-grow: 0;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: 24px;
-        padding: 0;
-      }
-  
-      .container  .Breadcrumb .headerprofile-link{
-        display: block;
-        font-size: .9rem;
-        font-weight: 700;
-        text-decoration: none;
-        color: var(--secondary-text-clr);
-    }
+.ProfileHeader.container .Breadcrumb-wrap {
+	height: 88px;
+	align-self: stretch;
+	flex-grow: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 24px 160px;
+}
 
-    .container .Divider{
-        height: 1px;
-        align-self: stretch;
-        flex-grow: 0;
-        background-color: #e6e8ec;
-    }
+.ProfileHeader.container .Breadcrumb-wrap button {
+	width: 159px;
+	height: 40px;
+	flex-grow: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 12px;
+	padding: 12px 16px;
+	border-radius: 90px;
+	border: solid 2px #e6e8ec;
+}
 
+.ProfileHeader.container .Breadcrumb-wrap button .backtoprofile {
+	width: 99px;
+	height: 16px;
+	flex-grow: 0;
+	font-family: Inter;
+	font-size: 14px;
+	font-weight: bold;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.14;
+	letter-spacing: normal;
+	text-align: left;
+	color: #23262f;
+}
 
+.ProfileHeader.container .Breadcrumb-wrap .Breadcrumb {
+	width: 192px;
+	height: 24px;
+	flex-grow: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 24px;
+	padding: 0;
+}
 
+.ProfileHeader.container .Breadcrumb .headerprofile-link {
+	display: block;
+	font-size: 0.9rem;
+	font-weight: 700;
+	text-decoration: none;
+	color: var(--secondary-text-clr);
+}
 
-
-
+.ProfileHeader.container .Divider {
+	height: 1px;
+	align-self: stretch;
+	flex-grow: 0;
+	background-color: #e6e8ec;
+}
 
 /*.ProfileHeader{
     padding: 1.25em 11%;

@@ -1,4 +1,4 @@
-.Edit-ProfileDesktopLight{
+.Profile{
 width: 100%;
 height: 1330px;
 flex-grow: 0;
@@ -11,7 +11,7 @@ padding: 0 0 136px;
 
 }
 
-.container .Breadcrumb-wrap{
+.Profile .container .Breadcrumb-wrap{
     height: 88px;
     align-self: stretch;
     flex-grow: 0;
@@ -23,7 +23,7 @@ padding: 0 0 136px;
 
 }
 
-.container .Headline{
+.Profile .container .Headline{
     height: 96px;
   align-self: stretch;
   flex-grow: 0;
@@ -35,7 +35,8 @@ padding: 0 0 136px;
   padding: 0;
   background-color: aquamarine;
 }
-.container .Headline .Edit-profile {
+
+.Profile .container .Headline .Edit-profile {
     width: 352px;
     height: 56px;
     flex-grow: 0;
@@ -49,7 +50,8 @@ padding: 0 0 136px;
     text-align: left;
     color: #23262f;
 }
-.container .Headline .Headline-span{
+
+.Profile .container .Headline .Headline-span{
     width: 736px;
   height: 24px;
   flex-grow: 0;
@@ -63,7 +65,8 @@ padding: 0 0 136px;
   text-align: left;
   color: #777e90;
 }
-.container .Headline .Headline-span .text-style-1{
+
+.Profile .container .Headline .Headline-span .text-style-1{
     font-weight: 500;
     color: #23262f;
 }

@@ -9,7 +9,7 @@ const ProfileForm = ()=>{
 
 
   return (
-      <div className="Input-text-fields">
+      <div className="ProfileForm">
            <AccountInfo/>
            
            <div className="Social">

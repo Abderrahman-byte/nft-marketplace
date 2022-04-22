@@ -1,78 +1,78 @@
-.Frame-946 {
-    height: 148px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 32px;
-    padding: 0;
-    
-  }
+.ProfilePhoto {
+	height: 148px;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 32px;
+	padding: 0;
+}
 
-  .Frame-946 .Avatar{
-    width: 128px;
-    height: 128px;
-    margin: 0 32px 20px 0;
-    background-color: #23262f;
-  }
-  .Frame-946 .Avatar .Pic{
-    width: 128px;
-    height: 128px;
-    margin: 0 32px 20px 0;
-    background-color: #e6e8ec;
-  }
-  
-  .Frame-946 .Frame-944{
-    width: 192px;
-  height: 148px;
-  flex-grow: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 0;
-  }
+.ProfilePhoto .Avatar {
+	width: 128px;
+	height: 128px;
+	margin: 0 32px 20px 0;
+	background-color: #23262f;
+}
 
+.ProfilePhoto .Avatar .Pic {
+	width: 128px;
+	height: 128px;
+	margin: 0 32px 20px 0;
+	background-color: #e6e8ec;
+}
 
-  .Frame-946 .Frame-944 .Frame-945 {
-    width: 192px;
-    height: 92px;
-    flex-grow: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 8px;
-    padding: 0;
-  }
-  .Frame-946 .Frame-944 .Frame-945 .Profile{
-    width: 150px;
-    height: 24px;
-    flex-grow: 0;
-    font-family: Inter;
-    font-size: 16px;
-    font-weight: 500;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.5;
-    letter-spacing: normal;
-    text-align: left;
-    color: #23262f;
-    
-    }
-    .Frame-946  .Frame-944 .Frame-945 .Recomendation{
-        width: 192px;
-        height: 60px;
-        flex-grow: 0;
-        font-family: Inter;
-        font-size: 12px;
-        font-weight: normal;
-        font-stretch: normal;
-        font-style: normal;
-        line-height: 1.67;
-        letter-spacing: normal;
-        text-align: left;
-        color: #777e90;
-      }
+.ProfilePhoto .Frame-944 {
+	width: 192px;
+	height: 148px;
+	flex-grow: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 16px;
+	padding: 0;
+}
+
+.ProfilePhoto .Frame-944 .Frame-945 {
+	width: 192px;
+	height: 92px;
+	flex-grow: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 8px;
+	padding: 0;
+}
+
+.ProfilePhoto .Frame-944 .Frame-945 .Profile {
+	width: 150px;
+	height: 24px;
+	flex-grow: 0;
+	font-family: Inter;
+	font-size: 16px;
+	font-weight: 500;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.5;
+	letter-spacing: normal;
+	text-align: left;
+	color: #23262f;
+}
+
+.ProfilePhoto .Frame-944 .Frame-945 .Recomendation {
+	width: 192px;
+	height: 60px;
+	flex-grow: 0;
+	font-family: Inter;
+	font-size: 12px;
+	font-weight: normal;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.67;
+	letter-spacing: normal;
+	text-align: left;
+	color: #777e90;
+}
