@@ -59,7 +59,7 @@ public class CreateCollection {
     private Pattern imageTypePattern = Pattern.compile("^image+/(png|gif|webp|jpeg)+$");
 
     @PostMapping
-    Map<String, Object> handlePostRequest (@ModelAttribute Account account, @ModelAttribute("metadata") Map<String, Object> data, @RequestParam(name = "file", required = false) MultipartFile file, HttpServletRequest request) throws ApiError {
+    Map<String, Object> handlePostRequest (@ModelAttribute Account account, @ModelAttribute("metadata") Map<String, Object> data, @RequestParam(name = "image", required = false) MultipartFile file, HttpServletRequest request) throws ApiError {
         Map<String, Object> response = new HashMap<>();
         Map<String, Object> createdData = new HashMap<>();
         MapBindingResult errors = new MapBindingResult(data, "collection");

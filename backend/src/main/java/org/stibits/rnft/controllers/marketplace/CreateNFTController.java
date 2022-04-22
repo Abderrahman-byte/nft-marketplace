@@ -1,6 +1,7 @@
 package org.stibits.rnft.controllers.marketplace;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -11,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.stibits.rnft.errors.StorageUnacceptedMediaType;
 import org.stibits.rnft.errors.UnacceptedMediaTypeError;
+import org.stibits.rnft.errors.UnknownError;
 import org.stibits.rnft.helpers.StorageService;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.DataIntegrityError;
@@ -18,8 +20,10 @@ import org.stibits.rnft.errors.ValidationError;
 import org.stibits.rnft.model.bo.Account;
 import org.stibits.rnft.model.bo.NFToken;
 import org.stibits.rnft.model.dao.NFTokenDAO;
+import org.stibits.rnft.validation.CreateMultipleNFTValidator;
 import org.stibits.rnft.validation.CreateSingleNFTValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.ui.Model;
@@ -45,7 +49,12 @@ public class CreateNFTController {
     private ObjectMapper objectMapper;
 
     @Autowired
-    private CreateSingleNFTValidator validator;
+    @Qualifier("singleNftValidator")
+    private CreateSingleNFTValidator singleNftFormValidator;
+
+    @Autowired
+    @Qualifier("multipleNftsValidator")
+    private CreateMultipleNFTValidator multipleNFTValidator;
 
     @Autowired
     private MessageSource messageSource;
@@ -58,53 +67,60 @@ public class CreateNFTController {
     @PostMapping
     public Map<String, Object> handlePostRequest(
             @RequestParam(name = "multi", required = false, defaultValue = "false") boolean multi,
-            @RequestParam(name = "file") MultipartFile file,
+            @ModelAttribute("contentUrl") String contentUrl,
             @ModelAttribute("metadata") Map<String, Object> metadata,
             HttpServletRequest request,
             @RequestAttribute("account") Account account) throws ApiError {
-        Map<String, Object> response = new HashMap<>();
 
-        if (!multi) return this.createSingleNFT(file, metadata, request, account);
-
-        return response;
+        return multi 
+            ? this.createMultipleNFT(metadata, contentUrl, account)
+            : this.createSingleNFT(metadata, contentUrl, account);
     }
 
-    public Map<String, Object> createSingleNFT(@RequestParam(name = "file") MultipartFile file, @ModelAttribute("metadata") Map<String, Object> metadata, HttpServletRequest request, @RequestAttribute("account") Account account) throws ApiError {
-        if (metadata == null) throw new ValidationError();
-
-        MapBindingResult errors = new MapBindingResult(metadata, "nft");
-
-        validator.validate(metadata, errors);
-
-        if (errors.hasErrors()) throw new ValidationError(errors, messageSource);
-
-        if (file == null || file.isEmpty()) {
-            errors.rejectValue("file", "requiredField", new Object[]{"file"}, null);
-            throw new ValidationError(errors, messageSource);
-        }
-
+    public Map<String, Object> createMultipleNFT(Map<String, Object> metadata, String contentUrl, Account account) throws ApiError {
         try {
             Map<String, Object> response = new HashMap<>();
             Map<String, Object> nftData = new HashMap<>();
-            String nftContentUrl = storageService.storeFile(file, acceptedFiles, "nft/");
-            String contentFullUrl = ServletUriComponentsBuilder.fromContextPath(request).replacePath("/").pathSegment("media", nftContentUrl).build().toUriString();
 
-            NFToken nft = nftokenDAO.insertNFT(account, metadata, contentFullUrl);
-            nftData.put("id", nft.getId());
-            nftData.put("contentUrl", contentFullUrl);
+            List<NFToken> nfts = nftokenDAO.insertMultipleNFT(account, metadata, contentUrl);
+
+            nftData.put("items", nfts.stream().map(nft -> {
+                Map<String, String> item = new HashMap<>();
+                item.put("id", nft.getId());
+                item.put("title", nft.getTitle());
+                return item;
+            }).toList());
+            
+            nftData.put("contentUrl", contentUrl);
             response.put("success", true);
             response.put("data", nftData);
 
             return response;
-        } catch (StorageUnacceptedMediaType ex) {
-            throw new UnacceptedMediaTypeError(ex);
+        } catch (Exception ex) {
+            System.out.println("[" + ex.getClass().getName() + "] " + ex.getMessage());
+            throw new UnknownError();
+        }
+    }
+
+    public Map<String, Object> createSingleNFT(Map<String, Object> metadata, String contentUrl, Account account) throws ApiError {
+        try {
+            Map<String, Object> response = new HashMap<>();
+            Map<String, Object> nftData = new HashMap<>();
+
+            NFToken nft = nftokenDAO.insertNFT(account, metadata, contentUrl);
+            nftData.put("id", nft.getId());
+            nftData.put("contentUrl", contentUrl);
+            response.put("success", true);
+            response.put("data", nftData);
+
+            return response;
         } catch (DataIntegrityViolationException ex) {
             throw new DataIntegrityError("Item with the same title already exists", "title");
         }
     }
 
     @ModelAttribute
-    public void parseDataPart(Model model, @RequestParam(name = "metadata") String dataStr) {
+    public void parseMetaData(Model model, @RequestParam(name = "metadata") String dataStr) {
         if (dataStr == null || dataStr.isEmpty()) {
             model.addAttribute("metadata", null);
             return;
@@ -116,5 +132,30 @@ public class CreateNFTController {
             model.addAttribute("metadata", null);
             return;
         }
+    }
+
+    @ModelAttribute
+    public void validateRequest (@RequestParam(name = "file") MultipartFile file, @ModelAttribute("metadata") Map<String, Object> metadata, @RequestParam(name = "multi", required = false, defaultValue = "false") boolean multi, HttpServletRequest request, Model model) throws ApiError {
+        if (metadata == null) throw new ValidationError();
+
+        MapBindingResult errors = new MapBindingResult(metadata, "nft");
+
+        if (!multi) singleNftFormValidator.validate(metadata, errors);
+        else multipleNFTValidator.validate(metadata, errors);
+
+        if (errors.hasErrors()) throw new ValidationError(errors, messageSource);
+
+        if (file == null || file.isEmpty()) {
+            errors.rejectValue("file", "requiredField", new Object[]{"file"}, null);
+            throw new ValidationError(errors, messageSource);
+        }
+
+        try {
+            String nftContentUrl = storageService.storeFile(file, acceptedFiles, "nft/");
+            String contentFullUrl = ServletUriComponentsBuilder.fromContextPath(request).replacePath("/").pathSegment("media", nftContentUrl).build().toUriString();
+            model.addAttribute("contentUrl", contentFullUrl);
+        } catch (StorageUnacceptedMediaType ex) {
+            throw new UnacceptedMediaTypeError(ex);
+        } 
     }
 }

@@ -8,8 +8,6 @@ import java.util.regex.Pattern;
 
 import org.springframework.validation.Errors;
 
-
-
 public abstract class GenericMapValidator extends GenericValidator {
     @Override
     public boolean supports(Class<?> clazz) {
@@ -60,6 +58,21 @@ public abstract class GenericMapValidator extends GenericValidator {
         if (matcher.matches()) return ;
 
         errors.rejectValue(field, "invalidValue");
+    }
+
+    protected void checkPositiveIntegers (Map<String, Object> data, List<String> fields, Errors errors) {
+        for (String field : fields) {
+            if (!data.containsKey(field)) return;
+
+            if (data.get(field) == null || !data.get(field).getClass().equals(Integer.class)) {
+                errors.rejectValue(field, "invalidType");
+                return ;
+            }
+
+            int value = (Integer)data.get(field);
+
+            if (value <= 0) errors.rejectValue(field, "invalidValue");
+        }
     }
 
     private void checkFieldsType(Map<String, Object> data, List<String> fields, Class<?> typeClass, Errors errors) {

@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 
-@Component
+@Component("singleNftValidator")
 public class CreateSingleNFTValidator extends GenericMapValidator {
     public CreateSingleNFTValidator () {
         this.addRequiredFields("title", "isForSell");
@@ -23,7 +23,7 @@ public class CreateSingleNFTValidator extends GenericMapValidator {
 
         if (errors.hasErrors()) return ;
 
-        this.checkStringValues(data, List.of("title", "description", "price"), errors);
+        this.checkStringValues(data, List.of("title", "description"), errors);
         this.checkBooleanValues(data, List.of("isForSell"), errors);
 
         if (errors.hasErrors()) return ;

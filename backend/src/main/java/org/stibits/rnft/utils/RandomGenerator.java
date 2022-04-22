@@ -1,5 +1,7 @@
 package org.stibits.rnft.utils;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -40,5 +42,9 @@ public class RandomGenerator {
         }
 
         return ascii;
+    }
+
+    public int randomInteger (int min, int max) {
+        return ThreadLocalRandom.current().nextInt(min, max + 1);
     }
 }

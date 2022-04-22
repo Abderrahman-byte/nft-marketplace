@@ -1,5 +1,8 @@
 package org.stibits.rnft.model.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
@@ -19,6 +22,20 @@ public class NFTokenDAO {
 
     @Autowired
     private RandomGenerator randomGenerator;
+
+    @Transactional
+    public List<NFToken> insertMultipleNFT (Account account, Map<String, Object> data, String contentUrl) {
+        int quantity = (Integer)data.get("quantity");
+        List<NFToken> nfts = new ArrayList<>();
+
+        for (int i = 0; i < quantity; i++) {
+            Map<String, Object> nftData = new HashMap<>(data);
+            nftData.put("title", data.get("title") + " #" + String.format("%05d", randomGenerator.randomInteger(10, 99999)));
+            nfts.add(this.insertNFT(account, nftData, contentUrl));
+        }
+
+        return nfts;
+    }
 
     @Transactional
     public NFToken insertNFT (Account creator, Map<String, Object> data, String contentUrl) {
