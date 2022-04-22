@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.JoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.CascadeType;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -41,7 +42,7 @@ public class NftCollection {
 	@CreationTimestamp
 	private Calendar createdDate = Calendar.getInstance();
 
-	@OneToMany(targetEntity = NFToken.class, mappedBy = "collection", fetch = FetchType.LAZY)
+	@OneToMany(targetEntity = NFToken.class, mappedBy = "collection", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<NFToken> nfts = new ArrayList<>();
 
 	public NftCollection () {}

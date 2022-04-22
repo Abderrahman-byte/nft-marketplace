@@ -15,11 +15,14 @@ import org.stibits.rnft.errors.UnacceptedMediaTypeError;
 import org.stibits.rnft.errors.UnknownError;
 import org.stibits.rnft.helpers.StorageService;
 import org.stibits.rnft.errors.ApiError;
+import org.stibits.rnft.errors.CollectionNotFound;
 import org.stibits.rnft.errors.DataIntegrityError;
 import org.stibits.rnft.errors.ValidationError;
 import org.stibits.rnft.model.bo.Account;
 import org.stibits.rnft.model.bo.NFToken;
+import org.stibits.rnft.model.bo.NftCollection;
 import org.stibits.rnft.model.dao.NFTokenDAO;
+import org.stibits.rnft.model.dao.NftCollectionDAO;
 import org.stibits.rnft.validation.CreateMultipleNFTValidator;
 import org.stibits.rnft.validation.CreateSingleNFTValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,27 +65,31 @@ public class CreateNFTController {
     @Autowired
     private NFTokenDAO nftokenDAO;
 
+    @Autowired
+    private NftCollectionDAO collectionDAO;
+
     private Pattern acceptedFiles = Pattern.compile("^(image|video|audio)+/(png|gif|webp|mp4|mp3|jpeg)+$");
 
     @PostMapping
     public Map<String, Object> handlePostRequest(
             @RequestParam(name = "multi", required = false, defaultValue = "false") boolean multi,
             @ModelAttribute("contentUrl") String contentUrl,
+            @ModelAttribute("collection") NftCollection collection,
             @ModelAttribute("metadata") Map<String, Object> metadata,
             HttpServletRequest request,
             @RequestAttribute("account") Account account) throws ApiError {
 
         return multi 
-            ? this.createMultipleNFT(metadata, contentUrl, account)
-            : this.createSingleNFT(metadata, contentUrl, account);
+            ? this.createMultipleNFT(metadata, contentUrl, account, collection)
+            : this.createSingleNFT(metadata, contentUrl, account, collection);
     }
 
-    public Map<String, Object> createMultipleNFT(Map<String, Object> metadata, String contentUrl, Account account) throws ApiError {
+    public Map<String, Object> createMultipleNFT(Map<String, Object> metadata, String contentUrl, Account account, NftCollection collection) throws ApiError {
         try {
             Map<String, Object> response = new HashMap<>();
             Map<String, Object> nftData = new HashMap<>();
 
-            List<NFToken> nfts = nftokenDAO.insertMultipleNFT(account, metadata, contentUrl);
+            List<NFToken> nfts = nftokenDAO.insertMultipleNFT(account, collection, metadata, contentUrl);
 
             nftData.put("items", nfts.stream().map(nft -> {
                 Map<String, String> item = new HashMap<>();
@@ -102,12 +109,12 @@ public class CreateNFTController {
         }
     }
 
-    public Map<String, Object> createSingleNFT(Map<String, Object> metadata, String contentUrl, Account account) throws ApiError {
+    public Map<String, Object> createSingleNFT(Map<String, Object> metadata, String contentUrl, Account account, NftCollection collection) throws ApiError {
         try {
             Map<String, Object> response = new HashMap<>();
             Map<String, Object> nftData = new HashMap<>();
 
-            NFToken nft = nftokenDAO.insertNFT(account, metadata, contentUrl);
+            NFToken nft = nftokenDAO.insertNFT(account, collection, metadata, contentUrl);
             nftData.put("id", nft.getId());
             nftData.put("contentUrl", contentUrl);
             response.put("success", true);
@@ -121,6 +128,8 @@ public class CreateNFTController {
 
     @ModelAttribute
     public void parseMetaData(Model model, @RequestParam(name = "metadata") String dataStr) {
+        model.addAttribute("collection", null);
+
         if (dataStr == null || dataStr.isEmpty()) {
             model.addAttribute("metadata", null);
             return;
@@ -130,7 +139,6 @@ public class CreateNFTController {
             model.addAttribute("metadata", objectMapper.readValue(dataStr, Map.class));
         } catch (JsonProcessingException ex) {
             model.addAttribute("metadata", null);
-            return;
         }
     }
 
@@ -148,6 +156,15 @@ public class CreateNFTController {
         if (file == null || file.isEmpty()) {
             errors.rejectValue("file", "requiredField", new Object[]{"file"}, null);
             throw new ValidationError(errors, messageSource);
+        }
+
+        String collectionId = metadata.containsKey("collectionId") ? (String)metadata.get("collectionId") : null;
+
+        if (collectionId != null) {
+            NftCollection collection = collectionDAO.getCollectionById(collectionId);
+            model.addAttribute("collection", collection);
+
+            if (collection == null ) throw new CollectionNotFound();
         }
 
         try {

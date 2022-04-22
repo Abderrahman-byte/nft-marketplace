@@ -10,7 +10,7 @@ import org.springframework.validation.Errors;
 public class CreateSingleNFTValidator extends GenericMapValidator {
     public CreateSingleNFTValidator () {
         this.addRequiredFields("title", "isForSell");
-        this.addAllowedFields("description", "price");
+        this.addAllowedFields("description", "price", "collectionId");
     }
 
     @Override
@@ -23,7 +23,7 @@ public class CreateSingleNFTValidator extends GenericMapValidator {
 
         if (errors.hasErrors()) return ;
 
-        this.checkStringValues(data, List.of("title", "description"), errors);
+        this.checkStringValues(data, List.of("title", "description", "collectionId"), errors);
         this.checkBooleanValues(data, List.of("isForSell"), errors);
 
         if (errors.hasErrors()) return ;

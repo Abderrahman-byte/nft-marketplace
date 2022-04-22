@@ -20,6 +20,10 @@ public class NftCollectionDAO {
     @Autowired
     private RandomGenerator randomGenerator;
 
+    public NftCollection getCollectionById (String id) {
+        return this.entityManager.find(NftCollection.class, id);
+    }
+
     @Transactional
     public NftCollection insertCollection(Account creator, Map<String, Object> data, String imageUrl) {
         return this.insertCollection(creator, (String)data.get("name"), (String)data.get("description"), imageUrl);
