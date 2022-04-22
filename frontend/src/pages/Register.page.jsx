@@ -4,14 +4,14 @@ import RegisterForm from '../components/RegisterForm'
 import LoadingCard from '../components/LoadingCard'
 import { register } from '../utils/api'
 import { DEFAULT_ERROR, translateError } from '../utils/generic'
-import { ModelContext } from '../context/ModelContext'
+import RegisterSuccessPage from './RegisterSuccess.page'
+import { AuthContext } from '../context/AuthContext'
 
 import '../styles/RegisterPage.css'
 import '../styles/forms.css'
-import RegisterSuccessPage from './RegisterSuccess.page'
 
 const RegisterPage = () => {
-    const { openModel, closeModel } = useContext(ModelContext)
+    const { openModel, closeModel, setAuth } = useContext(AuthContext)
     const [isDone, setDone] = useState(false)
 
     const submitCallback = async (data, setErrors) => {
@@ -25,6 +25,7 @@ const RegisterPage = () => {
             setErrors([ DEFAULT_ERROR ])
         }
 
+        setAuth(done)
         setDone(done)
         closeModel()
     }

@@ -6,21 +6,21 @@ import App from './App'
 
 import './styles/index.css'
 import './styles/icons.css'
-import { ModelProvider } from './context/ModelContext'
 import { AuthProvider } from './context/AuthContext'
 
 // import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
+// TODO : remove React.StrictMode because it render twice
+// which causes the Auth context to fetch the same data twice
+
 root.render(
 	<React.StrictMode>
 		<BrowserRouter>
-			<ModelProvider>
-				<AuthProvider>
-					<App />
-				</AuthProvider>
-			</ModelProvider>
+			<AuthProvider>
+				<App />
+			</AuthProvider>
 		</BrowserRouter>
 	</React.StrictMode>
 )

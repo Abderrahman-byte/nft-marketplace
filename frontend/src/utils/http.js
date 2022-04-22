@@ -1,13 +1,17 @@
 const DEFAULT_HEADERS = { 'Content-Type': 'application/json' }
 
 export const httpRequest = async (url, method, data = null, headers = {}, options = {}) => {
-    const response = await fetch(url, {
+    const requestOptions = {
         credentials: 'include',
-        body: data,
         headers : { ...DEFAULT_HEADERS, ...headers},
         method,
         ...options
-    })
+    }
+
+
+    if (method !== 'GET' && method !== 'HEAD') requestOptions.body = data
+
+    const response = await fetch(url, requestOptions)
 
     const contentType = response.headers.get('Content-Type') || response.headers.get('content-type')
     const responseData = /json/.test(contentType) ? await response.json() : await response.text()

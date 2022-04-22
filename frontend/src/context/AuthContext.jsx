@@ -1,24 +1,46 @@
-import React, { createContext, useContext, useEffect } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import LoadingCard from '../components/LoadingCard'
 
-import { ModelContext } from './ModelContext'
-
-// TODO : check if user is logged in
+import { isUserLoggedIn } from '../utils/api'
 
 export const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
-    // const { openModel, closeModel } = useContext(ModelContext)
+    const [authenticated, setAuth] = useState(undefined)
+    const [isActive, setActive] = useState(false)
+    const [modelElt, setModelElt] = useState(null)
 
-    // useEffect(() => {
-    //     openModel(<LoadingCard />)
+    const openModel = (elt) => {
+        setModelElt(elt)
+        setActive(true)
+    }
 
-    //     setTimeout(() => closeModel(), 1000)
-    // }, [])
+    const closeModel = () => {
+        setModelElt(null)
+        setActive(false)
+    }
+
+    const getAuthState = async () => {
+        openModel(<LoadingCard />)
+
+        const isLoggedIn = await isUserLoggedIn()
+        setAuth(isLoggedIn)
+        
+        closeModel()
+    }
+    
+    useEffect(() => {
+        console.log('isLoggedIn')
+        getAuthState()
+    }, [])
 
     return (
-        <AuthContext.Provider value={{}}>
+        <AuthContext.Provider value={{ openModel, closeModel, authenticated, setAuth }}>
             {children}
+            <div className={`model-background ${isActive ? 'active' : ''}`}></div>
+            <div className={`model-popup-box ${isActive ? 'active' : ''}`}>
+                {modelElt}
+            </div>
         </AuthContext.Provider>
     )
 }
