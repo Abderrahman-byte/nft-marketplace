@@ -1,5 +1,7 @@
 package org.stibits.rnft.model.dao;
 
+import java.util.Map;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -17,6 +19,11 @@ public class NftCollectionDAO {
 
     @Autowired
     private RandomGenerator randomGenerator;
+
+    @Transactional
+    public NftCollection insertCollection(Account creator, Map<String, Object> data, String imageUrl) {
+        return this.insertCollection(creator, (String)data.get("name"), (String)data.get("description"), imageUrl);
+    }
 
     @Transactional
     public NftCollection insertCollection (Account creator, String name, String description, String imageUrl) {

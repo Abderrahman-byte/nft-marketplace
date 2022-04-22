@@ -33,6 +33,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+// TODO : Check File max size
+
 @RestController
 @RequestMapping("/api/${api.version}/marketplace/create")
 public class CreateNFTController {
@@ -54,7 +56,20 @@ public class CreateNFTController {
     private Pattern acceptedFiles = Pattern.compile("^(image|video|audio)+/(png|gif|webp|mp4|mp3|jpeg)+$");
 
     @PostMapping
-    public Map<String, Object> handlePostRequest(@RequestParam(name = "file") MultipartFile file, @ModelAttribute("metadata") Map<String, Object> metadata, HttpServletRequest request, @RequestAttribute("account") Account account) throws ApiError {
+    public Map<String, Object> handlePostRequest(
+            @RequestParam(name = "multi", required = false, defaultValue = "false") boolean multi,
+            @RequestParam(name = "file") MultipartFile file,
+            @ModelAttribute("metadata") Map<String, Object> metadata,
+            HttpServletRequest request,
+            @RequestAttribute("account") Account account) throws ApiError {
+        Map<String, Object> response = new HashMap<>();
+
+        if (!multi) return this.createSingleNFT(file, metadata, request, account);
+
+        return response;
+    }
+
+    public Map<String, Object> createSingleNFT(@RequestParam(name = "file") MultipartFile file, @ModelAttribute("metadata") Map<String, Object> metadata, HttpServletRequest request, @RequestAttribute("account") Account account) throws ApiError {
         if (metadata == null) throw new ValidationError();
 
         MapBindingResult errors = new MapBindingResult(metadata, "nft");
