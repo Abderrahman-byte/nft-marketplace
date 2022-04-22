@@ -9,7 +9,7 @@ const AccountInfo = () => {
 
     return (
 
-        <div className=" accountInfo ">
+        <div className="accountInfo">
             <span className="Account-Info">
                 Account Info
             </span>

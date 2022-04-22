@@ -19,7 +19,7 @@ const Profile = () => {
          </div>*/
 
         //</div>
-        <div className="Edit-ProfileDesktopLight">
+        <div className="Profile">
 
 
             

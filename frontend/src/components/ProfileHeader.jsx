@@ -7,7 +7,7 @@ const ProfileHeader = () => {
 
 
     return (
-        <div className="container">
+        <div className="ProfileHeader container">
             <div className="Breadcrumb-wrap">
 
                 <button>
