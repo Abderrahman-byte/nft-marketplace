@@ -1,18 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
+
+import UploadFileInput from './UploadFileInput'
 
 import '../styles/CreateSingleItemForm.css'
-import UploadFileInput from './UploadFileInput'
 
 // TODO : Maybe create a generic component for creating both singles and multiples
 
 const CreateSingleItemForm = () => {
+    const [itemFile, setItemFile] = useState(null)
+
     const createItem = (e) => {
         e.preventDefault()
     }
 
     return (
         <form className='CreateSingleItemForm form' onSubmit={createItem}>
-            <UploadFileInput />
+            <UploadFileInput fileInputCallback={setItemFile} />
+
+            <div className='form-div'></div>
         </form>
     )
 }

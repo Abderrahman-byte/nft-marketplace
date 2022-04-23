@@ -25,3 +25,10 @@
 .UploadItem .container .left-side .btn {
     display: inline-block;
 }
+
+.UploadItem form .form-div .section-label {
+    display: block;
+    margin-bottom: 0.25em;
+    font-size: 1rem;
+    color: #23262f;
+}
