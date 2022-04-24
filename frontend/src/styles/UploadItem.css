@@ -1,0 +1,56 @@
+.UploadItem {
+    padding-bottom: 4.7em;
+    padding-top: 8em;
+}
+
+.UploadItem .form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 3em;
+    /* border: 1px solid blue; */
+}
+
+.UploadItem .form-header .btn {
+    width: max-content;
+    white-space: nowrap;
+}
+
+.UploadItem .form-header h2 {
+    color: #23262f; 
+    font-size: 3rem;
+}
+
+.UploadItem .form-div {
+    margin-bottom: 2.5em;
+}
+
+.UploadItem .container {
+    display: flex;
+    justify-content: space-between;
+    width: 78%;
+    /* border: 1px solid green; */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.UploadItem .container .left-side {
+    width: 56%;
+    /* border: 1px solid red; */
+}
+
+.UploadItem .container .preview {
+    width: 32%;
+    /* border: 1px solid red; */
+}
+
+.UploadItem .container .left-side .btn {
+    display: inline-block;
+}
+
+.UploadItem form .form-div .section-label {
+    display: block;
+    margin-bottom: 0.25em;
+    font-size: 1rem;
+    color: #23262f;
+}

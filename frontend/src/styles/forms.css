@@ -37,3 +37,8 @@
     color: red;
     margin-left: .7em;
 }
+
+.form .form-div small {
+    font-size: 0.75rem;
+    color: #777e90;
+}

@@ -36,3 +36,19 @@
     width: 14px;
     height: 9px;
 }
+
+.upload-icon::before {
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_File\ Upload_Line.svg') no-repeat center;
+    width: 24px;
+    height: 24px;
+}
+
+.plus-icon::before {
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Plus\ 2_Line.svg') no-repeat center;
+    width: 30px;
+    height: 30px;
+}
