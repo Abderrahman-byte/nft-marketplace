@@ -5,6 +5,7 @@ import ItemDetails from './ItemDetails'
 import CheckboxSettingsItem from './CheckboxSettingsItem'
 
 import '../styles/CreateSingleItemForm.css'
+import ChooseCollectionInput from './ChooseCollectionInput'
 
 // TODO : Maybe create a generic component for creating both singles and multiples
 
@@ -27,6 +28,7 @@ const CreateSingleItemForm = () => {
                 <CheckboxSettingsItem defaultValue name='for-sell' subtitle='You’ll receive bids on this item' title='Put on sale' />
                 <CheckboxSettingsItem name='instant-sell' subtitle='Enter the price for which the item will be instantly sold' title='Instant sale price' />
                 <CheckboxSettingsItem name='unlock' subtitle='Content will be unlocked after successful transaction' title='Unlock once purchased' />
+                <ChooseCollectionInput />
             </div>
         </form>
     )
