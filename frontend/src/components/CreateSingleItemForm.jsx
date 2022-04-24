@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import UploadFileInput from './UploadFileInput'
+import ItemDetails from './ItemDetails'
 
 import '../styles/CreateSingleItemForm.css'
 
@@ -17,7 +18,7 @@ const CreateSingleItemForm = () => {
         <form className='CreateSingleItemForm form' onSubmit={createItem}>
             <UploadFileInput fileInputCallback={setItemFile} />
 
-            <div className='form-div'></div>
+            <ItemDetails />
         </form>
     )
 }
