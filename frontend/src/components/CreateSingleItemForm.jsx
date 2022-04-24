@@ -3,9 +3,9 @@ import React, { useState } from 'react'
 import UploadFileInput from './UploadFileInput'
 import ItemDetails from './ItemDetails'
 import CheckboxSettingsItem from './CheckboxSettingsItem'
+import ChooseCollectionInput from './ChooseCollectionInput'
 
 import '../styles/CreateSingleItemForm.css'
-import ChooseCollectionInput from './ChooseCollectionInput'
 
 // TODO : Maybe create a generic component for creating both singles and multiples
 
@@ -14,6 +14,9 @@ const CreateSingleItemForm = () => {
 
     const createItem = (e) => {
         e.preventDefault()
+        const elements = e.target.elements
+
+        console.log()
     }
 
     return (
@@ -30,6 +33,8 @@ const CreateSingleItemForm = () => {
                 <CheckboxSettingsItem name='unlock' subtitle='Content will be unlocked after successful transaction' title='Unlock once purchased' />
                 <ChooseCollectionInput />
             </div>
+
+            <button className='btn btn-blue'><span>Create item</span><i className='arrow-right-icon'></i></button>
         </form>
     )
 }

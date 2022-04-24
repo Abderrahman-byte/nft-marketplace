@@ -35,6 +35,8 @@ const UploadFileInput = ({fileInputCallback}) => {
         } else if (e.dataTransfer.files.length > 0) {
             file = e.dataTransfer.files[0]
         }
+
+        fileInserted(file) 
     }
 
     const fileInputChanged = (e) => {

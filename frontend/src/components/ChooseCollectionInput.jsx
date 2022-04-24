@@ -3,34 +3,9 @@ import React, { useCallback, useState } from 'react'
 import '../styles/ChooseCollectionInput.css'
 
 const ChooseCollectionInput = () => {
-    const [collections, setCollections] = useState([
-		{
-			title: 'Crypto Legend - Professor',
-			image: 'https://gateway.ipfs.io/ipfs/QmUk1bJ1ax51hCQN7Gh4RYwvhRqTDHdPZQj2G5et1ywPoh',
-			id: 1,
-		},
-		{
-			title: 'Crypto Legend - Professor',
-			image: null,
-			id: 2,
-		},
-        {
-			title: 'Crypto Legend - Professor',
-			image: null,
-			id: 3,
-		},
+    const [collections, setCollections] = useState([])
 
-        {
-			title: 'Crypto Legend - Professor',
-			image: null,
-			id: 4,
-		},
-        {
-			title: 'Crypto Legend - Professor',
-			image: 'https://gateway.ipfs.io/ipfs/QmUk1bJ1ax51hCQN7Gh4RYwvhRqTDHdPZQj2G5et1ywPoh',
-			id: 5,
-		},
-	])
+    // TODO : get collection list
 
     const collectionSelected = (id) => {
         setCollections(collections.map(collection => {
