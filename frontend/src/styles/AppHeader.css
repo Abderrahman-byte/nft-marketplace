@@ -6,7 +6,7 @@
     border-bottom: 1px solid var(--divider-clr);
 }
 
-.AppHeader .horizontal-divider {
+.AppHeader .vertical-divider {
     align-self: stretch;
 }
 

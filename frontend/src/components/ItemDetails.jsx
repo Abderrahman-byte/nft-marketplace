@@ -21,7 +21,7 @@ const ItemDetails = () => {
 
             <div className='form-subdiv'>
                 <label className='form-label'>Royalties</label>
-                <input className='input-elt' type='number' defaultValue={10} name='royalties' max={10} min={0} />
+                <input className='input-elt' type='number' defaultValue={10} name='royalties' max={50} min={0} />
             </div>
         </div>
     )

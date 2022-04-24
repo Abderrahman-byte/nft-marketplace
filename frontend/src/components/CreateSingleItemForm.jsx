@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import UploadFileInput from './UploadFileInput'
 import ItemDetails from './ItemDetails'
+import CheckboxSettingsItem from './CheckboxSettingsItem'
 
 import '../styles/CreateSingleItemForm.css'
 
@@ -19,6 +20,14 @@ const CreateSingleItemForm = () => {
             <UploadFileInput fileInputCallback={setItemFile} />
 
             <ItemDetails />
+
+            <hr className='horizontal-divider' />
+
+            <div className='form-div settings'>
+                <CheckboxSettingsItem defaultValue name='for-sell' subtitle='You’ll receive bids on this item' title='Put on sale' />
+                <CheckboxSettingsItem name='instant-sell' subtitle='Enter the price for which the item will be instantly sold' title='Instant sale price' />
+                <CheckboxSettingsItem name='unlock' subtitle='Content will be unlocked after successful transaction' title='Unlock once purchased' />
+            </div>
         </form>
     )
 }
