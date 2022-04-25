@@ -5,10 +5,11 @@ import AppFooter from './components/AppFooter'
 import AppHeader from './components/AppHeader'
 import RegisterPage from './pages/Register.page'
 import LoginPage from './pages/login.page'
-import Profile from './components/Profile'
+import UpdateProfilepage from './pages/UpdateProfile.page'
 import AuthenticationOnly from './components/AuthenticatedOnly'
 import CreatePages from './pages/upload.pages'
-import Profile from './components/Profile'
+import Profilepage from './pages/Profile.page'
+
 
 import './styles/App.css'
 
@@ -19,8 +20,9 @@ function App() {
 			<Routes>
 				<Route path='/sign-up' element={<RegisterPage />} />
 				<Route path='/sign-in' element={<LoginPage />} />
-				<Route path='/profile' element={<Profile />} />
+				<Route path='/updateprofile' element={<AuthenticationOnly><UpdateProfilepage /> </AuthenticationOnly>} />
 				<Route path='create' element={<AuthenticationOnly><CreatePages /></AuthenticationOnly>} />
+			    <Route path='/profile' element={<Profilepage/>}/>
 			</Routes>
 		
 			<AppFooter />

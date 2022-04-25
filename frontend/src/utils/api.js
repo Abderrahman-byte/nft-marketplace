@@ -48,3 +48,24 @@ export const isUserLoggedIn = async () => {
 
     return false
 }
+
+export const getProfile = async()=>{
+    try{
+        const response = await getRequest(buildApiUrl('/profile'))
+        console.log(response);
+        console.log(response.profile)
+         return [response.success, response.profile]
+    }
+    catch{}
+    return [false, null]
+    
+}
+export const sendProfile = async (item) => {
+    try {
+        const response = await postRequest(buildApiUrl('/profile'), JSON.stringify(item))
+        if (response && response.success) return [true, null]
+        else if (response && response.error) return [false, response.error]
+    } catch {}
+
+    return [false, null]
+}

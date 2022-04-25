@@ -4,11 +4,11 @@ import ProfilePhoto from './ProfilePhoto'
 import ProfileForm from './ProfileForm'
 import '../styles/ProfileSettings.css'
 
-const ProfileSettings = () => {
+const ProfileSettings = ({profile, setprofile}) => {
 	return (
 		<div className='ProfileSettings'>
-			<ProfilePhoto />
-			<ProfileForm />
+			<ProfilePhoto profile = {profile} />
+			<ProfileForm profile = {profile}  setprofile ={setprofile}/>
 		</div>
 	)
 }

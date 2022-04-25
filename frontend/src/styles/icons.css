@@ -36,3 +36,32 @@
     width: 14px;
     height: 9px;
 }
+
+.arrow-left-icon::before {
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Arrow\ Left\ 2_Line.svg') no-repeat center;
+    width: 14px;
+    height: 9px;
+}
+.clearall {
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Close\ Circle_Line.svg') no-repeat center;
+    width: 20px;
+    height: 40px;  
+}
+.arrow-simple-icon::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Arrow\ Right\ Simple_Line\ (1).svg') no-repeat center;
+    width: 14px;
+    height: 9px;
+}
+.global::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Globe_Line.svg') no-repeat center;
+    width: 14px;
+    height: 19px;
+}

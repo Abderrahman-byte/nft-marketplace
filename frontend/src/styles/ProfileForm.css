@@ -124,7 +124,40 @@
 }
 
 .ProfileForm .buttons {
-	display: flex;
-	gap: 0.95em;
-	align-items: center;
+	width: 288px;
+  height: 48px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 32px;
+  padding: 0;
 }
+.ProfileForm .buttons .Frame-942{
+	width: 96px;
+  height: 24px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+ 
+}
+.ProfileForm .buttons .Frame-942 label{
+	width: 64px;
+	height: 16px;
+	flex-grow: 0;
+	font-family: Inter;
+	font-size: 16px;
+	font-weight: bold;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1;
+	letter-spacing: normal;
+	text-align: right;
+	color: #777e90;
+}
+

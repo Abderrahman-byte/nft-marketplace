@@ -4,7 +4,7 @@ import ProfileSettings from "./ProfileSettings";
 
 
 
-const EditProfile = () => {
+const EditProfile = ({profile, setprofile}) => {
 
 
     return (
@@ -17,7 +17,7 @@ const EditProfile = () => {
                     and manage other personal settings.
                 </span>
             </div>
-            <ProfileSettings />
+            <ProfileSettings profile={profile} setprofile={setprofile} />
 
         </div>
     )

@@ -1,4 +1,4 @@
-.ProfileHeader.container {
+.ProfileHeader .container {
 	height: 89px;
 	align-self: stretch;
 	flex-grow: 0;
@@ -9,7 +9,7 @@
 	padding: 0;
 }
 
-.ProfileHeader.container .Breadcrumb-wrap {
+.ProfileHeader .container .Breadcrumb-wrap {
 	height: 88px;
 	align-self: stretch;
 	flex-grow: 0;
@@ -21,7 +21,7 @@
 }
 
 .ProfileHeader.container .Breadcrumb-wrap button {
-	width: 159px;
+	width: 170px;
 	height: 40px;
 	flex-grow: 0;
 	display: flex;
@@ -60,13 +60,19 @@
 	gap: 24px;
 	padding: 0;
 }
-
-.ProfileHeader.container .Breadcrumb .headerprofile-link {
+.ProfileHeader.container .Breadcrumb .headerprofile-linkp {
 	display: block;
 	font-size: 0.9rem;
 	font-weight: 700;
 	text-decoration: none;
 	color: var(--secondary-text-clr);
+}
+.ProfileHeader.container .Breadcrumb .headerprofile-link {
+	display: block;
+	font-size: 0.9rem;
+	font-weight: 700;
+	text-decoration: none;
+    color: #23262f;
 }
 
 .ProfileHeader.container .Divider {
