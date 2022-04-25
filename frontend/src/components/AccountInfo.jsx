@@ -5,28 +5,31 @@ import '../styles/AccountInfo.css'
 
 
 
-const AccountInfo = () => {
+const AccountInfo = ({ profile, setprofile}) => {
 
     return (
 
         <div className="accountInfo">
             <span className="Account-Info">
-                Account Info
+                Account Info 
             </span>
             <div className="Display-name">
-                <label > Display Name</label>
-                <input name='search' placeholder=' Enter your display name' className='Display-name-input' autoComplete='off' />
+                <label > Display Name </label>
+                <input onChange={e => setprofile({...profile, displayName : e.target.value})} name='search' placeholder=' Enter your display name'
+                 defaultValue=  {profile.displayName}
+                /* defaultValue={` ${profile === null ? 'h': profile.displayName}`}*/
+                 className='Display-name-input' />
             </div>
             <div className="CustomUrl">
                 <label > Custom URL</label>     
-                <input name='search' placeholder=' Enter your display name' className='CustomUrl-input' autoComplete='off' />
-
+                 <input onChange={e=> setprofile({ ...profile, customUrl : e.target.value })}  name='search' placeholder=' Enter your display name'  defaultValue={profile.customUrl } className='CustomUrl-input'  />
             </div>
             <div className="Bio">
                 <label >Bio</label>
-                <input name='search' placeholder='  About yourselt in a few words' className='Bio-input' autoComplete='off' />
-            </div>
+               <input onChange={e=> setprofile({ ...profile, bio : e.target.value })} name='search' placeholder='  About yourselt in a few words'  defaultValue={profile.bio } className='Bio-input' autoComplete='off' />
 
+            </div>
+           
         </div>
 
     )

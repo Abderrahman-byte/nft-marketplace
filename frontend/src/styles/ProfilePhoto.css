@@ -12,16 +12,18 @@
 .ProfilePhoto .Avatar {
 	width: 128px;
 	height: 128px;
-	margin: 0 32px 20px 0;
-	background-color: #23262f;
+	flex-grow: 0;
+	border-radius: 160px;
+	/*background-color: #45b26b;*/
 }
 
 .ProfilePhoto .Avatar .Pic {
 	width: 128px;
 	height: 128px;
 	margin: 0 32px 20px 0;
-	background-color: #e6e8ec;
+	border-radius: 160px;
 }
+
 
 .ProfilePhoto .Frame-944 {
 	width: 192px;
@@ -33,18 +35,24 @@
 	align-items: flex-start;
 	gap: 16px;
 	padding: 0;
+
+	/*background-color: #23262f;*/
 }
+
 
 .ProfilePhoto .Frame-944 .Frame-945 {
 	width: 192px;
-	height: 92px;
-	flex-grow: 0;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: flex-start;
-	gap: 8px;
-	padding: 0;
+  height: 92px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 0;
+
+  /*background-color: #45b26b;*/
+
 }
 
 .ProfilePhoto .Frame-944 .Frame-945 .Profile {

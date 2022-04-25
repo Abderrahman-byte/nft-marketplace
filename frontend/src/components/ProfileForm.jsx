@@ -1,20 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 
 import AccountInfo from "./AccountInfo";
+import { sendProfile } from "../utils/api";
 import { Link } from "react-router-dom";
 
 import'../styles/ProfileForm.css'
+import Profilepage from "../pages/Profile.page";
 
-const ProfileForm = ()=>{
-
+const ProfileForm = ({profile, setprofile})=>{
+   
+   /*const submit = async (e) => {
+      e.preventDefault()
+      console.log(items)
+      const [success, err] = await sendProfile(items);
+      console.log(err)
+      console.log(success)
+    } */
+    
+    const submit = async (e) => {
+      e.preventDefault()
+     const data={
+        displayName : profile.displayName,
+        customUrl : profile.customUrl,
+        bio: profile.bio
+      }
+      console.log(profile.displayName)
+      console.log(data)
+     const [success, err] = await sendProfile(data);
+     console.log(err)
+     console.log(success)
+     
+    }
+    
 
   return (
-      <div className="ProfileForm">
-           <AccountInfo/>
-           
+     
+      <form className="ProfileForm" onSubmit={submit}>
+          
+           <AccountInfo profile={profile} setprofile={setprofile} />
            <div className="Social">
               <span>
-                  Social 
+                  Social  
               </span>
               <div >
               <label>portfolio or website</label>
@@ -30,9 +56,12 @@ const ProfileForm = ()=>{
            <div className="Divider"></div>
 
            <div className="buttons"> 
-           <Link className='btn btn-blue' to='#'>Update Profile</Link>
+           <button className='btn btn-blue' type="submit">Update Profile</button>
+           <div className="Frame-942">
+            <i className="clearall"> </i> <label> Clear all </label>
+            </div>
            </div>
-      </div>
+      </form>
   )
 
 

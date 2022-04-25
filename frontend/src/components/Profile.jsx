@@ -1,42 +1,37 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import ProfileHeader from "./ProfileHeader";
+
 
 import '../styles/Profile.css'
-import EditProfile from "./EditProfile";
+import ProfileInfo from "./ProfileInfo";
 
-const Profile = () => {
-
+const Profile = ({profile}) => {
+ 
     return (
-        //<div>
-        //<ProfileHeader/>
-        /* <div className="Profile EditProfile">
-             <div className="Headline">
-              
+     
+        <div className="Account ">
+           <div className="Container">
+          <div className="cover">
+               <div className="Action-button ">
+                  <button  className=" Editcover" >
+                  <label className="coverbutton"> Edit cover photo</label>
+                  </button>
+                  <Link className="Editprofile" to='/updateprofile'> 
+                  <label className="profilebutton"> Edit Profile</label>
+                  </Link>   
+               </div>
+          </div>         
+          <div className="Frame-936">
 
-             </div>
+               <ProfileInfo profile ={profile}/>
+              <div className="Frame-935">
+                     <div className="sub-navigation">
 
-         </div>*/
+                     </div>
+              </div>
 
-        //</div>
-        <div className="Profile">
-
-
-            
-           
-                  <ProfileHeader/>
-                  <EditProfile/>
-
-         
-           { /*
-            <div className="Headline">
-            <span className="Edit-profile"> Edit profile  </span>
-            <span className="Headline-span">You can set preferred display name, create
-                <span className="text-style-1"> your profile URL </span>
-                 and manage other personal settings.
-            </span>
-            </div>
-*/}  
+          </div>
+        </div>
         </div>
     )
 

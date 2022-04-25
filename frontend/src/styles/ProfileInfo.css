@@ -1,0 +1,145 @@
+
+.ProfileInfo .Frame-928 {
+    width: 256px;
+    height: 669px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 48px;
+    padding: 32px;
+    border-radius: 16px;
+    box-shadow: 0 40px 32px -24px rgba(15, 15, 15, 0.12);
+    border: solid 1px #e6e8ec;
+    background-color: #fcfcfd;
+  
+  }
+  .ProfileInfo .Frame-928 .Frame-934{
+    width: 186px;
+    height: 332px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    padding: 0;
+    
+  }
+
+  .ProfileInfo .Frame-928  .Avatar {
+	width: 128px;
+	height: 128px;
+	flex-grow: 0;
+	border-radius: 160px;
+	background-color: #45b26b;
+}
+
+.ProfileInfo .Frame-928 .Avatar .Pic {
+	width: 128px;
+	height: 128px;
+	margin: 0 32px 20px 0;
+	border-radius: 160px;
+}
+
+.ProfileInfo .Frame-928 .Frame-934 .Frame-930{
+  width: 186px;
+  height: 148px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 0;
+  
+}
+.ProfileInfo .Frame-928 .Frame-934 .Name {
+    width: 131px;
+    height: 32px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 0;
+   
+  }
+  .ProfileInfo .Frame-928 .Frame-934 .Name span{
+   
+    font-family: Inter;
+  font-size: 24px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  text-align: left;
+  color: #23262f;
+  }
+  .ProfileInfo .Frame-928 .Frame-934 .Bio{
+    width: 186px;
+    height: 60px;
+    flex-grow: 0;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.67;
+    letter-spacing: normal;
+    text-align: center;
+    color: #777e90;
+   
+  }
+  .ProfileInfo .Frame-928  .Frame-934 .adress{
+    width: 175px;
+    height: 16px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 0;
+  
+  }
+  .ProfileInfo .Frame-928 .Frame-934 .adress span{
+    width: 151px;
+  height: 16px;
+  flex-grow: 0;
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.14;
+  letter-spacing: normal;
+  text-align: left;
+  color: #23262f;
+  }
+  .ProfileInfo .Frame-928 .Frame-932{
+    width: 88px;
+  height: 40px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+
+  }
+  .ProfileInfo .social-icons{
+    width: 108px;
+    height: 20px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 24px;
+    padding: 0;
+  }

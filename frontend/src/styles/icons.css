@@ -37,6 +37,35 @@
     height: 9px;
 }
 
+
+.arrow-left-icon::before {
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Arrow\ Left\ 2_Line.svg') no-repeat center;
+    width: 14px;
+    height: 9px;
+}
+.clearall {
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Close\ Circle_Line.svg') no-repeat center;
+    width: 20px;
+    height: 40px;  
+}
+.arrow-simple-icon::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Arrow\ Right\ Simple_Line\ (1).svg') no-repeat center;
+    width: 14px;
+    height: 9px;
+}
+.global::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Globe_Line.svg') no-repeat center;
+    width: 14px;
+    height: 19px;
+}
 .upload-icon::before {
     content: "";
     display: block;
@@ -51,4 +80,40 @@
     background: url('../assets/icons/icons_Plus\ 2_Line.svg') no-repeat center;
     width: 30px;
     height: 30px;
+
+}
+.share-icon::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/share\ icon.svg') no-repeat center;
+    width: 40px;
+    height: 40px;
+}
+.more-icon::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/share\ icon\ (1).svg') no-repeat center;
+     height: 40px;
+     width: 40px;
+}
+.facebook::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/Icons_Facebook_Line.svg') no-repeat center;
+    width: 20px;
+    height: 20px;
+}
+.instagram::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/Icons_Instagram_Line.svg') no-repeat center;
+    width: 20px;
+    height: 20px;
+}
+.twitter::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/Icons_Twitter_Line.svg') no-repeat center;
+    width: 20px;
+    height: 20px;
 }
