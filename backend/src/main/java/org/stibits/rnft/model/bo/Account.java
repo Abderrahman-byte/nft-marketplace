@@ -32,14 +32,6 @@ public class Account {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    public Profile getProfile() {
-		return profile;
-	}
-
-	public void setProfile(Profile profile) {
-		this.profile = profile;
-	}
-
 	@Column(name = "password", nullable = false)
     private String password;
 
@@ -148,6 +140,14 @@ public class Account {
     public void setUpdatedDate(Calendar updatedDate) {
         this.updatedDate = updatedDate;
     }
+
+    public Profile getProfile() {
+		return profile;
+	}
+
+	public void setProfile(Profile profile) {
+		this.profile = profile;
+	}
 
     public List<NFToken> getNfts() {
         return nfts;
