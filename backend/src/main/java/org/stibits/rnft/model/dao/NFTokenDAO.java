@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
@@ -99,6 +100,18 @@ public class NFTokenDAO {
 
     public List<NFToken> selectTokensSortedByLowPrice (int limit, int offset) {
         return this.selectToken("order by price ASC, created_date DESC", limit, offset);
+    }
+
+    public NFToken selectToken (String id) {
+        String qlString = "Select t from NFToken t where id = :id or title = :id";
+        Query query = entityManager.createQuery(qlString, NFToken.class);
+        query.setParameter("id", id);
+
+        try {
+            return (NFToken)query.getSingleResult();
+        } catch (NoResultException ex) {
+            return null;
+        }
     }
 
     // FIXME : this maybe unsafe re-check 

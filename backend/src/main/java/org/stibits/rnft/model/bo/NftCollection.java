@@ -94,4 +94,12 @@ public class NftCollection {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public List<NFToken> getNfts() {
+		return nfts;
+	}
+	
+	public void setNfts(List<NFToken> nfts) {
+		this.nfts = nfts;
+	}
 }
