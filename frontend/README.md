@@ -2,3 +2,4 @@
 
 ## Tasks :
  - [ ] Logout
+ - [ ] Re-structure components 

@@ -11,7 +11,7 @@ const UploadItemPage = () => {
 		return (
 			<div className='create-option'>
 				<img src={image} />
-				<Link className='create-option-link btn btn-white' to='#'>{text}</Link>
+				<Link className='create-option-link btn btn-white' to='single'>{text}</Link>
 			</div>
 		)
 	}

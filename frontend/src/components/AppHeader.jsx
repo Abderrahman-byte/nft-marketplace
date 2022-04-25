@@ -12,7 +12,7 @@ const AppHeader = () => {
         <header className='AppHeader Nav-content'>
             <div className='Left-content'>
                 <AppLogo />
-                <div className='horizontal-divider' />
+                <div className='vertical-divider' />
                 <Link className='nav-link' to='#' >Discover</Link>
                 <Link className='nav-link' to='#' >How it work</Link>
             </div>

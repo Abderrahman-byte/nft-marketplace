@@ -30,11 +30,16 @@ textarea {
 	outline: none;
 }
 
-.horizontal-divider {
+.vertical-divider {
 	width: 2px;
 	min-height: 100%;
 	border-radius: 2px;
 	background-color: var(--divider-clr);
+}
+
+.horizontal-divider {
+	width: 100%;
+	border-top: 1px solid var(--divider-clr);
 }
 
 .btn {
