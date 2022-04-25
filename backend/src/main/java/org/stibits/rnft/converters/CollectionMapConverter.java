@@ -26,6 +26,8 @@ public class CollectionMapConverter implements Converter<NftCollection, Map<Stri
 
         if (source.getCreatedBy().getProfile() != null) {
             data.put("creator", profileDetailsConverter.convert(source.getCreatedBy().getProfile()));
+        } else {
+            data.put("createdId", source.getCreatedBy().getId());
         }
 
         return data;

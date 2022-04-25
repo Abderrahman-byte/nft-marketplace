@@ -41,4 +41,8 @@ public class NftCollectionDAO {
 
         return entityManager.merge(collection);
     }
+
+    public NftCollection selectCollectionById (String id) {
+        return entityManager.find(NftCollection.class, id);
+    }
 }
