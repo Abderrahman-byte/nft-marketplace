@@ -114,6 +114,28 @@ public class NFTokenDAO {
         }
     }
 
+    @Transactional
+    public boolean likeItem (String accountId, String tokenId) {
+        String qlString = "INSERT INTO nft_token_likes (token_id, account_id) VALUES (?, ?)";
+        Query query = entityManager.createNativeQuery(qlString);
+
+        query.setParameter(1, tokenId);
+        query.setParameter(2, accountId);
+
+        return query.executeUpdate() > 0;
+    }
+
+    @Transactional
+    public boolean unlikeItem (String accountId, String tokenId) {
+        String qlString = "Delete from NftLike Where accountId = :accountId and tokenId = :tokenId";
+        Query query = entityManager.createQuery(qlString);
+
+        query.setParameter("accountId", accountId);
+        query.setParameter("tokenId", tokenId);
+
+        return query.executeUpdate() > 0;
+    }
+
     // FIXME : this maybe unsafe re-check 
     @SuppressWarnings("unchecked")
     private List<NFToken> selectToken (String addSql, int limit, int offset) {
