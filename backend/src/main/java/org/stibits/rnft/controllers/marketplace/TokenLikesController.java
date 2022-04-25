@@ -31,8 +31,8 @@ public class TokenLikesController {
         if (!data.containsKey("id") || !data.get("id").getClass().equals(String.class)) throw new NotFoundError();
 
         try {
-            Boolean deleted = nftokenDAO.likeItem(account.getId(), (String)data.get("id"));
-            response.put("success", deleted);
+            Boolean created = nftokenDAO.likeItem(account.getId(), (String)data.get("id"));
+            response.put("success", created);
         } catch (DataIntegrityViolationException ex) {
             throw new DataIntegrityError("Token with this id does not exist or already liked", "id");
         }
@@ -41,8 +41,14 @@ public class TokenLikesController {
     }
 
     @DeleteMapping
-    public Map<String, Object> handleDeleteRequest (@RequestParam("id") String tokenId) {
+    public Map<String, Object> handleDeleteRequest (@RequestParam("id") String tokenId, @RequestAttribute("account") Account account) throws ApiError {
         Map<String, Object> response = new HashMap<>();
+
+        boolean deleted = nftokenDAO.unlikeItem(account.getId(), tokenId);
+        
+        if (!deleted) throw new NotFoundError();
+        response.put("success", true);
+
         return response;
     }
 }
