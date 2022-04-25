@@ -1,6 +1,7 @@
 import React, {useEffect, useState}from "react";
 import Profile from "../components/Profile";
 import { getProfile } from "../utils/api";
+import UpdateProfilepage from "./UpdateProfile.page";
 
 const Profilepage = () => {
     const [profile, setprofile]= useState({});
@@ -20,6 +21,8 @@ const Profilepage = () => {
          console.log("this is use effect")
          submitCallback();
      },[])
+   
+   
 
     return (
         <div className="Profile">
@@ -27,7 +30,7 @@ const Profilepage = () => {
 
             
            
-                  <Profile profile ={profile}/>
+                  <Profile profile ={profile}  />
                   
 
         </div>

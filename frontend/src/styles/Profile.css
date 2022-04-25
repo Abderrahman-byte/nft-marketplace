@@ -1,4 +1,103 @@
- .Account .Frame-936 {
+ .Account{
+
+  width: 100%;
+  height: 1038px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  padding: 0 0 136px;
+
+  background-color: #fcfcfd;
+ }
+ .Account .Container{
+  align-self: stretch;
+  flex-grow: 1;
+  padding: 0 0 576px;
+ }
+
+ .Account .Container .cover{
+  width: 100%;
+  height: 326px;
+  padding: 254px 159px 32px 959px;
+  background-color: #0f0f0f;
+ }
+ .Account .Container .Action-button {
+  width: 322px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 0;
+ }
+
+ .Account .Container .Action-button .Editcover{
+    width: 172px;
+    height: 40px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 90px;
+    border: solid 2px #777e90;
+    background-color: #0f0f0f;
+    cursor: pointer;
+  
+}
+.Account .Container .Action-button .Editprofile{
+  width: 135px;
+  height: 40px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+
+  border-radius: 90px;
+  border: solid 2px #777e90;
+  background-color: #0f0f0f;
+  cursor: pointer;
+}
+.Account .Container .Action-button .Editcover .coverbutton{
+  width: 120px;
+  height: 16px;
+  flex-grow: 0;
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.14;
+  letter-spacing: normal;
+  text-align: right;
+  color: #eceef3;
+  
+}
+.Account .Container .Action-button .Editprofile .profilebutton{
+  width: 120px;
+  height: 16px;
+  flex-grow: 0;
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.14;
+  letter-spacing: normal;
+  text-align: right;
+  color: #eceef3;
+}
+
+.Account .Container .Frame-936 {
+
   width: 1120px;
   height: 746px;
   display: flex;
@@ -6,8 +105,33 @@
   justify-content: flex-start;
   align-items: flex-start;
   gap: 64px;
-  margin: 213px 160px 0;
+  margin: -81px 160px 0;
   padding: 0;
+  pointer-events: none;
+  
+  
+}
+.Account .Container .Frame-936 .Frame-935{
+  height: 746px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 32px;
+  padding: 180px 0 0;
+  pointer-events: none;
 
-  background-color: rgb(20, 192, 135);
+}
+.Account .Container .Frame-936 .Frame-935 .sub-navigation{
+  height: 28px;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 0;
+  background-color: #777e90;
 }

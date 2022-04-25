@@ -36,8 +36,8 @@ const ProfileForm = ({profile, setprofile})=>{
   return (
      
       <form className="ProfileForm" onSubmit={submit}>
-           {/*<AccountInfo displayname={displayname} setdisplayname={setdisplayname}  />*/}
-           <AccountInfo /*items={items} setitems={setitems}*/ profile={profile} setprofile={setprofile} />
+          
+           <AccountInfo profile={profile} setprofile={setprofile} />
            <div className="Social">
               <span>
                   Social  

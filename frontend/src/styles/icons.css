@@ -82,3 +82,38 @@
     height: 30px;
 
 }
+.share-icon::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/share\ icon.svg') no-repeat center;
+    width: 40px;
+    height: 40px;
+}
+.more-icon::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/share\ icon\ (1).svg') no-repeat center;
+     height: 40px;
+     width: 40px;
+}
+.facebook::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/Icons_Facebook_Line.svg') no-repeat center;
+    width: 20px;
+    height: 20px;
+}
+.instagram::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/Icons_Instagram_Line.svg') no-repeat center;
+    width: 20px;
+    height: 20px;
+}
+.twitter::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/Icons_Twitter_Line.svg') no-repeat center;
+    width: 20px;
+    height: 20px;
+}
