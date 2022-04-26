@@ -102,6 +102,30 @@ public class NFTokenDAO {
         return this.selectToken("order by price ASC, created_date DESC", limit, offset);
     }
 
+    public List<NFToken> selectTokensSortedByLikes (String collectionId,int limit, int offset) {
+        return this.selectToken("order by likes DESC, created_date DESC", collectionId, limit, offset);
+    }
+
+    public List<NFToken> selectTokensSortedByHighPrice (String collectionId, int limit, int offset) {
+        return this.selectToken("order by price DESC, created_date DESC", collectionId, limit, offset);
+    }
+
+    public List<NFToken> selectTokensSortedByLowPrice (String collectionId, int limit, int offset) {
+        return this.selectToken("order by price ASC, created_date DESC", collectionId, limit, offset);
+    }
+
+    public List<NFToken> selectTokensSortedByLikes (String collectionId,int limit, int offset, double maxPrice) {
+        return this.selectToken("order by likes DESC, created_date DESC", collectionId, limit, offset, maxPrice);
+    }
+
+    public List<NFToken> selectTokensSortedByHighPrice (String collectionId, int limit, int offset, double maxPrice) {
+        return this.selectToken("order by price DESC, created_date DESC", collectionId, limit, offset, maxPrice);
+    }
+
+    public List<NFToken> selectTokensSortedByLowPrice (String collectionId, int limit, int offset, double maxPrice) {
+        return this.selectToken("order by price ASC, created_date DESC", collectionId, limit, offset, maxPrice);
+    }
+
     public NFToken selectToken (String id) {
         String qlString = "Select t from NFToken t where id = :id or title = :id";
         Query query = entityManager.createQuery(qlString, NFToken.class);
@@ -136,7 +160,7 @@ public class NFTokenDAO {
         return query.executeUpdate() > 0;
     }
 
-    // FIXME : this maybe unsafe re-check 
+    // FIXME : this maybe unsafe, re-check later
     @SuppressWarnings("unchecked")
     private List<NFToken> selectToken (String addSql, int limit, int offset) {
         String sqlString = "select id, title, preview_url, price, artist_id,owner_id, description,is_for_sell,collection_id, created_date, " +
@@ -153,7 +177,7 @@ public class NFTokenDAO {
         return list;
     }
 
-    // FIXME : this maybe unsafe re-check 
+    // FIXME : this maybe unsafe, re-check later
     @SuppressWarnings("unchecked")
     private List<NFToken> selectToken (String addSql, int limit, int offset, double maxPrice) {
         String sqlString = "select id, title, preview_url, price, artist_id,owner_id, description,is_for_sell,collection_id, created_date, " +
@@ -164,8 +188,42 @@ public class NFTokenDAO {
         query.setParameter("offset", offset);
         query.setParameter("limit", limit);
         query.setParameter("max", maxPrice);
-
         
+        List<NFToken> list = (List<NFToken>)query.getResultList();
+
+        return list;
+    }
+
+    // FIXME : this maybe unsafe, re-check later
+    @SuppressWarnings("unchecked")
+    private List<NFToken> selectToken (String addSql, String collectionId, int limit, int offset) {
+        String sqlString = "select id, title, preview_url, price, artist_id,owner_id, description,is_for_sell,collection_id, created_date, " +
+            "(select count(account_id) as likes from nft_token_likes where nft_token_likes.token_id = nft_token.id ) as likes "+ 
+            "from nft_token where collection_id = :collectionId " + addSql + " limit :limit offset :offset";
+
+        Query query = entityManager.createNativeQuery(sqlString, NFToken.class);
+        query.setParameter("offset", offset);
+        query.setParameter("limit", limit);
+        query.setParameter("collectionId", collectionId);
+
+        List<NFToken> list = (List<NFToken>)query.getResultList();
+
+        return list;
+    }
+
+    // FIXME : this maybe unsafe re-check 
+    @SuppressWarnings("unchecked")
+    private List<NFToken> selectToken (String addSql, String collectionId, int limit, int offset, double maxPrice) {
+        String sqlString = "select id, title, preview_url, price, artist_id,owner_id, description,is_for_sell,collection_id, created_date, " +
+            "(select count(account_id) as likes from nft_token_likes where nft_token_likes.token_id = nft_token.id ) as likes "+ 
+            "from nft_token where collection_id = :collectionId and price <= :max " + addSql + " limit :limit offset :offset";
+
+        Query query = entityManager.createNativeQuery(sqlString, NFToken.class);
+        query.setParameter("offset", offset);
+        query.setParameter("limit", limit);
+        query.setParameter("max", maxPrice);
+        query.setParameter("collectionId", collectionId);
+
         List<NFToken> list = (List<NFToken>)query.getResultList();
 
         return list;
