@@ -2,10 +2,10 @@ import React, { useState } from "react";
 
 import AccountInfo from "./AccountInfo";
 
-import { Link } from "react-router-dom";
+
 
 import'../styles/ProfileForm.css'
-import Profilepage from "../pages/Profile.page";
+
 
 const ProfileForm = ({profile, setprofile, submit})=>{
    
@@ -40,7 +40,7 @@ const ProfileForm = ({profile, setprofile, submit})=>{
            <div className="Divider"></div>
 
            <div className="buttons"> 
-           <button to="/profile" className='btn btn-blue' type="submit">Update Profile</button>
+           <button  className='btn btn-blue' type="submit">Update Profile</button>
            <div className="Frame-942" onClick={(e)=>{
              window.top.location = window.top.location
            }}>
