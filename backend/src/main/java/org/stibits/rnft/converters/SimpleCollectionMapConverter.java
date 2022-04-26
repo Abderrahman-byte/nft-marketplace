@@ -1,6 +1,7 @@
 package org.stibits.rnft.converters;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.core.convert.converter.Converter;
@@ -18,5 +19,9 @@ public class SimpleCollectionMapConverter implements Converter<NftCollection, Ma
         data.put("description", source.getDescription());
 
         return data;
+    }
+
+    public List<Map<String, Object>> convertList(List<NftCollection> source) {
+        return source.stream().map(nft -> this.convert(nft)).toList();
     }
 }
