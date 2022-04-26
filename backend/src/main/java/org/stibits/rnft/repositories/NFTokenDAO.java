@@ -162,8 +162,7 @@ public class NFTokenDAO {
 
     @SuppressWarnings("unchecked")
     public List<NFToken> getTokensOwnedBy (String accountId, int limit, int offset) {
-        String sqlString = "select id, title, preview_url, price, artist_id,owner_id, description,is_for_sell,collection_id, created_date, " +
-            "(select count(account_id) as likes from nft_token_likes where nft_token_likes.token_id = nft_token.id ) as likes "+ 
+        String sqlString = "select id, title, preview_url, price, artist_id,owner_id, description,is_for_sell,collection_id, created_date " +
             "from nft_token where owner_id = :accountId and artist_id != :accountId "+
             "order by created_date DESC limit :limit offset :offset";
 
@@ -179,8 +178,7 @@ public class NFTokenDAO {
 
     @SuppressWarnings("unchecked")
     public List<NFToken> getTokensForSaleBy (String accountId, int limit, int offset) {
-        String sqlString = "select id, title, preview_url, price, artist_id,owner_id, description,is_for_sell,collection_id, created_date, " +
-            "(select count(account_id) as likes from nft_token_likes where nft_token_likes.token_id = nft_token.id ) as likes "+ 
+        String sqlString = "select id, title, preview_url, price, artist_id,owner_id, description,is_for_sell,collection_id, created_date " +
             "from nft_token where owner_id = :accountId and is_for_sell = true "+
             "order by created_date DESC limit :limit offset :offset";
 
@@ -196,10 +194,10 @@ public class NFTokenDAO {
 
     @SuppressWarnings("unchecked")
     public List<NFToken> getUserFavoriteTokens (String accountId, int limit, int offset) {
-        String sqlString = "select id, title, preview_url, price, artist_id,owner_id, description,is_for_sell,collection_id, created_date, " +
-            "(select count(account_id) as likes from nft_token_likes where nft_token_likes.token_id = nft_token.id ) as likes "+ 
-            "from nft_token where owner_id = :accountId and is_for_sell = true "+
-            "order by created_date DESC, id ASC limit :limit offset :offset";
+        String sqlString = "select id, title, preview_url, price, artist_id,owner_id, description,is_for_sell,collection_id, created_date "+
+        "from nft_token "+
+        "where id in (select token_id from nft_token_likes where account_id = :accountId) "+
+        "order by created_date DESC, id ASC limit :limit offset :offset";
 
         Query query = entityManager.createNativeQuery(sqlString, NFToken.class);
         query.setParameter("offset", offset);
@@ -213,8 +211,7 @@ public class NFTokenDAO {
 
     @SuppressWarnings("unchecked")
     public List<NFToken> getTokensCreatedBy (String accountId, int limit, int offset) {
-        String sqlString = "select id, title, preview_url, price, artist_id,owner_id, description,is_for_sell,collection_id, created_date, " +
-            "(select count(account_id) as likes from nft_token_likes where nft_token_likes.token_id = nft_token.id ) as likes "+ 
+        String sqlString = "select id, title, preview_url, price, artist_id,owner_id, description,is_for_sell,collection_id, created_date " +
             "from nft_token where artist_id = :accountId order by created_date DESC limit :limit offset :offset";
 
         Query query = entityManager.createNativeQuery(sqlString, NFToken.class);
