@@ -15,15 +15,15 @@ import org.stibits.rnft.model.bo.NftCollection;
 import org.stibits.rnft.model.dao.NftCollectionDAO;
 
 @RestController
-@RequestMapping("/api/${api.version}/marketplace/collection/{id}")
-public class GetCollectionDetails {
+@RequestMapping("/api/${api.version}/marketplace/collections")
+public class CollectionsController {
     @Autowired
     private NftCollectionDAO collectionDAO;
 
     @Autowired
     private CollectionMapConverter collectionConverter;
 
-    @GetMapping
+    @GetMapping("/{id}")
     public Map<String, Object> handleGetRequest (@PathVariable("id") String collectionId) throws ApiError {
         Map<String, Object> response = new HashMap<>();
 
@@ -36,4 +36,6 @@ public class GetCollectionDetails {
 
         return response;
     }
+
+    
 }
