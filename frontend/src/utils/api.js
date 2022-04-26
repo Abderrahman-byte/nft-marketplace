@@ -1,5 +1,5 @@
 import { buildPath } from "./generic"
-import { getRequest, postRequest } from "./http"
+import { getRequest, multipartPostRequest, postRequest } from "./http"
 
 const apiHost = process.env.REACT_APP_API_HOST
 const apiPrefix = process.env.REACT_APP_API_PREFIX
@@ -63,6 +63,18 @@ export const getProfile = async()=>{
 export const sendProfile = async (item) => {
     try {
         const response = await postRequest(buildApiUrl('/profile'), JSON.stringify(item))
+        if (response && response.success) return [true, null]
+        else if (response && response.error) return [false, response.error]
+    } catch {}
+
+    return [false, null]
+}
+export const sendProfilepicture = async (file, type) => {
+    try {
+        const formData = new FormData()
+        formData.append('file', file)
+        formData.append('Type',type)
+        const response = await multipartPostRequest(buildApiUrl('marketplace/profile/picture'), formData)
         if (response && response.success) return [true, null]
         else if (response && response.error) return [false, response.error]
     } catch {}

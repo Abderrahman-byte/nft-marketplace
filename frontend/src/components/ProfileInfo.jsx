@@ -13,7 +13,7 @@ const ProfileInfo = ({profile}) => {
           <div className="Frame-934">     
           <div className="Avatar">
             
-            <img className="Pic" src={CreateSingleImg} />
+            <img className="Pic" src={profile.avatarUrl} />
            </div>
            <div className="Frame-930">
            <div className="Name">

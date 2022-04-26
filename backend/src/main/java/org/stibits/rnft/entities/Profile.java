@@ -32,6 +32,16 @@ public class Profile {
 
 	@Column(name = "avatar_url")
 	private String avatarUrl;
+	public String getCoverUrl() {
+		return coverUrl;
+	}
+
+	public void setCoverUrl(String coverUrl) {
+		this.coverUrl = coverUrl;
+	}
+
+	@Column(name = "cover_url")
+	private String coverUrl;
 
 	public Profile () {}
 

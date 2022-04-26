@@ -1,34 +1,32 @@
-import React, {useState} from "react";
-import { Link } from "react-router-dom";
+import React, {useEffect, useState} from "react";
 import '../styles/ProfilePhoto.css'
 
 
 
 
-const ProfilePhoto = () => {
-    const [image, setimage]= useState("")
+const ProfilePhoto = ({image, setimage}) => {
+    
+    const [imageUrl, setImageUrl] = useState(image)
    
-    const handlerupload=(e)=>
-    {
-        const reader = new FileReader();
-        reader.onload = ()=>{
-            if(reader.readyState === 2){
-               setimage(reader.result)
-            }
-        }
-        reader.readAsDataURL(e.target.files[0])
+    const pictureChanged = (e) => {
+        setimage(e.target.files[0])
+
+        const fileReader = new FileReader()
+
+        fileReader.onload = e => setImageUrl(e.target.result)
+
+        fileReader.readAsDataURL(e.target.files[0])
     }
+
     return (
        
         <div className="ProfilePhoto">
 
             <div className="Avatar">
             
-                 <img className="Pic" src= {image } />
+                 <img className="Pic" src= {imageUrl} />
             </div>
-            {/*<img className="Avatar" src= {CreateSingleImg } >  
-            
-    </img>*/}
+          
             <div className="Frame-944">
                 <div className="Frame-945">
                     <span className="Profile">Photo de profile </span>
@@ -36,8 +34,8 @@ const ProfilePhoto = () => {
                         of at least 400x400. Gifs work too 🙌</span>
 
                 </div>
-                <button className='btn btn-white' onClick={handlerupload}> Upload</button>
-                {/*<input className='btn btn-white' type="file" id="img" name="img" accept="image/*" onChange={handlerupload} />*/}
+                {/*<button className='btn btn-white' > Upload</button>*/}
+                <input className='btn btn-white' type="file" id="img" name="img" accept="image/*" onChange={pictureChanged}  />
             </div>
 
         </div>
