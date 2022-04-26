@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.stibits.rnft.entities.Account;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.AuthenticationRequiredError;
 import org.stibits.rnft.errors.UnverifiedEmailError;
-import org.stibits.rnft.model.bo.Account;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 public class AuthenticatedOnly implements HandlerInterceptor {

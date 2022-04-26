@@ -1,4 +1,4 @@
-package org.stibits.rnft.model.dao;
+package org.stibits.rnft.repositories;
 
 import java.util.Map;
 
@@ -10,7 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.stibits.rnft.model.bo.Account;
+import org.stibits.rnft.entities.Account;
 import org.stibits.rnft.utils.PasswordHasher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

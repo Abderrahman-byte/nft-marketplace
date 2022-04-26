@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.stibits.rnft.converters.TokenMapConverter;
+import org.stibits.rnft.entities.Account;
+import org.stibits.rnft.entities.NFToken;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.NotFoundError;
-import org.stibits.rnft.model.bo.Account;
-import org.stibits.rnft.model.bo.NFToken;
-import org.stibits.rnft.model.dao.NFTokenDAO;
+import org.stibits.rnft.repositories.NFTokenDAO;
 
 @RestController
 @RequestMapping("/api/${api.version}/marketplace/tokens/{id}")

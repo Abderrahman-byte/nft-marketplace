@@ -1,4 +1,4 @@
-package org.stibits.rnft.model.dao;
+package org.stibits.rnft.repositories;
 
 import java.util.List;
 import java.util.Map;
@@ -10,8 +10,8 @@ import javax.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.stibits.rnft.model.bo.Account;
-import org.stibits.rnft.model.bo.NftCollection;
+import org.stibits.rnft.entities.Account;
+import org.stibits.rnft.entities.NftCollection;
 import org.stibits.rnft.utils.RandomGenerator;
 
 @Repository

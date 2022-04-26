@@ -1,4 +1,4 @@
-package org.stibits.rnft.model.bo;
+package org.stibits.rnft.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

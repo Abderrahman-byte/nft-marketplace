@@ -14,15 +14,15 @@ import org.stibits.rnft.errors.UnacceptedMediaTypeError;
 import org.stibits.rnft.errors.UnknownError;
 import org.stibits.rnft.helpers.StorageService;
 import org.stibits.rnft.converters.NftCreatedResponseConverter;
+import org.stibits.rnft.entities.Account;
+import org.stibits.rnft.entities.NFToken;
+import org.stibits.rnft.entities.NftCollection;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.CollectionNotFound;
 import org.stibits.rnft.errors.DataIntegrityError;
 import org.stibits.rnft.errors.ValidationError;
-import org.stibits.rnft.model.bo.Account;
-import org.stibits.rnft.model.bo.NFToken;
-import org.stibits.rnft.model.bo.NftCollection;
-import org.stibits.rnft.model.dao.NFTokenDAO;
-import org.stibits.rnft.model.dao.NftCollectionDAO;
+import org.stibits.rnft.repositories.NFTokenDAO;
+import org.stibits.rnft.repositories.NftCollectionDAO;
 import org.stibits.rnft.validation.CreateMultipleNFTValidator;
 import org.stibits.rnft.validation.CreateSingleNFTValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 // TODO : Check File max size
 
 @RestController
-@RequestMapping("/api/${api.version}/marketplace/create")
+@RequestMapping("/api/${api.version}/marketplace/tokens")
 public class CreateNFTController {
     @Autowired
     private StorageService storageService;

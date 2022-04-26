@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-import org.stibits.rnft.model.bo.NFToken;
+import org.stibits.rnft.entities.NFToken;
 
 @Component
 public class NftCreatedResponseConverter implements Converter<NFToken, Map<String, Object>> {

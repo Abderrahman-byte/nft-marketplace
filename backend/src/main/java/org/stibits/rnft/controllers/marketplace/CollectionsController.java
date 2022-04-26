@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.stibits.rnft.converters.CollectionMapConverter;
 import org.stibits.rnft.converters.SimpleCollectionMapConverter;
 import org.stibits.rnft.converters.TokenMapConverter;
+import org.stibits.rnft.entities.Account;
+import org.stibits.rnft.entities.NFToken;
+import org.stibits.rnft.entities.NftCollection;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.CollectionNotFound;
-import org.stibits.rnft.model.bo.Account;
-import org.stibits.rnft.model.bo.NFToken;
-import org.stibits.rnft.model.bo.NftCollection;
-import org.stibits.rnft.model.dao.NFTokenDAO;
-import org.stibits.rnft.model.dao.NftCollectionDAO;
+import org.stibits.rnft.repositories.NFTokenDAO;
+import org.stibits.rnft.repositories.NftCollectionDAO;
 
 @RestController
 @RequestMapping("/api/${api.version}/marketplace/collections")

@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.stibits.rnft.converters.TokenMapConverter;
-import org.stibits.rnft.model.bo.Account;
-import org.stibits.rnft.model.bo.NFToken;
-import org.stibits.rnft.model.dao.NFTokenDAO;
+import org.stibits.rnft.entities.Account;
+import org.stibits.rnft.entities.NFToken;
+import org.stibits.rnft.repositories.NFTokenDAO;
 
 // FIXME : this request take long time to respond
 // FIXME : maybe use enum as a type of sortby param

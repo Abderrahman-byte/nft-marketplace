@@ -1,4 +1,4 @@
-package org.stibits.rnft.model.bo;
+package org.stibits.rnft.entities;
 
 import java.util.ArrayList;
 import java.util.Calendar;

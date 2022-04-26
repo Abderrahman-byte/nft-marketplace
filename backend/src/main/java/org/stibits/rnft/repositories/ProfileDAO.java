@@ -1,4 +1,4 @@
-package org.stibits.rnft.model.dao;
+package org.stibits.rnft.repositories;
 
 import java.util.Map;
 
@@ -6,9 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-import org.stibits.rnft.model.bo.Account;
-import org.stibits.rnft.model.bo.Profile;
 import org.springframework.stereotype.*;
+import org.stibits.rnft.entities.Account;
+import org.stibits.rnft.entities.Profile;
 
 @Repository
 public class ProfileDAO {

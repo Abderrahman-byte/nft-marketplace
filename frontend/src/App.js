@@ -26,9 +26,7 @@ function App() {
 				
 			    <Route path='/profile' element={<Profilepage/>}/>
 
-				<Route path='upload/*' element={<AuthenticationOnly><CreatePages /></AuthenticationOnly>} />
-				
-
+				<Route path='/upload/*' element={<AuthenticationOnly><CreatePages /></AuthenticationOnly>} />
 			</Routes>
 		
 			<AppFooter />
