@@ -1,6 +1,8 @@
 package org.stibits.rnft.model.bo;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -9,6 +11,8 @@ import javax.persistence.TemporalType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -50,6 +54,9 @@ public class NFToken {
 	@ManyToOne(targetEntity = NftCollection.class, optional = true)
 	@JoinColumn(name = "collection_id", nullable = true)
 	private NftCollection collection;
+
+	@OneToMany(targetEntity = NftLike.class, cascade = CascadeType.ALL, mappedBy = "token")
+	private List<NftLike> likes = new ArrayList<>();
 
 	public NFToken() {
 	}
@@ -132,5 +139,13 @@ public class NFToken {
 
 	public void setPreviewUrl(String previewUrl) {
 		this.previewUrl = previewUrl;
+	}
+
+	public List<NftLike> getLikes() {
+		return likes;
+	}
+
+	public void setLikes(List<NftLike> likes) {
+		this.likes = likes;
 	}
 }

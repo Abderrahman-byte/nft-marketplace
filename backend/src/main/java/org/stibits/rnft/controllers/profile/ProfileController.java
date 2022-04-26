@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.stibits.rnft.converters.ProfileDetailsConverter;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.UnknownError;
 import org.stibits.rnft.errors.ValidationError;
@@ -23,6 +24,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/${api.version}/profile")
 public class ProfileController {
+	@Autowired
+	private ProfileDetailsConverter profileDetailsConverter;
 
 	@Autowired
 	private ProfileFormValidator formValidator;
@@ -56,15 +59,9 @@ public class ProfileController {
 	Map<String, Object> handleGetRequest(@RequestAttribute(name = "account", required = true) Account account)throws ApiError {
 		Map<String, Object> response = new HashMap<>();
 
+		Profile profile = profiledao.getProfilebyId(account.getId());
+		response.put("profile", profileDetailsConverter.convert(profile));
 		response.put("success", true);
-
-		try {
-			Profile profile = profiledao.getProfilebyId(account.getId());
-			response.put("profile", profile);
-		} catch (Exception ex) {
-			System.out.println(ex);
-			throw new UnknownError();
-		}
 
 		return response;
 	}

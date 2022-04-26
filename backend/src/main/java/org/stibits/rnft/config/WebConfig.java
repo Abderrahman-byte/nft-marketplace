@@ -1,5 +1,6 @@
 package org.stibits.rnft.config;
 
+import java.util.List;
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -87,8 +88,9 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        List<String> authenticatedOnlyPaths = List.of("/api/*/marketplace/create", "/api/*/profile");
         registry.addInterceptor(authenticationHandler()).addPathPatterns("/**").order(0);
-        registry.addInterceptor(new AuthenticatedOnly()).addPathPatterns("/api/*/marketplace/create", "/api/*/profile").order(1);
+        registry.addInterceptor(new AuthenticatedOnly()).addPathPatterns(authenticatedOnlyPaths).order(1);
     }
 
     // Serving static content just in case of using css

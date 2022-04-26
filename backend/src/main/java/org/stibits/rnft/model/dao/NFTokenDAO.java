@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.stibits.rnft.model.bo.Account;
@@ -74,5 +75,64 @@ public class NFTokenDAO {
         nft.setPrice(price);
 
         return entityManager.merge(nft);
+    }
+
+    public List<NFToken> selectTokensSortedByLikes (int limit, int offset, double maxPrice) {
+        return this.selectToken("order by likes DESC, created_date DESC", limit, offset, maxPrice);
+    }
+
+    public List<NFToken> selectTokensSortedByHighPrice (int limit, int offset, double maxPrice) {
+        return this.selectToken("order by price DESC, created_date DESC", limit, offset, maxPrice);
+    }
+
+    public List<NFToken> selectTokensSortedByLowPrice (int limit, int offset, double maxPrice) {
+        return this.selectToken("order by price ASC, created_date DESC", limit, offset, maxPrice);
+    }
+
+    public List<NFToken> selectTokensSortedByLikes (int limit, int offset) {
+        return this.selectToken("order by likes DESC, created_date DESC", limit, offset);
+    }
+
+    public List<NFToken> selectTokensSortedByHighPrice (int limit, int offset) {
+        return this.selectToken("order by price DESC, created_date DESC", limit, offset);
+    }
+
+    public List<NFToken> selectTokensSortedByLowPrice (int limit, int offset) {
+        return this.selectToken("order by price ASC, created_date DESC", limit, offset);
+    }
+
+    // FIXME : this maybe unsafe re-check 
+    @SuppressWarnings("unchecked")
+    private List<NFToken> selectToken (String addSql, int limit, int offset) {
+        String sqlString = "select id, title, preview_url, price, artist_id,owner_id, description,is_for_sell,collection_id, created_date, " +
+            "(select count(account_id) as likes from nft_token_likes where nft_token_likes.token_id = nft_token.id ) as likes "+ 
+            "from nft_token " + addSql + " limit :limit offset :offset";
+
+        Query query = entityManager.createNativeQuery(sqlString, NFToken.class);
+        query.setParameter("offset", offset);
+        query.setParameter("limit", limit);
+
+        
+        List<NFToken> list = (List<NFToken>)query.getResultList();
+
+        return list;
+    }
+
+    // FIXME : this maybe unsafe re-check 
+    @SuppressWarnings("unchecked")
+    private List<NFToken> selectToken (String addSql, int limit, int offset, double maxPrice) {
+        String sqlString = "select id, title, preview_url, price, artist_id,owner_id, description,is_for_sell,collection_id, created_date, " +
+            "(select count(account_id) as likes from nft_token_likes where nft_token_likes.token_id = nft_token.id ) as likes "+ 
+            "from nft_token where price <= :max " + addSql + " limit :limit offset :offset";
+
+        Query query = entityManager.createNativeQuery(sqlString, NFToken.class);
+        query.setParameter("offset", offset);
+        query.setParameter("limit", limit);
+        query.setParameter("max", maxPrice);
+
+        
+        List<NFToken> list = (List<NFToken>)query.getResultList();
+
+        return list;
     }
 }
