@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
 import AccountInfo from "./AccountInfo";
-import { sendProfile } from "../utils/api";
+
 import { Link } from "react-router-dom";
 
 import'../styles/ProfileForm.css'
 import Profilepage from "../pages/Profile.page";
 
-const ProfileForm = ({profile, setprofile})=>{
+const ProfileForm = ({profile, setprofile, submit})=>{
    
    /*const submit = async (e) => {
       e.preventDefault()
@@ -17,22 +17,6 @@ const ProfileForm = ({profile, setprofile})=>{
       console.log(success)
     } */
     
-    const submit = async (e) => {
-      e.preventDefault()
-     const data={
-        displayName : profile.displayName,
-        customUrl : profile.customUrl,
-        bio: profile.bio
-      }
-      console.log(profile.displayName)
-      console.log(data)
-     const [success, err] = await sendProfile(data);
-     console.log(err)
-     console.log(success)
-     
-    }
-    
-
   return (
      
       <form className="ProfileForm" onSubmit={submit}>
@@ -56,8 +40,10 @@ const ProfileForm = ({profile, setprofile})=>{
            <div className="Divider"></div>
 
            <div className="buttons"> 
-           <button className='btn btn-blue' type="submit">Update Profile</button>
-           <div className="Frame-942">
+           <button to="/profile" className='btn btn-blue' type="submit">Update Profile</button>
+           <div className="Frame-942" onClick={(e)=>{
+             window.top.location = window.top.location
+           }}>
             <i className="clearall"> </i> <label> Clear all </label>
             </div>
            </div>

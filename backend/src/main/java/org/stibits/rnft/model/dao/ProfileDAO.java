@@ -21,6 +21,16 @@ public class ProfileDAO {
 	}
 
 	@Transactional
+	public Profile insertProfile(Account acc, Profile p) {
+		
+		acc.setProfile(p);
+		entityManager.merge(acc);
+		
+		return p;
+	}
+	
+	
+	@Transactional
 	public Profile insertProfile(Account acc, String displayName, String bio, String customUrl, String avatarUrl) {
 		Profile profile = entityManager.find(Profile.class, acc.getId());
 

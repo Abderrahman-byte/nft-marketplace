@@ -10,7 +10,7 @@ import org.springframework.validation.Errors;
 
 @Component
 public class ProfileFormValidator extends GenericMapValidator {
-	List<String> stringFields = List.of("displayName", "bio", "customUrl", "avatarUrl");
+	List<String> stringFields = List.of("displayName", "bio", "customUrl", "avatarUrl","social");
 
 	public ProfileFormValidator() {
 		this.addRequiredFields("displayName");
