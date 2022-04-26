@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS account_profile (
     bio TEXT,
     custom_url TEXT,
     avatar_url TEXT,
+    cover_url TEXT,
     FOREIGN KEY (account_id) REFERENCES account (id) ON DELETE CASCADE
 );
 
