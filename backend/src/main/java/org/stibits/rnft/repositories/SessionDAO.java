@@ -1,4 +1,4 @@
-package org.stibits.rnft.model.dao;
+package org.stibits.rnft.repositories;
 
 import java.util.Calendar;
 
@@ -10,9 +10,9 @@ import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.stibits.rnft.model.bo.Session;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.stibits.rnft.entities.Session;
 
 // TODO : Delete Expired sessions
 

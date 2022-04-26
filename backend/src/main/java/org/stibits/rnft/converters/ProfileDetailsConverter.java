@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-import org.stibits.rnft.model.bo.Profile;
+import org.stibits.rnft.entities.Profile;
 
 @Component
 public class ProfileDetailsConverter implements Converter<Profile, Map<String, Object>> {

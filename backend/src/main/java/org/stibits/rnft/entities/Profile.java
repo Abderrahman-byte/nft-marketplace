@@ -1,9 +1,7 @@
-package org.stibits.rnft.model.bo;
+package org.stibits.rnft.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.Id;
 import javax.persistence.MapsId;
@@ -34,14 +32,7 @@ public class Profile {
 
 	@Column(name = "avatar_url")
 	private String avatarUrl;
-	public String getCoverUrl() {
-		return coverUrl;
-	}
-
-	public void setCoverUrl(String coverUrl) {
-		this.coverUrl = coverUrl;
-	}
-
+	
 	@Column(name = "cover_url")
 	private String coverUrl;
 
@@ -94,5 +85,13 @@ public class Profile {
 
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
+	}
+
+	public String getCoverUrl() {
+		return coverUrl;
+	}
+	
+	public void setCoverUrl(String coverUrl) {
+		this.coverUrl = coverUrl;
 	}
 }

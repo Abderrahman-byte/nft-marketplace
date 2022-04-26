@@ -11,13 +11,13 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
+import org.stibits.rnft.entities.Account;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.DataIntegrityError;
 import org.stibits.rnft.errors.UnknownError;
 import org.stibits.rnft.errors.ValidationError;
 import org.stibits.rnft.helpers.MailService;
-import org.stibits.rnft.model.bo.Account;
-import org.stibits.rnft.model.dao.AccountDAO;
+import org.stibits.rnft.repositories.AccountDAO;
 import org.stibits.rnft.validation.RegisterFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;

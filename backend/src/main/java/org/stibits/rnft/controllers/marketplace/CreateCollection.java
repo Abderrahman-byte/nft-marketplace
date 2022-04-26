@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.stibits.rnft.converters.CollectionCreatedResponseConverter;
+import org.stibits.rnft.entities.Account;
+import org.stibits.rnft.entities.NftCollection;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.AuthenticationRequiredError;
 import org.stibits.rnft.errors.DataIntegrityError;
@@ -30,9 +32,7 @@ import org.stibits.rnft.errors.UnacceptedMediaTypeError;
 import org.stibits.rnft.errors.UnknownError;
 import org.stibits.rnft.errors.ValidationError;
 import org.stibits.rnft.helpers.StorageService;
-import org.stibits.rnft.model.bo.Account;
-import org.stibits.rnft.model.bo.NftCollection;
-import org.stibits.rnft.model.dao.NftCollectionDAO;
+import org.stibits.rnft.repositories.NftCollectionDAO;
 import org.stibits.rnft.validation.CreateCollectionValidator;
 
 // TODO : Check collection image max size

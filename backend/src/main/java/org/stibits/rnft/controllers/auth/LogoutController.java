@@ -3,9 +3,9 @@ package org.stibits.rnft.controllers.auth;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
-import org.stibits.rnft.model.bo.Account;
-import org.stibits.rnft.model.bo.Session;
-import org.stibits.rnft.model.dao.SessionDAO;
+import org.stibits.rnft.entities.Account;
+import org.stibits.rnft.entities.Session;
+import org.stibits.rnft.repositories.SessionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;

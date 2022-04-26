@@ -37,5 +37,7 @@ CREATE TABLE IF NOT EXISTS historique_trx (
 CREATE TABLE IF NOT EXISTS nft_token_likes (
     token_id VARCHAR(25) NOT NULL REFERENCES nft_token (id) ON DELETE CASCADE,
     account_id VARCHAR(25) NOT NULL REFERENCES account (id) ON DELETE CASCADE,
-    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
+
+    PRIMARY KEY (token_id, account_id)
 );

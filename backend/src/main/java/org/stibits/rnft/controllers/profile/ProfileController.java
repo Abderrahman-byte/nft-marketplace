@@ -6,12 +6,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.stibits.rnft.converters.ProfileDetailsConverter;
+import org.stibits.rnft.entities.Account;
+import org.stibits.rnft.entities.Profile;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.UnknownError;
 import org.stibits.rnft.errors.ValidationError;
-import org.stibits.rnft.model.bo.Account;
-import org.stibits.rnft.model.bo.Profile;
-import org.stibits.rnft.model.dao.ProfileDAO;
+import org.stibits.rnft.repositories.ProfileDAO;
 import org.stibits.rnft.validation.ProfileFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;

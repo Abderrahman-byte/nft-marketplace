@@ -7,13 +7,16 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-import org.stibits.rnft.model.bo.Account;
-import org.stibits.rnft.model.bo.NFToken;
+import org.stibits.rnft.entities.Account;
+import org.stibits.rnft.entities.NFToken;
 
 @Component
 public class TokenMapConverter implements Converter<NFToken, Map<String, Object>> {
     @Autowired
     public ProfileDetailsConverter profileDetailsConverter;
+
+    @Autowired
+    public SimpleCollectionMapConverter collectionMapConverter;
 
     public List<Map<String, Object>> convertList (List<NFToken> nfts, Account account) {
         return nfts.stream().map(nft -> this.convert(nft, account)).toList();
@@ -33,6 +36,11 @@ public class TokenMapConverter implements Converter<NFToken, Map<String, Object>
         data.put("price", source.getPrice());
         data.put("description", source.getDescription());
         data.put("likesCount", source.getLikes().size());
+        data.put("isForSale", source.isForSell());
+    
+        if (source.getCollection() != null) {
+            data.put("collection", collectionMapConverter.convert(source.getCollection()));
+        }
 
         if (source.getCreator().getProfile() != null) {
             data.put("creator", profileDetailsConverter.convert(source.getCreator().getProfile()));

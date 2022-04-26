@@ -6,8 +6,7 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.validation.MapBindingResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,22 +18,17 @@ import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.StorageUnacceptedMediaType;
 import org.stibits.rnft.errors.UnacceptedMediaTypeError;
 import org.stibits.rnft.helpers.StorageService;
-import org.stibits.rnft.model.bo.Account;
-import org.stibits.rnft.model.bo.Profile;
-import org.stibits.rnft.model.dao.AccountDAO;
-import org.stibits.rnft.model.dao.ProfileDAO;
+import org.stibits.rnft.entities.Account;
+import org.stibits.rnft.entities.Profile;
+import org.stibits.rnft.repositories.ProfileDAO;
 
 @RestController
 @RequestMapping("/api/${api.version}/marketplace/profile/picture")
-public class ProfilepictureController {
-
+public class ProfilePictureController {
 	@Autowired 
 	private ProfileDAO profiledao;
 	@Autowired
     private StorageService storageService;
-	
-	
-
 	
 	private Pattern fileformat = Pattern.compile("^(image|video|audio)+/(png|gif|webp|mp4|mp3|jpeg|svg)+$");
 	
@@ -73,7 +67,4 @@ public class ProfilepictureController {
 	        } 
 		
 	}
-	
-	
-	
 }
