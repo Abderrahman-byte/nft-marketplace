@@ -17,7 +17,7 @@ public class RegisterFormValidator extends GenericMapValidator {
 
     public RegisterFormValidator () {
         // ! isArtist field may be move to update profile form
-        this.addRequiredFields("username", "email", "password", "password2", "isArtist");
+        this.addRequiredFields("username", "email", "password", "password2");
     }
 
     @Override
@@ -31,7 +31,6 @@ public class RegisterFormValidator extends GenericMapValidator {
         if (errors.hasErrors()) return;
 
         this.checkStringValues(data, stringFields, errors);
-        this.checkBooleanValues(data, List.of("isArtist"), errors);
 
         if (errors.hasErrors()) return;
 

@@ -53,16 +53,14 @@ public class AccountDAO {
         return this.insertAccount(
             (String) data.get("username"),
             (String) data.get("email"), 
-            (String) data.get("password"),
-            (Boolean) data.get("isArtist")
+            (String) data.get("password")
         );
     }
 
     @Transactional
-    public Account insertAccount (String username, String email, String password, boolean isArtist) {
+    public Account insertAccount (String username, String email, String password) {
         Account account = new Account();
         account.setUsername(username);
-        account.setArtist(isArtist);
         account.setEmail(email);
         account.setPassword(PasswordHasher.hashPassword(password));
         account.setId(randomGenerator.generateRandomStr(25));

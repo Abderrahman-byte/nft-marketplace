@@ -67,15 +67,10 @@ public class UserInfoController {
 
         if (!List.of("CREATOR", "SALE", "OWNER", "FAVORITE").contains(role)) role = "CREATOR";
 
-        if (role.equals("SALE")) {
-            tokens = nfTokenDAO.getTokensForSaleBy(accountId, limit, offset);
-        } else if (role.equals("OWNER")) {
-            tokens = nfTokenDAO.getTokensOwnedBy(accountId, limit, offset);
-        } else if (role.equals("FAVORITE")) {
-            tokens = nfTokenDAO.getUserFavoriteTokens(accountId, limit, offset);
-        } else {
-            tokens = nfTokenDAO.getTokensCreatedBy(accountId, limit, offset);
-        }
+        if (role.equals("SALE")) tokens = nfTokenDAO.getTokensForSaleBy(accountId, limit, offset);
+        else if (role.equals("OWNER")) tokens = nfTokenDAO.getTokensOwnedBy(accountId, limit, offset);
+        else if (role.equals("FAVORITE")) tokens = nfTokenDAO.getUserFavoriteTokens(accountId, limit, offset);
+        else tokens = nfTokenDAO.getTokensCreatedBy(accountId, limit, offset);
 
         response.put("success", true);
         response.put("data", tokenConverter.convertList(tokens, account));

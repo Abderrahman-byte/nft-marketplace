@@ -22,8 +22,8 @@ public class ProfileDAO {
 
 	@Transactional
 	public Profile insertProfile(Account acc, Profile p) {
-		
 		acc.setProfile(p);
+		
 		entityManager.merge(acc);
 		
 		return p;

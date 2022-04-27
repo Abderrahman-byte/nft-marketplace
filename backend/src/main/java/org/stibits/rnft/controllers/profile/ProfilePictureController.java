@@ -25,46 +25,43 @@ import org.stibits.rnft.repositories.ProfileDAO;
 @RestController
 @RequestMapping("/api/${api.version}/marketplace/profile/picture")
 public class ProfilePictureController {
-	@Autowired 
+	@Autowired
 	private ProfileDAO profiledao;
 	@Autowired
-    private StorageService storageService;
-	
-	private Pattern fileformat = Pattern.compile("^(image|video|audio)+/(png|gif|webp|mp4|mp3|jpeg|svg)+$");
-	
+	private StorageService storageService;
+
+	private Pattern fileformat = Pattern.compile("^image+/(png|gif|webp|jpeg)+$");
+
 	@PostMapping
-	public Map<String, Object> insert(@RequestParam( name = "file")  MultipartFile file,
+	public Map<String, Object> insert(@RequestParam(name = "file") MultipartFile file,
 			@RequestAttribute(name = "account", required = true) Account account,
-			@RequestParam(name="Type",required = true ) String Type,
-			HttpServletRequest request )throws ApiError 
-	{
+			@RequestParam(name = "Type", required = true) String Type,
+			HttpServletRequest request) throws ApiError {
 		Map<String, Object> response = new HashMap<>();
-		
-		response.put("success", true);
-		if(file ==null || file.isEmpty()) {
+
+		if (file == null || file.isEmpty()) {
 			response.put("success", false);
+			return response;
 		}
-		  try {
-	            String CustomUrl = storageService.storeFile(file, fileformat);
-	            String contentFullUrl = ServletUriComponentsBuilder.fromContextPath(request).replacePath("/").pathSegment("media", CustomUrl).build().toUriString();
-	           System.out.println(contentFullUrl);
-	          
-	            Profile p = account.getProfile();
-	            System.out.println("here"+p.getDisplayName());
-	           
-	            if(Type.equals("avatar")) {
-	            
-	            	p.setAvatarUrl(contentFullUrl);
-	            
-	            } else 
-	            {
-	               p.setCoverUrl(contentFullUrl);
-	            }
-	            profiledao.insertProfile(account, p);
-	           return response;
-	        } catch (StorageUnacceptedMediaType ex) {
-	            throw new UnacceptedMediaTypeError(ex);
-	        } 
+
+		response.put("success", true);
 		
+		try {
+			Profile p = account.getProfile();
+			String CustomUrl = storageService.storeFile(file, fileformat);
+			String contentFullUrl = ServletUriComponentsBuilder
+					.fromContextPath(request).replacePath("/")
+					.pathSegment("media", CustomUrl)
+					.build().toUriString();
+
+			if (Type.equals("avatar")) p.setAvatarUrl(contentFullUrl);
+			else p.setCoverUrl(contentFullUrl);
+
+			profiledao.insertProfile(account, p);
+
+			return response;
+		} catch (StorageUnacceptedMediaType ex) {
+			throw new UnacceptedMediaTypeError(ex);
+		}
 	}
 }
