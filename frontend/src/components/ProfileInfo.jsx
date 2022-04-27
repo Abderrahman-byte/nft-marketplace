@@ -17,7 +17,7 @@ const ProfileInfo = ({profile}) => {
            </div>
            <div className="Frame-930">
            <div className="Name">
-              <span>{profile.username} </span> 
+              <span>{profile.displayName} </span> 
            </div>
            <div className="Bio">
                 {profile.bio}

@@ -29,7 +29,7 @@ const ProfilePhoto = ({image, setimage}) => {
           
             <div className="Frame-944">
                 <div className="Frame-945">
-                    <span className="Profile">Photo de profile </span>
+                    <span className="Profile">Photo de profile  </span>
                     <span className="Recomendation"> We recommend an image
                         of at least 400x400. Gifs work too 🙌</span>
 

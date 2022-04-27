@@ -6,6 +6,7 @@ import { sendLogin } from '../utils/api'
 import { DEFAULT_ERROR, translateError } from '../utils/generic'
 import LoadingCard from '../components/LoadingCard'
 import { AuthContext } from '../context/AuthContext'
+import Profilepage from './Profile.page'
 
 import '../styles/forms.css'
 import '../styles/LoginPage.css'
@@ -14,7 +15,7 @@ const LoginPage = () => {
 	const { openModel, closeModel, setAuth } = useContext(AuthContext)
     const Navigate = useNavigate()
 	const location = useLocation()
-	const nextPath = location?.state?.next || '/'
+	const nextPath = location?.state?.next || '/profile'
 
 	const submitCallback = async (data, setError) => {
         openModel(<LoadingCard />)
@@ -33,6 +34,7 @@ const LoginPage = () => {
         Navigate(nextPath)
 	}
 
+	
 	return (
 		<div className='Login center-container page'>
 			<div className='container card'>

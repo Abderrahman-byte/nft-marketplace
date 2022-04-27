@@ -3,6 +3,7 @@ import React, {useState} from 'react'
 import ProfilePhoto from './ProfilePhoto'
 import ProfileForm from './ProfileForm'
 import '../styles/ProfileSettings.css'
+
 import { sendProfile, sendProfilepicture } from "../utils/api";
 
 const ProfileSettings = ({profile, setprofile}) => {
@@ -25,7 +26,6 @@ const ProfileSettings = ({profile, setprofile}) => {
 		 const [success, err] = await sendProfilepicture(image, 'avatar');
 	    console.log(err)
 	    console.log(success)
-	  
 	   
 	  }
 	return (

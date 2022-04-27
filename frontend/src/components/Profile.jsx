@@ -2,9 +2,8 @@ import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 
 import '../styles/Profile.css'
-import CreateSingleImg from '../assets/create-single-img.jpg'
 import ProfileInfo from "./ProfileInfo";
-import { sendProfilepicture } from "../utils/api";
+
 
 const Profile = ({profile, pictureChanged}) => {
     //const [imageUrl, setImageUrl] = useState(profile.cover)
@@ -40,7 +39,7 @@ const Profile = ({profile, pictureChanged}) => {
                <ProfileInfo profile ={profile}/>
               <div className="Frame-935">
                      <div className="sub-navigation">
-                        {profile.cover}
+                     
                      </div>
               </div>
 

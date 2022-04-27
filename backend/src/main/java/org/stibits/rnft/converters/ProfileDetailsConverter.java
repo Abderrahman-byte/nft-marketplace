@@ -13,7 +13,7 @@ public class ProfileDetailsConverter implements Converter<Profile, Map<String, O
     public Map<String, Object> convert(Profile source) {
         Map<String, Object> data = new HashMap<>();
         data.put("id", source.getId());
-        data.put("username", source.getAccount().getUsername());
+        data.put("displayName", source.getDisplayName());
         data.put("bio", source.getBio());
         data.put("customUrl", source.getCustomUrl());
         data.put("avatarUrl", source.getAvatarUrl());

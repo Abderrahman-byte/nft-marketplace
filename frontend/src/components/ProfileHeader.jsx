@@ -10,10 +10,10 @@ const ProfileHeader = () => {
         <div className="ProfileHeader container">
             <div className="Breadcrumb-wrap">
 
-                <button className="btn btn-white">
+                <Link  to= "/profile" className="btn">
                     <i className='arrow-left-icon'></i>
                     <label className="backtoprofile"> Back to profile</label>
-                </button>
+                </Link>
                 <div className="Breadcrumb">
                     <Link className='headerprofile-linkp' to='#' >Profile</Link>
                     <i className='arrow-simple-icon'></i>

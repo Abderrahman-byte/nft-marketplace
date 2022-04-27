@@ -74,6 +74,7 @@
   border: solid 2px #777e90;
   background-color: #0f0f0f;
   cursor: pointer;
+  text-decoration: none;
 }
 .Account .Container .Action-button .Editcover .coverbutton{
   width: 120px;

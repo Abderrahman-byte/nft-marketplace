@@ -20,7 +20,7 @@
 	padding: 24px 160px;
 }
 
-.ProfileHeader.container .Breadcrumb-wrap button {
+.ProfileHeader.container .Breadcrumb-wrap .btn {
 	width: 170px;
 	height: 40px;
 	flex-grow: 0;
@@ -34,7 +34,7 @@
 	border: solid 2px #e6e8ec;
 }
 
-.ProfileHeader.container .Breadcrumb-wrap button .backtoprofile {
+.ProfileHeader.container .Breadcrumb-wrap  .backtoprofile {
 	width: 99px;
 	height: 16px;
 	flex-grow: 0;
@@ -46,6 +46,7 @@
 	line-height: 1.14;
 	letter-spacing: normal;
 	text-align: left;
+	cursor: pointer;
 	color: #23262f;
 }
 

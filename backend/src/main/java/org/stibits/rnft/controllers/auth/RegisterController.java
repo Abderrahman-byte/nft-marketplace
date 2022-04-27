@@ -18,6 +18,7 @@ import org.stibits.rnft.errors.UnknownError;
 import org.stibits.rnft.errors.ValidationError;
 import org.stibits.rnft.helpers.MailService;
 import org.stibits.rnft.repositories.AccountDAO;
+import org.stibits.rnft.repositories.ProfileDAO;
 import org.stibits.rnft.validation.RegisterFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -47,6 +48,8 @@ public class RegisterController {
 
     @Autowired
      private MailService mailService;
+    @Autowired
+    private ProfileDAO profiledao;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     Map<String, Object> handlePostRequest (@RequestBody Map<String, Object> data, HttpServletRequest request) throws ApiError {
@@ -60,6 +63,7 @@ public class RegisterController {
 
         try {
             Account account = accountDAO.insertAccount(data);
+            profiledao.insertProfile(account, account.getUsername(), "", "", "");
             this.sendVerificationEmail(request, account);
         } catch (DataIntegrityViolationException ex) {
             throw this.translateDataIntegrityError(ex);
