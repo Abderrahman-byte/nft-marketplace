@@ -39,9 +39,9 @@ public class ProfileController {
 	Map<String, Object> handlePostRequest(@RequestBody Map<String, Object> data, @RequestAttribute(name = "account", required = true) Account account, HttpServletRequest request) throws ApiError {
 		Map<String, Object> response = new HashMap<>();
 		MapBindingResult errors = new MapBindingResult(data, "profile");
-
-		response.put("success", true);
+		
 		formValidator.validate(data, errors);
+		response.put("success", true);
 
 		if (errors.hasErrors()) throw new ValidationError(errors, messageSource);
 
@@ -59,8 +59,14 @@ public class ProfileController {
 		Map<String, Object> response = new HashMap<>();
 
 		Profile profile = profiledao.getProfilebyId(account.getId());
-		response.put("profile", profileDetailsConverter.convert(profile));
-		response.put("success", true);
+
+		if (profile == null) {
+			response.put("profile", null);
+			response.put("success", false);
+		} else {
+			response.put("profile", profileDetailsConverter.convert(profile));
+			response.put("success", true);
+		}
 
 		return response;
 	}

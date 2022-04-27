@@ -4,7 +4,6 @@ CREATE TABLE IF NOT EXISTS account (
     email VARCHAR (200) NOT NULL UNIQUE,
     password TEXT,
     is_admin BOOLEAN NOT NULL DEFAULT false,
-    is_artist BOOLEAN NOT NULL DEFAULT false,
     is_verified BOOLEAN NOT NULL DEFAULT false,
 
     created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),

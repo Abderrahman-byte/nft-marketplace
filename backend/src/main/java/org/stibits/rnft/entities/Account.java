@@ -38,9 +38,6 @@ public class Account {
     @Column(name = "is_admin", nullable = false)
     private boolean isAdmin = false;
 
-    @Column(name = "is_artist", nullable = false)
-    private boolean isArtist = false;
-
     @Column(name = "is_verified", nullable = false)
     private boolean isVerified = false;
 
@@ -107,14 +104,6 @@ public class Account {
 
     public void setAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
-    }
-
-    public boolean isArtist() {
-        return isArtist;
-    }
-
-    public void setArtist(boolean isArtist) {
-        this.isArtist = isArtist;
     }
 
     public boolean isVerified() {
