@@ -63,7 +63,7 @@ public class RegisterController {
 
         try {
             Account account = accountDAO.insertAccount(data);
-            profiledao.insertProfile(account, account.getUsername(), "", "", "");
+            profiledao.insertProfile(account, account.getUsername(), null, null, null);
             this.sendVerificationEmail(request, account);
         } catch (DataIntegrityViolationException ex) {
             throw this.translateDataIntegrityError(ex);
@@ -81,7 +81,7 @@ public class RegisterController {
 
         String content = templateEngine.process("email-verification", ctx);
 
-      mailService.sendMail(account.getEmail(), "Verify Email", content, "text/html; charset=utf-8");
+        mailService.sendMail(account.getEmail(), "Verify Email", content, "text/html; charset=utf-8");
     }
 
     private String generateVerificationUrl (Account account, HttpServletRequest request) {

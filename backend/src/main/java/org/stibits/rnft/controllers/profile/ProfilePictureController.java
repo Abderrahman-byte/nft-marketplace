@@ -33,8 +33,6 @@ public class ProfilePictureController {
 	
 	private Pattern fileformat = Pattern.compile("^(image|video|audio)+/(png|gif|webp|mp4|mp3|jpeg|svg)+$");
 	
-    //registry.addResourceHandler("/media/**").addResourceLocations("file://" + "/D:/ILISI2/" );
-	
 	@PostMapping
 	public Map<String, Object> insert(@RequestParam(name = "file") MultipartFile file,
 			@RequestAttribute(name = "account", required = true) Account account,
@@ -57,8 +55,8 @@ public class ProfilePictureController {
 					.pathSegment("media", CustomUrl)
 					.build().toUriString();
 
-			if (Type.equals("avatar")) p.setAvatarUrl(contentFullUrl);
-			else p.setCoverUrl(contentFullUrl);
+			if (Type.equals("cover")) p.setCoverUrl(contentFullUrl);
+			else p.setAvatarUrl(contentFullUrl);
 
 			profiledao.insertProfile(account, p);
 

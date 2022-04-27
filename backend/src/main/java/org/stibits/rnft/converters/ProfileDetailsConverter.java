@@ -12,12 +12,16 @@ public class ProfileDetailsConverter implements Converter<Profile, Map<String, O
     @Override
     public Map<String, Object> convert(Profile source) {
         Map<String, Object> data = new HashMap<>();
+
         data.put("id", source.getId());
         data.put("displayName", source.getDisplayName());
         data.put("bio", source.getBio());
         data.put("customUrl", source.getCustomUrl());
         data.put("avatarUrl", source.getAvatarUrl());
         data.put("cover", source.getCoverUrl());
+
+        // Username may also be shown in the frontend along side the display name
+        data.put("username", source.getAccount().getUsername()); 
 
         return data;
     }

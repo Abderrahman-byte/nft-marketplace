@@ -36,12 +36,13 @@ public class ProfileDAO {
 
 		if (profile == null) {
 			profile = new Profile();
+
 			profile.setId(acc.getId());
 			profile.setDisplayName(displayName);
 			profile.setBio(bio);
 			profile.setAvatarUrl(avatarUrl);
 			profile.setCustomUrl(customUrl);
-			profile.setCoverUrl(avatarUrl);
+			profile.setCoverUrl(null);
 			profile.setAccount(acc);
 		}
 		
