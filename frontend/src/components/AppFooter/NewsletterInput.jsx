@@ -1,6 +1,6 @@
 import React from 'react'
 
-import '../styles/NewsletterInput.css'
+import '../../styles/NewsletterInput.css'
 
 const NewsletterInput = () => {
     return (

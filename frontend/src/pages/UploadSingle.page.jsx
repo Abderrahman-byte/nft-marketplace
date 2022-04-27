@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import CreateSingleItemForm from '../components/CreateSingleItemForm'
+import CreateSingleItemForm from '../components/CreateTokenForm'
 
 import '../styles/UploadSinglePage.css'
 import '../styles/UploadItem.css'

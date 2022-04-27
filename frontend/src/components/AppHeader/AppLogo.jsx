@@ -1,6 +1,6 @@
 import React from 'react'
 
-import '../styles/AppLogo.css'
+import '../../styles/AppLogo.css'
 
 const AppLogo = () => {
     return (

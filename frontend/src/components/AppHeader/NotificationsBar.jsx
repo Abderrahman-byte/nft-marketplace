@@ -1,6 +1,6 @@
 import React from 'react'
 
-import '../styles/NotificationsBar.css'
+import '../../styles/NotificationsBar.css'
 
 const NotificationsBar = () => {
     return (

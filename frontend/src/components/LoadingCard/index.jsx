@@ -1,6 +1,6 @@
 import React from 'react'
 
-import '../styles/LoadingCard.css'
+import '../../styles/LoadingCard.css'
 
 const LoadingCard = () => {
 	return (

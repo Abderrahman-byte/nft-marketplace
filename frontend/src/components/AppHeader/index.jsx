@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 
 import AppLogo from './AppLogo'
 import SearchBox from './SearchBox'
-
-import '../styles/AppHeader.css'
 import NotificationsBar from './NotificationsBar'
+
+import '../../styles/AppHeader.css'
 
 const AppHeader = () => {
     return (

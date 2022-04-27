@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 
 import UploadFileInput from './UploadFileInput'
 import ItemDetails from './ItemDetails'
-import CheckboxSettingsItem from './CheckboxSettingsItem'
+import CheckboxSettingsItem from '../CheckBoxSettingsItem'
 import ChooseCollectionInput from './ChooseCollectionInput'
 
-import '../styles/CreateSingleItemForm.css'
+import '../../styles/CreateSingleItemForm.css'
 
 // TODO : Maybe create a generic component for creating both singles and multiples
 
-const CreateSingleItemForm = () => {
+const CreateTokenForm = () => {
     const [itemFile, setItemFile] = useState(null)
 
     const createItem = (e) => {
@@ -39,4 +39,4 @@ const CreateSingleItemForm = () => {
     )
 }
 
-export default CreateSingleItemForm
+export default CreateTokenForm
