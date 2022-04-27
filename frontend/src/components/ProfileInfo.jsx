@@ -1,8 +1,8 @@
 import React from "react";
-import CreateSingleImg from '../assets/create-single-img.jpg'
+import CreateSingleImg from '@Assets/create-single-img.jpg'
 
 
-import '../styles/ProfileInfo.css'
+import '@Styles/ProfileInfo.css'
 
 
 const ProfileInfo = ({profile}) => {

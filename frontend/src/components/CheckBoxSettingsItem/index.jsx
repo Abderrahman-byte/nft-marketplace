@@ -1,6 +1,6 @@
 import React from 'react'
 
-import '../../styles/CheckboxSettingsItem.css'
+import '@Styles/CheckboxSettingsItem.css'
 
 const CheckboxSettingsItem = ({title, subtitle, name, defaultValue = false}) => {
 

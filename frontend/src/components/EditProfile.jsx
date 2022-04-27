@@ -1,8 +1,7 @@
 import React from "react";
-import '../styles/EditProfile.css'
 import ProfileSettings from "./ProfileSettings";
 
-
+import '@Styles/EditProfile.css'
 
 const EditProfile = ({profile, setprofile}) => {
 

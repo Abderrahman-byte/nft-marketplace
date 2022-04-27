@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 
 import App from './App'
+import { AuthProvider } from '@Context/AuthContext'
 
-import './styles/index.css'
-import './styles/icons.css'
-import { AuthProvider } from './context/AuthContext'
+import '@Styles/index.css'
+import '@Styles/icons.css'
 
 // import reportWebVitals from './reportWebVitals';
 

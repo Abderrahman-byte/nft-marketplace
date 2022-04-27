@@ -1,18 +1,16 @@
 import React from 'react'
 import { Route, Routes } from 'react-router'
 
-import AppFooter from './components/AppFooter'
-import AppHeader from './components/AppHeader'
-import RegisterPage from './pages/Register.page'
-import LoginPage from './pages/login.page'
-import UpdateProfilepage from './pages/UpdateProfile.page'
-import AuthenticationOnly from './components/AuthenticatedOnly'
-import CreatePages from './pages/upload.pages'
+import UpdateProfilepage from '@Pages/UpdateProfile.page'
+import LoginPage from '@Pages/login.page'
+import CreatePages from '@Pages/upload.pages'
+import RegisterPage from '@Pages/Register.page'
+import Profilepage from '@Pages/Profile.page'
+import AppHeader from '@Components/AppHeader'
+import AppFooter from '@Components/AppFooter'
+import AuthenticationOnly from '@Components/AuthenticatedOnly'
 
-import Profilepage from './pages/Profile.page'
-
-
-import './styles/App.css'
+import '@Styles/App.css'
 
 function App() {
 	return (

@@ -5,7 +5,7 @@ import AppLogo from './AppLogo'
 import SearchBox from './SearchBox'
 import NotificationsBar from './NotificationsBar'
 
-import '../../styles/AppHeader.css'
+import '@Styles/AppHeader.css'
 
 const AppHeader = () => {
     return (

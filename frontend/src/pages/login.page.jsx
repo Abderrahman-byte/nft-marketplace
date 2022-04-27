@@ -1,15 +1,14 @@
 import React, { useContext } from 'react'
-import LoginForm from '../components/LoginForm'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 
-import { sendLogin } from '../utils/api'
-import { DEFAULT_ERROR, translateError } from '../utils/generic'
-import LoadingCard from '../components/LoadingCard'
-import { AuthContext } from '../context/AuthContext'
-import Profilepage from './Profile.page'
+import { sendLogin } from '@Utils/api'
+import { DEFAULT_ERROR, translateError } from '@Utils/generic'
+import LoadingCard from '@Components/LoadingCard'
+import { AuthContext } from '@Context/AuthContext'
+import LoginForm from '@Components/LoginForm'
 
-import '../styles/forms.css'
-import '../styles/LoginPage.css'
+import '@Styles/forms.css'
+import '@Styles/LoginPage.css'
 
 const LoginPage = () => {
 	const { openModel, closeModel, setAuth } = useContext(AuthContext)

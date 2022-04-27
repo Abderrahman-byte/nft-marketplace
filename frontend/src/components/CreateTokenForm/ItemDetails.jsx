@@ -1,6 +1,6 @@
 import React from 'react'
 
-import '../../styles/ItemDetails.css'
+import '@Styles/ItemDetails.css'
 
 const ItemDetails = () => {
     return (

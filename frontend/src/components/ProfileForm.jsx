@@ -4,7 +4,7 @@ import AccountInfo from "./AccountInfo";
 
 
 
-import'../styles/ProfileForm.css'
+import '@Styles/ProfileForm.css'
 
 
 const ProfileForm = ({profile, setprofile, submit})=>{

@@ -1,8 +1,8 @@
 import React from 'react'
 import { Route, Routes } from 'react-router'
 
-import UploadItemPage from './UploadItem.page'
-import UploadSinglePage from './UploadSingle.page'
+import UploadItemPage from '@Pages/UploadItem.page'
+import UploadSinglePage from '@Pages/UploadSingle.page'
 
 const UploadPages = () => {
     return (

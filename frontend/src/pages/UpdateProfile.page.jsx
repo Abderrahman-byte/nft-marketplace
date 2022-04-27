@@ -1,9 +1,10 @@
 import React, {useEffect, useState}from "react";
-import { Link } from "react-router-dom";
-import ProfileHeader from "../components/ProfileHeader";
-import EditProfile from "../components/EditProfile";
-import { getProfile } from "../utils/api";
-import'../styles/UpdateProfilepage.css'
+
+import ProfileHeader from "@Components/ProfileHeader";
+import EditProfile from "@Components/EditProfile";
+import { getProfile } from "@Utils/api";
+
+import '@Styles/UpdateProfilepage.css'
 
 const UpdateProfilepage = () => {
     const [profile, setprofile]= useState({});

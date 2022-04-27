@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
-import LoadingCard from '../components/LoadingCard'
+import React, { createContext, useEffect, useState } from 'react'
 
-import { isUserLoggedIn } from '../utils/api'
+import LoadingCard from '@Components/LoadingCard'
+import { isUserLoggedIn } from '@Utils/api'
 
 export const AuthContext = createContext()
 

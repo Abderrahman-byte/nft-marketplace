@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import CreateSingleImg from '../assets/create-single-img.jpg'
 import CreateMultiImg from '../assets/create-multi-img.jpg'
 
-import '../styles/UploadItemPage.css'
+import '@Styles/UploadItemPage.css'
 
 const UploadItemPage = () => {
     const renderOption = (image, text) => {

@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 
-import '../../styles/ChooseCollectionInput.css'
+import '@Styles/ChooseCollectionInput.css'
 
 const ChooseCollectionInput = () => {
     const [collections, setCollections] = useState([])

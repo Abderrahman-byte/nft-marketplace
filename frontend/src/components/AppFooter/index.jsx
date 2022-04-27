@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import AppLogo from '../AppHeader/AppLogo'
+import AppLogo from '@Components/AppHeader/AppLogo'
 import NewsletterInput from './NewsletterInput'
 
-import '../../styles/AppFooter.css'
+import '@Styles/AppFooter.css'
 
 const AppFooter = () => {
     return (

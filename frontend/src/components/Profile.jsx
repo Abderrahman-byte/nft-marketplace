@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 
-import '../styles/Profile.css'
+import '@Styles/Profile.css'
 import ProfileInfo from "./ProfileInfo";
 
 

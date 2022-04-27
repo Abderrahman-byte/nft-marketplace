@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import '../styles/ProfilePhoto.css'
+import '@Styles/ProfilePhoto.css'
 
 
 

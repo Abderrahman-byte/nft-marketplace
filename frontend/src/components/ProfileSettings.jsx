@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 
 import ProfilePhoto from './ProfilePhoto'
 import ProfileForm from './ProfileForm'
-import '../styles/ProfileSettings.css'
+import '@Styles/ProfileSettings.css'
 
 import { sendProfile, sendProfilepicture } from "../utils/api";
 

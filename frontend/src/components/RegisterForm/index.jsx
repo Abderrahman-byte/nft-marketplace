@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { registerFormFields, validateForm } from '../../utils/forms';
+import { registerFormFields, validateForm } from '@Utils/forms';
 
 // TODO : add is artist field to register form
 

@@ -5,7 +5,7 @@ import ItemDetails from './ItemDetails'
 import CheckboxSettingsItem from '../CheckBoxSettingsItem'
 import ChooseCollectionInput from './ChooseCollectionInput'
 
-import '../../styles/CreateSingleItemForm.css'
+import '@Styles/CreateSingleItemForm.css'
 
 // TODO : Maybe create a generic component for creating both singles and multiples
 

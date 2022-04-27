@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import CreateSingleItemForm from '../components/CreateTokenForm'
+import CreateSingleItemForm from '@Components/CreateTokenForm'
 
-import '../styles/UploadSinglePage.css'
-import '../styles/UploadItem.css'
+import '@Styles/UploadSinglePage.css'
+import '@Styles/UploadItem.css'
 
 const UploadSinglePage = () => {
 	return (

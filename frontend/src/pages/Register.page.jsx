@@ -1,14 +1,14 @@
 import React, { useContext, useState } from 'react'
 
-import RegisterForm from '../components/RegisterForm'
-import LoadingCard from '../components/LoadingCard'
-import { register } from '../utils/api'
-import { DEFAULT_ERROR, translateError } from '../utils/generic'
-import RegisterSuccessPage from './RegisterSuccess.page'
-import { AuthContext } from '../context/AuthContext'
+import RegisterForm from '@Components/RegisterForm'
+import LoadingCard from '@Components/LoadingCard'
+import RegisterSuccessPage from '@Pages/RegisterSuccess.page'
+import { DEFAULT_ERROR, translateError } from '@Utils/generic'
+import { AuthContext } from '@Context/AuthContext'
+import { register } from '@Utils/api'
 
-import '../styles/RegisterPage.css'
-import '../styles/forms.css'
+import '@Styles/RegisterPage.css'
+import '@Styles/forms.css'
 
 const RegisterPage = () => {
     const { openModel, closeModel, setAuth } = useContext(AuthContext)

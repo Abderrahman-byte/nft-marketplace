@@ -1,7 +1,7 @@
 import React from "react";
 
 
-import '../styles/AccountInfo.css'
+import '@Styles/AccountInfo.css'
 
 
 

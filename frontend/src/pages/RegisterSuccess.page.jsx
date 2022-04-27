@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import '../styles/RegisterSuccessPage.css'
+import '@Styles/RegisterSuccessPage.css'
 
 const RegisterSuccessPage = () => {
 	return (

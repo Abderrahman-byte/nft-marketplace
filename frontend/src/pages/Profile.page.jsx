@@ -1,9 +1,8 @@
 import React, {useEffect, useState}from "react";
-import Profile from "../components/Profile";
-import { getProfile } from "../utils/api";
-import UpdateProfilepage from "./UpdateProfile.page";
-import { sendProfilepicture } from "../utils/api";
 
+import Profile from "@Components/Profile";
+import { getProfile } from "@Utils/api";
+import { sendProfilepicture } from "@Utils/api";
 
 const Profilepage = () => {
     const [profile, setprofile]= useState({});
