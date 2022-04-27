@@ -1,6 +1,4 @@
-import React, { createRef, useEffect } from 'react'
-
-import '@Styles/UploadFileInput.css'
+import React, { createRef } from 'react'
 
 const UploadFileInput = ({fileInputCallback}) => {
     const inputRef = createRef()

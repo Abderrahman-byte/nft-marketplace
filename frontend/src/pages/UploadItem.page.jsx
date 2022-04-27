@@ -5,6 +5,7 @@ import CreateSingleImg from '../assets/create-single-img.jpg'
 import CreateMultiImg from '../assets/create-multi-img.jpg'
 
 import '@Styles/UploadItemPage.css'
+import '@Styles/UploadItem.css'
 
 const UploadItemPage = () => {
     const renderOption = (image, text) => {

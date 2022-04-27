@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import AppLogo from '@Components/AppHeader/AppLogo'
 import NewsletterInput from './NewsletterInput'
 
-import '@Styles/AppFooter.css'
+import './styles.css'
 
 const AppFooter = () => {
     return (

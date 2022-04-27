@@ -1,7 +1,5 @@
 import React from 'react'
 
-import '@Styles/NewsletterInput.css'
-
 const NewsletterInput = () => {
     return (
         <div className='NewsletterInput'>

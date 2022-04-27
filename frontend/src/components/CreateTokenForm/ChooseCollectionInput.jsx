@@ -1,7 +1,5 @@
 import React, { useCallback, useState } from 'react'
 
-import '@Styles/ChooseCollectionInput.css'
-
 const ChooseCollectionInput = () => {
     const [collections, setCollections] = useState([])
 

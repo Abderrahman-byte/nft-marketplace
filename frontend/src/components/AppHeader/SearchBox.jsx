@@ -1,7 +1,5 @@
 import React from 'react'
 
-import '@Styles/SearchBox.css'
-
 const SearchBox = () => {
     return (
         <div className='SearchBox'>

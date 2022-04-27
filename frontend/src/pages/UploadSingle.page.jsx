@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom'
 
 import CreateSingleItemForm from '@Components/CreateTokenForm'
 
-import '@Styles/UploadSinglePage.css'
-import '@Styles/UploadItem.css'
-
 const UploadSinglePage = () => {
 	return (
 		<div className='UploadSinglePage UploadItem'>

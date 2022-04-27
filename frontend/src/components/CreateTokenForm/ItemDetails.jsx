@@ -1,7 +1,5 @@
 import React from 'react'
 
-import '@Styles/ItemDetails.css'
-
 const ItemDetails = () => {
     return (
         <div className='ItemDetails form-div'>

@@ -1,7 +1,5 @@
 import React from 'react'
 
-import '@Styles/NotificationsBar.css'
-
 const NotificationsBar = () => {
     return (
         <div className='NotificationsBar'>
