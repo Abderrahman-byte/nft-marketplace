@@ -32,6 +32,8 @@ public class ProfilePictureController {
 	
 	private Pattern fileformat = Pattern.compile("^(image|video|audio)+/(png|gif|webp|mp4|mp3|jpeg|svg)+$");
 	
+    //registry.addResourceHandler("/media/**").addResourceLocations("file://" + "/D:/ILISI2/" );
+	
 	@PostMapping
 	public Map<String, Object> insert(@RequestParam( name = "file")  MultipartFile file,
 			@RequestAttribute(name = "account", required = true) Account account,

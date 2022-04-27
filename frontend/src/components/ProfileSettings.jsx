@@ -17,14 +17,15 @@ const ProfileSettings = ({profile, setprofile}) => {
 		console.log("from settings")
 		console.log(data)
 		/*sending image to db*/
-		console.log(image)
+		console.log(typeof image)
+	     const [success1, err1] = await sendProfile(data);
+			console.log(err1)
+			console.log(success1)
 		
-	    const [success, err] = await sendProfilepicture(image, 'avatar');
-	    const [success1, err1] = await sendProfile(data);
-	   /*console.log(err)
-	   console.log(success)
-	   console.log(err1)
-	  console.log(success1)*/
+		 const [success, err] = await sendProfilepicture(image, 'avatar');
+	    console.log(err)
+	    console.log(success)
+	  
 	   
 	  }
 	return (

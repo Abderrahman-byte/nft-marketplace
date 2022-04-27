@@ -35,7 +35,10 @@ const ProfilePhoto = ({image, setimage}) => {
 
                 </div>
                 {/*<button className='btn btn-white' > Upload</button>*/}
-                <input className='btn btn-white' type="file" id="img" name="img" accept="image/*" onChange={pictureChanged}  />
+               <div className=" btn btn-white">
+                <label for ="img"> Upload </label>
+                <input className='inputfile' type="file" id="img" name="img" accept="image/*" onChange={pictureChanged}  />
+                </div>
             </div>
 
         </div>

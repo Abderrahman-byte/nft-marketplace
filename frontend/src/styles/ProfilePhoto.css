@@ -38,6 +38,15 @@
 
 	/*background-color: #23262f;*/
 }
+.ProfilePhoto .Frame-944  div .inputfile{
+	display: none;
+}
+.ProfilePhoto .Frame-944  div label{
+
+  cursor: pointer;
+}
+
+
 
 
 .ProfilePhoto .Frame-944 .Frame-945 {

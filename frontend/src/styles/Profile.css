@@ -22,6 +22,13 @@
   height: 326px;
   padding: 254px 159px 32px 959px;
   background-color: #0f0f0f;
+  backgroundRepeat: 'no-repeat'
+ }
+ .Account .Container .cover img{
+  
+    width:100%;
+    height:100%;
+    object-fit:cover;
  }
  .Account .Container .Action-button {
   width: 322px;
@@ -50,6 +57,9 @@
     cursor: pointer;
   
 }
+.Account .Container .Action-button .Editcover .inputfile{
+ display: none;
+}
 .Account .Container .Action-button .Editprofile{
   width: 135px;
   height: 40px;
@@ -60,7 +70,6 @@
   align-items: center;
   gap: 12px;
   padding: 12px 16px;
-
   border-radius: 90px;
   border: solid 2px #777e90;
   background-color: #0f0f0f;
@@ -79,6 +88,7 @@
   letter-spacing: normal;
   text-align: right;
   color: #eceef3;
+  cursor: pointer;
   
 }
 .Account .Container .Action-button .Editprofile .profilebutton{
@@ -93,6 +103,7 @@
   line-height: 1.14;
   letter-spacing: normal;
   text-align: right;
+  cursor: pointer;
   color: #eceef3;
 }
 

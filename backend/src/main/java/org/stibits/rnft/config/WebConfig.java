@@ -97,7 +97,8 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
-        registry.addResourceHandler("/media/**").addResourceLocations("file://" + environment.getProperty("file.uploadDir") );
+        //registry.addResourceHandler("/media/**").addResourceLocations("file://" + environment.getProperty("file.uploadDir") );
+        registry.addResourceHandler("/media/**").addResourceLocations("file://" + "/D:/ILISI2/" );
     }
     
     @Override

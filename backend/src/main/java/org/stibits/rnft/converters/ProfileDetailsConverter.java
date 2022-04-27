@@ -17,7 +17,7 @@ public class ProfileDetailsConverter implements Converter<Profile, Map<String, O
         data.put("bio", source.getBio());
         data.put("customUrl", source.getCustomUrl());
         data.put("avatarUrl", source.getAvatarUrl());
-        data.put("cover", null);
+        data.put("cover", source.getCoverUrl());
 
         return data;
     }

@@ -2,6 +2,8 @@ import React, {useEffect, useState}from "react";
 import Profile from "../components/Profile";
 import { getProfile } from "../utils/api";
 import UpdateProfilepage from "./UpdateProfile.page";
+import { sendProfilepicture } from "../utils/api";
+
 
 const Profilepage = () => {
     const [profile, setprofile]= useState({});
@@ -21,7 +23,22 @@ const Profilepage = () => {
          console.log("this is use effect")
          submitCallback();
      },[])
-   
+
+     const pictureChanged =  async (e) => {
+        // setimage(e.target.files[0])
+       
+        const [success, err] = await sendProfilepicture(e.target.files[0], 'cover');
+        console.log(success)
+ 
+        console.log(err)
+        window.top.location = window.top.location
+        /* const fileReader = new FileReader()
+ 
+         fileReader.onload = e => setImageUrl(e.target.result)
+ 
+         fileReader.readAsDataURL(e.target.files[0])*/
+     }
+    
    
 
     return (
@@ -30,7 +47,7 @@ const Profilepage = () => {
 
             
            
-                  <Profile profile ={profile}  />
+                  <Profile profile ={profile} pictureChanged ={pictureChanged}  />
                   
 
         </div>
