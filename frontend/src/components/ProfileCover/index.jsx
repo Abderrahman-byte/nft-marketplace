@@ -20,7 +20,7 @@ const ProfileCover = ({ allowUpdate = false, profile }) => {
     const coverImageChanged = async (e) => {
         const files = e.target.files
 
-        if (files.length <= 0) return
+        if (files.length <= 0 || !allowUpdate) return
 
         openModel(<LoadingCard />)
 

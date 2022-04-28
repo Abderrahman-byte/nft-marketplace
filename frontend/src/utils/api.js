@@ -83,3 +83,13 @@ export const saveProfilePicture = async (file, type) => {
 
     return [false, null]
 }
+
+export const getUserData = async (id) => {
+    try {
+        const response = await getRequest(buildApiUrl(`/user/${id}`))
+
+        if (response && response.success && response.data) return response.data
+    } catch {}
+
+    return null
+}

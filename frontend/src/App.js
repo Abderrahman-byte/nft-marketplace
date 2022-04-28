@@ -10,6 +10,7 @@ import AuthenticationOnly from '@Components/AuthenticatedOnly'
 import ProfilePages from './pages/Profile.pages'
 
 import '@Styles/App.css'
+import UserProfilePage from './pages/UserProfile.page'
 
 function App() {
 	return (
@@ -21,6 +22,7 @@ function App() {
 
 				<Route path='/profile/*' element={<AuthenticationOnly><ProfilePages /></AuthenticationOnly>} />
 				<Route path='/upload/*' element={<AuthenticationOnly><CreatePages /></AuthenticationOnly>} />
+				<Route path='/user/:id/*' element={<UserProfilePage />} />
 			</Routes>
 		
 			<AppFooter />
