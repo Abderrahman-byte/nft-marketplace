@@ -22,7 +22,7 @@ const ProfileForm = ({ profile, saveProfileCallback }) => {
 
 	return (
 		<form className='ProfileForm form' onSubmit={submitCallback}>
-			<AccountInfo profile={profile} />
+			<AccountInfo profile={profile || {}} />
 
 			<div className='form-div social-info-div'>
 				<h3>Social</h3>

@@ -75,7 +75,7 @@ export const saveProfilePicture = async (file, type) => {
         formData.append('file', file)
         formData.append('Type',type)
 
-        const response = await multipartPostRequest(buildApiUrl('marketplace/profile/picture'), formData)
+        const response = await multipartPostRequest(buildApiUrl('/profile/picture'), formData)
         
         if (response && response.success) return [true, null]
         else if (response && response.error) return [false, response.error]

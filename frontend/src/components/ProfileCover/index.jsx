@@ -9,12 +9,11 @@ import './styles.css'
 
 // TODO : check if user is in his profile 
 
-const ProfileCover = ({ updateCover = false, profile }) => {
+const ProfileCover = ({ allowUpdate = false, profile }) => {
     const [coverUrl, setCoverUrl] = useState(profile?.cover)
     const { openModel, closeModel } = useContext(AuthContext)
 
     useEffect(() => {
-        console.log(profile)
         if (!coverUrl && profile?.cover) setCoverUrl(profile.cover)
     }, [profile])
 
@@ -40,9 +39,9 @@ const ProfileCover = ({ updateCover = false, profile }) => {
         <div className='ProfileCover' style={{ 'backgroundImage': `url(${coverUrl})`}} >
             <input onChange={coverImageChanged} className='hidden' id='cover-image-input' type='file' accept='image/*' /> 
 
-            {updateCover ? (<div className='buttons'>
+            {allowUpdate ? (<div className='buttons'>
                 <label htmlFor='cover-image-input' className='btn btn-white'>Edit cover photo</label>
-                <Link to='#' className='btn btn-white'>Edit cover photo</Link>
+                <Link to='/profile/edit' className='btn btn-white'>Edit Profile</Link>
             </div>) : null}
         </div>
     )

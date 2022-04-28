@@ -22,7 +22,7 @@ const ProfilePage = () => {
 
     return (
         <div className="ProfilePage">
-            <ProfileCover updateCover profile={profile} />
+            <ProfileCover allowUpdate profile={profile} />
             <div className="container">
                 <ProfileInfoCard profile={profile} />
                 <div className="profile-pages">
