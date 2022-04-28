@@ -1,23 +1,13 @@
-import React, {useEffect, useState}from "react";
+import React, {useContext, useEffect, useState}from "react";
 
 import ProfileHeader from "@Components/ProfileHeader";
 import EditProfile from "@Components/EditProfile";
-import { getProfile } from "@Utils/api";
+import { AuthContext } from "@/context/AuthContext";
 
 import '@Styles/EditProfilePage.css'
 
 const EditProfilepage = () => {
-    const [profile, setProfile]= useState({});
-
-    const getProfileData = async () => {
-        const profile = await getProfile();   
-        
-        setProfile(profile)
-    }
-
-     useEffect(()=>{
-        getProfileData();
-     },[])
+    const { account:profile, setProfileData:setProfile } = useContext(AuthContext)
 
     return (
         <div className="EditProfilePage">           

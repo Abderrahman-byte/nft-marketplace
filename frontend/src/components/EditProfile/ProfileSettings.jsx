@@ -19,16 +19,22 @@ const ProfileSettings = ({ profile, setProfile }) => {
 	}, [profile])
 
 	const saveProfileCallback = async (data) => {
+		let savedData = {}
 		openModel(<LoadingCard />)
 
 		const [profileSaved] = await updateProfile(data)
 
+		if (profileSaved) savedData = {...profile, ...data}
+
 		if (image?.file && !image?.saved) {
 			const [imageSaved] = await saveProfilePicture(image.file, 'avatar')
 			setimage({...image, saved: imageSaved})
+
+			if (imageSaved) savedData = {...savedData, avatarUrl: image.url}
 		}
 
-		if (profileSaved) setProfile({...profile, ...data})
+		if (Object.entries(savedData).length > 0)
+			setProfile({...profile, ...savedData})
 
 		closeModel()
 	}
