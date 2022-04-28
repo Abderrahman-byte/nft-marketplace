@@ -23,7 +23,7 @@ import org.stibits.rnft.entities.Profile;
 import org.stibits.rnft.repositories.ProfileDAO;
 
 @RestController
-@RequestMapping("/api/${api.version}/marketplace/profile/picture")
+@RequestMapping("/api/${api.version}/profile/picture")
 public class ProfilePictureController {
 	@Autowired
 	private ProfileDAO profiledao;
