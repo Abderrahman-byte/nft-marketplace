@@ -58,6 +58,7 @@ export const getProfile = async()=>{
 
     return null
 }
+
 export const updateProfile = async (data) => {
     try {
         const response = await postRequest(buildApiUrl('/profile'), JSON.stringify(data))
@@ -67,6 +68,7 @@ export const updateProfile = async (data) => {
 
     return [false, null]
 }
+
 export const saveProfilePicture = async (file, type) => {
     try {
         const formData = new FormData()

@@ -60,13 +60,15 @@
     width: 14px;
     height: 9px;
 }
-.global::before{
+
+.globe-icon::before{
     content: "";
     display: block;
     background: url('../assets/icons/icons_Globe_Line.svg') no-repeat center;
     width: 14px;
     height: 19px;
 }
+
 .upload-icon::before {
     content: "";
     display: block;
@@ -99,26 +101,27 @@
      height: 40px;
      width: 40px;
 }
-.facebook::before{
+
+.facebook-icon::before{
     content: "";
     display: block;
     background: url('../assets/icons/Icons_Facebook_Line.svg') no-repeat center;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
 }
 
-.instagram::before{
+.instagram-icon::before{
     content: "";
     display: block;
     background: url('../assets/icons/Icons_Instagram_Line.svg') no-repeat center;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
 }
 
-.twitter::before{
+.twitter-icon::before{
     content: "";
     display: block;
     background: url('../assets/icons/Icons_Twitter_Line.svg') no-repeat center;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
 }

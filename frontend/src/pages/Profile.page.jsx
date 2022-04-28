@@ -1,54 +1,30 @@
 import React, {useEffect, useState}from "react";
 
-import Profile from "@Components/Profile";
 import { getProfile } from "@Utils/api";
-import { saveProfilePicture } from "@Utils/api";
+import ProfileCover from "@/components/ProfileCover";
+import ProfileInfoCard from "@/components/ProfileInfoCard";
 
-const Profilepage = () => {
+import '@Styles/ProfilePage.css'
+
+const ProfilePage = () => {
     const [profile, setprofile]= useState({});
-    const submitCallback = async () => {
-       
-       
-        const [success, Profile] = await getProfile();
+
+    const getProfileData = async () => {       
+        const profile = await getProfile();
      
-        console.log("1111---->"+success)
-        console.log(Profile)
-        setprofile(Profile)
-        console.log("here object")
-        console.log(Profile)
-     }
-     useEffect(()=>{
+        setprofile(profile)
+    }
 
-         console.log("this is use effect")
-         submitCallback();
-     },[])
-
-     const pictureChanged =  async (e) => {
-        // setimage(e.target.files[0])
-       
-        const [success, err] = await saveProfilePicture(e.target.files[0], 'cover');
-        console.log(success)
- 
-        console.log(err)
-        window.top.location = window.top.location
-        /* const fileReader = new FileReader()
- 
-         fileReader.onload = e => setImageUrl(e.target.result)
- 
-         fileReader.readAsDataURL(e.target.files[0])*/
-     }
-    
-   
+    useEffect(()=>{
+        getProfileData();
+    },[])
 
     return (
-        <div className="Profile">
-
-
-            
-           
-                  <Profile profile ={profile} pictureChanged ={pictureChanged}  />
-                  
-
+        <div className="ProfilePage">
+            <ProfileCover updateCover profile={profile} />
+            <div className="container">
+                <ProfileInfoCard profile={profile} />
+            </div>
         </div>
     )
 
@@ -57,7 +33,7 @@ const Profilepage = () => {
 
 }
 
-export default Profilepage;
+export default ProfilePage;
 
 
 
