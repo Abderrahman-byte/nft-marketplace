@@ -3,17 +3,28 @@ import React, { useContext, useEffect, useState } from 'react'
 import ProfileCover from '@/components/ProfileCover'
 import ProfileInfoCard from '@/components/ProfileInfoCard'
 import ProfileNavbar from '@/components/ProfileNavbar'
+import { useParams } from 'react-router'
 import { AuthContext } from '@/context/AuthContext'
+import { getUserData } from '@/utils/api'
 
 import '@Styles/ProfilePage.css'
 
-const ProfilePage = () => {
+const UserProfilePage = () => {
 	const { account } = useContext(AuthContext)
-	const [profile, setProfile] = useState(account)
+	const [profile, setProfile] = useState(undefined)
+
+	const { id } = useParams()
+
+	const getProfileData = async () => {
+		if (!id) setProfile(null)
+
+		const userData = await getUserData(id)
+		setProfile(userData)
+	}
 
 	useEffect(() => {
-		setProfile(account)
-	}, [account])
+		getProfileData()
+	}, [])
 
 	return (
 		<div className='ProfilePage'>
@@ -29,4 +40,4 @@ const ProfilePage = () => {
 	)
 }
 
-export default ProfilePage
+export default UserProfilePage

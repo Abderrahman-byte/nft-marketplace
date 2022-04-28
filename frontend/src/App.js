@@ -11,6 +11,7 @@ import ProfilePages from './pages/Profile.pages'
 import DetailsPage from './pages/Details.page'
 
 import '@Styles/App.css'
+import UserProfilePage from './pages/UserProfile.page'
 
 function App() {
 	return (
@@ -22,7 +23,7 @@ function App() {
 
 				<Route path='/profile/*' element={<AuthenticationOnly><ProfilePages /></AuthenticationOnly>} />
 				<Route path='/upload/*' element={<AuthenticationOnly><CreatePages /></AuthenticationOnly>} />
-			
+				<Route path='/user/:id/*' element={<UserProfilePage />} />
 				<Route path='/details/:id' element={<DetailsPage />} />
 			</Routes>
 		
