@@ -15,8 +15,6 @@ const CreateTokenForm = () => {
     const createItem = (e) => {
         e.preventDefault()
         const elements = e.target.elements
-
-        console.log()
     }
 
     return (

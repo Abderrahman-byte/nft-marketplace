@@ -2,7 +2,7 @@ import React, {useEffect, useState}from "react";
 
 import Profile from "@Components/Profile";
 import { getProfile } from "@Utils/api";
-import { sendProfilepicture } from "@Utils/api";
+import { saveProfilePicture } from "@Utils/api";
 
 const Profilepage = () => {
     const [profile, setprofile]= useState({});
@@ -26,7 +26,7 @@ const Profilepage = () => {
      const pictureChanged =  async (e) => {
         // setimage(e.target.files[0])
        
-        const [success, err] = await sendProfilepicture(e.target.files[0], 'cover');
+        const [success, err] = await saveProfilePicture(e.target.files[0], 'cover');
         console.log(success)
  
         console.log(err)

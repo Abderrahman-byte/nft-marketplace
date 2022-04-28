@@ -42,3 +42,14 @@
     font-size: 0.75rem;
     color: #777e90;
 }
+
+.form textarea {
+    font-family: 'Inter';
+    resize: none;
+}
+
+.form .form-div .form-inputt::placeholder {
+    font-size: 0.9rem;
+    color: #777e90;
+    font-weight: 500;
+}

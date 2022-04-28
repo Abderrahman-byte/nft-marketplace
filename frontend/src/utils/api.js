@@ -52,29 +52,29 @@ export const isUserLoggedIn = async () => {
 export const getProfile = async()=>{
     try{
         const response = await getRequest(buildApiUrl('/profile'))
-        console.log(response);
-        console.log(response.profile)
-         return [response.success, response.profile]
-    }
-    catch{}
-    return [false, null]
-    
+        
+        if (response && response.profile) return response.profile
+    } catch {}
+
+    return null
 }
-export const sendProfile = async (item) => {
+export const updateProfile = async (data) => {
     try {
-        const response = await postRequest(buildApiUrl('/profile'), JSON.stringify(item))
-        if (response && response.success) return [true, null]
+        const response = await postRequest(buildApiUrl('/profile'), JSON.stringify(data))
+        if (response && response.success) return [true, response.error]
         else if (response && response.error) return [false, response.error]
     } catch {}
 
     return [false, null]
 }
-export const sendProfilepicture = async (file, type) => {
+export const saveProfilePicture = async (file, type) => {
     try {
         const formData = new FormData()
         formData.append('file', file)
         formData.append('Type',type)
+
         const response = await multipartPostRequest(buildApiUrl('marketplace/profile/picture'), formData)
+        
         if (response && response.success) return [true, null]
         else if (response && response.error) return [false, response.error]
     } catch {}

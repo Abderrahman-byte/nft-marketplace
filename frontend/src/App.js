@@ -1,14 +1,13 @@
 import React from 'react'
 import { Route, Routes } from 'react-router'
 
-import UpdateProfilepage from '@Pages/UpdateProfile.page'
-import LoginPage from '@Pages/login.page'
-import CreatePages from '@Pages/upload.pages'
+import LoginPage from '@Pages/Login.page'
+import CreatePages from '@Pages/Upload.pages'
 import RegisterPage from '@Pages/Register.page'
-import Profilepage from '@Pages/Profile.page'
 import AppHeader from '@Components/AppHeader'
 import AppFooter from '@Components/AppFooter'
 import AuthenticationOnly from '@Components/AuthenticatedOnly'
+import ProfilePages from './pages/Profile.pages'
 
 import '@Styles/App.css'
 
@@ -20,10 +19,7 @@ function App() {
 				<Route path='/sign-up' element={<RegisterPage />} />
 				<Route path='/sign-in' element={<LoginPage />} />
 
-				<Route path='/updateprofile' element={<AuthenticationOnly><UpdateProfilepage /> </AuthenticationOnly>} />
-				
-			    <Route path='/profile' element={<Profilepage/>}/>
-
+				<Route path='/profile/*' element={<AuthenticationOnly><ProfilePages /></AuthenticationOnly>} />
 				<Route path='/upload/*' element={<AuthenticationOnly><CreatePages /></AuthenticationOnly>} />
 			</Routes>
 		
