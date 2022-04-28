@@ -11,7 +11,7 @@ import './styles.css'
 
 const ProfileCover = ({ allowUpdate = false, profile }) => {
     const [coverUrl, setCoverUrl] = useState(profile?.cover)
-    const { openModel, closeModel } = useContext(AuthContext)
+    const { openModel, closeModel, setProfileData } = useContext(AuthContext)
 
     useEffect(() => {
         if (!coverUrl && profile?.cover) setCoverUrl(profile.cover)
@@ -27,10 +27,12 @@ const ProfileCover = ({ allowUpdate = false, profile }) => {
         const [saved] = await saveProfilePicture(files[0], 'cover')
 
         const fileReader = new FileReader()
-
-        fileReader.onload = e => setCoverUrl(e.target.result)
-
-        fileReader.readAsDataURL(files[0])
+        fileReader.onload = e => {
+            setProfileData({ ...profile, cover: e.target.result})
+            setCoverUrl(e.target.result)
+        }
+        
+        if (saved) fileReader.readAsDataURL(files[0])
 
         closeModel()
     }
