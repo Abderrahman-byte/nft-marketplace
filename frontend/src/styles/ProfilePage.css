@@ -1,7 +1,19 @@
 .ProfilePage .container {
     padding: 4em 11%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 5%;
 }
 
 .ProfilePage .ProfileInfoCard {
     margin-top: -11em;
+}
+
+.ProfilePage .container .profile-pages {
+    width: 100%;
+}
+
+.ProfilePage .container .profile-pages .profile-content {
+    margin-top: 2em;
 }

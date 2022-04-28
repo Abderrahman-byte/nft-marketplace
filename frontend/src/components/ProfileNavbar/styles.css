@@ -1,0 +1,22 @@
+.ProfileNavbar {
+    display: flex;
+    align-items: center;
+    gap: .75em;
+}
+
+.ProfileNavbar a {
+    color: #777e90;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: .875rem;
+    padding: .5em 0.857em;
+    border-radius: 100px;
+    text-transform: capitalize;
+}
+
+.ProfileNavbar a.active, .ProfileNavbar a:hover {
+    background-color: #353945;
+    color: #fcfcfd;
+    transition: .4s;
+}

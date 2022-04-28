@@ -5,6 +5,7 @@ import ProfileCover from "@/components/ProfileCover";
 import ProfileInfoCard from "@/components/ProfileInfoCard";
 
 import '@Styles/ProfilePage.css'
+import ProfileNavbar from "@/components/ProfileNavbar";
 
 const ProfilePage = () => {
     const [profile, setprofile]= useState({});
@@ -24,6 +25,12 @@ const ProfilePage = () => {
             <ProfileCover updateCover profile={profile} />
             <div className="container">
                 <ProfileInfoCard profile={profile} />
+                <div className="profile-pages">
+                    <ProfileNavbar />
+                    <div className="profile-content">
+                        
+                    </div>
+                </div>
             </div>
         </div>
     )
