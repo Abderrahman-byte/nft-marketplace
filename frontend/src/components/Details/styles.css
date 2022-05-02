@@ -1,0 +1,620 @@
+.Icons{
+    width: 48px;
+  height: 250px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 0;
+}
+.detailsbloc{
+    align-self: stretch;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 96px;
+  padding: 0;
+ 
+}
+.detailsbloc .frame-971{
+    
+    width: 384px;
+    align-self: stretch;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 0;
+   
+}
+.detailsbloc .img-01{
+  align-self: stretch;
+  flex-grow: 1;
+  padding: 24px 472px 718px 24px;
+  border-radius: 16px;
+  background-color: #45b26b;
+}
+.detailsbloc .img-01 .labels{
+  width: 144px;
+  height: 26px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 0;
+
+}
+.detailsbloc .img-01 .labels .Art{
+  width: 40px;
+  height: 26px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 8px 6px;
+  border-radius: 4px;
+  background-color: #23262f;
+}
+.detailsbloc .img-01 .labels .Art span{
+  width: 24px;
+  height: 12px;
+  flex-grow: 0;
+  font-family: Poppins;
+  font-size: 12px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-align: left;
+  color: #fcfcfd;
+}
+.detailsbloc .img-01 .labels .unlockable{
+  width: 96px;
+  height: 26px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 8px 6px;
+  border-radius: 4px;
+  background-color: #9757d7;
+}
+.detailsbloc .img-01 .labels .unlockable span{
+width: 80px;
+  height: 12px;
+  flex-grow: 0;
+  font-family: Poppins;
+  font-size: 12px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-align: left;
+  color: #fcfcfd;
+}
+.fixed{
+    height: 240px;
+    align-self: stretch;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    gap: 32px;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 64px 64px -48px rgba(31, 47, 70, 0.12);
+    border: solid 1px #e6e8ec;
+  
+}
+.frame-970{
+    height: 448px;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 40px;
+  padding: 0;
+  
+}
+.frame-970 .title{
+    height: 86px;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 0;
+ 
+  
+}
+.frame-970 .title span{
+    height: 48px;
+  align-self: stretch;
+  flex-grow: 0;
+  font-family: Inter;
+  font-size: 40px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: -0.4px;
+  text-align: left;
+  
+}
+.frame-970 .title .frame-952{
+    width: 100%;
+    height: 30px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+
+}
+.frame-970 .title .frame-952 .price-rvn{
+    width: 105px;
+  height: 30px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 8px 6px;
+  border-radius: 4px;
+  border: solid 2px #45b26b;
+}
+.frame-970 .title .frame-952 .price-rvn span{
+    width: 86px;
+    height: 16px;
+    flex-grow: 0;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-align: left;
+    color: #45b26b;
+}
+.frame-970 .title .frame-952 .price-d{
+    width: 98px;
+  height: 30px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 8px 6px;
+  border-radius: 4px;
+  border: solid 2px #e6e8ec;
+}
+.frame-970 .title .frame-952 .price-d span{
+    width: 82px;
+    height: 16px;
+    flex-grow: 0;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-align: left;
+    color: #777e90;
+}
+.frame-970 .title .frame-952 span{
+    width: 85px;
+    height: 16px;
+    flex-grow: 0;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 2.5;
+    letter-spacing: normal;
+    text-align: left;
+    color: #777e90;
+}
+.frame-970 .title-2{
+    height: 72px;
+    align-self: stretch;
+    flex-grow: 0;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: left;
+    color: #777e90;
+}
+.frame-970 .content{
+    height: 210px;
+    align-self: stretch;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 32px;
+    padding: 0;
+   
+  
+}
+/*navbar*/
+.DetailNavbar {
+    display: flex;
+    align-items: center;
+    gap: .75em;
+}
+
+.content .DetailNavbar span {
+    color: #777e90;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: .875rem;
+    padding: .5em 0.857em;
+    border-radius: 100px;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+
+.content .DetailNavbar span.active, .DetailNavbar span:hover {
+    background-color: #353945;
+    color: #fcfcfd;
+    transition: .4s;
+}
+/*fixed box css*/
+.fixed .buttons{
+    height: 48px;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 0;
+  
+}
+.fixed .buttons .btn{
+    height: 48px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 24px;
+  border-radius: 90px;
+}
+.fixed .buttons button .left{
+    width: 120px;
+    height: 16px;
+    flex-grow: 0;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-align: center;
+    color: #fcfcfd;
+}
+.fixed .buttons button .right{
+    width: 85px;
+  height: 16px;
+  flex-grow: 0;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-align: center;
+    color: #23262f;
+}
+/*fixed footer css*/
+.fixed .fixed-footer{
+    height: 24px;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+  padding: 0;
+
+  
+}
+.fixed .fixed-footer span{
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.71;
+    letter-spacing: normal;
+    text-align: left;
+    color: #777e90;
+}
+/*Highest bit*/
+.fixed .highest-bid{
+    width: 302px;
+    height: 56px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+    padding: 0;
+    transform: rotate(-180deg);
+ 
+} 
+.fixed .highest-bid .avatar{
+    width: 48px;
+  height: 48px;
+  flex-grow: 0;
+  transform: rotate(-180deg);
+  border-radius: 48px;
+  background-color: #45b26b;
+}
+.fixed .highest-bid .frame-959{
+    width: 238px;
+    height: 56px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0;
+    transform: rotate(-180deg);
+   
+}
+.fixed .highest-bid .frame-959 .row1{
+    width: 215px;
+  height: 24px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 0;
+  
+}
+.fixed .highest-bid .frame-959 .row1 .highest{
+
+    
+    flex-grow: 0;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: left;
+    color: #777e90;
+}
+.fixed .highest-bid .frame-959 .row1 .name{
+ 
+  flex-grow: 0;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: #23262f;
+}
+
+.fixed .highest-bid .frame-959 .row2{
+    width: 238px;
+    height: 32px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 0;
+
+}
+.fixed .highest-bid .frame-959 .row2 .RVN{
+    
+    flex-grow: 0;
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    text-align: left;
+    color: #23262f;
+}
+.fixed .highest-bid .frame-959 .row2 .dolar{
+    flex-grow: 0;
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    text-align: left;
+    color: #777e90;
+}
+.Icons .icon{
+  width: 48px;
+  height: 48px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 48px;
+  border: solid 2px #e6e8ec;
+
+}
+.Icons .icon-close{
+    background-color: #23262f;
+}
+.Icons .icon:hover{
+  width: 52px;
+  height: 52px;
+  cursor: pointer;
+ 
+}
+/***Info css***/
+.Info{
+  height: 150px;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 16px;
+  padding: 0;
+
+}
+.Info .devider{
+  height: 1px;
+  align-self: stretch;
+  flex-grow: 0;
+  background-color: #e6e8ec;
+}
+.Info .frame-967{
+  height: 67px;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 0;
+ 
+}
+.Info .frame-967 .frame-966{
+  width: 100%;
+  height: 50px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 16px;
+  padding: 0;
+
+
+  
+  
+}
+.Info .frame-967 .frame-966 .avatar{
+  width: 48px;
+  height: 48px;
+  flex-grow: 0;
+  transform: rotate(-180deg);
+  border-radius: 48px;
+  background-color: #45b26b;
+}
+.Info .frame-967 .frame-966 .avatar img{
+  width: 48px;
+  height: 48px;
+  border-radius: 48px;
+}
+
+.Info .frame-967 .frame-966 .avatar .box {
+  width: 24px;
+  height: 24px;
+  margin: 29px 332px 13px 28px;
+  padding: 6px;
+}
+.Info .frame-967 .frame-966 .avatar .box .Polygon-2 {
+  width: 24px;
+  height: 24px;
+  margin: 29px 332px 13px 28px;
+  padding: 6px;
+  border-radius: 4px;
+  border: solid 2px #fcfcfd;
+  background-color: #45b26b;
+}
+
+
+.Info .frame-967 .frame-966 .frame-965 {
+  width: 100%;
+  height: 50px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 0;
+ 
+}
+.Info .frame-967 .frame-966 .frame-965 .type{
+  width: 44px;
+  height: 24px;
+  flex-grow: 0;
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.71;
+  letter-spacing: normal;
+  text-align: left;
+  color: #777e90;
+}
+.Info .frame-967 .frame-966 .frame-965 .FullName{
+width: 100%;
+height: 24px;
+flex-grow: 0;
+font-family: Inter;
+font-size: 14px;
+font-weight: 500;
+font-stretch: normal;
+font-style: normal;
+line-height: 1.71;
+letter-spacing: normal;
+text-align: left;
+color: #23262f;
+
+}

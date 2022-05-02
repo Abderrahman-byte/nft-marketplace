@@ -14,6 +14,7 @@ const ProfilePage = () => {
         const profile = await getProfile();
      
         setprofile(profile)
+         console.log("profile page")
     }
 
     useEffect(()=>{

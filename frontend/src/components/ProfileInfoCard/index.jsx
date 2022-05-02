@@ -5,9 +5,10 @@ import './styles.css'
 
 const ProfileInfoCard = ({ profile }) => {
 	return (
+    
       <div className='ProfileInfoCard'>
          <img src={profile?.avatarUrl} alt={profile?.displayName} />
-
+         {console.log("profile info card")}
          <div className='info'>
             <h2 className='name'>{profile?.displayName || profile?.username}</h2>
             <p className='bio'>{profile?.bio}</p>

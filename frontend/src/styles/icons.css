@@ -125,3 +125,38 @@
     width: 30px;
     height: 30px;
 }
+.share2-icon::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Share\ Square_Line.svg') no-repeat center;
+    width: 30px;
+    height: 30px;
+}
+.close-icon::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Close_Line\ (1).svg') no-repeat center;
+    width: 30px;
+    height: 30px;
+}
+.heart-fill-icon::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Heart_Filled.svg') no-repeat center;
+    width: 30px;
+    height: 30px;
+}
+.more2-icon::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_More_Line.svg') no-repeat center;
+    width: 48px;
+    height: 48px;
+}
+.heart-icon::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Heart_Line.svg') no-repeat center;
+    width: 48px;
+    height: 48px;
+}
