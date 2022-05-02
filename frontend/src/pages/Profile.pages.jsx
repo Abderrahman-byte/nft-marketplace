@@ -7,7 +7,7 @@ import EditProfilePage from './EditProfile.page'
 const ProfilePages = () => {
     return (
         <Routes>
-            <Route index element={<Profilepage/>}/>
+            <Route path='*' element={<Profilepage/>}/>
             <Route path='edit' element={<EditProfilePage />} />
         </Routes>
     )

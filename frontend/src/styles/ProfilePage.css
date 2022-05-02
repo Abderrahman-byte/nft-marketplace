@@ -16,4 +16,20 @@
 
 .ProfilePage .container .profile-pages .profile-content {
     margin-top: 2em;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 2em;
+    column-gap: 3%;
+}
+
+.ProfilePage .container .profile-pages .profile-content .more-btn-container {
+    width: 100%;
+}
+
+.ProfilePage .container .profile-pages .profile-content .more-btn {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 3em;
+    padding-right: 3em;
 }

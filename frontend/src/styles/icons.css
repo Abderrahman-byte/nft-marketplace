@@ -125,6 +125,7 @@
     width: 30px;
     height: 30px;
 }
+
 .share2-icon::before{
     content: "";
     display: block;
@@ -159,4 +160,12 @@
     background: url('../assets/icons/icons_Heart_Line.svg') no-repeat center;
     width: 48px;
     height: 48px;
+}
+
+.candle-sticks-icon::before {
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Candlesticks\ Up_Line.svg') no-repeat center;
+    width: 20px;
+    height: 20px;
 }

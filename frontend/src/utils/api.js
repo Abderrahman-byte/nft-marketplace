@@ -103,3 +103,43 @@ export const getUserData = async (id) => {
 
     return null
 }
+
+export const getUserForSaleTokens = async (id, limit = 10, offset = 0) => {
+    try {
+        const response = await getRequest(buildApiUrl(`/user/${id}/tokens`) + `?role=SALE&limit=${limit}&offset=${offset}`)
+
+        if (response && response.success && response.data) return response.data
+    } catch {}
+
+    return []
+}
+
+export const getUserCreatedTokens = async (id, limit = 10, offset = 0) => {
+    try {
+        const response = await getRequest(buildApiUrl(`/user/${id}/tokens`) + `?role=CREATOR&limit=${limit}&offset=${offset}`)
+
+        if (response && response.success && response.data) return response.data
+    } catch {}
+
+    return []
+}
+
+export const getUserOwnedTokens = async (id, limit = 10, offset = 0) => {
+    try {
+        const response = await getRequest(buildApiUrl(`/user/${id}/tokens`) + `?role=OWNER&limit=${limit}&offset=${offset}`)
+
+        if (response && response.success && response.data) return response.data
+    } catch {}
+
+    return []
+}
+
+export const getUserFavoriteTokens = async (id, limit = 10, offset = 0) => {
+    try {
+        const response = await getRequest(buildApiUrl(`/user/${id}/tokens`) + `?role=FAVORITE&limit=${limit}&offset=${offset}`)
+
+        if (response && response.success && response.data) return response.data
+    } catch {}
+
+    return []
+}
