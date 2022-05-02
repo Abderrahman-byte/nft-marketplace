@@ -3,26 +3,26 @@ import { NavLink } from 'react-router-dom'
 
 import './styles.css'
 
-const ProfileNavbar = () => {
+const ProfileNavbar = ({ prefix = '.'}) => {
     const links = [
         {
             text: 'On sale',
-            link: '.'
+            link: `${prefix}/sale`
         }, {
             text: 'Collectibles',
-            link: './collectibles'
+            link: `${prefix}/collectibles`
         }, {
             text: 'Created',
-            link: './created'
+            link: `${prefix}/created`
         }, {
             text: 'Likes',
-            link: './likes'
+            link: `${prefix}/likes`
         }, {
             text: 'Following',
-            link: 's'
+            link: `null`
         }, {
             text: 'Followers',
-            link: 's'
+            link: `null_`
         }
     ]
 

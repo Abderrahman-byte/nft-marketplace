@@ -1,0 +1,113 @@
+.TokenCard {
+    width: fit-content;
+    max-width: 17vw;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: .4s;
+}
+
+.TokenCard:hover {
+    transform: translateY(-3%);
+}
+
+.TokenCard .token-img {
+    width: 100%;
+    height: 303px;
+    background-color: #c4c4c4;
+    border-radius: 8px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.TokenCard .info {
+    padding-top: 1.25em;
+    padding-bottom: 1.25em;
+}
+
+.TokenCard .info .info-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.813em;
+}
+
+.TokenCard .info .info-div:last-child {
+    margin-bottom: 0;
+    margin-top: 0.75em;
+}
+
+.TokenCard .info h3 {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #23262f;
+    margin-right: .75em;
+}
+
+.TokenCard .info .price {
+    display: block;
+    font-size: .75rem;
+    padding: .5em;
+    font-weight: bold;
+    border-radius: 4px;
+    color: #45b26b;
+    border: solid 2px #45b26b;
+    white-space: nowrap;
+}
+
+.TokenCard .info .quantity {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.TokenCard .info .info-footer * {
+    font-size: .75rem;
+    color: #777e90;
+}
+
+.TokenCard .info .info-footer .bold {
+    font-weight: 600;
+    color: #353945;
+}
+
+.TokenCard .info .info-footer .flex {
+    gap: .34em;
+    margin-right: .5em;
+}
+
+.TokenCard .info .avatars {
+    display: flex;
+}
+
+.TokenCard .info .avatars a {
+    display: block;
+}
+
+.TokenCard .info .avatars a:hover {
+    z-index: 10;
+    transition: .4s;
+}
+
+.TokenCard .info .avatars a:hover img {
+    transform: translateY(-25%);
+    transition: .4s;
+}
+
+.TokenCard .info .avatars img {
+    width: 35px;
+    height: 35px;
+    border: 2px solid whitesmoke;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    background-color: whitesmoke;
+}
+
+.TokenCard .info .avatars a:nth-child(2) {
+    transform: translateX(-40%);
+}
+
+.TokenCard .info .avatars a:nth-child(3) {
+    transform: translateX(-75%);
+}

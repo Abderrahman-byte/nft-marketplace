@@ -3,9 +3,10 @@ import React, { useContext, useEffect, useState } from 'react'
 import ProfileCover from '@/components/ProfileCover'
 import ProfileInfoCard from '@/components/ProfileInfoCard'
 import ProfileNavbar from '@/components/ProfileNavbar'
-import { useParams } from 'react-router'
+import ProfileTokenList from '@Components/ProfileTokenList'
+import { Navigate, Route, Routes, useParams } from 'react-router'
 import { AuthContext } from '@/context/AuthContext'
-import { getUserData } from '@/utils/api'
+import { getUserCreatedTokens, getUserData, getUserFavoriteTokens, getUserForSaleTokens, getUserOwnedTokens } from '@/utils/api'
 
 import '@Styles/ProfilePage.css'
 
@@ -33,7 +34,16 @@ const UserProfilePage = () => {
 				<ProfileInfoCard profile={profile} />
 				<div className='profile-pages'>
 					<ProfileNavbar />
-					<div className='profile-content'></div>
+					
+					{profile && profile.id ? (
+						<Routes>
+							<Route index element={<Navigate to='./sale' />} />
+							<Route path='sale' element={<ProfileTokenList getTokensFunction={getUserForSaleTokens} id={profile.id} />} />
+							<Route path='collectibles' element={<ProfileTokenList getTokensFunction={getUserOwnedTokens} id={profile.id} />} />
+							<Route path='created' element={<ProfileTokenList getTokensFunction={getUserCreatedTokens} id={profile.id} />} />
+							<Route path='likes' element={<ProfileTokenList getTokensFunction={getUserFavoriteTokens} id={profile.id} />} />
+						</Routes>
+					) : null}
 				</div>
 			</div>
 		</div>

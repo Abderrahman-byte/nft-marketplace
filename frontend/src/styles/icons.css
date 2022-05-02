@@ -125,3 +125,11 @@
     width: 30px;
     height: 30px;
 }
+
+.candle-sticks-icon::before {
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Candlesticks\ Up_Line.svg') no-repeat center;
+    width: 20px;
+    height: 20px;
+}
