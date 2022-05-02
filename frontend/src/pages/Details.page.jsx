@@ -25,7 +25,6 @@ const DetailsPage = () => {
     }
 
     useEffect(()=>{
-        
         getDetails(id);
     },[id])
 

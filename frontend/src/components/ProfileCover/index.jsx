@@ -40,6 +40,7 @@ const ProfileCover = ({ allowUpdate = false, profile }) => {
     return (
         <div className='ProfileCover' style={{ 'backgroundImage': `url(${coverUrl})`}} >
             <input onChange={coverImageChanged} className='hidden' id='cover-image-input' type='file' accept='image/*' /> 
+            
             {updateCover ? (<div className='buttons'>
                 <label htmlFor='cover-image-input' className='btn btn-white'>Edit cover photo</label>
                 <Link to='/profile/edit' className='btn btn-white'>Edit Profile</Link>
