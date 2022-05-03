@@ -8,18 +8,23 @@ export const AuthContext = createContext()
 export const AuthProvider = ({ children }) => {
     const [authenticated, setAuth] = useState(undefined)
     const [account, setAccount] = useState(undefined)
+    const [onExistCallback, setOnExistCallback] = useState(null)
 
     const [isActive, setActive] = useState(false)
     const [modelElt, setModelElt] = useState(null)
 
-    const openModel = (elt) => {
+    const openModel = (elt, onExistCallback = null) => {
         setModelElt(elt)
         setActive(true)
+
+        if (typeof onExistCallback === 'function') setOnExistCallback(() => onExistCallback)
+        else setOnExistCallback(null)
     }
 
     const closeModel = () => {
         setModelElt(null)
         setActive(false)
+        setOnExistCallback(null)
     }
 
     const getAuthState = async () => {
@@ -41,6 +46,10 @@ export const AuthProvider = ({ children }) => {
         setAccount({...prev, ...data})
     }
 
+    const onExistModel = () => {
+        if (typeof onExistCallback === 'function') onExistCallback()
+    }
+
     useEffect(() => {
         if (authenticated) {
             getAccountData()
@@ -56,7 +65,7 @@ export const AuthProvider = ({ children }) => {
     return (
         <AuthContext.Provider value={{ openModel, closeModel, authenticated, setAuth, account, setProfileData }}>
             {children}
-            <div className={`model-background ${isActive ? 'active' : ''}`}></div>
+            <div onClick={onExistModel} className={`model-background ${isActive ? 'active' : ''}`}></div>
             <div className={`model-popup-box ${isActive ? 'active' : ''}`}>
                 {modelElt}
             </div>

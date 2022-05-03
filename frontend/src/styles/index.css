@@ -74,15 +74,21 @@ textarea {
 
 .model-popup-box {
 	position: fixed;
-	top: 20%;
+	top: 0%;
 	left: 50%;
+	height: 100%;
 	transform: translateX(-50%);
 	display: none;
+	justify-content: center;
+	align-items: center;
 }
 
-.model-background.active,
-.model-popup-box.active {
+.model-background.active {
 	display: block;
+}
+
+.model-popup-box.active {
+	display: flex;
 }
 
 .card {
@@ -109,4 +115,9 @@ textarea {
 .flex {
 	display: flex;
 	align-items: center;
+}
+
+.block {
+	display: block;
+	width: fit-content;
 }
