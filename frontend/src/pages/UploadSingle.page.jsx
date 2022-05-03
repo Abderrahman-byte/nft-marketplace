@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom'
 
 import CreateSingleItemForm from '@Components/CreateTokenForm'
 
+import '@Styles/UploadItem.css'
+import TokenCard from '@/components/TokenCard'
+
 const UploadSinglePage = () => {
 	return (
 		<div className='UploadSinglePage UploadItem'>
@@ -14,7 +17,14 @@ const UploadSinglePage = () => {
                     </div>
                     <CreateSingleItemForm />
 				</div>
-				<div className='preview'></div>
+				<div className='preview'>
+					<h2>Preview</h2>
+					<TokenCard />
+					<button className='btn clean-all-btn'>
+						<i className='timer-icon'></i>
+						<span>Clean all</span>
+					</button>
+				</div>
 			</div>
 		</div>
 	)
