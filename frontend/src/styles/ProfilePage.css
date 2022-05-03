@@ -19,7 +19,7 @@
     display: flex;
     flex-wrap: wrap;
     row-gap: 2em;
-    column-gap: 3%;
+    column-gap: 5%;
 }
 
 .ProfilePage .container .profile-pages .profile-content .more-btn-container {
@@ -32,4 +32,8 @@
     margin-right: auto;
     padding-left: 3em;
     padding-right: 3em;
+}
+
+.ProfilePage .container .profile-pages .profile-content .TokenCard {
+    width: 30%;
 }

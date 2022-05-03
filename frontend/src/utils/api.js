@@ -1,5 +1,5 @@
 import { buildPath } from "./generic"
-import { getRequest, multipartPostRequest, postRequest } from "./http"
+import { deleteRequest, getRequest, multipartPostRequest, postRequest } from "./http"
 
 const apiHost = process.env.REACT_APP_API_HOST
 const apiPrefix = process.env.REACT_APP_API_PREFIX
@@ -142,4 +142,24 @@ export const getUserFavoriteTokens = async (id, limit = 10, offset = 0) => {
     } catch {}
 
     return []
+}
+
+export const postLikeToken = async (id) => {
+    try {
+        const response = await postRequest(buildApiUrl('/marketplace/like'), JSON.stringify({ id }))
+
+        if (response && response.success) return true
+    } catch {}
+
+    return false
+}
+
+export const deleteLikeToken = async (id) => {
+    try {
+        const response = await deleteRequest(buildApiUrl('/marketplace/like') + `?id=${id}`)
+
+        if (response && response.success) return true
+    } catch {}
+
+    return false
 }
