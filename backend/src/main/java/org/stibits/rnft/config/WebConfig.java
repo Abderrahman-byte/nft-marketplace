@@ -88,7 +88,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        List<String> authenticatedOnlyPaths = List.of("/api/*/marketplace/create", "/api/*/profile", "/api/*/marketplace/like");
+        List<String> authenticatedOnlyPaths = List.of("/api/*/marketplace/create", "/api/*/profile", "/api/*/marketplace/like", "/api/*/user/collections");
         registry.addInterceptor(authenticationHandler()).addPathPatterns("/**").order(0);
         registry.addInterceptor(new AuthenticatedOnly()).addPathPatterns(authenticatedOnlyPaths).order(1);
     }
