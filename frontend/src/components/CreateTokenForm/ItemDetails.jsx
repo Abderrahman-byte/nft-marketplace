@@ -1,13 +1,13 @@
 import React from 'react'
 
-const ItemDetails = () => {
+const ItemDetails = ({ inputChangedCallback }) => {
     return (
         <div className='ItemDetails form-div'>
             <label className='section-label'>Item Details</label>
 
             <div className='form-subdiv'>
                 <label className='form-label'>Item name</label>
-                <input className='input-elt' type='text' name='item-name' autoComplete='off' 
+                <input onChange={e => inputChangedCallback('title', e.target.value)} className='input-elt' type='text' name='item-title' autoComplete='off' 
                     placeholder='e. g. "Redeemable Bitcoin Card with logo"' />
             </div>
 
