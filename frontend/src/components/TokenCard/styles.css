@@ -1,14 +1,15 @@
 .TokenCard {
     width: fit-content;
-    max-width: 17vw;
     display: block;
     text-decoration: none;
     color: inherit;
     transition: .4s;
+    opacity: .8;
 }
 
 .TokenCard:hover {
-    transform: translateY(-3%);
+    /* transform: translateY(-3%); */
+    opacity: 1;
 }
 
 .TokenCard .token-img {
@@ -19,7 +20,49 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    padding: .5em;
 }
+
+.TokenCard:hover .token-img .like-btn {
+    display: flex;
+}
+
+.TokenCard .token-img .like-btn {
+    width: 32px;
+    height: 32px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    box-shadow: 0 8px 16px -8px rgba(15, 15, 15, 0.2);
+    background-color: #fcfcfd;
+    border: none;
+    float: right;
+    cursor: pointer;
+    display: none;
+}
+
+.TokenCard .token-img .like-btn .heart path {
+    transition: .4s;
+}
+
+/* .TokenCard .token-img .like-btn:hover .heart path {
+    fill: #ff5757;
+    fill-rule: nonzero;
+} */
+
+.TokenCard .token-img .like-btn.liked {
+    display: flex !important;
+}
+
+.TokenCard .token-img .like-btn.liked .heart path {
+    fill: #ff5757;
+    fill-rule: nonzero;
+}
+
+/* .TokenCard .token-img .like-btn.liked:hover .heart path {
+    fill: #777E91;
+    fill-rule: evenodd;
+} */
 
 .TokenCard .info {
     padding-top: 1.25em;

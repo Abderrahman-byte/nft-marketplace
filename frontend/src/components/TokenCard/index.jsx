@@ -1,12 +1,40 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
+
+import HeartIconSVG from '@/components/HeartIconSVG'
+import { deleteLikeToken, postLikeToken } from '@/utils/api'
+import { AuthContext } from '@/context/AuthContext'
 
 import './styles.css'
 
-const TokenCard = ({ title, price, creator, owner, collection, previewUrl }) => {
+const TokenCard = ({ id, title, price, creator, owner, collection, previewUrl, liked }) => {
+    const { account } = useContext(AuthContext)
+    const [isLiked, setLiked] = useState(liked)
+    const [isLoading, setLoading] = useState(false)
+
+    const likeBtnClicked = async (e) => {
+        e.preventDefault()
+
+        if (isLoading) return
+
+        setLoading(true)
+
+        const done = isLiked ? await deleteLikeToken(id) : await postLikeToken(id)
+        
+        if (done) setLiked(!isLiked)
+
+        setLoading(false)
+    }
+
     return (
         <Link to='#' className='TokenCard'>
-            <div className='token-img' style={{ 'backgroundImage': `url(${previewUrl}`}} />
+            <div className='token-img' style={{ 'backgroundImage': `url(${previewUrl}`}} >
+                {account ? (
+                    <button onClick={likeBtnClicked} className={`like-btn ${isLiked ? 'liked' : ''}` } >
+                        <HeartIconSVG className='heart' />
+                    </button>
+                ) : null}
+            </div>
             <div className='info'>
                 <div className='info-div'>
                     <h3>{title}</h3>

@@ -133,3 +133,11 @@
     width: 20px;
     height: 20px;
 }
+
+.heart-icon::before {
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Heart_Line.svg') no-repeat center;
+    width: 20px;
+    height: 20px;
+}
