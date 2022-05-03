@@ -6,6 +6,9 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -62,5 +65,20 @@ public class NftCollectionDAO {
         query.setParameter("limit", limit);
 
         return (List<NftCollection>)query.getResultList();
+    }
+
+    public List<NftCollection> selectCollectionsByAccountId (String accountId) {
+        CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
+        CriteriaQuery<NftCollection> cq = cb.createQuery(NftCollection.class);
+        Root<NftCollection> root = cq.from(NftCollection.class);
+
+        cq.select(root)
+        .where(
+            cb.equal(root.get("createdBy").get("id"), accountId)
+        ).orderBy(
+            cb.desc(root.get("createdDate"))
+        );
+
+        return (List<NftCollection>)this.entityManager.createQuery(cq).getResultList();
     }
 }
