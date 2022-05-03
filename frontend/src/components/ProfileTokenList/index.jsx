@@ -38,7 +38,7 @@ const TokenProfileList = ({ id, getTokensFunction }) => {
 
     return (
         <div className='TokenProfileList profile-content'>
-            {tokens.map((token, i) => <TokenCard key={i} {...token} />)}
+            {tokens.map((token, i) => <TokenCard key={i} likable link {...token} />)}
 
             {isMore ? (
                 <div className='more-btn-container'>
