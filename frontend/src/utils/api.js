@@ -163,3 +163,24 @@ export const deleteLikeToken = async (id) => {
 
     return false
 }
+
+export const createCollection = async (formData) => {
+    try {
+        const response = await multipartPostRequest(buildApiUrl('/marketplace/collections'), formData)
+
+        if (response && response.success && response.data) return [response.data, null]
+        if (response && response.error) return [null, response.error]
+    } catch {}
+
+    return [null, null]
+}
+
+export const getUserCollections = async () => {
+    try {
+        const response = await getRequest(buildApiUrl('/marketplace/collections'))
+
+        if (response && response.success && response.data) return response.data
+    } catch {}
+
+    return []
+}
