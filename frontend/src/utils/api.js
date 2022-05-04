@@ -200,3 +200,13 @@ export const createToken = async (file, metadata, multi = false) => {
 
     return [null, null]
 }
+
+export const getTokens = async (sort = 'LIKES', maxPrice = 10000, limit = 10, offset = 0) => {
+    try {
+        const response = await getRequest(buildApiUrl('/marketplace/tokens') + `?sort=${sort}&range=${maxPrice}&limit=${limit}&offset=${offset}`)
+
+        if (response && response.success && response.data) return response.data
+    } catch {}
+
+    return []
+}

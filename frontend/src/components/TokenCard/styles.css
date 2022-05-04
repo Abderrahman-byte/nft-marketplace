@@ -1,10 +1,13 @@
 .TokenCard {
     width: fit-content;
-    display: block;
     text-decoration: none;
     color: inherit;
     transition: .4s;
     opacity: .8;
+
+    display: flex;
+    flex-direction: column;
+    align-content: center;
 }
 
 .TokenCard:hover {
@@ -67,6 +70,10 @@
 .TokenCard .info {
     padding-top: 1.25em;
     padding-bottom: 1.25em;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .TokenCard .info .info-div {
