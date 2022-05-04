@@ -5,7 +5,7 @@ import React, { useCallback, useContext, useEffect, useState } from 'react'
 import CreateCollectionForm from '../CreateCollectionForm'
 import LoadingCard from '../LoadingCard'
 
-const ChooseCollectionInput = () => {
+const ChooseCollectionInput = ({ onSelectedCallback }) => {
 	const { openModel, closeModel } = useContext(AuthContext)
 	const [collections, setCollections] = useState([])
 
@@ -15,16 +15,18 @@ const ChooseCollectionInput = () => {
 		const collectionsList = await getUserCollections()
 		setCollections(collectionsList)
 
-		console.log(collectionsList)
-
 		closeModel()
 	}
 
 	const collectionSelected = (id) => {
 		setCollections(
 			collections.map((collection) => {
-				if (collection.id === id) collection.selected = true
-				else collection.selected = false
+				if (collection.id === id && typeof onSelectedCallback === 'function') {
+					onSelectedCallback(collection.selected ? null : collection)	
+				}
+
+				collection.selected = collection.id === id && !collection.selected
+
 				return collection
 			})
 		)
@@ -65,7 +67,7 @@ const ChooseCollectionInput = () => {
 				closeModel
 			)
 		} else if (data) {
-			setCollections([{ ...data, ...collectionData }, ...collections])
+			setCollections([{ ...data, ...collectionData}, ...collections])
 			closeModel()
 		} else {
 			openModel(
