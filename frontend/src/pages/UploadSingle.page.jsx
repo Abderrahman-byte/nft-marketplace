@@ -6,14 +6,26 @@ import CreateSingleItemForm from '@Components/CreateTokenForm'
 import '@Styles/UploadItem.css'
 import TokenCard from '@/components/TokenCard'
 import { AuthContext } from '@/context/AuthContext'
+import LoadingCard from '@/components/LoadingCard'
+import { createToken } from '@/utils/api'
 
 const UploadSinglePage = () => {
-	const { account } = useContext(AuthContext)
+	const { account, openModel, closeModel } = useContext(AuthContext)
 
 	const [tokenData, setTokenData] = useState({ price: 0.0 })
 
 	const onUpdateCallback = (data) => {
 		setTokenData({...tokenData, ...data})
+	}
+
+	const createItemCallback = async (file, metadata) => {
+		openModel(<LoadingCard />)
+
+		const response = await createToken(file, metadata)
+
+		console.log(response)
+
+		closeModel()
 	}
 
 	useEffect(() => {
@@ -28,7 +40,7 @@ const UploadSinglePage = () => {
                         <h2>Create Single collectible</h2>
                         <Link className='btn btn-white' to='#'>Switch to multiple</Link>
                     </div>
-                    <CreateSingleItemForm onUpdateCallback={onUpdateCallback} />
+                    <CreateSingleItemForm onSubmitCallback={createItemCallback} onUpdateCallback={onUpdateCallback} />
 				</div>
 				<div className='preview'>
 					<h2>Preview</h2>

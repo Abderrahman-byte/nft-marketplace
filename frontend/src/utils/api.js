@@ -167,10 +167,26 @@ export const createCollection = async (formData) => {
 
 export const getUserCollections = async () => {
     try {
-        const response = await getRequest(buildApiUrl('/marketplace/collections'))
+        const response = await getRequest(buildApiUrl('/user/collections'))
 
         if (response && response.success && response.data) return response.data
     } catch {}
 
     return []
+}
+
+export const createToken = async (file, metadata, multi = false) => {
+    try {
+        const formData = new FormData()
+        formData.append('file', file)
+        formData.append('metadata', JSON.stringify(metadata))
+        formData.append('multi', multi)
+
+        const response = await multipartPostRequest(buildApiUrl('/marketplace/tokens'), formData)
+
+        if (response && response.success && response.data) return [response.data, null]
+        else if (response && response.error) return [null, response.error]
+    } catch {}
+
+    return [null, null]
 }
