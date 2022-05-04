@@ -1,0 +1,12 @@
+/* TODO : add custom styling slider */
+
+.Slider .values {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Slider .slider {
+    width: 100%;
+}
