@@ -11,8 +11,7 @@ const Detailscard = ({details, owner, creator}) => {
             <div className="title">
                 <span className="The-amazing-art">
                    {details.title}
-                   {console.log("From details card")}
-                    {console.log(owner)}
+                 
                 </span>
                 <div className="frame-952">
                     <div className="price-rvn">
@@ -37,8 +36,7 @@ const Detailscard = ({details, owner, creator}) => {
              To learn more about check out unlockable
             </div>
             <div className="content">
-                 <DetailNavbar next={next} setnext={setnext}/>
-                {console.log(next)}
+                 <DetailNavbar next={next} setnext={setnext}/>        
                {next ==='1'  && <Info details={details} owner={owner} creator={creator}/>}
             </div>
 

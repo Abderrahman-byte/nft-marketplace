@@ -18,8 +18,7 @@ const Detailsbloc = ( {details, owner, creator})=>{
             </div>
             <div className="frame-971">
             <Detailscard details = {details} owner ={owner} creator={creator}/>
-            {console.log("from details bloc")}
-            {console.log(owner)}
+          
             <FixedBox />
             </div>
         </div>
