@@ -5,7 +5,7 @@ import '@Styles/RegisterSuccessPage.css'
 
 const RegisterSuccessPage = () => {
 	return (
-		<div className='RegisterSuccessPage page center-container'>
+		<div className='RegisterSuccessPage auth-page center-container'>
 			<div className='container card'>
 				<h2>Verify your email</h2>
 				<p>

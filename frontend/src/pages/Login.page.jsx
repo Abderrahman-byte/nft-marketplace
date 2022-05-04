@@ -35,7 +35,7 @@ const LoginPage = () => {
 
 	
 	return (
-		<div className='Login center-container page'>
+		<div className='Login center-container auth-page'>
 			<div className='container card'>
                 <h2>  Login  </h2>
                 <LoginForm submitCallback={submitCallback} />

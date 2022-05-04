@@ -103,9 +103,19 @@ textarea {
 	padding-right: 11%;
 }
 
-.page {
+.auth-page {
 	padding-top: 2em;
 	padding-bottom: 3em;
+}
+
+.page {
+	padding: 4em 11%;
+}
+
+.page h2.page-title {
+	font-size: 2.5rem;
+	font-weight: bold;
+	color: #23262f;
 }
 
 .hidden {
@@ -120,4 +130,29 @@ textarea {
 .block {
 	display: block;
 	width: fit-content;
+}
+
+.btn-loading {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: .8em;
+}
+
+.btn-loading .loading-icon {
+	animation: rotate 2s linear infinite;
+}
+
+.btn:disabled {
+	cursor: auto;
+}
+
+@keyframes rotate {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(359deg);
+	}
 }

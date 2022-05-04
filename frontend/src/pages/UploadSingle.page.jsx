@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom'
 
 import CreateSingleItemForm from '@Components/CreateTokenForm'
 
-import '@Styles/UploadItem.css'
 import TokenCard from '@/components/TokenCard'
 import { AuthContext } from '@/context/AuthContext'
 import LoadingCard from '@/components/LoadingCard'
 import { createToken } from '@/utils/api'
+
+import '@Styles/UploadItem.css'
 
 const UploadSinglePage = () => {
 	const { account, openModel, closeModel } = useContext(AuthContext)

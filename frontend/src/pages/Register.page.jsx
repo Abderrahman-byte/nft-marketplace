@@ -33,7 +33,7 @@ const RegisterPage = () => {
     if (isDone) return <RegisterSuccessPage />
 
     return (
-        <div className='RegisterPage center-container page'>
+        <div className='RegisterPage center-container auth-page'>
             <div className='container card'>
                 <h2>Create New Account</h2>
                 <RegisterForm submitCallback={submitCallback} />

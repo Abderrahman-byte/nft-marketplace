@@ -11,6 +11,7 @@ import ProfilePages from './pages/Profile.pages'
 
 import '@Styles/App.css'
 import UserProfilePage from './pages/UserProfile.page'
+import DiscoverPage from './pages/Discover.page'
 
 function App() {
 	return (
@@ -19,10 +20,12 @@ function App() {
 			<Routes>
 				<Route path='/sign-up' element={<RegisterPage />} />
 				<Route path='/sign-in' element={<LoginPage />} />
-
+				<Route path='/discover' element={<DiscoverPage />} />
+				
 				<Route path='/profile/*' element={<AuthenticationOnly><ProfilePages /></AuthenticationOnly>} />
 				<Route path='/upload/*' element={<AuthenticationOnly><CreatePages /></AuthenticationOnly>} />
 				<Route path='/user/:id/*' element={<UserProfilePage />} />
+
 			</Routes>
 		
 			<AppFooter />
