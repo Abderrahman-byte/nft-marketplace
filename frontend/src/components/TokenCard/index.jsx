@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import HeartIconSVG from '@/components/HeartIconSVG'
@@ -11,6 +11,10 @@ const TokenCard = ({ id, title, price, creator, owner, collection, previewUrl, l
     const { account } = useContext(AuthContext)
     const [isLiked, setLiked] = useState(liked)
     const [isLoading, setLoading] = useState(false)
+
+    useEffect(() => {
+        setLiked(liked)
+    }, [liked])
 
     const likeBtnClicked = async (e) => {
         e.preventDefault()

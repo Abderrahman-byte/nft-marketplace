@@ -1,0 +1,9 @@
+.TokensListFilter .filter-controls {
+    display: flex;
+    align-items: flex-start;
+    column-gap: 5%;
+}
+
+.TokensListFilter .filter-controls .form-div {
+    width: 30%;
+}
