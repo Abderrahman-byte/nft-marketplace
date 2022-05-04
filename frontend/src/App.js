@@ -27,10 +27,6 @@ function App() {
 				<Route path='/upload/*' element={<AuthenticationOnly><CreatePages /></AuthenticationOnly>} />
 				<Route path='/user/:id/*' element={<UserProfilePage />} />
 				<Route path='/details/:id' element={<DetailsPage />} />
-<<<<<<< HEAD
-				<Route path='/details' element={<DetailsPage />} />
-=======
->>>>>>> 6b64c55 (fix : details id error)
 			</Routes>
 		
 			<AppFooter />
