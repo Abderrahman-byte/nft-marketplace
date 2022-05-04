@@ -3,9 +3,10 @@ import '@Styles/DetailsPage.css'
 import Icons from "@/components/Details/icons";
 import Detailsbloc from "@/components/Details/detailsbloc";
 import { getDetailsToken } from "@/utils/api";
+import { useParams } from "react-router";
 
-const DetailsPage =({id})=>{
- 
+const DetailsPage = () => {
+    const { id } = useParams()
 
     const [details, setdetails]= useState({});
     const [owner, setowner] = useState({})
@@ -25,8 +26,8 @@ const DetailsPage =({id})=>{
 
     useEffect(()=>{
         
-        getDetails();
-    },[])
+        getDetails(id);
+    },[id])
 
 
     return (
