@@ -21,9 +21,9 @@ const UploadSinglePage = () => {
 	const createItemCallback = async (file, metadata) => {
 		openModel(<LoadingCard />)
 
-		const response = await createToken(file, metadata)
+		const [data, error] = await createToken(file, metadata)
 
-		console.log(response)
+		if (data && !error) setTokenData({})
 
 		closeModel()
 	}
