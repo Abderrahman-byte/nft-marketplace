@@ -11,10 +11,9 @@ import ProfilePages from '@Pages/Profile.pages'
 import UserProfilePage from '@Pages/UserProfile.page'
 import DiscoverPage from '@Pages/Discover.page'
 import MainPage from '@Pages/Main.page'
+import DetailsPage from '@Pages/Details.page'
 
 import '@Styles/App.css'
-import UserProfilePage from './pages/UserProfile.page'
-import DiscoverPage from './pages/Discover.page'
 
 function App() {
 	return (

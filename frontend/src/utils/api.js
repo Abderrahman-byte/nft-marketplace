@@ -210,3 +210,13 @@ export const getCollectionsList = async (limit, withDetails = false) => {
 
     return []
 }
+
+export const getDetailsToken = async (id) => {
+    try{
+        const response = await getRequest(buildApiUrl('marketplace/tokens/'+id))
+        
+        if(response && response.data ) return [response.data, response.data.owner, response.data.creator]
+    } catch{}
+
+    return [false, null]
+}
