@@ -9,7 +9,7 @@ const CreateCollectionForm = ({ defaultData, defaultErrors, onSubmitCallback, de
 
     useEffect(() => {
         if (defaultData && !image && defaultData?.image) setImage(defaultData.image)
-    }, [defaultData])
+    }, [defaultData, image])
 
     useEffect(() => {
         if (defaultErrors) setErrors(defaultErrors)
@@ -22,7 +22,7 @@ const CreateCollectionForm = ({ defaultData, defaultErrors, onSubmitCallback, de
             container.items.add(file)
             imageInput.current.files = container.files
         }
-    }, [defaultImage])
+    }, [defaultImage, image])
 
     const imageFileChanged = (e) => {
         const files = e.target.files
@@ -66,7 +66,7 @@ const CreateCollectionForm = ({ defaultData, defaultErrors, onSubmitCallback, de
             </div>
 
             <div className='form-div'>
-                <img src={image} />
+                <img src={image} alt='collection' />
                 <div>
                     <span>We recommend an image of at least 300x300. Gifs work too.<br/>Max 5mb.</span>
                     <label htmlFor='collection-image-input' className='btn btn-white block'>Choose file</label>

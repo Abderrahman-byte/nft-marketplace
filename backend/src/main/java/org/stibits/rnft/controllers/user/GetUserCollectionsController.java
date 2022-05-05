@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.stibits.rnft.converters.CollectionMapConverter;
+import org.stibits.rnft.converters.SimpleCollectionMapConverter;
 import org.stibits.rnft.entities.Account;
 import org.stibits.rnft.entities.NftCollection;
 import org.stibits.rnft.repositories.NftCollectionDAO;
@@ -21,14 +21,14 @@ public class GetUserCollectionsController {
     private NftCollectionDAO collectionDAO;
 
     @Autowired
-    private CollectionMapConverter collectionConverter;
+    private SimpleCollectionMapConverter collectionConverter;
 
     @GetMapping
     public Map<String, Object> handleGetRequest (@RequestAttribute("account") Account account) {
         Map<String, Object> response = new HashMap<>();
         List<NftCollection> collections = collectionDAO.selectCollectionsByAccountId(account.getId());
 
-        response.put("data", collectionConverter.convertSimple(collections));
+        response.put("data", collectionConverter.convertList(collections));
         response.put("success", true);
 
         return response;

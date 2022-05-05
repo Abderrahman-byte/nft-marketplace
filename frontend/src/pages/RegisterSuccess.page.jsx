@@ -18,7 +18,7 @@ const RegisterSuccessPage = () => {
 					after a few minutes, please check your spam folder.
 				</span>
 
-                <Link to='/login' className='btn btn-blue'>Sign In</Link>
+                <Link to='/sign-in' className='btn btn-blue'>Sign In</Link>
 			</div>
 		</div>
 	)

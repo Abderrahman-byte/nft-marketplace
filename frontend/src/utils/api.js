@@ -84,16 +84,6 @@ export const saveProfilePicture = async (file, type) => {
     return [false, null]
 }
 
-export const getDetailsToken = async (id) => {
-    try{
-        const response = await getRequest(buildApiUrl('marketplace/tokens/'+id))
-        
-        if(response && response.data ) return [response.data, response.data.owner, response.data.creator]
-    } catch{}
-
-    return [false, null]
-}
-
 export const getUserData = async (id) => {
     try {
         const response = await getRequest(buildApiUrl(`/user/${id}`))
@@ -204,6 +194,16 @@ export const createToken = async (file, metadata, multi = false) => {
 export const getTokens = async (sort = 'LIKES', maxPrice = 10000, limit = 10, offset = 0) => {
     try {
         const response = await getRequest(buildApiUrl('/marketplace/tokens') + `?sort=${sort}&range=${maxPrice}&limit=${limit}&offset=${offset}`)
+
+        if (response && response.success && response.data) return response.data
+    } catch {}
+
+    return []
+}
+
+export const getCollectionsList = async (limit, withDetails = false) => {
+    try {
+        const response = await getRequest(buildApiUrl('/marketplace/collections') + `?limit=${limit}&details=${withDetails}`)
 
         if (response && response.success && response.data) return response.data
     } catch {}
