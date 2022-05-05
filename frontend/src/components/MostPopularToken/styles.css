@@ -24,18 +24,19 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 10%;
+    column-gap: 5%;
 }
 
 .MostPopularToken .info .profiles .profile-elt {
     display: flex;
     align-items: flex-start;
-    width: 40%;
 }
 
 .MostPopularToken .info .profiles .profile-elt a {
     transition: transform .6s;
     margin-right: .5em;
+    width: 40px;
+    height: 40px;
 }
 
 .MostPopularToken .info .profiles .profile-elt a:hover {

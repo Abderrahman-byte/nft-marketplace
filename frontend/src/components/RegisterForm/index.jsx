@@ -18,7 +18,7 @@ const RegisterForm = ({submitCallback}) => {
 			email: elements.email.value,
 			password: elements.password.value,
 			password2: elements.password2.value,
-			isArtist: false
+			// isArtist: false
 		}
 
 		const localErrors = validateForm(data, registerFormFields)
