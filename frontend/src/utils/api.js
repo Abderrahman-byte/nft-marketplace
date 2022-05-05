@@ -200,3 +200,13 @@ export const getTokens = async (sort = 'LIKES', maxPrice = 10000, limit = 10, of
 
     return []
 }
+
+export const getCollectionsList = async (limit, withDetails = false) => {
+    try {
+        const response = await getRequest(buildApiUrl('/marketplace/collections') + `?limit=${limit}&details=${withDetails}`)
+
+        if (response && response.success && response.data) return response.data
+    } catch {}
+
+    return []
+}
