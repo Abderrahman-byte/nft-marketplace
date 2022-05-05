@@ -14,6 +14,9 @@ public class CollectionMapConverter implements Converter<NftCollection, Map<Stri
     @Autowired
     public ProfileDetailsConverter profileDetailsConverter;
 
+    @Autowired
+    public SimpleTokenMapConverter tokenMapConverter;
+
     @Override
     public Map<String, Object> convert(NftCollection source) {
         Map<String, Object> data = this.convertSimple(source);
@@ -26,6 +29,8 @@ public class CollectionMapConverter implements Converter<NftCollection, Map<Stri
         } else {
             data.put("createdId", source.getCreatedBy().getId());
         }
+
+        data.put("items", tokenMapConverter.convertList(source.getNfts()));
 
         return data;
     }

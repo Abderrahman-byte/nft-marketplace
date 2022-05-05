@@ -61,7 +61,8 @@ public class CollectionsController {
     @GetMapping()
     public Map<String, Object> getPopulareCollections (
         @RequestParam(name="limit", required = false, defaultValue = "20") int limit,
-        @RequestParam(name="offset", required = false, defaultValue = "0") int offset
+        @RequestParam(name="offset", required = false, defaultValue = "0") int offset,
+        @RequestParam(name="details", required = false, defaultValue = "false") boolean withDetails
     ) {
         Map<String, Object> response = new HashMap<>();
 
@@ -71,7 +72,9 @@ public class CollectionsController {
         List<NftCollection> collections = collectionDAO.selectPopulareCollections(limit, offset);
 
         response.put("success", true);
-        response.put("data", simpleCollectionMapConverter.convertList(collections));
+        response.put("data", withDetails 
+                ? collectionConverter.convert(collections)
+                : simpleCollectionMapConverter.convertList(collections));
 
         return response;
     }
