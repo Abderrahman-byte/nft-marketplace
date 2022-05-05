@@ -45,6 +45,22 @@
     height: 9px;
 }
 
+.big-arrow-right-icon::before {
+    content: "";
+    display: block;
+    background: url('../assets/icons/Right\ arrow.svg') no-repeat center;
+    width: 24px;
+    height: 24px;
+}
+
+.big-arrow-left-icon::before {
+    content: "";
+    display: block;
+    background: url('../assets/icons/Left\ arrow.svg') no-repeat center;
+    width: 24px;
+    height: 24px;
+}
+
 .timer-icon::before {
     content: "";
     display: block;

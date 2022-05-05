@@ -7,7 +7,7 @@ import { AuthContext } from '@/context/AuthContext'
 
 import './styles.css'
 
-const TokenCard = ({ id, title, price, creator, owner, collection, previewUrl, liked, likable = false, link = false }) => {
+const TokenCard = ({ id, title, price, creator, owner, collection, previewUrl, liked, likable = false, link = false, style={} }) => {
     const { account } = useContext(AuthContext)
     const [isLiked, setLiked] = useState(liked)
     const [isLoading, setLoading] = useState(false)
@@ -80,9 +80,9 @@ const TokenCard = ({ id, title, price, creator, owner, collection, previewUrl, l
         )
     }
 
-    if (link) return <Link to='#' className='TokenCard'>{getChildren()}</Link>
+    if (link) return <Link style={{...style}} to={`/details/${id}`} className='TokenCard'>{getChildren()}</Link>
 
-    return <div className='TokenCard'>{getChildren()}</div>
+    return <div style={{...style}} className='TokenCard'>{getChildren()}</div>
 }
 
 export default TokenCard

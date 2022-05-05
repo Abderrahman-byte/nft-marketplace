@@ -1,0 +1,41 @@
+.Carossel .Carossel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4em;
+}
+
+.Carossel .Carossel-header h3 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #23262f;
+}
+
+.Carossel .Carossel-header .controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.Carossel .Carossel-header .controls .btn {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: .5em;
+    border: solid 2px #e6e8ec;
+    background-color: white;
+}
+
+.Carossel .Carossel-header .controls .btn:disabled {
+    border: none;
+}
+
+.Carossel .row-container {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.Carossel .row {
+    display: flex;
+    transition: transform .4s;
+}
