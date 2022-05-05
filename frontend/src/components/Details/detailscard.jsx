@@ -10,7 +10,7 @@ const Detailscard = ({details, owner, creator}) => {
         <div className="frame-970">
             <div className="title">
                 <span className="The-amazing-art">
-                   {details.title}
+                   {details?.title}
                    {console.log("From details card")}
                     {console.log(owner)}
                 </span>
@@ -23,7 +23,7 @@ const Detailscard = ({details, owner, creator}) => {
                     </div>
                     <div className="price-d">
                         <span>
-                        ${details.price}
+                        ${details?.price}
                         </span>
 
                     </div>

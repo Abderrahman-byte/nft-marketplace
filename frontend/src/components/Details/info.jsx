@@ -15,7 +15,7 @@ const Info = ({ details, owner, creator }) => {
                 <div className="frame-966">
                     <div className="avatar">
 
-                        <img src={owner.avatarUrl} alt="" />
+                        <img src={owner?.avatarUrl} alt="" />
                         <div className="box">
                         </div>
 
@@ -25,7 +25,7 @@ const Info = ({ details, owner, creator }) => {
                             Owner
                         </span>
                         <span className="FullName">
-                            {owner.username}
+                            {owner?.username}
                         </span>
                     </div>
                 </div>
@@ -35,7 +35,7 @@ const Info = ({ details, owner, creator }) => {
                 <div className="frame-966">
                     <div className="avatar">
 
-                        <img src={owner.avatarUrl} alt="" />
+                        <img src={owner?.avatarUrl} alt="" />
                         <div className="box">
                         </div>
 
@@ -45,7 +45,7 @@ const Info = ({ details, owner, creator }) => {
                             Creator
                         </span>
                         <span className="FullName">
-                            {creator.username}
+                            {creator?.username}
                         </span>
                     </div>
                 </div>
