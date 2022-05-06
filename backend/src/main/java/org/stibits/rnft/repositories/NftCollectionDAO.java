@@ -6,6 +6,9 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -51,16 +54,32 @@ public class NftCollectionDAO {
     // TODO : maybe add likes date filter (ex: Trend collection of the last week)
     @SuppressWarnings("unchecked")
     public List<NftCollection> selectPopulareCollections (int limit, int offset) {
-        String sqlString = "SELECT c.id, c.name, c.created_by,c.description,c.image_url,c.created_date, count(lk.account_id) "+ 
+        String sqlString = "select c.id, c.name, c.created_by,c.description,c.image_url,c.created_date "+ 
         "FROM nft_collection AS c " + 
         "LEFT JOIN nft_token AS nft ON nft.collection_id is not NULL AND c.id = nft.collection_id "+ 
         "LEFT JOIN nft_token_likes AS lk ON nft.id = lk.token_id "+
-        "GROUP BY c.id,c.name,c.created_by,c.description,c.image_url,c.created_date limit :limit";
+        "GROUP BY c.id,c.name,c.created_by,c.description,c.image_url,c.created_date "+
+        "ORDER BY count(lk.account_id) DESC limit :limit";
 
         Query query = entityManager.createNativeQuery(sqlString, NftCollection.class);
 
         query.setParameter("limit", limit);
 
         return (List<NftCollection>)query.getResultList();
+    }
+
+    public List<NftCollection> selectCollectionsByAccountId (String accountId) {
+        CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
+        CriteriaQuery<NftCollection> cq = cb.createQuery(NftCollection.class);
+        Root<NftCollection> root = cq.from(NftCollection.class);
+
+        cq.select(root)
+        .where(
+            cb.equal(root.get("createdBy").get("id"), accountId)
+        ).orderBy(
+            cb.desc(root.get("createdDate"))
+        );
+
+        return (List<NftCollection>)this.entityManager.createQuery(cq).getResultList();
     }
 }

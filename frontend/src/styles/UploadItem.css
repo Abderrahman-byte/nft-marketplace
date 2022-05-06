@@ -28,6 +28,7 @@
 .UploadItem .container {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     width: 78%;
     /* border: 1px solid green; */
     margin-left: auto;
@@ -53,4 +54,32 @@
     margin-bottom: 0.25em;
     font-size: 1rem;
     color: #23262f;
+}
+
+.UploadItem .preview {
+    padding: 2em 3em;
+    border-radius: 16px;
+    box-shadow: 0 64px 64px 16px rgba(31, 47, 70, 0.12);
+    background-color: #fcfcfd;
+}
+
+.UploadItem .preview .TokenCard {
+    width: 100%;
+}
+
+.UploadItem .preview h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1em;
+    font-weight: 600;
+    color: #23262f;
+}
+
+.UploadItem .preview .clean-all-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.625em;
+    padding: 0.25em 0;
+    background-color: transparent;
+    color: #777e90;
+    margin-top: 1.5em;
 }

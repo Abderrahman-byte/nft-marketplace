@@ -31,10 +31,17 @@ public class CreateSingleNFTValidator extends GenericMapValidator {
         if (errors.hasErrors()) return ;
 
         Boolean isForSell = (Boolean)data.get("isForSell");
-        Boolean isValidPrice = data.containsKey("price") && data.get("price").getClass().equals(Double.class);
+        Boolean isValidPrice = data.containsKey("price") && (data.get("price").getClass().equals(Double.class) || data.get("price").getClass().equals(Integer.class));
+        double price = 0;
 
-        if (isForSell && (!isValidPrice || ((Double)data.get("price")) <= 0)) {
+        if (isValidPrice) {
+            price = data.get("price").getClass().equals(Integer.class) ? Double.valueOf((Integer)data.get("price")) : (Double)data.get("price");
+        }
+
+        if (isForSell && (!isValidPrice || price <= 0)) {
             errors.rejectValue("price", "invalidValue");
         }
+
+        data.put("price", price);
     }
 }

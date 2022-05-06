@@ -5,7 +5,7 @@ import '@Styles/RegisterSuccessPage.css'
 
 const RegisterSuccessPage = () => {
 	return (
-		<div className='RegisterSuccessPage page center-container'>
+		<div className='RegisterSuccessPage auth-page center-container'>
 			<div className='container card'>
 				<h2>Verify your email</h2>
 				<p>
@@ -18,7 +18,7 @@ const RegisterSuccessPage = () => {
 					after a few minutes, please check your spam folder.
 				</span>
 
-                <Link to='/login' className='btn btn-blue'>Sign In</Link>
+                <Link to='/sign-in' className='btn btn-blue'>Sign In</Link>
 			</div>
 		</div>
 	)

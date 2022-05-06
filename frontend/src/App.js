@@ -7,8 +7,11 @@ import RegisterPage from '@Pages/Register.page'
 import AppHeader from '@Components/AppHeader'
 import AppFooter from '@Components/AppFooter'
 import AuthenticationOnly from '@Components/AuthenticatedOnly'
-import ProfilePages from './pages/Profile.pages'
-import DetailsPage from './pages/Details.page'
+import ProfilePages from '@Pages/Profile.pages'
+import UserProfilePage from '@Pages/UserProfile.page'
+import DiscoverPage from '@Pages/Discover.page'
+import MainPage from '@Pages/Main.page'
+import DetailsPage from '@Pages/Details.page'
 
 import '@Styles/App.css'
 
@@ -17,13 +20,14 @@ function App() {
 		<div className='App'>
 			<AppHeader />
 			<Routes>
+				<Route index element={<MainPage />} />
 				<Route path='/sign-up' element={<RegisterPage />} />
 				<Route path='/sign-in' element={<LoginPage />} />
-
+				<Route path='/discover' element={<DiscoverPage />} />
+				
 				<Route path='/profile/*' element={<AuthenticationOnly><ProfilePages /></AuthenticationOnly>} />
 				<Route path='/upload/*' element={<AuthenticationOnly><CreatePages /></AuthenticationOnly>} />
-			
-
+				<Route path='/user/:id/*' element={<UserProfilePage />} />
 				<Route path='/details/:id' element={<DetailsPage />} />
 
 			</Routes>

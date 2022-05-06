@@ -1,47 +1,44 @@
-import React, {useEffect, useState}from "react";
+import React, { useContext, useEffect, useState } from 'react'
 
-import { getProfile } from "@Utils/api";
-import ProfileCover from "@/components/ProfileCover";
-import ProfileInfoCard from "@/components/ProfileInfoCard";
+import ProfileCover from '@/components/ProfileCover'
+import ProfileInfoCard from '@/components/ProfileInfoCard'
+import ProfileNavbar from '@/components/ProfileNavbar'
+import ProfileTokenList from '@/components/ProfileTokenList'
+import { AuthContext } from '@/context/AuthContext'
+import { Navigate, Route, Routes } from 'react-router'
+import { getUserForSaleTokens, getUserCreatedTokens, getUserOwnedTokens, getUserFavoriteTokens } from '@Utils/api'
 
 import '@Styles/ProfilePage.css'
-import ProfileNavbar from "@/components/ProfileNavbar";
 
 const ProfilePage = () => {
-    const [profile, setprofile]= useState({});
+	const { account } = useContext(AuthContext)
+	const [profile, setProfile] = useState(account)
 
-    const getProfileData = async () => {       
-        const profile = await getProfile();
-     
-        setprofile(profile)
-         console.log("profile page")
-    }
+	useEffect(() => {
+		setProfile(account)
+	}, [account])
 
-    useEffect(()=>{
-        getProfileData();
-    },[])
-
-    return (
-        <div className="ProfilePage">
-            <ProfileCover updateCover profile={profile} />
-            <div className="container">
-                <ProfileInfoCard profile={profile} />
-                <div className="profile-pages">
-                    <ProfileNavbar />
-                    <div className="profile-content">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-
-
-
-
+	return (
+		<div className='ProfilePage'>
+			<ProfileCover allowUpdate={account && profile && profile?.id === account?.id} profile={profile} />
+			<div className='container'>
+				<ProfileInfoCard profile={profile} />
+				<div className='profile-pages'>
+					<ProfileNavbar />
+					
+					{profile && profile.id ? (
+						<Routes>
+							<Route index element={<Navigate to='./sale' />} />
+							<Route path='sale' element={<ProfileTokenList getTokensFunction={getUserForSaleTokens} id={profile.id} />} />
+							<Route path='collectibles' element={<ProfileTokenList getTokensFunction={getUserOwnedTokens} id={profile.id} />} />
+							<Route path='created' element={<ProfileTokenList getTokensFunction={getUserCreatedTokens} id={profile.id} />} />
+							<Route path='likes' element={<ProfileTokenList getTokensFunction={getUserFavoriteTokens} id={profile.id} />} />
+						</Routes>
+					) : null}
+				</div>
+			</div>
+		</div>
+	)
 }
 
-export default ProfilePage;
-
-
-
+export default ProfilePage

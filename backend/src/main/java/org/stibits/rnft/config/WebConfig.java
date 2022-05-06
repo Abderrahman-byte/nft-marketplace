@@ -88,7 +88,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        List<String> authenticatedOnlyPaths = List.of("/api/*/marketplace/create", "/api/*/profile", "/api/*/marketplace/like");
+        List<String> authenticatedOnlyPaths = List.of("/api/*/marketplace/create", "/api/*/profile", "/api/*/marketplace/like", "/api/*/user/collections");
         registry.addInterceptor(authenticationHandler()).addPathPatterns("/**").order(0);
         registry.addInterceptor(new AuthenticatedOnly()).addPathPatterns(authenticatedOnlyPaths).order(1);
     }
@@ -102,6 +102,6 @@ public class WebConfig implements WebMvcConfigurer {
     
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/**").allowedOrigins("http://localhost:3000/").allowCredentials(true).maxAge(3600); 
+        registry.addMapping("/api/**").allowedOrigins("http://localhost:3000/").allowCredentials(true).maxAge(3600).allowedMethods("*"); 
     }
 }

@@ -9,29 +9,30 @@ import './styles.css'
 
 // TODO : check if user is in his profile 
 
-const ProfileCover = ({ updateCover = false, profile }) => {
+const ProfileCover = ({ allowUpdate = false, profile }) => {
     const [coverUrl, setCoverUrl] = useState(profile?.cover)
-    const { openModel, closeModel } = useContext(AuthContext)
+    const { openModel, closeModel, setProfileData } = useContext(AuthContext)
 
     useEffect(() => {
-        console.log(profile)
         if (!coverUrl && profile?.cover) setCoverUrl(profile.cover)
     }, [profile])
 
     const coverImageChanged = async (e) => {
         const files = e.target.files
 
-        if (files.length <= 0) return
+        if (files.length <= 0 || !allowUpdate) return
 
         openModel(<LoadingCard />)
 
         const [saved] = await saveProfilePicture(files[0], 'cover')
 
         const fileReader = new FileReader()
-
-        fileReader.onload = e => setCoverUrl(e.target.result)
-
-        fileReader.readAsDataURL(files[0])
+        fileReader.onload = e => {
+            setProfileData({ ...profile, cover: e.target.result})
+            setCoverUrl(e.target.result)
+        }
+        
+        if (saved) fileReader.readAsDataURL(files[0])
 
         closeModel()
     }
@@ -39,10 +40,9 @@ const ProfileCover = ({ updateCover = false, profile }) => {
     return (
         <div className='ProfileCover' style={{ 'backgroundImage': `url(${coverUrl})`}} >
             <input onChange={coverImageChanged} className='hidden' id='cover-image-input' type='file' accept='image/*' /> 
-           
-            {updateCover ? (<div className='buttons'>
+            {allowUpdate ? (<div className='buttons'>
                 <label htmlFor='cover-image-input' className='btn btn-white'>Edit cover photo</label>
-                <Link to='#' className='btn btn-white'>Edit cover photo</Link>
+                <Link to='/profile/edit' className='btn btn-white'>Edit Profile</Link>
             </div>) : null}
         </div>
     )

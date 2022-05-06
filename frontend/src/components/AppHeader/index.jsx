@@ -13,14 +13,14 @@ const AppHeader = () => {
             <div className='Left-content'>
                 <AppLogo />
                 <div className='vertical-divider' />
-                <Link className='nav-link' to='#' >Discover</Link>
+                <Link className='nav-link' to='/discover' >Discover</Link>
                 <Link className='nav-link' to='#' >How it work</Link>
             </div>
             <div className='Actions'>
                 <SearchBox />
                 <NotificationsBar />
                 <div className='buttons'>
-                    <Link className='btn btn-blue' to='#'>Upload</Link>
+                    <Link className='btn btn-blue' to='/upload'>Upload</Link>
                     <Link className='btn btn-white' to='#'>Connect Wallet</Link>
                 </div>
             </div>

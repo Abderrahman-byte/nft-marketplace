@@ -22,7 +22,7 @@ const Detailscard = ({details, owner, creator}) => {
                     </div>
                     <div className="price-d">
                         <span>
-                        ${details.price}
+                        ${details?.price}
                         </span>
 
                     </div>

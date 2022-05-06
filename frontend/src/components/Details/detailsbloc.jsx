@@ -9,7 +9,7 @@ const Detailsbloc = ( {details, owner, creator})=>{
   
     return(
         <div className="detailsbloc">
-            <div className="img-01" style={{ 'backgroundImage': `url(${details.previewUrl})`}}>
+            <div className="img-01" style={{ 'backgroundImage': `url(${details?.previewUrl})`}}>
                <div className="labels">                                             
                    <label className="Art"> <span> ART </span></label>               
                    <label className="unlockable"> <span> UNLOCKABLE</span></label>

@@ -11,7 +11,7 @@ const ProfileHeader = () => {
 			</Link>
 
 			<div className='Breadcrumb'>
-				<Link className='headerprofile-linkp' to='#'>
+				<Link className='headerprofile-linkp' to='/profile'>
 					Profile
 				</Link>
 				<i className='arrow-simple-icon'></i>

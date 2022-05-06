@@ -22,8 +22,8 @@ export const httpRequest = async (url, method, data = null, headers = {}, option
 export const multipartPostRequest = async (url, data, options) => {
     const response = await fetch(url, {
         credentials: 'include',
-       method:  'POST',
-       body: data,
+        method:  'POST',
+        body: data,
         ...options
     })
 
@@ -34,5 +34,7 @@ export const multipartPostRequest = async (url, data, options) => {
 }
 
 export const getRequest = (url, headers = {}, options = {}) => httpRequest(url, 'GET', headers, options)
+
+export const deleteRequest = (url, headers = {}, options = {}) => httpRequest(url, 'DELETE', headers, options)
 
 export const postRequest = (url, data, headers = {}, options = {}) => httpRequest(url, 'POST', data, headers, options)

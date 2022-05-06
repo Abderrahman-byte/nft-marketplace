@@ -1,6 +1,7 @@
 package org.stibits.rnft.converters;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +14,13 @@ public class CollectionMapConverter implements Converter<NftCollection, Map<Stri
     @Autowired
     public ProfileDetailsConverter profileDetailsConverter;
 
+    @Autowired
+    public SimpleTokenMapConverter tokenMapConverter;
+
     @Override
     public Map<String, Object> convert(NftCollection source) {
-        Map<String, Object> data = new HashMap<>();
+        Map<String, Object> data = this.convertSimple(source);
 
-        data.put("id", source.getId());
-        data.put("name", source.getName());
-        data.put("imageUrl", source.getImageUrl());
-        data.put("description", source.getDescription());
         data.put("itemsCount", source.getNfts().size());
         data.put("totalPrice", source.getNfts().stream().reduce(0.0, (subtotal, token) -> subtotal + token.getPrice(), Double::sum));
 
@@ -30,6 +30,27 @@ public class CollectionMapConverter implements Converter<NftCollection, Map<Stri
             data.put("createdId", source.getCreatedBy().getId());
         }
 
+        data.put("items", tokenMapConverter.convertList(source.getNfts()));
+
         return data;
+    }
+
+    public Map<String, Object> convertSimple (NftCollection source) {
+        Map<String, Object> data = new HashMap<>();
+
+        data.put("id", source.getId());
+        data.put("name", source.getName());
+        data.put("imageUrl", source.getImageUrl());
+        data.put("description", source.getDescription());
+
+        return data;
+    }
+
+    public List<Map<String, Object>> convertSimple (List<NftCollection> source) {
+        return source.stream().map(collection -> this.convertSimple(collection)).toList();
+    }
+
+    public List<Map<String, Object>> convert (List<NftCollection> source) {
+        return source.stream().map(collection -> this.convert(collection)).toList();
     }
 }
