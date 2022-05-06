@@ -1,9 +1,9 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+
 
 import './styles.css'
 
-const DetailNavbar = ({next, setnext}) => {
+const DetailNavbar = ({ setnext}) => {
     const links = [
         {
             text: 'Info',

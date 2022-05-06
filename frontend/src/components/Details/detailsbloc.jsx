@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import Detailscard from "./detailscard";
 import FixedBox from "./fixedbox";
 
 import'./styles.css'
+/**fix the fixedBox */
 
-const Detailsbloc = ( {details, owner, creator})=>{
-  
+const Detailsbloc = ( {details, owner, creator, isOwner})=>{
     return(
         <div className="detailsbloc">
             <div className="img-01" style={{ 'backgroundImage': `url(${details?.previewUrl})`}}>
@@ -18,12 +18,10 @@ const Detailsbloc = ( {details, owner, creator})=>{
             </div>
             <div className="frame-971">
             <Detailscard details = {details} owner ={owner} creator={creator}/>
-          
-            <FixedBox />
+            
+            {!isOwner? (<FixedBox />):null}
             </div>
-        </div>
-        
+        </div>  
     )
 }
-
 export default Detailsbloc;

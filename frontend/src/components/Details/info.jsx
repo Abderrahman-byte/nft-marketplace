@@ -1,13 +1,7 @@
 import React from "react";
 import './styles.css'
 
-
-
-
-
-const Info = ({ details, owner, creator }) => {
-
-
+const Info = ({ owner, creator }) => {
 
     return (
         <div className="Info ">
@@ -35,7 +29,7 @@ const Info = ({ details, owner, creator }) => {
                 <div className="frame-966">
                     <div className="avatar">
 
-                        <img src={owner?.avatarUrl} alt="" />
+                        <img src={creator?.avatarUrl} alt="" />
                         <div className="box">
                         </div>
 
