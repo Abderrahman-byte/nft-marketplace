@@ -16,9 +16,9 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
-@Table(name = "nft_token_likes")
+@Table(name = "token_likes")
 @IdClass(LikeId.class)
-public class NftLike {
+public class TokenLike {
     @Id
     @Column(name = "account_id")
     private String accountId;
@@ -32,17 +32,17 @@ public class NftLike {
     @MapsId("accountId")
     private Account account;
     
-    @ManyToOne(targetEntity = NFToken.class, optional = false)
+    @ManyToOne(targetEntity = Token.class, optional = false)
     @JoinColumn(name = "token_id")
     @MapsId("tokenId")
-    private NFToken token;
+    private Token token;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, name = "created_date")
     @CreationTimestamp
     private Calendar createdDate = Calendar.getInstance();
 
-    public NftLike () {}
+    public TokenLike () {}
 
     public Account getAccount() {
         return account;
@@ -60,11 +60,11 @@ public class NftLike {
         this.accountId = accountId;
     }
 
-    public NFToken getToken() {
+    public Token getToken() {
         return token;
     }
 
-    public void setToken(NFToken token) {
+    public void setToken(Token token) {
         this.token = token;
     }
 

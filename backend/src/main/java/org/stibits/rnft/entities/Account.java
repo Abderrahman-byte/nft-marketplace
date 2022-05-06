@@ -14,11 +14,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "account")
@@ -51,16 +50,15 @@ public class Account {
     @UpdateTimestamp
     private Calendar updatedDate = Calendar.getInstance();
      
-    @OneToMany(mappedBy="owner", fetch= FetchType.LAZY, cascade = CascadeType.MERGE)
-    private List<NFToken> nfts = new ArrayList<>();
+    @Transient
+    private List<Token> nfts = new ArrayList<>();
 
     @OneToMany(mappedBy="creator", fetch= FetchType.LAZY, cascade = CascadeType.MERGE)
-    private List<NFToken> createdNfts = new ArrayList<>();
+    private List<Token> createdNfts = new ArrayList<>();
 
     @OneToMany(mappedBy="createdBy", fetch= FetchType.LAZY)
     private List<NftCollection> collections = new ArrayList<>();
     
-    @JsonManagedReference
     @OneToOne(targetEntity = Profile.class, mappedBy = "account", optional = true, cascade = CascadeType.MERGE)
     private Profile profile;
     
@@ -138,19 +136,19 @@ public class Account {
 		this.profile = profile;
 	}
 
-    public List<NFToken> getNfts() {
+    public List<Token> getNfts() {
         return nfts;
     }
 
-    public void setNfts(List<NFToken> nfts) {
+    public void setNfts(List<Token> nfts) {
         this.nfts = nfts;
     }
 
-    public List<NFToken> getCreatedNfts() {
+    public List<Token> getCreatedNfts() {
         return createdNfts;
     }
 
-    public void setCreatedNfts(List<NFToken> createdNfts) {
+    public void setCreatedNfts(List<Token> createdNfts) {
         this.createdNfts = createdNfts;
     }
 

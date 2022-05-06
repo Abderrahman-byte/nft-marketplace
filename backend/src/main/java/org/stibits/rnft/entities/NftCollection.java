@@ -42,8 +42,8 @@ public class NftCollection {
 	@CreationTimestamp
 	private Calendar createdDate = Calendar.getInstance();
 
-	@OneToMany(targetEntity = NFToken.class, mappedBy = "collection", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<NFToken> nfts = new ArrayList<>();
+	@OneToMany(targetEntity = Token.class, mappedBy = "collection", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Token> nfts = new ArrayList<>();
 
 	public NftCollection () {}
 
@@ -95,11 +95,11 @@ public class NftCollection {
 		this.name = name;
 	}
 
-	public List<NFToken> getNfts() {
+	public List<Token> getNfts() {
 		return nfts;
 	}
 	
-	public void setNfts(List<NFToken> nfts) {
+	public void setNfts(List<Token> nfts) {
 		this.nfts = nfts;
 	}
 }

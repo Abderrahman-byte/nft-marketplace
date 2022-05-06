@@ -8,35 +8,34 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+// ! Token id is a random string for now but it can be replaced by rvn asset name
+// Or adding a another field for rvn asset name may help
+
 @Entity
-@Table(name = "nft_token")
-public class NFToken {
+@Table(name = "token")
+public class Token {
 	@Id
 	private String id;
 	
 	@Column(name = "title", nullable = false, unique = true)
 	private String title;
 
-	@Column(name = "price", nullable = false)
-	private double price = 0;
-
 	@Column(name = "description")
 	private String description;
 
 	@Column(name = "preview_url", nullable = false)
 	private String previewUrl;
-
-	@Column(name = "is_for_sell", nullable = false)
-	private boolean forSell;
 
 	@Column(name = "created_date", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
@@ -47,18 +46,24 @@ public class NFToken {
 	@JoinColumn(name = "artist_id", nullable = false)
 	private Account creator;
 
-	@ManyToOne(targetEntity = Account.class, optional = false)
-	@JoinColumn(name = "owner_id", nullable = false)
+	@OneToOne(targetEntity = TokenSettings.class, optional = false, orphanRemoval = true, mappedBy = "token", cascade = CascadeType.ALL)
+	private TokenSettings settings = new TokenSettings();
+
+	// This field does not have any relation with token 
+	// but it can be deducted from transactions in case of single token,
+	// after implementing multiple tokens it must be removed or replaced by list of owners
+	@Transient
 	private Account owner;
 
 	@ManyToOne(targetEntity = NftCollection.class, optional = true)
 	@JoinColumn(name = "collection_id", nullable = true)
 	private NftCollection collection;
 
-	@OneToMany(targetEntity = NftLike.class, cascade = CascadeType.ALL, mappedBy = "token")
-	private List<NftLike> likes = new ArrayList<>();
+	@OneToMany(targetEntity = TokenLike.class, cascade = CascadeType.ALL, mappedBy = "token")
+	private List<TokenLike> likes = new ArrayList<>();
 
-	public NFToken() {
+	public Token() {
+		this.settings.setToken(this);
 	}
 
 	public Calendar getCreatedDate() {
@@ -83,6 +88,7 @@ public class NFToken {
 
 	public void setId(String id) {
 		this.id = id;
+		this.settings.setTokenId(id);
 	}
 
 	public String getTitle() {
@@ -93,28 +99,12 @@ public class NFToken {
 		this.title = title;
 	}
 
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
 	public NftCollection getCollection() {
 		return collection;
 	}
 
 	public void setCollection(NftCollection collection) {
 		this.collection = collection;
-	}
-
-	public boolean isForSell() {
-		return forSell;
-	}
-
-	public void setForSell(boolean forSell) {
-		this.forSell = forSell;
 	}
 
 	public Account getCreator() {
@@ -141,11 +131,19 @@ public class NFToken {
 		this.previewUrl = previewUrl;
 	}
 
-	public List<NftLike> getLikes() {
+	public List<TokenLike> getLikes() {
 		return likes;
 	}
 
-	public void setLikes(List<NftLike> likes) {
+	public void setLikes(List<TokenLike> likes) {
 		this.likes = likes;
+	}
+
+	public TokenSettings getSettings() {
+		return settings;
+	}
+
+	public void setSettings(TokenSettings settings) {
+		this.settings = settings;
 	}
 }

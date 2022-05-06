@@ -6,12 +6,10 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 
-// TODO : refactor
-
 @Component("singleNftValidator")
 public class CreateSingleNFTValidator extends GenericMapValidator {
     public CreateSingleNFTValidator () {
-        this.addRequiredFields("title", "isForSell");
+        this.addRequiredFields("title", "isForSale", "instantSale");
         this.addAllowedFields("description", "price", "collectionId");
     }
 
@@ -26,21 +24,23 @@ public class CreateSingleNFTValidator extends GenericMapValidator {
         if (errors.hasErrors()) return ;
 
         this.checkStringValues(data, List.of("title", "description", "collectionId"), errors);
-        this.checkBooleanValues(data, List.of("isForSell"), errors);
+        this.checkBooleanValues(data, List.of("isForSale", "instantSale"), errors);
 
         if (errors.hasErrors()) return ;
 
-        Boolean isForSell = (Boolean)data.get("isForSell");
+        Boolean instantSale = (Boolean)data.get("instantSale");
+
+        // Check if the price is valid
         Boolean isValidPrice = data.containsKey("price") && (data.get("price").getClass().equals(Double.class) || data.get("price").getClass().equals(Integer.class));
         double price = 0;
 
-        if (isValidPrice) {
+        // Convert price from int to double
+        if (isValidPrice)
             price = data.get("price").getClass().equals(Integer.class) ? Double.valueOf((Integer)data.get("price")) : (Double)data.get("price");
-        }
 
-        if (isForSell && (!isValidPrice || price <= 0)) {
+        // If instant sale is set the price also must be set
+        if (instantSale && (!isValidPrice || price <= 0)) 
             errors.rejectValue("price", "invalidValue");
-        }
 
         data.put("price", price);
     }

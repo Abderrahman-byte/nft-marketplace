@@ -18,8 +18,6 @@ import org.springframework.http.MediaType;
 import org.springframework.validation.MapBindingResult;
 import org.springframework.web.bind.annotation.*;
 
-// TODO : refactor
-
 @RestController
 @RequestMapping("/api/${api.version}/profile")
 public class ProfileController {

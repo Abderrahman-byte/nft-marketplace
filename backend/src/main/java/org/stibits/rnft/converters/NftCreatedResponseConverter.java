@@ -6,12 +6,12 @@ import java.util.Map;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-import org.stibits.rnft.entities.NFToken;
+import org.stibits.rnft.entities.Token;
 
 @Component
-public class NftCreatedResponseConverter implements Converter<NFToken, Map<String, Object>> {
+public class NftCreatedResponseConverter implements Converter<Token, Map<String, Object>> {
     @Override
-    public Map<String, Object> convert(NFToken source) {
+    public Map<String, Object> convert(Token source) {
         Map<String, Object> response = new HashMap<>();
         Map<String, Object> data = new HashMap<>();
         
@@ -23,7 +23,7 @@ public class NftCreatedResponseConverter implements Converter<NFToken, Map<Strin
         return response;
     }
     
-    public Map<String, Object> convert (List<NFToken> source, String contentUrl) {
+    public Map<String, Object> convert (List<Token> source, String contentUrl) {
         Map<String, Object> response = new HashMap<>();
         Map<String, Object> data = new HashMap<>();
 

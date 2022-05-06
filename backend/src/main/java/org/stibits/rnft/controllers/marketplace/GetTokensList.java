@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.stibits.rnft.converters.TokenMapConverter;
 import org.stibits.rnft.entities.Account;
-import org.stibits.rnft.entities.NFToken;
+import org.stibits.rnft.entities.Token;
 import org.stibits.rnft.repositories.NFTokenDAO;
 
 // FIXME : this request take long time to respond
@@ -39,7 +39,7 @@ public class GetTokensList {
         if (!List.of("LIKES", "HIGH_PRICE", "LOW_PRICE").contains(sortBy)) sortBy = "LIKES";
 
         Map<String, Object> response = new HashMap<>();
-        List<NFToken> tokens = new ArrayList<>();
+        List<Token> tokens = new ArrayList<>();
 
         if (limit <= 0) limit = 50;
         if (offset < 0) offset = 0;

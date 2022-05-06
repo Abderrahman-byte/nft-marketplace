@@ -16,7 +16,7 @@ import org.stibits.rnft.converters.CollectionMapConverter;
 import org.stibits.rnft.converters.SimpleCollectionMapConverter;
 import org.stibits.rnft.converters.TokenMapConverter;
 import org.stibits.rnft.entities.Account;
-import org.stibits.rnft.entities.NFToken;
+import org.stibits.rnft.entities.Token;
 import org.stibits.rnft.entities.NftCollection;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.CollectionNotFound;
@@ -89,7 +89,7 @@ public class CollectionsController {
         @RequestAttribute(name = "account", required = false) Account account
     ) {
         Map<String, Object> response = new HashMap<>();
-        List<NFToken> tokens = new ArrayList<>();
+        List<Token> tokens = new ArrayList<>();
 
         if (!List.of("LIKES", "HIGH_PRICE", "LOW_PRICE").contains(sortBy)) sortBy = "LIKES";
 

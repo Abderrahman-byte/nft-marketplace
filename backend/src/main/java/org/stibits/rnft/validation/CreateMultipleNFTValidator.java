@@ -6,11 +6,14 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 
+// TODO : max quantity must be 21,000,000,000 after fully supporting multiple assets
+
 @Component("multipleNftsValidator")
 public class CreateMultipleNFTValidator extends CreateSingleNFTValidator {
-    private int maxQuantity = 10;
+    private int maxQuantity = 10 ;
 
     public CreateMultipleNFTValidator () {
+        super();
         this.addRequiredFields("quantity");
     }
 

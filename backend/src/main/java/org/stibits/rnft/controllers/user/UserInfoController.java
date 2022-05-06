@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.stibits.rnft.converters.ProfileDetailsConverter;
 import org.stibits.rnft.converters.TokenMapConverter;
 import org.stibits.rnft.entities.Account;
-import org.stibits.rnft.entities.NFToken;
+import org.stibits.rnft.entities.Token;
 import org.stibits.rnft.entities.Profile;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.NotFoundError;
@@ -63,7 +63,7 @@ public class UserInfoController {
         @RequestAttribute(name = "account", required = false) Account account
     ) {
         Map<String, Object> response = new HashMap<>();
-        List<NFToken> tokens = new ArrayList<>();
+        List<Token> tokens = new ArrayList<>();
 
         if (!List.of("CREATOR", "SALE", "OWNER", "FAVORITE").contains(role)) role = "CREATOR";
 

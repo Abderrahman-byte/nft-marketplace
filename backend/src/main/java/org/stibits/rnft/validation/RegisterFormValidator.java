@@ -16,7 +16,6 @@ public class RegisterFormValidator extends GenericMapValidator {
     Pattern passwordRegex = Pattern.compile("(?=.*[A-Z].*)(?=.*[a-z].*)(?=.*[0-9].*)(?=.{8,})");
 
     public RegisterFormValidator () {
-        // ! isArtist field may be move to update profile form
         this.addRequiredFields("username", "email", "password", "password2");
     }
 

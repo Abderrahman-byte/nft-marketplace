@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.stibits.rnft.converters.TokenMapConverter;
 import org.stibits.rnft.entities.Account;
-import org.stibits.rnft.entities.NFToken;
+import org.stibits.rnft.entities.Token;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.NotFoundError;
 import org.stibits.rnft.repositories.NFTokenDAO;
@@ -30,7 +30,7 @@ public class GetTokenDetails {
         if (tokenId == null || tokenId.equals("")) throw new NotFoundError();
 
         Map<String, Object> response = new HashMap<>();
-        NFToken token = nftokenDAO.selectToken(tokenId);
+        Token token = nftokenDAO.selectToken(tokenId);
 
         if (token == null) throw new NotFoundError();
 

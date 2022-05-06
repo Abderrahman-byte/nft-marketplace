@@ -22,7 +22,7 @@ public class CollectionMapConverter implements Converter<NftCollection, Map<Stri
         Map<String, Object> data = this.convertSimple(source);
 
         data.put("itemsCount", source.getNfts().size());
-        data.put("totalPrice", source.getNfts().stream().reduce(0.0, (subtotal, token) -> subtotal + token.getPrice(), Double::sum));
+        data.put("totalPrice", source.getNfts().stream().reduce(0.0, (subtotal, token) -> subtotal + token.getSettings().getPrice(), Double::sum));
 
         if (source.getCreatedBy().getProfile() != null) {
             data.put("creator", profileDetailsConverter.convert(source.getCreatedBy().getProfile()));

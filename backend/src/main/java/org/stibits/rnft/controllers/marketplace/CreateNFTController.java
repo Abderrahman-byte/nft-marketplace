@@ -15,7 +15,7 @@ import org.stibits.rnft.errors.UnknownError;
 import org.stibits.rnft.helpers.StorageService;
 import org.stibits.rnft.converters.NftCreatedResponseConverter;
 import org.stibits.rnft.entities.Account;
-import org.stibits.rnft.entities.NFToken;
+import org.stibits.rnft.entities.Token;
 import org.stibits.rnft.entities.NftCollection;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.CollectionNotFound;
@@ -89,7 +89,7 @@ public class CreateNFTController {
 
     public Map<String, Object> createMultipleNFT(Map<String, Object> metadata, String contentUrl, Account account, NftCollection collection) throws ApiError {
         try {
-            List<NFToken> nfts = nftokenDAO.insertMultipleNFT(account, collection, metadata, contentUrl);
+            List<Token> nfts = nftokenDAO.insertMultipleNFT(account, collection, metadata, contentUrl);
             return responseConverter.convert(nfts, contentUrl);
         } catch (Exception ex) {
             System.out.println("[" + ex.getClass().getName() + "] " + ex.getMessage());
@@ -99,7 +99,7 @@ public class CreateNFTController {
 
     public Map<String, Object> createSingleNFT(Map<String, Object> metadata, String contentUrl, Account account, NftCollection collection) throws ApiError {
         try {
-            NFToken nft = nftokenDAO.insertNFT(account, collection, metadata, contentUrl);
+            Token nft = nftokenDAO.insertNFT(account, collection, metadata, contentUrl);
             return responseConverter.convert(nft);
         } catch (DataIntegrityViolationException ex) {
             throw new DataIntegrityError("Item with the same title already exists", "title");
