@@ -54,7 +54,7 @@ const UploadFileInput = ({fileInputCallback}) => {
 
             <input onChange={fileInputChanged} ref={inputRef} type='file' name='item' />
 
-            <button onDrag={dragCallback} onDrop={dropCallback} onClick={btnClickedCallback} className='upload-btn'>
+            <button type='button' onDrag={dragCallback} onDrop={dropCallback} onClick={btnClickedCallback} className='upload-btn'>
                 <i className='upload-icon'></i>
                 <p>PNG, GIF, WEBP, MP4 or MP3, Max 1Gb.</p>
             </button>

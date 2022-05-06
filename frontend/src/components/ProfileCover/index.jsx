@@ -7,8 +7,6 @@ import LoadingCard from '../LoadingCard'
 
 import './styles.css'
 
-// TODO : check if user is in his profile 
-
 const ProfileCover = ({ allowUpdate = false, profile }) => {
     const [coverUrl, setCoverUrl] = useState(profile?.cover)
     const { openModel, closeModel, setProfileData } = useContext(AuthContext)
@@ -25,14 +23,13 @@ const ProfileCover = ({ allowUpdate = false, profile }) => {
         openModel(<LoadingCard />)
 
         const [saved] = await saveProfilePicture(files[0], 'cover')
-
-        const fileReader = new FileReader()
-        fileReader.onload = e => {
-            setProfileData({ ...profile, cover: e.target.result})
-            setCoverUrl(e.target.result)
-        }
         
-        if (saved) fileReader.readAsDataURL(files[0])
+        if (saved) {
+            const fileUrl = URL.createObjectURL(files[0])
+            
+            setProfileData({ ...profile, cover: fileUrl})
+            setCoverUrl(fileUrl)    
+        }
 
         closeModel()
     }

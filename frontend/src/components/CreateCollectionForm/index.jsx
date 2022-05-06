@@ -29,11 +29,9 @@ const CreateCollectionForm = ({ defaultData, defaultErrors, onSubmitCallback, de
 
         if (!files || files.length <= 0) return
 
-        const fileReader = new FileReader()
+        const fileUrl = URL.createObjectURL(files[0])
 
-        fileReader.onload = e => setImage(e.target.result)
-
-        fileReader.readAsDataURL(files[0])
+        setImage(fileUrl)
     }
 
     const submitCallback = (e) => {

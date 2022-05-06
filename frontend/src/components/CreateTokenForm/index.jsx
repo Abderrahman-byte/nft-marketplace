@@ -13,17 +13,16 @@ import './styles.css'
 const CreateTokenForm = ({ onUpdateCallback, onSubmitCallback }) => {
     const [itemFile, setItemFile] = useState(null)
     const [instantSale, setInstantSale] = useState(false)
+    const [isForSale, setForSale] = useState(false)
     const [price, setPrice] = useState(0)
     const [selectedCollection, setSelectedCollection] = useState(null)
 
     useEffect(() => {
         if (!itemFile) return
-        
-        const fileReader = new FileReader()
 
-        fileReader.onload = e => onUpdateCallback({ previewUrl: e.target.result })
+        const fileUrl = URL.createObjectURL(itemFile)
 
-        fileReader.readAsDataURL(itemFile)
+        onUpdateCallback({ previewUrl: fileUrl })
     }, [itemFile])
 
     useEffect(() => {
@@ -50,15 +49,21 @@ const CreateTokenForm = ({ onUpdateCallback, onSubmitCallback }) => {
         const metadata = {
             title: elements['item-title'].value,
             description: elements['description'].value,
-            isForSell: instantSale
+            isForSale: isForSale
         }
 
-        if (instantSale) metadata.price = Number.parseFloat(price)
+        if (instantSale && Number.parseFloat(price) > 0) {
+            metadata.price = Number.parseFloat(price)
+        }
+
+        metadata.instantSale = instantSale && Number.parseFloat(price) > 0
 
         if (selectedCollection && selectedCollection?.id) metadata.collectionId = selectedCollection.id
 
         if (itemFile && metadata.title !== '' && (!instantSale || metadata?.price > 0))
             onSubmitCallback(itemFile, metadata)
+
+        console.log(Date.now(), metadata)
     }
 
     return (
@@ -70,7 +75,7 @@ const CreateTokenForm = ({ onUpdateCallback, onSubmitCallback }) => {
             <hr className='horizontal-divider' />
 
             <div className='form-div settings'>
-                <CheckboxSettingsItem defaultValue name='for-sell' subtitle='You’ll receive bids on this item' title='Put on sale' />
+                <CheckboxSettingsItem onChange={e => setForSale(e.target.checked)} defaultValue={isForSale} name='for-sell' subtitle='You’ll receive bids on this item' title='Put on sale' />
                 <CheckboxSettingsItem onChange={e => setInstantSale(e.target.checked)} defaultValue={instantSale} name='instant-sell' subtitle='Enter the price for which the item will be instantly sold' title='Instant sale price' />
 
                 {instantSale ? (

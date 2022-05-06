@@ -12,9 +12,9 @@ const ProfilePhotoInput = ({ image, setimage }) => {
 
 		if (files.length <= 0) return
 
-		const fileReader = new FileReader()
-		fileReader.onload = (e) => setimage({ url: e.target.result, file: files[0], saved: false})
-		fileReader.readAsDataURL(files[0])
+		const fileUrl = URL.createObjectURL(files[0])
+
+		setimage({ url: fileUrl, file: files[0], saved: false})
 	}
 
 	return (
