@@ -9,7 +9,6 @@ import AppFooter from '@Components/AppFooter'
 import AuthenticationOnly from '@Components/AuthenticatedOnly'
 import ProfilePages from './pages/Profile.pages'
 import DetailsPage from './pages/Details.page'
-import DashboardPage from './pages/Dashboard.page'
 
 import '@Styles/App.css'
 
@@ -24,9 +23,7 @@ function App() {
 				<Route path='/profile/*' element={<AuthenticationOnly><ProfilePages /></AuthenticationOnly>} />
 				<Route path='/upload/*' element={<AuthenticationOnly><CreatePages /></AuthenticationOnly>} />
 			
-		
-				<Route path='/dashboard' element ={ <DashboardPage/>}></Route>
-=======
+
 				<Route path='/details/:id' element={<DetailsPage />} />
 
 			</Routes>
