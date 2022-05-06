@@ -352,8 +352,6 @@ width: 80px;
   align-items: center;
   gap: 12px;
   padding: 0;
-
-  
 }
 .fixed .fixed-footer span{
     font-family: Inter;
@@ -378,7 +376,6 @@ width: 80px;
     gap: 16px;
     padding: 0;
     transform: rotate(-180deg);
- 
 } 
 .fixed .highest-bid .avatar{
     width: 48px;
@@ -397,8 +394,7 @@ width: 80px;
     justify-content: flex-start;
     align-items: flex-start;
     padding: 0;
-    transform: rotate(-180deg);
-   
+    transform: rotate(-180deg); 
 }
 .fixed .highest-bid .frame-959 .row1{
     width: 215px;
@@ -409,8 +405,7 @@ width: 80px;
   justify-content: flex-start;
   align-items: flex-start;
   gap: 8px;
-  padding: 0;
-  
+  padding: 0; 
 }
 .fixed .highest-bid .frame-959 .row1 .highest{
 
@@ -450,7 +445,6 @@ width: 80px;
     align-items: flex-start;
     gap: 12px;
     padding: 0;
-
 }
 .fixed .highest-bid .frame-959 .row2 .RVN{
     
@@ -488,18 +482,58 @@ width: 80px;
   gap: 10px;
   padding: 12px;
   border-radius: 48px;
-  border: solid 2px #e6e8ec;
-
+  border: solid 2px #c7c7d6;
+  cursor: pointer;
 }
 .Icons .icon-close{
     background-color: #23262f;
+    box-shadow: 0 8px 16px -8px rgba(15, 15, 15, 0.2);
 }
 .Icons .icon:hover{
   width: 52px;
   height: 52px;
   cursor: pointer;
- 
 }
+/**buttons icon heart**/
+
+
+
+
+.Icons .icon .like-btn {
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  box-shadow: 0 8px 16px -8px rgba(15, 15, 15, 0.2);
+  background-color: #fcfcfd;
+  border: none;
+  float: right;
+  cursor: pointer;
+}
+/*.Icons .icon-heart .like-btn:hover{
+  width: 52px;
+  height: 52px;
+  cursor: pointer;
+}*/
+
+.Icons .icon-heart .like-btn .heart path {
+  transition: .4s;
+}
+
+
+
+.Icons .icon-heart .like-btn.liked {
+  display: flex !important;
+}
+
+.Icons .icon-heart .like-btn.liked .heart path {
+  fill: #ff5757;
+  fill-rule: nonzero;
+}
+
+
+
 /***Info css***/
 .Info{
   height: 150px;
@@ -511,7 +545,6 @@ width: 80px;
   align-items: stretch;
   gap: 16px;
   padding: 0;
-
 }
 .Info .devider{
   height: 1px;
@@ -541,10 +574,6 @@ width: 80px;
   align-items: center;
   gap: 16px;
   padding: 0;
-
-
-  
-  
 }
 .Info .frame-967 .frame-966 .avatar{
   width: 48px;
@@ -587,7 +616,6 @@ width: 80px;
   align-items: flex-start;
   gap: 4px;
   padding: 0;
- 
 }
 .Info .frame-967 .frame-966 .frame-965 .type{
   width: 44px;
@@ -616,5 +644,4 @@ line-height: 1.71;
 letter-spacing: normal;
 text-align: left;
 color: #23262f;
-
 }

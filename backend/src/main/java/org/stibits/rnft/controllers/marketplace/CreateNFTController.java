@@ -71,7 +71,7 @@ public class CreateNFTController {
     @Autowired
     private NftCreatedResponseConverter responseConverter;
 
-    private Pattern acceptedFiles = Pattern.compile("^(image|video|audio)+/(png|gif|webp|mp4|mp3|jpeg)+$");
+    private Pattern acceptedFiles = Pattern.compile("^(image|video|audio)+/(png|gif|webp|mp4|mp3|jpeg|svg)+$");
 
     @PostMapping
     public Map<String, Object> handlePostRequest(

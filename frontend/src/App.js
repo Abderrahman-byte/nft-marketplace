@@ -29,6 +29,7 @@ function App() {
 				<Route path='/upload/*' element={<AuthenticationOnly><CreatePages /></AuthenticationOnly>} />
 				<Route path='/user/:id/*' element={<UserProfilePage />} />
 				<Route path='/details/:id' element={<DetailsPage />} />
+
 			</Routes>
 		
 			<AppFooter />

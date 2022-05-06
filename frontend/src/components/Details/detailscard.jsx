@@ -3,6 +3,7 @@ import React, {useState, useEffect} from "react";
 import './styles.css'
 import DetailNavbar from "./navbar";
 import Info from "./info";
+/*Stock ??*/
 const Detailscard = ({details, owner, creator}) => {
 
     const [next, setnext]=useState("1")
@@ -10,25 +11,21 @@ const Detailscard = ({details, owner, creator}) => {
         <div className="frame-970">
             <div className="title">
                 <span className="The-amazing-art">
-                   {details?.title}
-                   {console.log("From details card")}
-                    {console.log(owner)}
+                   {details.title}
                 </span>
                 <div className="frame-952">
                     <div className="price-rvn">
                         <span>
-                            2,500 RVN
+                        {details?.price} RVN
                         </span>
-
                     </div>
                     <div className="price-d">
                         <span>
-                        ${details?.price}
+                        $ {details?.price * 0.04178087.toFixed(2)}
                         </span>
-
                     </div>
                     <span className="stok">
-                    10 in stock
+                        10 in stock
                     </span>
                 </div>
             </div>
@@ -37,14 +34,10 @@ const Detailscard = ({details, owner, creator}) => {
              To learn more about check out unlockable
             </div>
             <div className="content">
-                 <DetailNavbar next={next} setnext={setnext}/>
-                {console.log(next)}
+                 <DetailNavbar setnext={setnext}/>        
                {next ==='1'  && <Info details={details} owner={owner} creator={creator}/>}
             </div>
-
         </div>
-
     )
-
 }
 export default Detailscard;

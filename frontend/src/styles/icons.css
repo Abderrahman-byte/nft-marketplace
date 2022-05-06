@@ -165,3 +165,9 @@
     width: 20px;
     height: 20px;
 }
+.close-icon{
+    display: block;
+    background: url('../assets/icons/icons_Close_Line\ (1).svg') no-repeat center;
+    width: 20px;
+    height: 20px;
+}
