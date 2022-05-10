@@ -46,6 +46,9 @@ public class Token {
 	@JoinColumn(name = "artist_id", nullable = false)
 	private Account creator;
 
+	@OneToMany(targetEntity = Bid.class, mappedBy = "token")
+	private List<Bid> bids = new ArrayList<>();
+
 	@OneToOne(targetEntity = TokenSettings.class, optional = false, orphanRemoval = true, mappedBy = "token", cascade = CascadeType.ALL)
 	private TokenSettings settings = new TokenSettings();
 
@@ -148,5 +151,13 @@ public class Token {
 
 	public void setSettings(TokenSettings settings) {
 		this.settings = settings;
+	}
+
+	public List<Bid> getBids() {
+		return bids;
+	}
+
+	public void setBids(List<Bid> bids) {
+		this.bids = bids;
 	}
 }

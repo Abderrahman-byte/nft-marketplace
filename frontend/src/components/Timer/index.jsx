@@ -26,8 +26,8 @@ const Timer = ({ date }) => {
 
     return (
         <div className='Timer'>
-            {Object.entries(timerData).map(entry => (
-                <div className='Timer-section'>
+            {Object.entries(timerData).map((entry, i) => (
+                <div key={i} className='Timer-section'>
                     <span className='value'>{entry[1]}</span>
                     <span className='key'>{entry[0]}</span>
                 </div>

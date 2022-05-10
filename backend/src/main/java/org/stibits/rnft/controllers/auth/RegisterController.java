@@ -21,6 +21,7 @@ import org.stibits.rnft.repositories.AccountDAO;
 import org.stibits.rnft.repositories.ProfileDAO;
 import org.stibits.rnft.validation.RegisterFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.MediaType;
@@ -47,9 +48,13 @@ public class RegisterController {
     private AccountDAO accountDAO;
 
     @Autowired
-     private MailService mailService;
+    private MailService mailService;
+
     @Autowired
     private ProfileDAO profiledao;
+
+    @Value("${jwt.secret}")
+    private String jwtSecret;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     Map<String, Object> handlePostRequest (@RequestBody Map<String, Object> data, HttpServletRequest request) throws ApiError {
@@ -95,7 +100,7 @@ public class RegisterController {
 
     private String generateToken(Account account) {
         try {
-            Algorithm algorithm = Algorithm.HMAC256("secret");
+            Algorithm algorithm = Algorithm.HMAC256(jwtSecret);
             Map<String, Object> payloadClaims = new HashMap<>();
             payloadClaims.put("accountId", account.getId());
             payloadClaims.put("email", account.getEmail());

@@ -1,12 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Timer from '../Timer'
+
+import PlaceBidBtn from '@Components/PlaceBidBtn'
+import Timer from '@Components/Timer'
 
 import './styles.css'
 
 // TODO : make profile element into its own component
 
-const MostPopularToken = ({ previewUrl, title, creator, collection }) => {
+const MostPopularToken = ({id, previewUrl, title, creator, collection, owner }) => {
     const getProfileElt = (title, img, name, to = '#') => {
         return (
             <div className='profile-elt'>
@@ -43,7 +45,7 @@ const MostPopularToken = ({ previewUrl, title, creator, collection }) => {
                 </div>
 
                 <div className='buttons'>
-                    <Link to='#' className='btn btn-blue block'>Place bid</Link>
+                    <PlaceBidBtn tokenId={id} ownerId={owner?.id || creator?.id} />
                     <Link to='#' className='btn btn-white block'>View NFT</Link>
                 </div>
             </div>

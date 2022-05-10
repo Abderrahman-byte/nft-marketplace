@@ -5,7 +5,7 @@ const apiHost = process.env.REACT_APP_API_HOST
 const apiPrefix = process.env.REACT_APP_API_PREFIX
 
 
-const buildApiUrl = (path) => {
+export const buildApiUrl = (path) => {
     try {
         const url = new URL(apiHost)
         url.pathname = buildPath(apiPrefix, path)
@@ -219,4 +219,15 @@ export const getDetailsToken = async (id) => {
     } catch{}
 
     return [false, null]
+}
+
+export const createBidStream = async (data) => {
+    try {
+        const response = await postRequest(buildApiUrl('/marketplace/bids'), JSON.stringify(data))
+
+        if (response && response.success && response.ref) return [response.ref, null]
+        else if (response && response.error) return [null, response.error]
+    } catch {}
+
+    return [null, null]
 }

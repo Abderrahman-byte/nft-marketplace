@@ -53,6 +53,12 @@ public class Account {
     @Transient
     private List<Token> nfts = new ArrayList<>();
 
+    @OneToMany(targetEntity = Bid.class, mappedBy = "to")
+    private List<Bid> receivedBids = new ArrayList<>();
+
+    @OneToMany(targetEntity = Bid.class, mappedBy = "from")
+    private List<Bid> sentBids = new ArrayList<>();
+
     @OneToMany(mappedBy="creator", fetch= FetchType.LAZY, cascade = CascadeType.MERGE)
     private List<Token> createdNfts = new ArrayList<>();
 
@@ -161,5 +167,21 @@ public class Account {
 
     public void setCollections(List<NftCollection> collections) {
         this.collections = collections;
+    }
+
+    public List<Bid> getReceivedBids() {
+        return receivedBids;
+    }
+
+    public void setReceivedBids(List<Bid> receivedBids) {
+        this.receivedBids = receivedBids;
+    }
+
+    public List<Bid> getSentBids() {
+        return sentBids;
+    }
+
+    public void setSentBids(List<Bid> sentBids) {
+        this.sentBids = sentBids;
     }
 }

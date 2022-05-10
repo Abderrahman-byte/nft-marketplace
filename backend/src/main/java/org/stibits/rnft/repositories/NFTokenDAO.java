@@ -26,6 +26,10 @@ public class NFTokenDAO {
     @Autowired
     private RandomGenerator randomGenerator;
 
+    public Token selectTokenById (String id) {
+        return this.entityManager.find(Token.class, id);
+    }
+
     @Transactional
     public List<Token> insertMultipleNFT (Account account, NftCollection collection, Map<String, Object> data, String contentUrl) {
         int quantity = (Integer)data.get("quantity");
