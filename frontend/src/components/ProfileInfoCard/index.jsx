@@ -8,7 +8,7 @@ const ProfileInfoCard = ({ profile }) => {
     
       <div className='ProfileInfoCard'>
          <img src={profile?.avatarUrl} alt={profile?.displayName} />
-         {console.log("profile info card")}
+         {console.log("profile"+profile?.avatarUrl)}
          <div className='info'>
             <h2 className='name'>{profile?.displayName || profile?.username}</h2>
             <p className='bio'>{profile?.bio}</p>

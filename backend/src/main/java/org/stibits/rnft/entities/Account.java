@@ -62,6 +62,9 @@ public class Account {
     @OneToOne(targetEntity = Profile.class, mappedBy = "account", optional = true, cascade = CascadeType.MERGE)
     private Profile profile;
     
+    @OneToMany(mappedBy ="account", fetch= FetchType.LAZY)
+    private List<Transaction> transactions ;
+    
     public Account () {}
 
     public String getId() {

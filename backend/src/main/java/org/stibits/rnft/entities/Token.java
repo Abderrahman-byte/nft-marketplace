@@ -61,6 +61,9 @@ public class Token {
 
 	@OneToMany(targetEntity = TokenLike.class, cascade = CascadeType.ALL, mappedBy = "token")
 	private List<TokenLike> likes = new ArrayList<>();
+	
+	@OneToMany(targetEntity = Transaction.class, cascade = CascadeType.ALL, mappedBy = "token")
+	private List<Transaction> transaction = new ArrayList<>();
 
 	public Token() {
 		this.settings.setToken(this);
