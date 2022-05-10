@@ -38,6 +38,7 @@ import org.stibits.rnft.validation.CreateBidValidator;
 @RestController
 @RequestMapping("/api/${api.version}/marketplace/bids")
 public class BidsController {
+	
     @Autowired
     private CreateBidValidator validator;
 
