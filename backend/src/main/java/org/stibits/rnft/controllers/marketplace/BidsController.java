@@ -28,6 +28,7 @@ import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.AuthenticationRequiredError;
 import org.stibits.rnft.errors.DataIntegrityError;
 import org.stibits.rnft.errors.TokenNotFound;
+import org.stibits.rnft.errors.UnauthorizedError;
 import org.stibits.rnft.errors.ValidationError;
 import org.stibits.rnft.executors.CreateBidSseExecutor;
 import org.stibits.rnft.repositories.BidsDAO;
@@ -59,7 +60,6 @@ public class BidsController {
 
         if (account == null) throw new AuthenticationRequiredError();
 
-        // Validate data
         validator.validate(data, errors);
 
         if (errors.hasErrors()) throw new ValidationError(errors, messageSource);
@@ -68,18 +68,16 @@ public class BidsController {
         String to = (String) data.get("to");
         Token token = this.tokenDAO.selectTokenById(tokenId);
 
-        // Check if token exists
         if (token == null) throw new TokenNotFound();
 
-        // Check if token is for sale
         if (!token.getSettings().isForSale()) throw new DataIntegrityError("Token is not for sell", "tokenId");
 
-        // Check token ownership
         if (!token.getCreator().getId().equals(to)) throw new DataIntegrityError("Account does not own this token", "to");
+
+        if (account.getId().equals(to)) throw new UnauthorizedError("You cannot bid on your token");
 
         data.put("accountId", account.getId());
         
-        // send bid Reference token
         Algorithm algorithm = Algorithm.HMAC256(jwtSecret);
         String refToken = JWT.create()
             .withExpiresAt(Date.from(Instant.now().plusSeconds(60 * 5)))
@@ -93,10 +91,7 @@ public class BidsController {
     }
 
     @GetMapping
-    public SseEmitter createBid(
-            @RequestAttribute("account") Account account,
-            @RequestParam("ref") String ref) throws ApiError {
-
+    public SseEmitter createBid(@RequestAttribute("account") Account account, @RequestParam("ref") String ref) throws ApiError {
         SseEmitter emitter = new SseEmitter();
         ExecutorService sseExecutor = Executors.newSingleThreadExecutor();
         CreateBidSseExecutor executor = new CreateBidSseExecutor();

@@ -22,7 +22,6 @@ import org.stibits.rnft.repositories.BidsDAO;
 
 public class CreateBidSseExecutor implements Runnable {
     private static ObjectMapper objectMapper = new ObjectMapper();
-    // private final String defaultError = "{\"title\":\"unknown_error\",\"status\":400}";
 
     private SseEmitter emitter;
     private String jwtSecret;
