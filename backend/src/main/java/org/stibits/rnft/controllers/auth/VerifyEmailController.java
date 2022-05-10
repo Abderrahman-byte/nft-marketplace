@@ -10,6 +10,7 @@ import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,9 @@ import org.stibits.rnft.repositories.AccountDAO;
 public class VerifyEmailController {
     @Autowired
     private AccountDAO accountDAO;
+
+    @Value("${jwt.secret}")
+    private String jwtSecret;
 
     @GetMapping
     String handleGetRequest (@ModelAttribute("payload") Map<String, Claim> payload) {
@@ -47,7 +51,7 @@ public class VerifyEmailController {
             return ;
         }
 
-        Algorithm algorithm = Algorithm.HMAC256("secret");
+        Algorithm algorithm = Algorithm.HMAC256(jwtSecret);
         JWTVerifier  verifier = JWT.require(algorithm).build();
 
         try {
