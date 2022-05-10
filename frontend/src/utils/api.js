@@ -220,3 +220,13 @@ export const getDetailsToken = async (id) => {
 
     return [false, null]
 }
+
+export const createBidStream = async (data) => {
+    try {
+        const response = await postRequest(buildApiUrl('/marketplace/bids'), JSON.stringify(data))
+
+        if (response && response.success && response.ref) return response.ref
+    } catch {}
+
+    return null
+}
