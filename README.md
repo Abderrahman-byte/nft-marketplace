@@ -1,1 +1,1 @@
-# NFT Project
+# STIBITS NFT Marketplace
