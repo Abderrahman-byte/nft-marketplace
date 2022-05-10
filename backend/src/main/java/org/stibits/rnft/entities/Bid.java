@@ -43,7 +43,7 @@ public class Bid {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_date")
     @CreationTimestamp
-    private Calendar createDate = Calendar.getInstance();
+    private Calendar createdDate = Calendar.getInstance();
 
     public Bid () {}
 
@@ -56,11 +56,11 @@ public class Bid {
     }
 
     public Calendar getCreateDate() {
-        return createDate;
+        return createdDate;
     }
 
-    public void setCreateDate(Calendar createDate) {
-        this.createDate = createDate;
+    public void setCreatedDate(Calendar createdDate) {
+        this.createdDate = createdDate;
     }
 
     public Account getFrom() {
