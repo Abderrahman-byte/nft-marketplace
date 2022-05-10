@@ -1,27 +1,31 @@
-import React, { useEffect, useRef } from 'react'
+import { QRCodeSVG } from 'qrcode.react'
+import React from 'react'
 
-const QrCodeCard = ({ title, text}) => {
-    const qrCodeRef = useRef()
+import './styles.css'
 
-    useEffect(() => {
-        if (!qrCodeRef.current) return
+const QrCodeCard = ({ title, text, value, closeBtnCallback }) => {
+	return (
+		<div className='QrCodeCard card'>
+			<div className='card-header'>
+				<h2>{title}</h2>
+				<button onClick={closeBtnCallback} className='close-btn'>
+					<i className='close-icon ' />
+				</button>
+			</div>
 
-        console.log(QRCode)
+			<div className='notice'>
+				<div className='red-dot'></div>
+				<div className='notice-text'>
+					<p>Scan code with stibits wallet</p>
+					<small>{text}</small>
+				</div>
+			</div>
 
-        // const qr = new QRCode(qrCodeRef.current)
-        // qr.makeCode('Abderrahmane')
-
-    }, [qrCodeRef])
-
-    return (
-        <div className='card'>
-            <h2>{title}</h2>
-            <p>Scan code with stibits wallet</p>
-            <small>{text}</small>
-
-            <div className='qrcode-container'></div>
-        </div>
-    )
+			<div className='qrcode-container'>
+				<QRCodeSVG value={value} />
+			</div>
+		</div>
+	)
 }
 
 export default QrCodeCard
