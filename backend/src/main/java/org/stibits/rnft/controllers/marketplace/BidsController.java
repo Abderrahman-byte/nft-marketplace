@@ -91,7 +91,7 @@ public class BidsController {
     }
 
     @GetMapping
-    public SseEmitter createBid(@RequestAttribute("account") Account account, @RequestParam("ref") String ref) throws ApiError {
+    public SseEmitter createBid(@RequestAttribute(name = "account", required = false) Account account, @RequestParam("ref") String ref) throws ApiError {
         SseEmitter emitter = new SseEmitter();
         ExecutorService sseExecutor = Executors.newSingleThreadExecutor();
         CreateBidSseExecutor executor = new CreateBidSseExecutor();

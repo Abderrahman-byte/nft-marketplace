@@ -93,7 +93,7 @@ public class CreateBidSseExecutor implements Runnable {
         this.emitter.send(SseEmitter.event().name("qr").data(qrCode));
 
         // Wait untill the user accept the bid through qr code scanning
-        Thread.sleep(2000);
+        Thread.sleep(5000);
 
         try {
             this.bidsDAO.insertBid(account, toId, tokenId, price);
