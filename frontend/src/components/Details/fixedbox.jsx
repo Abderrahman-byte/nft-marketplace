@@ -1,9 +1,10 @@
 import React from "react";
 
 import'./styles.css'
+import PurchaseNowBtn from "../PurchaseNowBtn";
 
 
-const FixedBox =()=>{
+const FixedBox =({details, owner,creator})=>{
  
 
 
@@ -38,9 +39,8 @@ const FixedBox =()=>{
             </div>
 
             <div className="buttons">
-              <button className="btn btn-blue">
-                      <label className="left" > Purchase now</label>
-              </button>
+
+              <PurchaseNowBtn tokenId = {details?.id} accountFrom ={owner?.id} creator={creator} />
               <button className="btn btn-white">
                   <label className="right">Place a bid </label>
 

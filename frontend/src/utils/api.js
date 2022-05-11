@@ -231,3 +231,17 @@ export const createBidStream = async (data) => {
 
     return [null, null]
 }
+export const createTransaction = async(data) =>{
+
+    try{
+        const response = await postRequest(buildApiUrl('/marketplace/buy'), JSON.stringify(data))
+
+        console.log(response.error)
+        if(response && response.success && response.ref) return [response.ref, null]
+
+        else if (response && response.error) return [null, response.error]
+       
+    }catch{}
+    return [null, null]
+}  
+
