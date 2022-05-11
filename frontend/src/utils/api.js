@@ -42,9 +42,7 @@ export const isUserLoggedIn = async () => {
         const response = await getRequest(buildApiUrl('/auth/isLoggedIn'))
 
         if (response && response.isLoggedIn) return true
-    } catch (err) {
-        console.log("[ERROR] " + err)
-    }
+    } catch {}
 
     return false
 }
@@ -236,12 +234,9 @@ export const createTransaction = async(data) =>{
     try{
         const response = await postRequest(buildApiUrl('/marketplace/buy'), JSON.stringify(data))
 
-        console.log(response.error)
         if(response && response.success && response.ref) return [response.ref, null]
-
         else if (response && response.error) return [null, response.error]
-       
-    }catch{}
+    } catch {}
     return [null, null]
 }  
 
