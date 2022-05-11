@@ -160,4 +160,12 @@ public class Token {
 	public void setBids(List<Bid> bids) {
 		this.bids = bids;
 	}
+
+	public List<Transaction> getTransaction() {
+		return transaction;
+	}
+
+	public void setTransaction(List<Transaction> transaction) {
+		this.transaction = transaction;
+	}
 }

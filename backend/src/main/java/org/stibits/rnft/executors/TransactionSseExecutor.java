@@ -100,7 +100,13 @@ public class TransactionSseExecutor implements Runnable {
 	        
 	        Thread.sleep(5000);
 
-	        this.transDAO.insertTransaction(tokenId, fromId, accountId, price);
+			try {
+				this.transDAO.insertTransaction(tokenId, fromId, accountId, price);
+			} catch (ApiError ex) {
+				this.sendAndComplete(this.makeErrorEvent(ex));
+	            return ;
+			}
+
 
 	        this.emitter.send(SseEmitter.event().name("accepted").data(""));
 	        this.emitter.complete();

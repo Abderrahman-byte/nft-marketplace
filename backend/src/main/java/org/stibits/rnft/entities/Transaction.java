@@ -3,38 +3,36 @@ package org.stibits.rnft.entities;
 import java.io.Serializable;
 import java.util.Calendar;
 
-import javax.persistence.*;
+import javax.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "transactions")
-@IdClass(TransactionId.class)
 public class Transaction implements Serializable {
-    
 	@Id
-	@Column(name="from_account",nullable = false)
-	private String accountFrom;
+	private String id;
 	
-	@Id
-	@Column(name="to_account",nullable = false)
-	private String accountTo;
+	@ManyToOne(targetEntity = Token.class, optional = false)
+	@JoinColumn(name = "from_account")
+	private Account from;
 	
-	@Id
-	@Column(name="token_id", nullable = false)
-	private String tokenId;
-	
-	@ManyToOne(targetEntity = Account.class, optional = false)
+	@ManyToOne(targetEntity = Token.class, optional = false)
 	@JoinColumn(name = "to_account")
-	@MapsId("accountTo")
-	private Account account;
+	private Account to;
 	
 	@ManyToOne(targetEntity = Token.class, optional = false)
 	@JoinColumn(name="token_id")
-	@MapsId("tokenId")
 	private Token token;
 	
-	@Column(name="price")
+	@Column(name="price", nullable = false)
 	private double price;
 	
 	@Temporal(TemporalType.TIMESTAMP)
@@ -42,39 +40,38 @@ public class Transaction implements Serializable {
     @CreationTimestamp
 	private Calendar createdDate = Calendar.getInstance();
 	
-	public Transaction() {
-		
-	}
-	public String getAccountFrom() {
-		return accountFrom;
-	}
-	public void setAccountFrom(String accountFrom) {
-		this.accountFrom = accountFrom;
-	}
-	public String getAccountTo() {
-		return accountTo;
-	}
-	public void setAccountTo(String accountTo) {
-		this.accountTo = accountTo;
-	}
-	public String getTokenid() {
-		return tokenId;
+	public Transaction() {}
+
+	public String getId() {
+		return id;
 	}
 
-	public void setTokenid(String tokenid) {
-		this.tokenId = tokenid;
+	public void setId(String id) {
+		this.id = id;
 	}
-	public Account getAccount() {
-		return account;
+
+	public Account getTo() {
+		return to;
 	}
-	public void setAccount(Account account) {
-		this.account = account;
+
+	public void setTo(Account to) {
+		this.to = to;
 	}
-	public Token getToken() {
-		return token;
+
+	public Account getFrom() {
+		return from;
 	}
-	public void setToken(Token token) {
-		this.token = token;
+
+	public void setFrom(Account from) {
+		this.from = from;
+	}
+
+	public Calendar getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Calendar createdDate) {
+		this.createdDate = createdDate;
 	}
 
 	public double getPrice() {
@@ -85,12 +82,11 @@ public class Transaction implements Serializable {
 		this.price = price;
 	}
 
-	public Calendar getCreatedDate() {
-		return createdDate;
+	public Token getToken() {
+		return token;
 	}
 
-	public void setCreatedDate(Calendar createdDate) {
-		this.createdDate = createdDate;
+	public void setToken(Token token) {
+		this.token = token;
 	}
-	
 }

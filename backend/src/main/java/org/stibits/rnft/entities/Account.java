@@ -68,8 +68,11 @@ public class Account {
     @OneToOne(targetEntity = Profile.class, mappedBy = "account", optional = true, cascade = CascadeType.MERGE)
     private Profile profile;
     
-    @OneToMany(mappedBy ="account", fetch= FetchType.LAZY)
-    private List<Transaction> transactions ;
+    @OneToMany(targetEntity = Transaction.class, mappedBy ="from", fetch= FetchType.LAZY)
+    private List<Transaction> transactionsFrom ;
+
+    @OneToMany(targetEntity = Transaction.class, mappedBy ="to", fetch= FetchType.LAZY)
+    private List<Transaction> transactionsTo ;
     
     public Account () {}
 
@@ -183,5 +186,13 @@ public class Account {
 
     public void setSentBids(List<Bid> sentBids) {
         this.sentBids = sentBids;
+    }
+
+    public List<Transaction> getTransactionsFrom() {
+        return transactionsFrom;
+    }
+
+    public List<Transaction> getTransactionsTo() {
+        return transactionsTo;
     }
 }

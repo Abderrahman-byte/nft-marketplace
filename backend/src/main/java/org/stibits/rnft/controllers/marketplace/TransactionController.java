@@ -7,12 +7,9 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import javax.swing.event.TreeExpansionEvent;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.validation.MapBindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,8 +23,6 @@ import org.stibits.rnft.entities.Account;
 import org.stibits.rnft.entities.Token;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.AuthenticationRequiredError;
-import org.stibits.rnft.errors.DataIntegrityError;
-import org.stibits.rnft.errors.NotFoundError;
 import org.stibits.rnft.errors.TokenNotFound;
 import org.stibits.rnft.errors.UnauthorizedError;
 import org.stibits.rnft.errors.ValidationError;
