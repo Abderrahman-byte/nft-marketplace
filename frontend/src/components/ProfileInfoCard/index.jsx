@@ -1,14 +1,16 @@
+import { formatDate } from '@/utils/generic'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
 import './styles.css'
 
 const ProfileInfoCard = ({ profile }) => {
+
+   console.log(profile)
 	return (
     
       <div className='ProfileInfoCard'>
          <img src={profile?.avatarUrl} alt={profile?.displayName} />
-         {console.log("profile"+profile?.avatarUrl)}
          <div className='info'>
             <h2 className='name'>{profile?.displayName || profile?.username}</h2>
             <p className='bio'>{profile?.bio}</p>
@@ -31,7 +33,7 @@ const ProfileInfoCard = ({ profile }) => {
 
          <div className='horizontal-divider' />
 
-         <p className='card-footer'>Member since Mar 15, 2021</p>
+         <p className='card-footer'>Member since {formatDate(profile?.createdDate)}</p>
       </div>
    )
 }
