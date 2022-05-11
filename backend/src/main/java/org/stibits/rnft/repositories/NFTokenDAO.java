@@ -91,6 +91,31 @@ public class NFTokenDAO {
         return entityManager.merge(nft);
     }
 
+    @SuppressWarnings("unchecked")
+    public List<Token> selectTokensSortedByPopularity (int limit, int offset, double maxPrice) {
+        String sqlString = "select t.id, t.title, t.artist_id, t.collection_id, t.preview_url, t.description, t.created_date, " +
+        "(select count(*) from bids where token_id = t.id and created_date >= DATE_SUB(NOW(), INTERVAL :interval DAY)) as bids_count, "+
+        "(select count(*) from token_likes where token_id = t.id and created_date >= DATE_SUB(NOW(), INTERVAL :interval DAY)) as likes_count "+
+        "from token as t "+
+        "join token_settings as settings on settings.token_id = t.id and settings.price <= :maxPrice " +
+        "order by bids_count DESC, likes_count DESC, t.created_date DESC "+
+        "LIMIT :limit OFFSET :offset";
+
+        Query query = this.entityManager.createNativeQuery(sqlString, Token.class);
+        query.setParameter("interval", 1);
+        query.setParameter("maxPrice", maxPrice);
+        query.setParameter("limit", limit);
+        query.setParameter("offset", offset);
+
+        List<Token> tokens = (List<Token>)query.getResultList();
+
+        if (tokens == null || tokens.size() <= 0) return List.of();
+
+        tokens.forEach(token -> token.setOwner(transactionDAO.getTokenOwner(token)));
+
+        return tokens;
+    }
+
     public List<Token> selectTokensSortedByLikes (int limit, int offset, double maxPrice) {
         return this.selectToken("order by likes DESC, created_date DESC", limit, offset, maxPrice);
     }

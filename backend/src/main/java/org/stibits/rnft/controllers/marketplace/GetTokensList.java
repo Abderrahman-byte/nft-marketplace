@@ -40,12 +40,12 @@ public class GetTokensList {
     @GetMapping
     public Map<String, Object> handleGetRequest (
             @RequestParam(name = "sort", required = false, defaultValue = "LIKES") String sortBy, 
-            @RequestParam(name="range", required = false, defaultValue = "100000") double maxPrice, 
+            @RequestParam(name="range", required = false, defaultValue = "100000000000") double maxPrice, 
             @RequestParam(name="limit", required = false, defaultValue = "50") int limit,
             @RequestParam(name="offset", required = false, defaultValue = "0") int offset,
             @RequestAttribute(name = "account", required = false) Account account) {
         
-        if (!List.of("LIKES", "HIGH_PRICE", "LOW_PRICE").contains(sortBy)) sortBy = "LIKES";
+        if (!List.of("LIKES", "HIGH_PRICE", "LOW_PRICE", "POPULARE").contains(sortBy)) sortBy = "LIKES";
 
         Map<String, Object> response = new HashMap<>();
         List<Token> tokens = new ArrayList<>();
@@ -55,6 +55,7 @@ public class GetTokensList {
         
         if (sortBy.equals("HIGH_PRICE")) tokens = nftokenDAO.selectTokensSortedByHighPrice(limit, offset, maxPrice);
         else if (sortBy.equals("LOW_PRICE")) tokens = nftokenDAO.selectTokensSortedByLowPrice(limit, offset, maxPrice);
+        else if (sortBy.equals("POPULARE")) tokens = nftokenDAO.selectTokensSortedByPopularity(limit, offset, maxPrice);
         else tokens = nftokenDAO.selectTokensSortedByLikes(limit, offset, maxPrice);
 
         List<Map<String, Object>> tokensData = converter.convertList(tokens, account).stream().map(data -> {

@@ -64,6 +64,8 @@ public class TransactionController {
 		Token token = tokenDao.selectTokenById(TokenId);
 
 		if (token == null) throw new TokenNotFound();
+
+		if (token.getOwner().getId().equals(account.getId())) throw new DataIntegrityError("You cannot buy your token", "tokenId");
 		
 		if (!token.getSettings().isInstantSale()) throw new DataIntegrityError("Token is not for sell", "tokenId");
 
