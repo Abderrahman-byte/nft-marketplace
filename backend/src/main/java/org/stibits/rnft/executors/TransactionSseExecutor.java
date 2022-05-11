@@ -62,6 +62,8 @@ public class TransactionSseExecutor extends AbstractStreamExecutor {
 
 		Thread.sleep(5000);
 
+		// TODO : reset token settings 
+
 		try {
 			this.transDAO.insertTransaction(tokenId, fromId, accountId, price);
 		} catch (ApiError ex) {

@@ -50,7 +50,8 @@ public class GetTokenDetails {
 
         Map<String, Object> data = tokenMapConverter.convert(token, account);
         Bid highestBid = bidsDAO.getTokenHighestBid(tokenId);
-        data.put("highestBid", bidMapConverter.convert(highestBid));
+
+        if (highestBid != null) data.put("highestBid", bidMapConverter.convert(highestBid));
 
         response.put("success", true);
         response.put("data", data);
