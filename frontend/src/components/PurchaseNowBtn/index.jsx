@@ -1,67 +1,81 @@
-import React, { useContext } from "react";
-import { AuthContext } from "@/context/AuthContext";
-import { buildApiUrl, createTransaction } from "@/utils/api";
-import LoadingCard from "../LoadingCard";
-import MessageCard from '../MessageCard';
-import LoginPage from "@/pages/Login.page";
-import QrCodeCard from "../QrCodeCard";
+import React, { useCallback, useContext } from 'react'
 
+import LoadingCard from '@Components/LoadingCard'
+import MessageCard from '@Components/MessageCard'
+import LoginPage from '@/pages/Login.page'
+import QrCodeCard from '@Components/QrCodeCard'
+import { AuthContext } from '@/context/AuthContext'
+import { buildApiUrl, createTransaction } from '@/utils/api'
+import { DEFAULT_ERROR } from '@/utils/generic'
 
-const PurchaseNowBtn=({tokenId, accountFrom})=>{
-//connect wallet
-const {authenticated, account, openModel, closeModel} = useContext(AuthContext)
+const PurchaseNowBtn = ({ tokenId }) => {
+	const { authenticated, account, openModel, closeModel } = useContext(AuthContext)
 
-const ShowError = (msg) =>{
- 
-    openModel(<MessageCard title='' text={msg} closeBtnCallback={closeModel} />, closeModel)
+	const ShowError = (msg) =>
+		openModel(
+			<MessageCard title='Could not buy token' text={msg} closeBtnCallback={closeModel} />,
+			closeModel
+		)
+
+	const PurchaseNowCallback = useCallback(async () => {
+		if (!authenticated || !account) return <LoginPage />
+
+		openModel(<LoadingCard />)
+
+		const [ref, error] = await createTransaction({ id: tokenId })
+
+		if (ref === null) return ShowError(error?.detail || DEFAULT_ERROR.message)
+
+		const eventSource = new EventSource(buildApiUrl('/marketplace/buy') + `?ref=${ref}`, { withCredentials: true })
+
+        const closeModelQr = () => {
+			if (eventSource.readyState !== eventSource.CLOSED) eventSource.close()
+			closeModel()
+		}
+
+		eventSource.addEventListener('qr', (event) => {
+			const data = event.data
+
+            if (data) {
+                openModel(
+                    <QrCodeCard
+                        title='Scan to confirm'
+                        text='Confirm by scanning this code'
+                        value={data}
+                        closeBtnCallback={closeModelQr}
+                    />,
+                    closeModelQr
+                )
+            } else {
+                console.log('no Data found for the qr')
+            }
+		})
+
+		eventSource.addEventListener('accepted', () => {
+			openModel(
+				<MessageCard
+					title='Success'
+					text='The transaction is done successfully'
+					closeBtnCallback={closeModel}
+				/>,
+				closeModel
+			)
+
+			if (eventSource.readyState !== eventSource.CLOSED) eventSource.close()
+		})
+
+		eventSource.addEventListener('error', (event) => {
+			const error = JSON.parse(event.data || '{}')
+
+			if (event.readyState !== event.CLOSED) event.close()
+
+			ShowError(error.detail)
+		})
+	}, [tokenId, authenticated, account])
+
+	return (
+		<button onClick={PurchaseNowCallback} className='btn btn-blue'>Purchase now</button>
+	)
 }
-const PurchaseNow = async()=>{
-    
-    const closeModelQr = ()=>{
-        if(event.readyState !== event.CLOSED) event.close()
-        closeModel()
-    }
 
-    if(!authenticated || !account ) return <LoginPage/>
-    openModel(<LoadingCard/>)
-    const[ref, error] = await createTransaction({tokenId, accountFrom})
-    if(ref === null ) return ShowError(error?.detail)
-    const event = new EventSource(buildApiUrl('/marketplace/buy') + `?ref=${ref}`, { withCredentials : true })
-
-
-    event.addEventListener('qr', (eventqr)=>{
-        const dataForqr = eventqr.data
-        dataForqr ? openModel(<QrCodeCard 
-            title='Scan to confirm' 
-            text='Confirm by scanning this code' 
-            value={dataForqr} 
-            closeBtnCallback={closeModelQr} />, closeModelQr) : console.log('no Data found for the qr');
-    })
-
-    event.addEventListener('accepted', ()=>{
-        openModel(<MessageCard title='Success' text='The transaction is done successfully' closeBtnCallback={closeModel} />, closeModel)
-
-        if(event.readyState !== event.CLOSED) event.close()
-    },[tokenId, accountFrom, authenticated, account])
-
-    event.addEventListener('error', eventqr => {
-        const error = JSON.parse(eventqr.data || '{}')
-
-        if(event.readyState !== event.CLOSED) event.close()
-
-        ShowError(error.detail)
-    })
-    
-}
-return (
-   
-    <div>
-        
-    <button onClick={PurchaseNow} className="btn btn-blue">
-                      <label className="left" > Purchase now</label>
-     </button>
-  </div>
-)
-
-}
-export default PurchaseNowBtn;
+export default PurchaseNowBtn
