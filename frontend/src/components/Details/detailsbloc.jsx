@@ -4,7 +4,7 @@ import Detailscard from "./detailscard";
 import FixedBox from "./fixedbox";
 
 import'./styles.css'
-/**fix the fixedBox */
+/**fix elements in the fixedBox */
 /*test is the token is for sell*/
 const Detailsbloc = ( {details, owner, creator, isOwner})=>{
     return(

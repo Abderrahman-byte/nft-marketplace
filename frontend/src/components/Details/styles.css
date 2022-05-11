@@ -36,7 +36,6 @@
 
 align-self: stretch;
   display: flex;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: stretch;
   gap: 96px;
@@ -44,6 +43,12 @@ align-self: stretch;
   flex-grow: 1;
   position: relative;
   border-radius: 16px;
+  object-fit: contain;
+}
+.detailsbloc .img-01 > img{
+  border-radius: 16px;
+  
+ 
 }
 .detailsbloc .img-01 .labels{
   position: absolute;
