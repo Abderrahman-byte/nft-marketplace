@@ -68,10 +68,10 @@ public class Account {
     @OneToOne(targetEntity = Profile.class, mappedBy = "account", optional = true, cascade = CascadeType.MERGE)
     private Profile profile;
     
-    @OneToMany(targetEntity = Transaction.class, mappedBy ="from", fetch= FetchType.LAZY)
+    @OneToMany(targetEntity = Transaction.class, mappedBy ="from")
     private List<Transaction> transactionsFrom ;
 
-    @OneToMany(targetEntity = Transaction.class, mappedBy ="to", fetch= FetchType.LAZY)
+    @OneToMany(targetEntity = Transaction.class, mappedBy ="to")
     private List<Transaction> transactionsTo ;
     
     public Account () {}

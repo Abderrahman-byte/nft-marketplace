@@ -33,10 +33,11 @@ public class TokenMapConverter implements Converter<Token, Map<String, Object>> 
         data.put("id", source.getId());
         data.put("title", source.getTitle());
         data.put("previewUrl", source.getPreviewUrl());
-        data.put("price", source.getSettings().getPrice());
         data.put("description", source.getDescription());
         data.put("likesCount", source.getLikes().size());
         data.put("isForSale", source.getSettings().isForSale());
+        data.put("instantSale", source.getSettings().isInstantSale());
+        data.put("price", source.getSettings().getPrice());
     
         if (source.getCollection() != null) {
             data.put("collection", collectionMapConverter.convert(source.getCollection()));

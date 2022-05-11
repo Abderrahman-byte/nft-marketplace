@@ -3,6 +3,7 @@ package org.stibits.rnft.repositories;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -74,5 +75,27 @@ public class BidsDAO {
 
 
         return (List<Bid>)query.getResultList();
+    }
+
+    public Bid getTokenHighestBid (String id) {
+        CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
+        CriteriaQuery<Bid> cq = cb.createQuery(Bid.class);
+        Root<Bid> root = cq.from(Bid.class);
+        
+        cq.select(root).where(
+            cb.equal(root.get("token").get("id"), id)
+        ).orderBy(
+            cb.desc(root.get("price"))  
+        );
+
+        Query query = this.entityManager.createQuery(cq);
+
+        query.setMaxResults(1);
+        
+        try {
+            return (Bid)query.getSingleResult();
+        } catch (NoResultException ex) {
+            return null;
+        }
     }
 }
