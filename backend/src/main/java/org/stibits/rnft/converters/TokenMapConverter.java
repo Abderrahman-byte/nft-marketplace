@@ -18,6 +18,9 @@ public class TokenMapConverter implements Converter<Token, Map<String, Object>> 
     @Autowired
     public SimpleCollectionMapConverter collectionMapConverter;
 
+    @Autowired
+    public DateTimestampConverter timestampConverter;
+
     public List<Map<String, Object>> convertList (List<Token> nfts, Account account) {
         return nfts.stream().map(nft -> this.convert(nft, account)).toList();
     }
@@ -33,10 +36,12 @@ public class TokenMapConverter implements Converter<Token, Map<String, Object>> 
         data.put("id", source.getId());
         data.put("title", source.getTitle());
         data.put("previewUrl", source.getPreviewUrl());
-        data.put("price", source.getSettings().getPrice());
         data.put("description", source.getDescription());
         data.put("likesCount", source.getLikes().size());
         data.put("isForSale", source.getSettings().isForSale());
+        data.put("instantSale", source.getSettings().isInstantSale());
+        data.put("price", source.getSettings().getPrice());
+        data.put("createdDate", timestampConverter.convert(source.getCreatedDate()));
     
         if (source.getCollection() != null) {
             data.put("collection", collectionMapConverter.convert(source.getCollection()));

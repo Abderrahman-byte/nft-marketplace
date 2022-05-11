@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
@@ -26,8 +25,15 @@ public class NFTokenDAO {
     @Autowired
     private RandomGenerator randomGenerator;
 
+    @Autowired
+    private TransactionDAO transactionDAO;
+
     public Token selectTokenById (String id) {
-        return this.entityManager.find(Token.class, id);
+        Token token = this.entityManager.find(Token.class, id);
+        
+        if (token != null) token.setOwner(transactionDAO.getTokenOwner(token));
+
+        return token;
     }
 
     @Transactional
@@ -85,6 +91,31 @@ public class NFTokenDAO {
         return entityManager.merge(nft);
     }
 
+    @SuppressWarnings("unchecked")
+    public List<Token> selectTokensSortedByPopularity (int limit, int offset, double maxPrice) {
+        String sqlString = "select t.id, t.title, t.artist_id, t.collection_id, t.preview_url, t.description, t.created_date, " +
+        "(select count(*) from bids where token_id = t.id and created_date >= DATE_SUB(NOW(), INTERVAL :interval DAY)) as bids_count, "+
+        "(select count(*) from token_likes where token_id = t.id and created_date >= DATE_SUB(NOW(), INTERVAL :interval DAY)) as likes_count "+
+        "from token as t "+
+        "join token_settings as settings on settings.token_id = t.id and settings.price <= :maxPrice " +
+        "order by bids_count DESC, likes_count DESC, t.created_date DESC "+
+        "LIMIT :limit OFFSET :offset";
+
+        Query query = this.entityManager.createNativeQuery(sqlString, Token.class);
+        query.setParameter("interval", 1);
+        query.setParameter("maxPrice", maxPrice);
+        query.setParameter("limit", limit);
+        query.setParameter("offset", offset);
+
+        List<Token> tokens = (List<Token>)query.getResultList();
+
+        if (tokens == null || tokens.size() <= 0) return List.of();
+
+        tokens.forEach(token -> token.setOwner(transactionDAO.getTokenOwner(token)));
+
+        return tokens;
+    }
+
     public List<Token> selectTokensSortedByLikes (int limit, int offset, double maxPrice) {
         return this.selectToken("order by likes DESC, created_date DESC", limit, offset, maxPrice);
     }
@@ -133,20 +164,6 @@ public class NFTokenDAO {
         return this.selectToken("order by price ASC, created_date DESC", collectionId, limit, offset, maxPrice);
     }
 
-    public Token selectToken (String id) {
-        String qlString = "Select t from Token t where id = :id or title = :id";
-        Query query = entityManager.createQuery(qlString, Token.class);
-        query.setParameter("id", id);
-
-        try {
-            Token token = (Token)query.getSingleResult();
-            token.setOwner(token.getCreator());
-            return token;
-        } catch (NoResultException ex) {
-            return null;
-        }
-    }
-
     @Transactional
     public boolean likeItem (String accountId, String tokenId) {
         String qlString = "INSERT INTO token_likes (token_id, account_id) VALUES (?, ?)";
@@ -191,7 +208,7 @@ public class NFTokenDAO {
             
         List<Token> tokenslist = (List<Token>)query.getResultList();
 
-        tokenslist.forEach(token -> token.setOwner(token.getCreator()));
+        tokenslist.forEach(token -> token.setOwner(transactionDAO.getTokenOwner(token)));
     
         return tokenslist;        
     }
@@ -208,7 +225,7 @@ public class NFTokenDAO {
             
         List<Token> tokenslist = (List<Token>)query.getResultList();
 
-        tokenslist.forEach(token -> token.setOwner(token.getCreator()));
+        tokenslist.forEach(token -> token.setOwner(transactionDAO.getTokenOwner(token)));
     
         return tokenslist;
     }
@@ -227,7 +244,7 @@ public class NFTokenDAO {
         
         List<Token> tokenslist = (List<Token>)query.getResultList();
 
-        tokenslist.forEach(token -> token.setOwner(token.getCreator()));
+        tokenslist.forEach(token -> token.setOwner(transactionDAO.getTokenOwner(token)));
     
         return tokenslist;
     }
@@ -249,7 +266,7 @@ public class NFTokenDAO {
         
         List<Token> tokenslist = (List<Token>)query.getResultList();
 
-        tokenslist.forEach(token -> token.setOwner(token.getCreator()));
+        tokenslist.forEach(token -> token.setOwner(transactionDAO.getTokenOwner(token)));
     
         return tokenslist;
     }
@@ -268,7 +285,7 @@ public class NFTokenDAO {
 
         List<Token> tokenslist = (List<Token>)query.getResultList();
 
-        tokenslist.forEach(token -> token.setOwner(token.getCreator()));
+        tokenslist.forEach(token -> token.setOwner(transactionDAO.getTokenOwner(token)));
     
         return tokenslist;
     }
@@ -287,7 +304,7 @@ public class NFTokenDAO {
 
         List<Token> tokenslist = (List<Token>)query.getResultList();
 
-        tokenslist.forEach(token -> token.setOwner(token.getCreator()));
+        tokenslist.forEach(token -> token.setOwner(transactionDAO.getTokenOwner(token)));
     
         return tokenslist;
     }

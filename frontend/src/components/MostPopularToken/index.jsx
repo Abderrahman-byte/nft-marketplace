@@ -1,14 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import PlaceBidBtn from '@Components/PlaceBidBtn'
 import Timer from '@Components/Timer'
 
 import './styles.css'
+import { convertRvnToUsd, formatMoney } from '@/utils/currency'
 
 // TODO : make profile element into its own component
 
-const MostPopularToken = ({id, previewUrl, title, creator, collection, owner }) => {
+const MostPopularToken = ({id, previewUrl, title, creator, collection, owner, highestBid }) => {
+    const [usdPrice, setUsdPrice] = useState(0)
+
+    const updateUsdPrice = async () => {
+        if (!highestBid || !highestBid?.price) return
+
+        const price = await convertRvnToUsd(highestBid?.price || 0)
+
+        setUsdPrice(price)
+    }
+
+    useEffect(() => {
+        updateUsdPrice()
+    }, [highestBid])
+
     const getProfileElt = (title, img, name, to = '#') => {
         return (
             <div className='profile-elt'>
@@ -35,18 +50,20 @@ const MostPopularToken = ({id, previewUrl, title, creator, collection, owner }) 
                         getProfileElt('Collection', collection?.imageUrl, collection?.name, `/collection/${collection?.id}`)
                     ) : null}
                 </div>
-
-                <div className='bid-panel'>
-                    <h6>Current Bid</h6>
-                    <span className='rvn'>10,000 RVN</span>
-                    <span className='dollar'>$3,618.36</span>
-                    <h6>Auction ending in</h6>
-                    <Timer date={new Date()} />
-                </div>
+                
+                {highestBid ? (
+                    <div className='bid-panel'>
+                        <h6>Current Bid</h6>
+                        <span className='rvn'>{formatMoney(highestBid?.price || 0)} RVN</span>
+                        <span className='dollar'>${formatMoney(usdPrice)}</span>
+                        {/* <h6>Auction ending in</h6>
+                        <Timer date={new Date()} /> */}
+                    </div>
+                ): null}
 
                 <div className='buttons'>
                     <PlaceBidBtn tokenId={id} ownerId={owner?.id || creator?.id} />
-                    <Link to='#' className='btn btn-white block'>View NFT</Link>
+                    <Link to={`/details/${id}`} className='btn btn-white block'>View NFT</Link>
                 </div>
             </div>
         </div>

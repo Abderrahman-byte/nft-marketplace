@@ -24,6 +24,7 @@
     background-position: center;
     background-size: cover;
     padding: .5em;
+    position: relative;
 }
 
 .TokenCard:hover .token-img .like-btn {
@@ -39,9 +40,24 @@
     box-shadow: 0 8px 16px -8px rgba(15, 15, 15, 0.2);
     background-color: #fcfcfd;
     border: none;
-    float: right;
     cursor: pointer;
     display: none;
+    position: absolute;
+    top: .5em;
+    right: .5em;
+}
+
+.TokenCard .token-img .purshace-tag {
+    display: block;
+    background-color: #45b26b;
+    padding: 8px 8px 6px;
+    border-radius: 4px;
+    background-color: #45b26b;
+    width: fit-content;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fcfcfd;
+    text-transform: uppercase;
 }
 
 .TokenCard .token-img .like-btn .heart path {
@@ -160,4 +176,8 @@
 
 .TokenCard .info .avatars a:nth-child(3) {
     transform: translateX(-75%);
+}
+
+.TokenCard .info .new-bid-span {
+    margin-left: auto;
 }

@@ -62,8 +62,6 @@ const CreateTokenForm = ({ onUpdateCallback, onSubmitCallback }) => {
 
         if (itemFile && metadata.title !== '' && (!instantSale || metadata?.price > 0))
             onSubmitCallback(itemFile, metadata)
-
-        console.log(Date.now(), metadata)
     }
 
     return (

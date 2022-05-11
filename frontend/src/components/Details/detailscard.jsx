@@ -3,10 +3,24 @@ import React, {useState, useEffect} from "react";
 import './styles.css'
 import DetailNavbar from "./navbar";
 import Info from "./info";
+import { convertRvnToUsd, formatMoney } from "@/utils/currency";
 /*Stock ??*/
 const Detailscard = ({details, owner, creator}) => {
-
+    const [usdPrice, setUsdPrice] = useState(0)
     const [next, setnext]=useState("1")
+
+    const updateUsdPrice = async () => {
+        const price = await convertRvnToUsd(details?.price)
+
+        if (price >= 0) setUsdPrice(price)
+    }
+
+    useEffect(() => {
+        if (!details || !details.price) return
+
+        updateUsdPrice()
+    }, [details])
+
     return (
         <div className="frame-970">
             <div className="title">
@@ -16,17 +30,15 @@ const Detailscard = ({details, owner, creator}) => {
                 <div className="frame-952">
                     <div className="price-rvn">
                         <span>
-                        {details?.price} RVN
+                        {formatMoney(details?.price || 0)} RVN
                         </span>
                     </div>
                     <div className="price-d">
                         <span>
-                        $ {details?.price * 0.04178087.toFixed(2)}
+                        ${formatMoney(usdPrice || 0)}
                         </span>
                     </div>
-                    <span className="stok">
-                        10 in stock
-                    </span>
+                    <span className="stok">10 in stock</span>
                 </div>
             </div>
             <div className="title-2">

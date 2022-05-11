@@ -33,11 +33,16 @@ import org.stibits.rnft.errors.ValidationError;
 import org.stibits.rnft.executors.CreateBidSseExecutor;
 import org.stibits.rnft.repositories.BidsDAO;
 import org.stibits.rnft.repositories.NFTokenDAO;
+import org.stibits.rnft.repositories.TransactionDAO;
 import org.stibits.rnft.validation.CreateBidValidator;
+
+// TODO : implement accept/reject offer
 
 @RestController
 @RequestMapping("/api/${api.version}/marketplace/bids")
 public class BidsController {
+    @Autowired
+    private TransactionDAO transactionDAO;
 	
     @Autowired
     private CreateBidValidator validator;
@@ -73,11 +78,12 @@ public class BidsController {
 
         if (!token.getSettings().isForSale()) throw new DataIntegrityError("Token is not for sell", "tokenId");
 
-        if (!token.getCreator().getId().equals(to)) throw new DataIntegrityError("Account does not own this token", "to");
+        if (transactionDAO.getAccountTokenBalance(token, to) <= 0) throw new DataIntegrityError("Account does not own this token", "to");
 
         if (account.getId().equals(to)) throw new UnauthorizedError("You cannot bid on your token");
 
         data.put("accountId", account.getId());
+        data.put("action", "offer");
         
         Algorithm algorithm = Algorithm.HMAC256(jwtSecret);
         String refToken = JWT.create()

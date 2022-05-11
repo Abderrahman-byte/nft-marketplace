@@ -3,6 +3,8 @@ export const DEFAULT_ERROR = {
     message: 'Something went wrong, please try again another time'
 }
 
+export const ONE_DAY = 24 * 60 * 60 * 1000
+
 export const buildPath = (...args) => {
 	return args
 		.map((part, i) => {
@@ -32,4 +34,12 @@ export const translateError = (error) => {
     }
 
     return [DEFAULT_ERROR]
+}
+
+export const formatDate = (timestamp) => {
+    console.log(timestamp)
+    const date = timestamp ? new Date(timestamp) : new Date()
+    const monthStr = date.toLocaleString('default', { month: 'long' });
+
+    return `${monthStr} ${date.getDate()}, ${date.getFullYear()}`
 }
