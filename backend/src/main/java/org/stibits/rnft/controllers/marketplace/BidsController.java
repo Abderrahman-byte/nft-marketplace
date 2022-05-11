@@ -83,6 +83,7 @@ public class BidsController {
         if (account.getId().equals(to)) throw new UnauthorizedError("You cannot bid on your token");
 
         data.put("accountId", account.getId());
+        data.put("action", "offer");
         
         Algorithm algorithm = Algorithm.HMAC256(jwtSecret);
         String refToken = JWT.create()
