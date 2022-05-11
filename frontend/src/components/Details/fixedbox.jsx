@@ -40,7 +40,7 @@ const FixedBox =({details, owner,creator})=>{
 
             <div className="buttons">
 
-              <PurchaseNowBtn tokenId = {details?.id} accountFrom ={owner?.id} creator={creator} />
+              <PurchaseNowBtn tokenId = {details?.id} />
               <button className="btn btn-white">
                   <label className="right">Place a bid </label>
 

@@ -48,8 +48,8 @@ public class TransactionController {
 	private NFTokenDAO tokenDao;
 	@Autowired
 	private CreateTransValidator validator;
-	 @Autowired
-	    private MessageSource messageSource;
+    @Autowired
+     private MessageSource messageSource;
 	
 	@Value("${jwt.secret}")
 	private String jwtSecret;
@@ -62,8 +62,6 @@ public class TransactionController {
 	        validator.validate(data, errors);
 
 	        if (errors.hasErrors()) throw new ValidationError(errors, messageSource);
-
-	        
 	        
                String TokenId = (String) data.get("tokenId");
                Token t = tokenDao.selectToken(TokenId);
