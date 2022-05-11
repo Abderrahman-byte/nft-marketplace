@@ -16,7 +16,7 @@ const MainPage = () => {
     const [childrenGap, setChildrenGap] = useState(0)
 
     const fetchData = async () => {
-        const tokens = await getTokens('LIKES', 100000, 100)
+        const tokens = await getTokens('POPULARE', 100000, 100)
         setPopularTokens(tokens)
         setTrendToken(tokens.length > 0 ? tokens[0] : null)
 
