@@ -2,12 +2,11 @@ import React from "react";
 
 import'./styles.css'
 import PurchaseNowBtn from "../PurchaseNowBtn";
+import PlaceBidBtn from "../PlaceBidBtn";
 
 
 const FixedBox =({details, owner,creator})=>{
  
-
-
     return (
         <div className="fixed">
             <div className="highest-bid">
@@ -39,12 +38,9 @@ const FixedBox =({details, owner,creator})=>{
             </div>
 
             <div className="buttons">
-
+        
               <PurchaseNowBtn tokenId = {details?.id} />
-              <button className="btn btn-white">
-                  <label className="right">Place a bid </label>
-
-              </button>
+              <PlaceBidBtn tokenId={details?.id} ownerId={owner?.id} />
             </div>
 
             <div className="fixed-footer">
