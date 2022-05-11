@@ -69,4 +69,24 @@ public class TransactionDAO {
 
 		return balance;
 	}
+
+	@Transactional
+	public Account getTokenOwner (String id) {
+		Token token = this.entityManager.find(Token.class, id);
+		
+		if (token == null) return null;
+
+		return this.getTokenOwner(token);
+	}
+
+	@Transactional
+	public Account getTokenOwner (Token token) {
+		List<Transaction> transactions = token.getTransaction().stream().sorted(
+			(a, b) -> a.getCreatedDate().compareTo(b.getCreatedDate())
+		).toList();
+
+		if (transactions.isEmpty()) return token.getCreator();
+
+		return transactions.get(transactions.size() - 1).getTo();
+	}
 }

@@ -44,7 +44,7 @@ public class GetTokenDetails {
             @RequestAttribute(name = "account", required = false) Account account) throws ApiError {
         
         Map<String, Object> response = new HashMap<>();
-        Token token = nftokenDAO.selectToken(tokenId);
+        Token token = nftokenDAO.selectTokenById(tokenId);
 
         if (token == null) throw new TokenNotFound();
 
@@ -61,7 +61,7 @@ public class GetTokenDetails {
             @RequestParam(name = "offset", defaultValue = "0") int offset) throws ApiError {
 
         Map<String, Object> response = new HashMap<>();
-        Token token = nftokenDAO.selectToken(tokenId);
+        Token token = nftokenDAO.selectTokenById(tokenId);
 
         if (token == null) throw new TokenNotFound();
 

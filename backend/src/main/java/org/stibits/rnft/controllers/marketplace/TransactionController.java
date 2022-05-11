@@ -23,8 +23,8 @@ import org.stibits.rnft.entities.Account;
 import org.stibits.rnft.entities.Token;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.AuthenticationRequiredError;
+import org.stibits.rnft.errors.DataIntegrityError;
 import org.stibits.rnft.errors.TokenNotFound;
-import org.stibits.rnft.errors.UnauthorizedError;
 import org.stibits.rnft.errors.ValidationError;
 import org.stibits.rnft.executors.TransactionSseExecutor;
 import org.stibits.rnft.repositories.NFTokenDAO;
@@ -43,56 +43,61 @@ public class TransactionController {
 	private NFTokenDAO tokenDao;
 	@Autowired
 	private CreateTransValidator validator;
-	 @Autowired
-	    private MessageSource messageSource;
-	
+	@Autowired
+	private MessageSource messageSource;
+
 	@Value("${jwt.secret}")
 	private String jwtSecret;
-	
-	 @PostMapping
-	    public Map<String, Object> handlePostRequest (@RequestBody Map<String, Object> data, @RequestAttribute("account") Account account) throws ApiError {
-	        Map<String, Object> response = new HashMap<>();
-	        MapBindingResult errors = new MapBindingResult(data, "trans");
-	        if (account == null ) throw new AuthenticationRequiredError();
-	        validator.validate(data, errors);
 
-	        if (errors.hasErrors()) throw new ValidationError(errors, messageSource);
+	@PostMapping
+	public Map<String, Object> handlePostRequest(@RequestBody Map<String, Object> data, @RequestAttribute("account") Account account) throws ApiError {
+		Map<String, Object> response = new HashMap<>();
+		MapBindingResult errors = new MapBindingResult(data, "transaction");
 
-	        
-	        
-               String TokenId = (String) data.get("tokenId");
-               Token t = tokenDao.selectToken(TokenId);
-               String From = (String) data.get("accountFrom");
-               Double price = t.getSettings().getPrice();
-               if(t == null) throw new TokenNotFound();
-               if(account.getId().equals((String) data.get("accountFrom"))) throw new UnauthorizedError("You can not buy your token");
-               
-               data.put("accountToId", account.getId());
-               data.put("price", price);
-               Algorithm algo = Algorithm.HMAC256(jwtSecret);
-               String refToken = JWT.create()
-            		   .withExpiresAt(Date.from(Instant.now().plusSeconds(60 * 5)))
-            		   .withPayload(data)
-            		   .sign(algo);
-               response.put("ref", refToken);
-               response.put("success", true);
-	        
-	        return response;
-	    }
+		if (account == null) throw new AuthenticationRequiredError();
 
-	 @GetMapping
-	 public SseEmitter createTransaction( @RequestAttribute("account") Account account, @RequestParam("ref") String ref) {
-		 SseEmitter emitter = new SseEmitter();
-		 ExecutorService sseExecutor = Executors.newSingleThreadExecutor();
-		 TransactionSseExecutor executor = new TransactionSseExecutor();
-		 executor.setAccount(account);
-		 executor.setTransDAO(transactionDAO);
-		 executor.setEmitter(emitter);
-		 executor.setJwtSecret(jwtSecret);
-		 executor.setRefToken(ref);
-		 sseExecutor.execute(executor);
-		 return emitter;
-	 }
-	 
+		validator.validate(data, errors);
 
+		if (errors.hasErrors()) throw new ValidationError(errors, messageSource);
+
+		String TokenId = (String) data.get("id");
+		Token token = tokenDao.selectTokenById(TokenId);
+
+		if (token == null) throw new TokenNotFound();
+		
+		if (!token.getSettings().isInstantSale()) throw new DataIntegrityError("Token is not for sell", "tokenId");
+
+		data.put("toId", account.getId());
+		data.put("fromId", token.getOwner().getId());
+		data.put("action", "transaction");
+		data.put("price", token.getSettings().getPrice());
+
+		Algorithm algo = Algorithm.HMAC256(jwtSecret);
+		String refToken = JWT.create()
+				.withExpiresAt(Date.from(Instant.now().plusSeconds(60 * 5)))
+				.withPayload(data)
+				.sign(algo);
+		
+		response.put("ref", refToken);
+		response.put("success", true);
+
+		return response;
+	}
+
+	@GetMapping
+	public SseEmitter createTransaction(@RequestAttribute("account") Account account, @RequestParam("ref") String ref) {
+		SseEmitter emitter = new SseEmitter();
+		ExecutorService sseExecutor = Executors.newSingleThreadExecutor();
+		TransactionSseExecutor executor = new TransactionSseExecutor();
+
+		executor.setAccount(account);
+		executor.setTransDAO(transactionDAO);
+		executor.setEmitter(emitter);
+		executor.setJwtSecret(jwtSecret);
+		executor.setRefToken(ref);
+
+		sseExecutor.execute(executor);
+
+		return emitter;
+	}
 }

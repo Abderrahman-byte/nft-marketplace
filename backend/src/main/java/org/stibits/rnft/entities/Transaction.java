@@ -20,11 +20,11 @@ public class Transaction implements Serializable {
 	@Id
 	private String id;
 	
-	@ManyToOne(targetEntity = Token.class, optional = false)
+	@ManyToOne(targetEntity = Account.class, optional = false)
 	@JoinColumn(name = "from_account")
 	private Account from;
 	
-	@ManyToOne(targetEntity = Token.class, optional = false)
+	@ManyToOne(targetEntity = Account.class, optional = false)
 	@JoinColumn(name = "to_account")
 	private Account to;
 	

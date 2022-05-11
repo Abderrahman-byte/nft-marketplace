@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -65,8 +66,8 @@ public class Token {
 	@OneToMany(targetEntity = TokenLike.class, cascade = CascadeType.ALL, mappedBy = "token")
 	private List<TokenLike> likes = new ArrayList<>();
 	
-	@OneToMany(targetEntity = Transaction.class, cascade = CascadeType.ALL, mappedBy = "token")
-	private List<Transaction> transaction = new ArrayList<>();
+	@OneToMany(targetEntity = Transaction.class, cascade = CascadeType.ALL, mappedBy = "token", fetch = FetchType.EAGER)
+	private List<Transaction> transactions = new ArrayList<>();
 
 	public Token() {
 		this.settings.setToken(this);
@@ -162,10 +163,10 @@ public class Token {
 	}
 
 	public List<Transaction> getTransaction() {
-		return transaction;
+		return transactions;
 	}
 
 	public void setTransaction(List<Transaction> transaction) {
-		this.transaction = transaction;
+		this.transactions = transaction;
 	}
 }
