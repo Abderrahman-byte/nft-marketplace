@@ -146,6 +146,7 @@ public class BidsController {
 
         if (action.equals("accept")) {
             this.transactionDAO.insertTransaction(bid.getToken(), account, bid.getFrom(), bid.getPrice());
+            this.tokenDAO.updateTokenSettings(bid.getToken(), bid.getPrice());
         }
 
         bid = this.bidsDAO.updateResponse(bid, response);

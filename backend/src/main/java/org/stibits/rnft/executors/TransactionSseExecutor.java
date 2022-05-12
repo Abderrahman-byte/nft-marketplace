@@ -9,11 +9,13 @@ import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.AuthenticationRequiredError;
 import org.stibits.rnft.errors.InvalidData;
 import org.stibits.rnft.errors.UnauthorizedError;
+import org.stibits.rnft.repositories.NFTokenDAO;
 import org.stibits.rnft.repositories.TransactionDAO;
 
 import com.auth0.jwt.interfaces.Claim;
 
 public class TransactionSseExecutor extends AbstractStreamExecutor {
+	private NFTokenDAO tokenDAO;
 	private String refToken;
 	private Account account;
 	private TransactionDAO transDAO;
@@ -28,6 +30,10 @@ public class TransactionSseExecutor extends AbstractStreamExecutor {
 
 	public void setTransDAO(TransactionDAO transDAO) {
 		this.transDAO = transDAO;
+	}
+
+	public void setTokenDAO(NFTokenDAO tokenDAO) {
+		this.tokenDAO = tokenDAO;
 	}
 
 	protected void execute() throws Exception {
@@ -62,10 +68,9 @@ public class TransactionSseExecutor extends AbstractStreamExecutor {
 
 		Thread.sleep(5000);
 
-		// TODO : reset token settings 
-
 		try {
 			this.transDAO.insertTransaction(tokenId, fromId, accountId, price);
+			this.tokenDAO.updateTokenSettings(tokenId, true, false, price);
 		} catch (ApiError ex) {
 			this.sendAndComplete(this.makeErrorEvent(ex));
 			return;

@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 
 import org.stibits.rnft.entities.Account;
 import org.stibits.rnft.entities.Token;
+import org.stibits.rnft.entities.TokenSettings;
 import org.stibits.rnft.entities.NftCollection;
 import org.stibits.rnft.utils.RandomGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,40 @@ public class NFTokenDAO {
         if (token != null) token.setOwner(transactionDAO.getTokenOwner(token));
 
         return token;
+    }
+
+    @Transactional
+    public TokenSettings updateTokenSettings (String tokenId, double price) {
+        Token token = this.entityManager.find(Token.class, tokenId);
+
+        if (token == null) return null;
+
+        return this.updateTokenSettings(token, price);
+    }
+
+    @Transactional
+    public TokenSettings updateTokenSettings (String tokenId, boolean isForSale, boolean instantSale, double price) {
+        Token token = this.entityManager.find(Token.class, tokenId);
+
+        if (token == null) return null;
+
+        return this.updateTokenSettings(token, isForSale, instantSale, price);
+    }
+
+    @Transactional
+    public TokenSettings updateTokenSettings (Token token, double price) {
+        return this.updateTokenSettings(token, true, false, price);
+    }
+
+    @Transactional
+    public TokenSettings updateTokenSettings (Token token, boolean isForSale, boolean instantSale, double price) {
+        TokenSettings settings = token.getSettings();
+
+        settings.setForSale(isForSale);
+        settings.setInstantSale(instantSale);
+        settings.setPrice(price);
+
+        return this.entityManager.merge(settings);
     }
 
     @Transactional

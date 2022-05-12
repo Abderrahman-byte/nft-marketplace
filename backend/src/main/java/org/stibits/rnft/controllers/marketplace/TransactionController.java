@@ -39,10 +39,13 @@ import com.auth0.jwt.algorithms.Algorithm;
 public class TransactionController {
 	@Autowired
 	private TransactionDAO transactionDAO;
+
 	@Autowired
 	private NFTokenDAO tokenDao;
+
 	@Autowired
 	private CreateTransValidator validator;
+
 	@Autowired
 	private MessageSource messageSource;
 
@@ -93,10 +96,11 @@ public class TransactionController {
 		TransactionSseExecutor executor = new TransactionSseExecutor();
 
 		executor.setAccount(account);
-		executor.setTransDAO(transactionDAO);
+		executor.setTransDAO(this.transactionDAO);
 		executor.setEmitter(emitter);
 		executor.setJwtSecret(jwtSecret);
 		executor.setRefToken(ref);
+		executor.setTokenDAO(this.tokenDao);
 
 		sseExecutor.execute(executor);
 
