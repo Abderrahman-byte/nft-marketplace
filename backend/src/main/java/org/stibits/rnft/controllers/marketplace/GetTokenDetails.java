@@ -15,13 +15,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.stibits.rnft.converters.BidMapConverter;
 import org.stibits.rnft.converters.TokenMapConverter;
+import org.stibits.rnft.converters.TransactionMapConverter;
 import org.stibits.rnft.entities.Account;
 import org.stibits.rnft.entities.Bid;
 import org.stibits.rnft.entities.Token;
+import org.stibits.rnft.entities.Transaction;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.TokenNotFound;
 import org.stibits.rnft.repositories.BidsDAO;
 import org.stibits.rnft.repositories.NFTokenDAO;
+import org.stibits.rnft.repositories.TransactionDAO;
 
 @RestController
 @RequestMapping("/api/${api.version}/marketplace/tokens/{id}")
@@ -36,7 +39,13 @@ public class GetTokenDetails {
     private BidsDAO bidsDAO;
 
     @Autowired
+    private TransactionDAO transactionDAO;
+
+    @Autowired
     private BidMapConverter bidMapConverter;
+
+    @Autowired
+    private TransactionMapConverter transactionConverter;
 
     @GetMapping
     public Map<String, Object> handleGetRequest(
@@ -78,6 +87,30 @@ public class GetTokenDetails {
 
         response.put("success", true);
         response.put("data", bidMapConverter.convert(bidsList));
+
+        return response;
+    }
+
+    @GetMapping("/transactions")
+    public Map<String, Object> getTransactionsList (
+        @ModelAttribute(name = "id") String tokenId,
+        @RequestParam(name = "limit", defaultValue = "10") int limit,
+        @RequestParam(name = "offset", defaultValue = "0") int offset) throws ApiError {
+
+        Map<String, Object> response = new HashMap<>();
+
+        Token token = nftokenDAO.selectTokenById(tokenId);
+
+        if (token == null) throw new TokenNotFound();
+
+        if (limit <= 0) limit = 10;
+
+        if (offset < 0) offset = 0;
+
+        List<Transaction> transactions = this.transactionDAO.selectTransactionsByTokenId(tokenId, limit, offset);
+
+        response.put("success", true);
+        response.put("data", this.transactionConverter.convert(transactions));
 
         return response;
     }
