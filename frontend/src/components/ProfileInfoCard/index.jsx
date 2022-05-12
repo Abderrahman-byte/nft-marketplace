@@ -5,10 +5,7 @@ import { Link } from 'react-router-dom'
 import './styles.css'
 
 const ProfileInfoCard = ({ profile }) => {
-
-   console.log(profile)
 	return (
-    
       <div className='ProfileInfoCard'>
          <img src={profile?.avatarUrl} alt={profile?.displayName} />
          <div className='info'>

@@ -30,7 +30,6 @@ const DetailsPage = () => {
     return (
         <div className="DetailsPage">
              <Detailsbloc details={details} owner= {owner} creator={creator} isOwner={isOwner}/> 
-             {console.log(details.liked)}
              <Icons id ={id} Like={details.liked} account ={account} />    
         </div>
     )
