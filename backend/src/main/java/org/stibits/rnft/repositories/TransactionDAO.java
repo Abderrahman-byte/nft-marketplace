@@ -4,6 +4,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +27,25 @@ public class TransactionDAO {
 
 	@PersistenceContext
 	private EntityManager entityManager;
+
+	@SuppressWarnings("unchecked")
+	public List<Transaction> selectTransactionsByTokenId (String id, int limit, int offset) {
+		CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
+		CriteriaQuery<Transaction> cq = cb.createQuery(Transaction.class);
+		Root<Transaction> root = cq.from(Transaction.class);
+
+		cq.select(root).where(
+			cb.equal(root.get("token").get("id"), id)	
+		).orderBy(
+			cb.desc(root.get("createdDate"))	
+		);
+
+		Query query = this.entityManager.createQuery(cq);
+		query.setMaxResults(limit);
+		query.setFirstResult(offset);
+
+		return (List<Transaction>)query.getResultList();
+	}
 
 	@Transactional
 	public Transaction insertTransaction(String tokenId, String accountFrom, String accountTo, double price) throws ApiError {
@@ -88,5 +111,19 @@ public class TransactionDAO {
 		if (transactions.isEmpty()) return token.getCreator();
 
 		return transactions.get(transactions.size() - 1).getTo();
+	}
+
+	public double getTransactionsSumOfAccount (String id) {
+		String sqlString = "select COALESCE(SUM(transactions.price), 0) as total " +
+		"from transactions where from_account = :id";
+
+		Query query = this.entityManager.createNativeQuery(sqlString);
+		query.setParameter("id", id);
+		
+		try {
+			return (Double)query.getSingleResult();
+		} catch (Exception ex) {
+			return 0;
+		}
 	}
 }

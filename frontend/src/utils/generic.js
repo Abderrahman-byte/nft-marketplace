@@ -1,9 +1,12 @@
+import { formatMoney } from "./currency"
+
 export const DEFAULT_ERROR = {
     field: null,
     message: 'Something went wrong, please try again another time'
 }
 
-export const ONE_DAY = 24 * 60 * 60 * 1000
+export const ONE_HOUR = 60 * 60 * 1000
+export const ONE_DAY = 24 * ONE_HOUR
 
 export const buildPath = (...args) => {
 	return args
@@ -37,9 +40,21 @@ export const translateError = (error) => {
 }
 
 export const formatDate = (timestamp) => {
-    console.log(timestamp)
     const date = timestamp ? new Date(timestamp) : new Date()
     const monthStr = date.toLocaleString('default', { month: 'long' });
 
     return `${monthStr} ${date.getDate()}, ${date.getFullYear()}`
 }
+
+export const formatBigNumberMoney = (n) => {
+    if (n >= 1000000) {
+        return (n / 1000000).toFixed(1) + 'M'
+    }
+
+    if (n >= 100000) {
+        return (n / 1000).toFixed(1) + 'k'
+    }
+
+
+    return formatMoney(n)
+}   

@@ -4,19 +4,17 @@ import { Link } from 'react-router-dom'
 import HeartIconSVG from '@/components/HeartIconSVG'
 import { deleteLikeToken, postLikeToken } from '@/utils/api'
 import { AuthContext } from '@/context/AuthContext'
-import { ONE_DAY } from '@/utils/generic'
+import { formatBigNumberMoney, ONE_DAY, ONE_HOUR } from '@/utils/generic'
 import { formatMoney } from '@/utils/currency'
 
 import './styles.css'
 
-const TokenCard = ({ id, title, price, creator, owner, collection, previewUrl, liked, createdDate, instantSale, highestBid, likable = false, link = false, style={}, ...rest }) => {
+const TokenCard = ({ id, title, price, creator, owner, collection, previewUrl, liked, createdDate, isForSale, instantSale, highestBid, likable = false, link = false, style={}, ...rest }) => {
     const { account } = useContext(AuthContext)
     const [isLiked, setLiked] = useState(liked)
     const [isLoading, setLoading] = useState(false)
 
     useEffect(() => setLiked(liked), [liked])
-
-    console.log(createdDate)
 
     const likeBtnClicked = async (e) => {
         e.preventDefault()
@@ -81,10 +79,12 @@ const TokenCard = ({ id, title, price, creator, owner, collection, previewUrl, l
 
                     <div className='info-div info-footer'>
                         {highestBid ? (
-                            <div className='flex'><i className='candle-sticks-icon'></i><span>higest bid</span><span className='bold'>{formatMoney(highestBid?.price)} RVN</span></div>
+                            <div className='flex'><i className='candle-sticks-icon'></i><span>higest bid</span><span className='bold'>{formatBigNumberMoney(highestBid?.price)} RVN</span></div>
                         ) : null}
 
-                        {Date.now() - createdDate <= ONE_DAY ? (
+                        {!isForSale ? (
+							<span className='new-bid-span'>Not for sale</span>
+                        ) : highestBid && Date.now() - highestBid.createdDate <= ONE_HOUR ? (
                             <span className='new-bid-span'>New bid 🔥</span>
                         ) : null}
                     </div>

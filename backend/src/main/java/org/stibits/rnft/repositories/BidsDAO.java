@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.stibits.rnft.entities.Account;
 import org.stibits.rnft.entities.Bid;
+import org.stibits.rnft.entities.OfferResponse;
 import org.stibits.rnft.entities.Token;
 import org.stibits.rnft.errors.AccountNotFound;
 import org.stibits.rnft.errors.NotFoundError;
@@ -45,6 +46,9 @@ public class BidsDAO {
         return bid;
     }
 
+    public Bid selectBidById (String id) {
+        return this.entityManager.find(Bid.class, id);
+    }
     
     @Transactional
     public Bid insertBid (Account from, String to, String tokenId, double price) throws NotFoundError {
@@ -75,6 +79,12 @@ public class BidsDAO {
 
 
         return (List<Bid>)query.getResultList();
+    }
+
+    @Transactional
+    public Bid updateResponse (Bid bid, OfferResponse response) {
+        bid.setResponse(response);
+        return this.entityManager.merge(bid);
     }
 
     public Bid getTokenHighestBid (String id) {

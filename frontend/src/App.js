@@ -1,5 +1,5 @@
-import React from 'react'
-import { Route, Routes } from 'react-router'
+import React, { useEffect, useState } from 'react'
+import { Route, Routes, useLocation, useParams } from 'react-router'
 
 import LoginPage from '@Pages/Login.page'
 import CreatePages from '@Pages/Upload.pages'
@@ -15,7 +15,22 @@ import DetailsPage from '@Pages/Details.page'
 
 import '@Styles/App.css'
 
-function App() {
+const App = () => {
+	const location = useLocation()
+
+	const [pathname, setPathname] = useState(() => {
+		if (location && location.pathname) return location.pathname
+		
+		return '/'
+	})	
+
+	useEffect(() => {
+		if (location && location.pathname && location.pathname !== pathname) {
+			setPathname(location.pathname)
+			window.scroll(0, 0)
+		} 	
+	}, [location])
+
 	return (
 		<div className='App'>
 			<AppHeader />

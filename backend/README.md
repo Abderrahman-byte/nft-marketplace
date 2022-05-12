@@ -9,16 +9,27 @@
      * POST /register
      * GET /isLoggedIn
      * POST/GET /logout
-   * GET /profile
+   * /profile
+     * POST .
+     * GET .
+     * POST /picture
    * /marketplace
-     * GET /user/{userId}
-     * GET /user/{userId}/tokens
      * GET /tokens
      * POST /tokens
      * GET /tokens/{tokenId}
+     * GET /tokens/{tokenId}/bids
+     * GET /tokens/{tokenId}/transactions
+     * POST /bids
+     * GET /bids?ref=<JWT> (Create Bid stream)
+     * POST /bids/{bidId}
+     * POST /buy
+     * GET /buy?ref=<JWT> (Create transaction stream)
      * GET /collections
      * POST /collections
      * GET /collections/{collectionId}
      * GET /collections/{collectionId}/items
      * POST /like
-     * DELET /like
+     * DELETE /like
+   * /user
+     * GET /{userId}
+     * GET /{userId}/tokens

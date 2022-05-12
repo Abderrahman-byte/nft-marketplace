@@ -3,6 +3,7 @@ package org.stibits.rnft.controllers.marketplace;
 import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.validation.MapBindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,10 +25,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import org.stibits.rnft.entities.Account;
+import org.stibits.rnft.entities.Bid;
+import org.stibits.rnft.entities.OfferResponse;
 import org.stibits.rnft.entities.Token;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.AuthenticationRequiredError;
 import org.stibits.rnft.errors.DataIntegrityError;
+import org.stibits.rnft.errors.InvalidData;
+import org.stibits.rnft.errors.NotFoundError;
 import org.stibits.rnft.errors.TokenNotFound;
 import org.stibits.rnft.errors.UnauthorizedError;
 import org.stibits.rnft.errors.ValidationError;
@@ -112,5 +118,40 @@ public class BidsController {
         sseExecutor.execute(executor);
 
         return emitter;
+    }
+
+    @PostMapping("/{id}")
+    public Map<String, Object> respondToOffer (@PathVariable(name = "id") String bidId, @RequestAttribute(name = "account", required = false) Account account, @RequestBody Map<String, Object> data) throws ApiError {
+        Map<String, Object> responseData = new HashMap<>();
+
+        if (account == null) throw new AuthenticationRequiredError();
+
+        if (!data.containsKey("action") || !data.get("action").getClass().equals(String.class)) throw new InvalidData();
+
+        String action = (String)data.get("action");
+
+        if (!List.of("accept", "reject").contains(action)) throw new InvalidData();
+
+        Bid bid = bidsDAO.selectBidById(bidId);
+        
+        if (bid == null) throw new NotFoundError();
+
+        Account owner = this.transactionDAO.getTokenOwner(bid.getToken());
+
+        if (!owner.getId().equals(account.getId()) || 
+            !bid.getTo().getId().equals(account.getId()) || 
+            !bid.getResponse().equals(OfferResponse.PENDING)) throw new UnauthorizedError();
+
+        OfferResponse response = action.equals("reject") ? OfferResponse.REJECTED : OfferResponse.ACCEPTED;
+
+        if (action.equals("accept")) {
+            this.transactionDAO.insertTransaction(bid.getToken(), account, bid.getFrom(), bid.getPrice());
+            this.tokenDAO.updateTokenSettings(bid.getToken(), bid.getPrice());
+        }
+
+        bid = this.bidsDAO.updateResponse(bid, response);
+        responseData.put("success", bid.getResponse().equals(response));
+
+        return responseData;
     }
 }
