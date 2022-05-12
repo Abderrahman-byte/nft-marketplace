@@ -133,6 +133,7 @@ width: 80px;
     border: solid 1px #e6e8ec;
   
 }
+/*Need to be fixed*/
 .frame-970{
     height: 448px;
   align-self: stretch;
@@ -143,7 +144,6 @@ width: 80px;
   align-items: stretch;
   gap: 40px;
   padding: 0;
-  
 }
 .frame-970 .title{
     height: 86px;
@@ -155,89 +155,48 @@ width: 80px;
   align-items: flex-start;
   gap: 8px;
   padding: 0;
- 
-  
 }
-.frame-970 .title span{
-    height: 48px;
-  align-self: stretch;
-  flex-grow: 0;
-  font-family: Inter;
+.frame-970 .title .The-amazing-art{
+  display: block;
   font-size: 40px;
   font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.2;
-  letter-spacing: -0.4px;
-  text-align: left;
-  
 }
 .frame-970 .title .frame-952{
     width: 100%;
-    height: 30px;
+    align-self: stretch;
     flex-grow: 0;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
-    gap: 8px;
-    padding: 0;
+     gap: 8px;
+     padding: 0;
+}
+
+.frame-970 .title .frame-952 .price-rvn{
+
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 4px;
+    color: #45b26b;
+    border-radius: 4px;
+   
+    white-space: nowrap;
 
 }
-.frame-970 .title .frame-952 .price-rvn{
-    width: 105px;
-  height: 30px;
-  flex-grow: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 8px 6px;
-  border-radius: 4px;
-  border: solid 2px #45b26b;
-}
-.frame-970 .title .frame-952 .price-rvn span{
-    width: 86px;
-    height: 16px;
-    flex-grow: 0;
-    font-family: Inter;
-    font-size: 16px;
-    font-weight: bold;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1;
-    letter-spacing: normal;
-    text-align: left;
-    color: #45b26b;
-}
+
 .frame-970 .title .frame-952 .price-d{
-    width: 98px;
-  height: 30px;
-  flex-grow: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 8px 6px;
-  border-radius: 4px;
-  border: solid 2px #e6e8ec;
-}
-.frame-970 .title .frame-952 .price-d span{
-    width: 82px;
-    height: 16px;
-    flex-grow: 0;
-    font-family: Inter;
+
+  display: block;
     font-size: 16px;
     font-weight: bold;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1;
-    letter-spacing: normal;
-    text-align: left;
+    border-radius: 4px;
     color: #777e90;
+ 
+    white-space: nowrap;
 }
+
 .frame-970 .title .frame-952 span{
     width: 85px;
     height: 16px;
@@ -252,6 +211,7 @@ width: 80px;
     text-align: left;
     color: #777e90;
 }
+/*************************/
 .frame-970 .title-2{
     height: 72px;
     align-self: stretch;
@@ -366,6 +326,7 @@ width: 80px;
   align-items: center;
   gap: 12px;
   padding: 0;
+  background-color: rgba(31, 47, 70, 0.12)
 }
 .fixed .fixed-footer span{
     font-family: Inter;
@@ -373,10 +334,12 @@ width: 80px;
     font-weight: 500;
     font-stretch: normal;
     font-style: normal;
+    display: inline;
     line-height: 1.71;
     letter-spacing: normal;
     text-align: left;
     color: #777e90;
+
 }
 /*Highest bit*/
 .fixed .highest-bid{
@@ -398,6 +361,11 @@ width: 80px;
   transform: rotate(-180deg);
   border-radius: 48px;
   background-color: #45b26b;
+}
+.fixed .highest-bid .avatar img{
+  width: 48px;
+  height: 48px;
+  border-radius: 48px;
 }
 .fixed .highest-bid .frame-959{
     width: 238px;
@@ -657,4 +625,17 @@ line-height: 1.71;
 letter-spacing: normal;
 text-align: left;
 color: #23262f;
+}
+.bids-scroll {
+  background-color:rgba(15, 15, 15, 0.2);
+  box-sizing: border-box;
+    direction: ltr;
+    height: auto;
+    position: relative;
+    width: 344px;
+    will-change: transform;
+    overflow: auto;
+    overflow-x: auto;
+    overflow-y: auto;
+    height: 100%;
 }

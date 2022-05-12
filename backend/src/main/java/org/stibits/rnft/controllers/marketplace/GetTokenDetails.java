@@ -1,5 +1,6 @@
 package org.stibits.rnft.controllers.marketplace;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +46,6 @@ public class GetTokenDetails {
         
         Map<String, Object> response = new HashMap<>();
         Token token = nftokenDAO.selectTokenById(tokenId);
-
         if (token == null) throw new TokenNotFound();
 
         Map<String, Object> data = tokenMapConverter.convert(token, account);

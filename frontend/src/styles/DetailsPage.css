@@ -10,3 +10,13 @@
     padding: 96px 56px 96px 160px;
    background-color: #fcfcfd;
 }
+/*add
+.DetailsPage .Container{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+}
+.DetailsPage .Container > img{
+      border-radius: 16px;
+}*/

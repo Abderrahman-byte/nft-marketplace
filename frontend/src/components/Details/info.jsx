@@ -45,6 +45,7 @@ const Info = ({ owner, creator }) => {
                 </div>
             </div>
             <div className="devider"> </div>
+            
         </div>
     )
 }

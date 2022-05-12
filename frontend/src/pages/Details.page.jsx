@@ -25,14 +25,19 @@ const DetailsPage = () => {
 
     useEffect(()=>{    
         getDetails(id);
-    },[id])
+        
+    },[id, account])
 
     return (
         <div className="DetailsPage">
+            {/* <div className="Container">
+             <img src={details?.previewUrl} alt="" />   */}
              <Detailsbloc details={details} owner= {owner} creator={creator} isOwner={isOwner}/> 
              {console.log(details.liked)}
-             <Icons id ={id} Like={details.liked} account ={account} />    
-        </div>
+             <Icons id ={id} Like={details.liked} account ={account} />  
+              
+           
+            </div> 
     )
 }
 
