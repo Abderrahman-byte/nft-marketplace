@@ -18,6 +18,7 @@
      * POST /tokens
      * GET /tokens/{tokenId}
      * GET /tokens/{tokenId}/bids
+     * GET /tokens/{tokenId}/transactions
      * POST /bids
      * GET /bids?ref=<JWT> (Create Bid stream)
      * POST /bids/{bidId}
