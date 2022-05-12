@@ -1,5 +1,6 @@
 package org.stibits.rnft.repositories;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
@@ -78,4 +79,18 @@ public class AccountDAO {
         return query.executeUpdate() > 0;
     }
 
+    @SuppressWarnings("unchecked")
+    public List<Account> getBestSellers (int limit) {
+        String sqlString = "select a.id, a.username, a.email, a.password, a.is_admin, a.is_verified, a.created_date, a.updated_date, " +
+        "COUNT(t.to_account) as transactions_count, SUM(t.price) as transactions_sum " +
+        "from account as a "+ 
+        "join transactions as t on t.from_account = a.id and t.created_date >= DATE_SUB(NOW(), INTERVAL 1 MONTH) "+
+        "group by a.id, a.username " +
+        "order by transactions_count DESC, transactions_sum DESC limit :limit";
+
+        Query query = this.entityManager.createNativeQuery(sqlString, Account.class);
+        query.setParameter("limit", limit);
+        
+        return (List<Account>)query.getResultList();
+    }
 }

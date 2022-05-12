@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,5 +89,19 @@ public class TransactionDAO {
 		if (transactions.isEmpty()) return token.getCreator();
 
 		return transactions.get(transactions.size() - 1).getTo();
+	}
+
+	public double getTransactionsSumOfAccount (String id) {
+		String sqlString = "select COALESCE(SUM(transactions.price), 0) as total " +
+		"from transactions where from_account = :id";
+
+		Query query = this.entityManager.createNativeQuery(sqlString);
+		query.setParameter("id", id);
+		
+		try {
+			return (Double)query.getSingleResult();
+		} catch (Exception ex) {
+			return 0;
+		}
 	}
 }
