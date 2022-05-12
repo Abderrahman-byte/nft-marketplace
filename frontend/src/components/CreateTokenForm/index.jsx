@@ -31,6 +31,8 @@ const CreateTokenForm = ({ onUpdateCallback, onSubmitCallback }) => {
         onUpdateCallback({ price })
     }, [price])
 
+    useEffect(() => onUpdateCallback({ isForSale, instantSale }), [isForSale, instantSale])
+
     useEffect(() => {
         if (selectedCollection) onUpdateCallback({ collection: {...selectedCollection}})
         else onUpdateCallback({ collection: null })
