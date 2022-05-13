@@ -5,6 +5,9 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
+
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.stibits.rnft.handlers.AuthenticatedOnly;
 import org.stibits.rnft.handlers.AuthenticationHandler;
@@ -30,7 +33,21 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @PropertySource("classpath:env.properties")
 public class WebConfig implements WebMvcConfigurer {
     @Autowired
-    Environment environment;
+    private Environment environment;
+
+    @Bean
+    public Connection rmqConnection () throws Exception {
+        return rmqConnectionFactory().newConnection();
+    }
+
+    @Bean
+    public ConnectionFactory rmqConnectionFactory () throws Exception {
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+
+        connectionFactory.setUri(environment.getProperty("rmq.uri"));
+
+        return connectionFactory;
+    }
 
     @Bean
     public MessageSource messageSource () {

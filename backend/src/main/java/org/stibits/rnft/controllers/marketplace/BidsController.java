@@ -37,8 +37,10 @@ import org.stibits.rnft.errors.TokenNotFound;
 import org.stibits.rnft.errors.UnauthorizedError;
 import org.stibits.rnft.errors.ValidationError;
 import org.stibits.rnft.executors.CreateBidSseExecutor;
+import org.stibits.rnft.notifications.NotificationsPublisher;
 import org.stibits.rnft.repositories.BidsDAO;
 import org.stibits.rnft.repositories.NFTokenDAO;
+import org.stibits.rnft.repositories.NotificationDAO;
 import org.stibits.rnft.repositories.TransactionDAO;
 import org.stibits.rnft.validation.CreateBidValidator;
 
@@ -61,6 +63,12 @@ public class BidsController {
 
     @Autowired
     private MessageSource messageSource;
+
+    @Autowired
+    private NotificationDAO notificationDAO;
+
+    @Autowired
+    private NotificationsPublisher notificationPublisher;
 
     @Value("${jwt.secret}")
     private String jwtSecret;
@@ -114,6 +122,8 @@ public class BidsController {
         executor.setEmitter(emitter);
         executor.setJwtSecret(jwtSecret);
         executor.setRefToken(ref);
+        executor.setNotificationDAO(notificationDAO);
+        executor.setNotificationPublisher(notificationPublisher);
 
         sseExecutor.execute(executor);
 

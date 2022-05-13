@@ -27,7 +27,9 @@ import org.stibits.rnft.errors.DataIntegrityError;
 import org.stibits.rnft.errors.TokenNotFound;
 import org.stibits.rnft.errors.ValidationError;
 import org.stibits.rnft.executors.TransactionSseExecutor;
+import org.stibits.rnft.notifications.NotificationsPublisher;
 import org.stibits.rnft.repositories.NFTokenDAO;
+import org.stibits.rnft.repositories.NotificationDAO;
 import org.stibits.rnft.repositories.TransactionDAO;
 import org.stibits.rnft.validation.CreateTransValidator;
 
@@ -48,6 +50,12 @@ public class TransactionController {
 
 	@Autowired
 	private MessageSource messageSource;
+
+	@Autowired
+	private NotificationDAO notificationDAO;
+
+	@Autowired
+	private NotificationsPublisher notificationPublisher;
 
 	@Value("${jwt.secret}")
 	private String jwtSecret;
@@ -101,6 +109,8 @@ public class TransactionController {
 		executor.setJwtSecret(jwtSecret);
 		executor.setRefToken(ref);
 		executor.setTokenDAO(this.tokenDao);
+		executor.setNotificationDAO(notificationDAO);
+		executor.setNotificationPublisher(notificationPublisher);
 
 		sseExecutor.execute(executor);
 

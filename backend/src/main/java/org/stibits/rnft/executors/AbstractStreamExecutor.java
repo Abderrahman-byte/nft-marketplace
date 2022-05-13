@@ -13,11 +13,23 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter.SseEventBuilder;
 import org.stibits.rnft.errors.ApiError;
+import org.stibits.rnft.notifications.NotificationsPublisher;
+import org.stibits.rnft.repositories.NotificationDAO;
 
 public abstract class AbstractStreamExecutor implements Runnable {
     private ObjectMapper objectMapper = new ObjectMapper();
     protected SseEmitter emitter;
     protected String jwtSecret;
+    protected NotificationDAO notificationDAO;
+    protected NotificationsPublisher notificationPublisher;
+
+    public void setNotificationDAO(NotificationDAO notificationDAO) {
+        this.notificationDAO = notificationDAO;
+    }
+
+    public void setNotificationPublisher(NotificationsPublisher notificationPublisher) {
+        this.notificationPublisher = notificationPublisher;
+    }
 
     public void setEmitter(SseEmitter emitter) {
         this.emitter = emitter;

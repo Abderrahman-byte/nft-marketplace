@@ -5,6 +5,8 @@ import java.util.Map;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import org.stibits.rnft.entities.Account;
+import org.stibits.rnft.entities.Notification;
+import org.stibits.rnft.entities.Transaction;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.AuthenticationRequiredError;
 import org.stibits.rnft.errors.InvalidData;
@@ -69,16 +71,17 @@ public class TransactionSseExecutor extends AbstractStreamExecutor {
 		Thread.sleep(5000);
 
 		try {
-			this.transDAO.insertTransaction(tokenId, fromId, accountId, price);
+			Transaction transaction = this.transDAO.insertTransaction(tokenId, fromId, accountId, price);
 			this.tokenDAO.updateTokenSettings(tokenId, true, false, price);
+			this.emitter.send(SseEmitter.event().name("accepted").data(""));
+			this.emitter.complete();
+
+			Notification notification = this.notificationDAO.insertNotification(transaction);
+			this.notificationPublisher.publish(notification);
 		} catch (ApiError ex) {
 			this.sendAndComplete(this.makeErrorEvent(ex));
 			return;
 		}
-
-		this.emitter.send(SseEmitter.event().name("accepted").data(""));
-		this.emitter.complete();
-
 	}
 
 	private boolean checkPayload(Map<String, Claim> payload) {
