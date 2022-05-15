@@ -11,7 +11,10 @@ import com.rabbitmq.client.ConnectionFactory;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.stibits.rnft.handlers.AuthenticatedOnly;
 import org.stibits.rnft.handlers.AuthenticationHandler;
+import org.stibits.rnft.handlers.WebsocketAuthentication;
+import org.stibits.rnft.websocket.NotificationsHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -27,13 +30,20 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
+import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
+import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
 @Configuration
+@EnableWebSocket
 @ComponentScan("org.stibits.rnft")
 @PropertySource("classpath:env.properties")
-public class WebConfig implements WebMvcConfigurer {
+public class WebConfig implements WebMvcConfigurer, WebSocketConfigurer {
     @Autowired
     private Environment environment;
+
+    @Value("#{'${cors.allowOrigins}'.split(',')}")
+    String corsAllowOrigins[];
 
     @Bean
     public Connection rmqConnection () throws Exception {
@@ -103,6 +113,11 @@ public class WebConfig implements WebMvcConfigurer {
         return new AuthenticationHandler();
     }
 
+    @Bean
+    public WebsocketAuthentication websocketAuthentication () {
+        return new WebsocketAuthentication();
+    }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         List<String> authenticatedOnlyPaths = List.of("/api/*/marketplace/create", "/api/*/profile", "/api/*/marketplace/like", "/api/*/user/collections");
@@ -116,9 +131,17 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
         registry.addResourceHandler("/media/**").addResourceLocations("file://" + environment.getProperty("file.uploadDir") );
     }
+
+    @Override
+    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+        registry
+            .addHandler(new NotificationsHandler(), "/notifications")
+            .setAllowedOrigins(corsAllowOrigins)
+            .addInterceptors(websocketAuthentication());
+    }
     
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/**").allowedOrigins("http://localhost:3000/").allowCredentials(true).maxAge(3600).allowedMethods("*"); 
+        registry.addMapping("/api/**").allowedOrigins(corsAllowOrigins).allowCredentials(true).maxAge(3600).allowedMethods("*"); 
     }
 }
