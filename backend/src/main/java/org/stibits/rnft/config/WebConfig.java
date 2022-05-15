@@ -109,6 +109,11 @@ public class WebConfig implements WebMvcConfigurer, WebSocketConfigurer {
     }
 
     @Bean
+    public NotificationsHandler websocketNotificationsHandler () {
+        return new NotificationsHandler();
+    }
+
+    @Bean
     public AuthenticationHandler authenticationHandler () {
         return new AuthenticationHandler();
     }
@@ -135,7 +140,7 @@ public class WebConfig implements WebMvcConfigurer, WebSocketConfigurer {
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         registry
-            .addHandler(new NotificationsHandler(), "/notifications")
+            .addHandler(websocketNotificationsHandler(), "/notifications")
             .setAllowedOrigins(corsAllowOrigins)
             .addInterceptors(websocketAuthentication());
     }
