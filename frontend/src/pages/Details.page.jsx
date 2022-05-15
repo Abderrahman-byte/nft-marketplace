@@ -1,10 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
-import '@Styles/DetailsPage.css'
-import Icons from "@/components/Details/icons";
-import Detailsbloc from "@/components/Details/detailsbloc";
-import { getDetailsToken } from "@/utils/api";
 import { useParams } from "react-router";
-import { AuthContext } from '@/context/AuthContext'
+
+import Icons from "@Components/Details/icons";
+import Detailsbloc from "@Components/Details/detailsbloc";
+import { getDetailsToken } from "@Utils/api";
+import { AuthContext } from '@Context/AuthContext'
+
+import '@Styles/DetailsPage.css'
 
 const DetailsPage = () => {
     const { id } = useParams()

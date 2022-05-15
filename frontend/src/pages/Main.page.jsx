@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 
-import Carossel from '@/components/Carossel'
-import TokenCard from '@/components/TokenCard'
-import { getCollectionsList, getTokens } from '@/utils/api'
+import Carossel from '@Components/Carossel'
+import TokenCard from '@Components/TokenCard'
+import { getCollectionsList, getTokens } from '@Utils/api'
+import CollectionCard from '@Components/CollectionCard'
+import MostPopularToken from '@Components/MostPopularToken'
 
 import '@Styles/MainPage.css'
-import CollectionCard from '@/components/CollectionCard'
-import MostPopularToken from '@/components/MostPopularToken'
 
 const MainPage = () => {
     const [popularTokens, setPopularTokens] = useState([])

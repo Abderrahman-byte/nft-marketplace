@@ -3,9 +3,9 @@ import React, { useContext, useEffect, useState } from 'react'
 import ProfilePhotoInput from './ProfilePhotoInput'
 import ProfileForm from './ProfileForm'
 
-import { saveProfilePicture, updateProfile } from '../../utils/api'
-import { AuthContext } from '@/context/AuthContext'
-import LoadingCard from '../LoadingCard'
+import { saveProfilePicture, updateProfile } from '@Utils/api'
+import { AuthContext } from '@Context/AuthContext'
+import LoadingCard from '@Components/LoadingCard'
 
 const ProfileSettings = ({ profile, setProfile }) => {
 	const [image, setimage] = useState({ url: profile?.avatarUrl, file: null, saved: true })

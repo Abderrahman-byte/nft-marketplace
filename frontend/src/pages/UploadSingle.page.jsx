@@ -2,11 +2,10 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import CreateSingleItemForm from '@Components/CreateTokenForm'
-
-import TokenCard from '@/components/TokenCard'
-import { AuthContext } from '@/context/AuthContext'
-import LoadingCard from '@/components/LoadingCard'
-import { createToken } from '@/utils/api'
+import TokenCard from '@Components/TokenCard'
+import { AuthContext } from '@Context/AuthContext'
+import LoadingCard from '@Components/LoadingCard'
+import { createToken } from '@Utils/api'
 
 import '@Styles/UploadItem.css'
 

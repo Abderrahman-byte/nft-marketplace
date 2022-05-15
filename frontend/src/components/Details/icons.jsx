@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
-import HeartIconSVG from '@/components/HeartIconSVG'
-import './styles.css'
-import { deleteLikeToken, postLikeToken } from '@/utils/api'
+import React, { useState, useEffect } from 'react'
 import {useNavigate} from 'react-router-dom'
+
+import HeartIconSVG from '@Components/HeartIconSVG'
+import { deleteLikeToken, postLikeToken } from '@Utils/api'
+
+import './styles.css'
 
 /**Fix */
 /*Share */

@@ -1,9 +1,10 @@
-import { AuthContext } from '@/context/AuthContext'
-import { createCollection, getUserCollections } from '@/utils/api'
-import { DEFAULT_ERROR, translateError } from '@/utils/generic'
 import React, { useCallback, useContext, useEffect, useState } from 'react'
-import CreateCollectionForm from '../CreateCollectionForm'
-import LoadingCard from '../LoadingCard'
+
+import { AuthContext } from '@Context/AuthContext'
+import { createCollection, getUserCollections } from '@Utils/api'
+import { DEFAULT_ERROR, translateError } from '@Utils/generic'
+import CreateCollectionForm from '@Components/CreateCollectionForm'
+import LoadingCard from '@Components/LoadingCard'
 
 const ChooseCollectionInput = ({ onSelectedCallback }) => {
 	const { openModel, closeModel } = useContext(AuthContext)

@@ -1,12 +1,12 @@
 import React, { useCallback, useContext } from 'react'
-import { AuthContext } from '@/context/AuthContext'
+import { AuthContext } from '@Context/AuthContext'
 
 import CreateBidForm from '@Components/CreateBidForm'
 import LoadingCard from '@Components/LoadingCard'
-import { buildApiUrl, createBidStream } from '@/utils/api'
+import { buildApiUrl, createBidStream } from '@Utils/api'
 import QrCodeCard from '@Components/QrCodeCard'
 import MessageCard from '../MessageCard'
-import { DEFAULT_ERROR } from '@/utils/generic'
+import { DEFAULT_ERROR } from '@Utils/generic'
 
 const PlaceBidBtn = ({ tokenId, ownerId }) => {
     const { authenticated, account, openModel, closeModel } = useContext(AuthContext)

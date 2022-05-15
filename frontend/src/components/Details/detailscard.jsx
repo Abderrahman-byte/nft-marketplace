@@ -3,7 +3,7 @@ import React, {useState, useEffect} from "react";
 import './styles.css'
 import DetailNavbar from "./navbar";
 import Info from "./info";
-import { convertRvnToUsd, formatMoney } from "@/utils/currency";
+import { convertRvnToUsd, formatMoney } from "@Utils/currency";
 /*Stock ??*/
 const Detailscard = ({details, owner, creator}) => {
     const [usdPrice, setUsdPrice] = useState(0)

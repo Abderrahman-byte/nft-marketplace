@@ -1,6 +1,7 @@
-import { formatDate } from '@/utils/generic'
 import React from 'react'
 import { Link } from 'react-router-dom'
+
+import { formatDate } from '@Utils/generic'
 
 import './styles.css'
 

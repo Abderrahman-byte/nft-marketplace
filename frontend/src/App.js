@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Route, Routes, useLocation, useParams } from 'react-router'
+import { Route, Routes, useLocation } from 'react-router'
 
 import LoginPage from '@Pages/Login.page'
 import CreatePages from '@Pages/Upload.pages'
@@ -12,9 +12,9 @@ import UserProfilePage from '@Pages/UserProfile.page'
 import DiscoverPage from '@Pages/Discover.page'
 import MainPage from '@Pages/Main.page'
 import DetailsPage from '@Pages/Details.page'
+import { NotificationsProvider } from '@Context/NotifiactionsContext'
 
 import '@Styles/App.css'
-import { NotificationsProvider } from './context/NotifiactionsContext'
 
 const App = () => {
 	const location = useLocation()

@@ -1,8 +1,8 @@
 import React, { useEffect, createContext, useState, useContext } from 'react'
 
-import { EventWebSocket } from '@/utils/EventWebSocket'
+import { EventWebSocket } from '@Utils/EventWebSocket'
 import { AuthContext } from './AuthContext'
-import { buildWebsocketApiUrl } from '@/utils/api'
+import { buildWebsocketApiUrl } from '@Utils/api'
 
 export const NotificationsContext = createContext()
 

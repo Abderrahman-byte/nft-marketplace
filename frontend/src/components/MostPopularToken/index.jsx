@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import PlaceBidBtn from '@Components/PlaceBidBtn'
-import Timer from '@Components/Timer'
+import { convertRvnToUsd, formatMoney } from '@Utils/currency'
 
 import './styles.css'
-import { convertRvnToUsd, formatMoney } from '@/utils/currency'
 
 // TODO : make profile element into its own component
 
