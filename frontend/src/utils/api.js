@@ -5,6 +5,17 @@ const apiHost = process.env.REACT_APP_API_HOST
 const apiPrefix = process.env.REACT_APP_API_PREFIX
 
 
+export const buildWebsocketApiUrl = (path) => {
+    try {
+        const uri = new URL(apiHost)
+        uri.pathname = path
+        uri.protocol = 'ws'
+        return uri.href
+    } catch {
+        return path
+    }
+}
+
 export const buildApiUrl = (path) => {
     try {
         const url = new URL(apiHost)

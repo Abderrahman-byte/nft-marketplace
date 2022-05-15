@@ -14,6 +14,7 @@ import MainPage from '@Pages/Main.page'
 import DetailsPage from '@Pages/Details.page'
 
 import '@Styles/App.css'
+import { NotificationsProvider } from './context/NotifiactionsContext'
 
 const App = () => {
 	const location = useLocation()
@@ -33,21 +34,23 @@ const App = () => {
 
 	return (
 		<div className='App'>
-			<AppHeader />
-			<Routes>
-				<Route index element={<MainPage />} />
-				<Route path='/sign-up' element={<RegisterPage />} />
-				<Route path='/sign-in' element={<LoginPage />} />
-				<Route path='/discover' element={<DiscoverPage />} />
-				
-				<Route path='/profile/*' element={<AuthenticationOnly><ProfilePages /></AuthenticationOnly>} />
-				<Route path='/upload/*' element={<AuthenticationOnly><CreatePages /></AuthenticationOnly>} />
-				<Route path='/user/:id/*' element={<UserProfilePage />} />
-				<Route path='/details/:id' element={<DetailsPage />} />
+			<NotificationsProvider>
+				<AppHeader />
+				<Routes>
+					<Route index element={<MainPage />} />
+					<Route path='/sign-up' element={<RegisterPage />} />
+					<Route path='/sign-in' element={<LoginPage />} />
+					<Route path='/discover' element={<DiscoverPage />} />
+					
+					<Route path='/profile/*' element={<AuthenticationOnly><ProfilePages /></AuthenticationOnly>} />
+					<Route path='/upload/*' element={<AuthenticationOnly><CreatePages /></AuthenticationOnly>} />
+					<Route path='/user/:id/*' element={<UserProfilePage />} />
+					<Route path='/details/:id' element={<DetailsPage />} />
 
-			</Routes>
-		
-			<AppFooter />
+				</Routes>
+			
+				<AppFooter />
+			</NotificationsProvider>
 		</div>
 	)
 }
