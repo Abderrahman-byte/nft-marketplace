@@ -1,4 +1,4 @@
-package org.stibits.rnft.executors;
+package org.stibits.rnft.streams;
 
 import java.io.IOException;
 import java.util.Map;

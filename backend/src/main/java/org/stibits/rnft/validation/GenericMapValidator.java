@@ -14,6 +14,10 @@ public abstract class GenericMapValidator extends GenericValidator {
         return clazz.equals(Map.class) || Map.class.isAssignableFrom(clazz);
     }
 
+    protected void checkEmptyBody (Map<String, Object> data, Errors errors) {
+        if (data.size() <= 0) errors.reject("emptyBody");
+    }
+
     protected void checkAllowedFields(Map<String, Object> data, Errors errors) {
         List<String> allowedFields = this.getAllowedFields();
         List<String> requiredFields = this.getRequiredFields();

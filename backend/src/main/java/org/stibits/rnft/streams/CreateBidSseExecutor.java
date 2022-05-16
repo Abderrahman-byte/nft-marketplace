@@ -1,12 +1,15 @@
-package org.stibits.rnft.executors;
+package org.stibits.rnft.streams;
 
 import java.util.Map;
+
 
 import com.auth0.jwt.interfaces.Claim;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import org.stibits.rnft.entities.Account;
+import org.stibits.rnft.entities.Bid;
+import org.stibits.rnft.entities.Notification;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.AuthenticationRequiredError;
 import org.stibits.rnft.errors.InvalidData;
@@ -67,7 +70,9 @@ public class CreateBidSseExecutor extends AbstractStreamExecutor {
         Thread.sleep(5000);
 
         try {
-            this.bidsDAO.insertBid(account, toId, tokenId, price);
+            Bid bid = this.bidsDAO.insertBid(account, toId, tokenId, price);
+            Notification notification = notificationDAO.insertNotification(bid);
+            notificationPublisher.publish(notification);
         } catch (ApiError ex) {
             this.sendAndComplete(this.makeErrorEvent(ex));
             return ;
