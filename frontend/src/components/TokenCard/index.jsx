@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import HeartIconSVG from '@/components/HeartIconSVG'
-import { deleteLikeToken, postLikeToken } from '@/utils/api'
-import { AuthContext } from '@/context/AuthContext'
-import { formatBigNumberMoney, ONE_DAY, ONE_HOUR } from '@/utils/generic'
-import { formatMoney } from '@/utils/currency'
+import HeartIconSVG from '@Components/HeartIconSVG'
+import { deleteLikeToken, postLikeToken } from '@Utils/api'
+import { AuthContext } from '@Context/AuthContext'
+import { formatBigNumberMoney, ONE_HOUR } from '@Utils/generic'
+import { formatMoney } from '@Utils/currency'
 
 import './styles.css'
 

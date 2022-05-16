@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { AuthContext } from '@/context/AuthContext'
-import { saveProfilePicture } from '@/utils/api'
-import LoadingCard from '../LoadingCard'
+import { AuthContext } from '@Context/AuthContext'
+import { saveProfilePicture } from '@Utils/api'
+import LoadingCard from '@Components/LoadingCard'
 
 import './styles.css'
 

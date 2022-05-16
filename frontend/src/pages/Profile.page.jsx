@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
-
-import ProfileCover from '@/components/ProfileCover'
-import ProfileInfoCard from '@/components/ProfileInfoCard'
-import ProfileNavbar from '@/components/ProfileNavbar'
-import ProfileTokenList from '@/components/ProfileTokenList'
-import { AuthContext } from '@/context/AuthContext'
 import { Navigate, Route, Routes } from 'react-router'
+
+import ProfileCover from '@Components/ProfileCover'
+import ProfileInfoCard from '@Components/ProfileInfoCard'
+import ProfileNavbar from '@Components/ProfileNavbar'
+import ProfileTokenList from '@Components/ProfileTokenList'
+import { AuthContext } from '@Context/AuthContext'
 import { getUserForSaleTokens, getUserCreatedTokens, getUserOwnedTokens, getUserFavoriteTokens } from '@Utils/api'
 
 import '@Styles/ProfilePage.css'

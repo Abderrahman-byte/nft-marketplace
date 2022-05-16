@@ -5,10 +5,16 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
+
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.stibits.rnft.handlers.AuthenticatedOnly;
 import org.stibits.rnft.handlers.AuthenticationHandler;
+import org.stibits.rnft.handlers.WebsocketAuthentication;
+import org.stibits.rnft.websocket.NotificationsHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -24,13 +30,34 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
+import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
+import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
 @Configuration
+@EnableWebSocket
 @ComponentScan("org.stibits.rnft")
 @PropertySource("classpath:env.properties")
-public class WebConfig implements WebMvcConfigurer {
+public class WebConfig implements WebMvcConfigurer, WebSocketConfigurer {
     @Autowired
-    Environment environment;
+    private Environment environment;
+
+    @Value("#{'${cors.allowOrigins}'.split(',')}")
+    String corsAllowOrigins[];
+
+    @Bean
+    public Connection rmqConnection () throws Exception {
+        return rmqConnectionFactory().newConnection();
+    }
+
+    @Bean
+    public ConnectionFactory rmqConnectionFactory () throws Exception {
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+
+        connectionFactory.setUri(environment.getProperty("rmq.uri"));
+
+        return connectionFactory;
+    }
 
     @Bean
     public MessageSource messageSource () {
@@ -82,8 +109,18 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
     @Bean
+    public NotificationsHandler websocketNotificationsHandler () {
+        return new NotificationsHandler();
+    }
+
+    @Bean
     public AuthenticationHandler authenticationHandler () {
         return new AuthenticationHandler();
+    }
+
+    @Bean
+    public WebsocketAuthentication websocketAuthentication () {
+        return new WebsocketAuthentication();
     }
 
     @Override
@@ -99,9 +136,17 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
         registry.addResourceHandler("/media/**").addResourceLocations("file://" + environment.getProperty("resource.media.dir") );
     }
+
+    @Override
+    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+        registry
+            .addHandler(websocketNotificationsHandler(), "/notifications")
+            .setAllowedOrigins(corsAllowOrigins)
+            .addInterceptors(websocketAuthentication());
+    }
     
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/**").allowedOrigins("http://localhost:3000/").allowCredentials(true).maxAge(3600).allowedMethods("*"); 
+        registry.addMapping("/api/**").allowedOrigins(corsAllowOrigins).allowCredentials(true).maxAge(3600).allowedMethods("*"); 
     }
 }

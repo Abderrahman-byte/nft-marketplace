@@ -55,7 +55,7 @@ public class Bid {
         this.id = id;
     }
 
-    public Calendar getCreateDate() {
+    public Calendar getCreatedDate() {
         return createdDate;
     }
 

@@ -1,8 +1,8 @@
-import TokenCard from '@/components/TokenCard'
-import { getTokens } from '@/utils/api'
 import React, { useEffect, useState } from 'react'
 
-import TokensListFilter from '@/components/TokensListFilter'
+import TokenCard from '@Components/TokenCard'
+import { getTokens } from '@Utils/api'
+import TokensListFilter from '@Components/TokensListFilter'
 
 import '@Styles/DiscoverPage.css'
 

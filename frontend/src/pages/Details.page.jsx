@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
-import '@Styles/DetailsPage.css'
-import { getDetailsToken } from "@/utils/api";
 import { useParams } from "react-router";
-import { AuthContext } from '@/context/AuthContext'
+
+import { getDetailsToken } from "@Utils/api";
+import { AuthContext } from '@Context/AuthContext'
+
+import '@Styles/DetailsPage.css'
 
 import DetailsCard from "@/components/DetailsToken/DetailsCard";
 import DetailsIcons from "@/components/DetailsToken/DeatilsIcons";

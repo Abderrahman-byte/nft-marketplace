@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
-
-import ProfileCover from '@/components/ProfileCover'
-import ProfileInfoCard from '@/components/ProfileInfoCard'
-import ProfileNavbar from '@/components/ProfileNavbar'
-import ProfileTokenList from '@Components/ProfileTokenList'
 import { Navigate, Route, Routes, useParams } from 'react-router'
-import { AuthContext } from '@/context/AuthContext'
-import { getUserCreatedTokens, getUserData, getUserFavoriteTokens, getUserForSaleTokens, getUserOwnedTokens } from '@/utils/api'
+
+import ProfileCover from '@Components/ProfileCover'
+import ProfileInfoCard from '@Components/ProfileInfoCard'
+import ProfileNavbar from '@Components/ProfileNavbar'
+import ProfileTokenList from '@Components/ProfileTokenList'
+import { AuthContext } from '@Context/AuthContext'
+import { getUserCreatedTokens, getUserData, getUserFavoriteTokens, getUserForSaleTokens, getUserOwnedTokens } from '@Utils/api'
 
 import '@Styles/ProfilePage.css'
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Route, Routes, useLocation, useParams } from 'react-router'
+import { Route, Routes, useLocation } from 'react-router'
 
 import LoginPage from '@Pages/Login.page'
 import CreatePages from '@Pages/Upload.pages'
@@ -12,6 +12,7 @@ import UserProfilePage from '@Pages/UserProfile.page'
 import DiscoverPage from '@Pages/Discover.page'
 import MainPage from '@Pages/Main.page'
 import DetailsPage from '@Pages/Details.page'
+import { NotificationsProvider } from '@Context/NotifiactionsContext'
 
 import '@Styles/App.css'
 
@@ -33,21 +34,23 @@ const App = () => {
 
 	return (
 		<div className='App'>
-			<AppHeader />
-			<Routes>
-				<Route index element={<MainPage />} />
-				<Route path='/sign-up' element={<RegisterPage />} />
-				<Route path='/sign-in' element={<LoginPage />} />
-				<Route path='/discover' element={<DiscoverPage />} />
-				
-				<Route path='/profile/*' element={<AuthenticationOnly><ProfilePages /></AuthenticationOnly>} />
-				<Route path='/upload/*' element={<AuthenticationOnly><CreatePages /></AuthenticationOnly>} />
-				<Route path='/user/:id/*' element={<UserProfilePage />} />
-				<Route path='/details/:id' element={<DetailsPage />} />
+			<NotificationsProvider>
+				<AppHeader />
+				<Routes>
+					<Route index element={<MainPage />} />
+					<Route path='/sign-up' element={<RegisterPage />} />
+					<Route path='/sign-in' element={<LoginPage />} />
+					<Route path='/discover' element={<DiscoverPage />} />
+					
+					<Route path='/profile/*' element={<AuthenticationOnly><ProfilePages /></AuthenticationOnly>} />
+					<Route path='/upload/*' element={<AuthenticationOnly><CreatePages /></AuthenticationOnly>} />
+					<Route path='/user/:id/*' element={<UserProfilePage />} />
+					<Route path='/details/:id' element={<DetailsPage />} />
 
-			</Routes>
-		
-			<AppFooter />
+				</Routes>
+			
+				<AppFooter />
+			</NotificationsProvider>
 		</div>
 	)
 }

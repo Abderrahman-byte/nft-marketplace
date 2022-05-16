@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 
-import { AuthContext } from '@/context/AuthContext'
-import TokenCard from '../TokenCard'
-import LoadingCard from '../LoadingCard'
+import { AuthContext } from '@Context/AuthContext'
+import TokenCard from '@Components/TokenCard'
+import LoadingCard from '@Components/LoadingCard'
 
 const TokenProfileList = ({ id, getTokensFunction }) => {
     const { openModel, closeModel } = useContext(AuthContext)

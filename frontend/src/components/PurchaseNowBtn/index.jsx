@@ -2,11 +2,11 @@ import React, { useCallback, useContext } from 'react'
 
 import LoadingCard from '@Components/LoadingCard'
 import MessageCard from '@Components/MessageCard'
-import LoginPage from '@/pages/Login.page'
+import LoginPage from '@Pages/Login.page'
 import QrCodeCard from '@Components/QrCodeCard'
-import { AuthContext } from '@/context/AuthContext'
-import { buildApiUrl, createTransaction } from '@/utils/api'
-import { DEFAULT_ERROR } from '@/utils/generic'
+import { AuthContext } from '@Context/AuthContext'
+import { buildApiUrl, createTransaction } from '@Utils/api'
+import { DEFAULT_ERROR } from '@Utils/generic'
 
 const PurchaseNowBtn = ({ tokenId }) => {
 	const { authenticated, account, openModel, closeModel } = useContext(AuthContext)
