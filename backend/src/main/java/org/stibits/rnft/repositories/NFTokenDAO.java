@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -222,11 +223,48 @@ public class NFTokenDAO {
     }
 
     public List<Token> getTokensOwnedBy (String accountId, int limit, int offset) {
-        return List.of();
+        Account account = this.entityManager.find(Account.class, accountId);
+
+        if (account == null) return null;
+
+        try {
+            List<Token> tokens = account.getTransactionsTo().stream().map(transaction -> transaction.getToken()).filter(token -> {
+                boolean accountOwnsToken = transactionDAO.getAccountTokenBalance(token, account) > 0;
+
+                if (accountOwnsToken) token.setOwner(account);
+
+                return accountOwnsToken;
+            }).toList();
+            
+            return tokens.subList(offset, offset + limit <= tokens.size() ? offset + limit : tokens.size());
+        } catch (IndexOutOfBoundsException ex) {
+            return List.of();
+        }
     }
     
     public List<Token> getTokensForSaleBy (String accountId, int limit, int offset) {
-        return List.of();
+        Account account = this.entityManager.find(Account.class, accountId);
+
+        if (account == null) return null;
+
+        try {
+            List<Token> tokens = Stream.concat(
+                    account.getTransactionsTo().stream().map(transaction -> transaction.getToken()),
+                    account.getCreatedNfts().stream()
+                ).toList();
+            
+            tokens = tokens.stream().filter(token -> {
+                boolean accountOwnsToken = transactionDAO.getAccountTokenBalance(token, account) > 0;
+                
+                if (accountOwnsToken) token.setOwner(account);
+
+                return accountOwnsToken && token.getSettings().isForSale();
+            }).toList();
+
+            return tokens.subList(offset, offset + limit <= tokens.size() ? offset + limit : tokens.size());
+        } catch (IndexOutOfBoundsException ex) {
+            return List.of();
+        }
     }
 
     @SuppressWarnings("unchecked")
