@@ -195,7 +195,7 @@ color: #23262f;
 /**Fixed Box**/
 
 .FixedBox{
-  margin-top: 175px;
+  margin-top: 75px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -442,15 +442,24 @@ padding: 0;
   margin-bottom: 16px;
 }
 
-/*.bids-cont {
-  align-self: stretch;
-  position: relative;
-  height: 200px;
+/*fixed box owner*/
 
-  overflow: hidden; 
-  overflow-y: scroll;
+.FixedBox .input-elt {
+  padding: 0.9em 1.2em;
+  border-radius: 12px;
+  border: solid 2px #e6e8ec;
+  width: 100%;
 }
-.bids-cont::-webkit-scrollbar {
-  display: none; 
+
+.FixedBox .input-elt[type=number] {
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
-*/
+.FixedBox .form-Update{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
+ 
+}

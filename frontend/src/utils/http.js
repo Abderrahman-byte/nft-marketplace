@@ -38,3 +38,5 @@ export const getRequest = (url, headers = {}, options = {}) => httpRequest(url, 
 export const deleteRequest = (url, headers = {}, options = {}) => httpRequest(url, 'DELETE', headers, options)
 
 export const postRequest = (url, data, headers = {}, options = {}) => httpRequest(url, 'POST', data, headers, options)
+
+export const putRequest = (url, data, headers = {}, options = {}) => httpRequest(url, 'PUT', data, headers, options)

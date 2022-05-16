@@ -1,5 +1,5 @@
 import { buildPath } from "./generic"
-import { deleteRequest, getRequest, multipartPostRequest, postRequest } from "./http"
+import { deleteRequest, getRequest, multipartPostRequest, postRequest, putRequest } from "./http"
 
 const apiHost = process.env.REACT_APP_API_HOST
 const apiPrefix = process.env.REACT_APP_API_PREFIX
@@ -267,4 +267,14 @@ export const getHistoryTransaction = async(id, limit=10, offset=0)=>{
 
     }catch{}
     return[]
+}
+export const updateTokenSettings = async (id,data) => {
+    try {
+        const response = await putRequest(buildApiUrl(`/marketplace/tokens/${id}`), JSON.stringify(data))
+        console.log(response)
+        if (response && response.success) return [true, response.error]
+        else if (response && response.error) return [false, response.error]
+    } catch {}
+
+    return [false, null]
 }

@@ -5,6 +5,7 @@ import { convertRvnToUsd, formatMoney } from "@/utils/currency";
 import DetailsFixedBox from "./DetailsFixedBox";
 import DetailsBid from "./DetailsBids";
 import DetailsHistory from "./DetailsHistory";
+import DetailsFixedBoxOwner from "./DetailsFixedOwner";
 import './styles.css'
 
 
@@ -43,7 +44,10 @@ return(
         {next === '1' && <DetailsInfo details={details} owner={owner} creator={creator} />}
         {next === '3' && <DetailsHistory Id={details.id}/>}
         {next === '4'&& <DetailsBid Id={details.id}/>}
-        {!isOwner && (details?.isForSale || details?.instantSale)? (<DetailsFixedBox details = {details} owner ={owner} creator={creator}/>):null}
+        {!isOwner /*&& (details?.isForSale || details?.instantSale)*/? (<DetailsFixedBox details = {details} owner ={owner} creator={creator}/>)
+        :<DetailsFixedBoxOwner id={details.id} isForSale ={details?.isForSale } instantSale = {details?.instantSale} price ={details?.price}/>}
+
+        
 
     </div>
 )

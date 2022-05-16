@@ -82,12 +82,25 @@ const DetailsFixedBox=({ details, owner })=>{
              )
          }
     }
+    const Content=(hb,ifs,is)=>{
+
+        if(hb && ifs){
+            return highestBid(details?.highestBid)
+        }else if(!ifs && !is){
+
+          return <span style={{fontfamily :"Inter", fontsize: "3em",color: "#777e90"}}> This token is not for sell !!</span>
+
+        }else {
+           return <span style={{fontfamily :"Inter", fontsize: "1em",color: "#777e90"}}> There's no bids yet. Be the first!</span>
+        }
+    }
     return (
 
         <div className="FixedBox">
              { /**Highest bid */}
-            {(details?.highestBid && details?.isForSale )? highestBid(details?.highestBid)
-            : <span style={{fontfamily :"Inter", fontsize: "14px",color: "#777e90"}}> There's no bids yet. Be the first!</span>}
+            {/*(details?.highestBid && details?.isForSale )? highestBid(details?.highestBid)
+            : <span style={{fontfamily :"Inter", fontsize: "14px",color: "#777e90"}}> There's no bids yet. Be the first!</span>*/
+            Content(details?.highestBid,details?.isForSale,details?.instantSale )}
             
             <div className="Fixed-buttons">
              {
