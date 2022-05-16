@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import org.stibits.rnft.entities.Account;
 import org.stibits.rnft.entities.Bid;
+import org.stibits.rnft.entities.Notification;
 import org.stibits.rnft.entities.OfferResponse;
 import org.stibits.rnft.entities.Token;
 import org.stibits.rnft.errors.ApiError;
@@ -36,15 +37,13 @@ import org.stibits.rnft.errors.NotFoundError;
 import org.stibits.rnft.errors.TokenNotFound;
 import org.stibits.rnft.errors.UnauthorizedError;
 import org.stibits.rnft.errors.ValidationError;
-import org.stibits.rnft.executors.CreateBidSseExecutor;
 import org.stibits.rnft.notifications.NotificationsPublisher;
 import org.stibits.rnft.repositories.BidsDAO;
 import org.stibits.rnft.repositories.NFTokenDAO;
 import org.stibits.rnft.repositories.NotificationDAO;
 import org.stibits.rnft.repositories.TransactionDAO;
+import org.stibits.rnft.streams.CreateBidSseExecutor;
 import org.stibits.rnft.validation.CreateBidValidator;
-
-// TODO : implement accept/reject offer
 
 @RestController
 @RequestMapping("/api/${api.version}/marketplace/bids")
@@ -161,6 +160,9 @@ public class BidsController {
 
         bid = this.bidsDAO.updateResponse(bid, response);
         responseData.put("success", bid.getResponse().equals(response));
+        
+        Notification notification = notificationDAO.insertNotification(bid, action.equals("accept"));
+        notificationPublisher.publish(notification);
 
         return responseData;
     }

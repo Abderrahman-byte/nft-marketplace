@@ -14,9 +14,12 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.stibits.rnft.entities.Bid;
 import org.stibits.rnft.entities.Notification;
 import org.stibits.rnft.entities.NotificationEvent;
 import org.stibits.rnft.entities.Transaction;
+import org.stibits.rnft.notifications.converters.BidCreatedNotification;
+import org.stibits.rnft.notifications.converters.BidResponseNotification;
 import org.stibits.rnft.notifications.converters.SoldNotification;
 import org.stibits.rnft.utils.RandomGenerator;
 
@@ -27,6 +30,12 @@ public class NotificationDAO {
 
     @Autowired
     private SoldNotification soldNotificationConverter;
+
+    @Autowired
+    private BidCreatedNotification bidCreatedNotification;
+
+    @Autowired
+    private BidResponseNotification bidResponseNotification;
 
     @Autowired
     private RandomGenerator randomGenerator;
@@ -77,6 +86,34 @@ public class NotificationDAO {
         notification.setEvent(NotificationEvent.SOLD);
         notification.setTo(transaction.getFrom());
         notification.setMetadata(soldNotificationConverter.convert(transaction));
+
+        this.entityManager.persist(notification);
+        
+        return notification;
+    }
+    
+    @Transactional
+    public Notification insertNotification (Bid bid) {
+        Notification notification = new Notification();
+        
+        notification.setId(randomGenerator.generateRandomStr(25));
+        notification.setEvent(NotificationEvent.BID_CREATED);
+        notification.setTo(bid.getTo());
+        notification.setMetadata(bidCreatedNotification.convert(bid));
+
+        this.entityManager.persist(notification);
+
+        return notification;
+    }
+
+    @Transactional
+    public Notification insertNotification (Bid bid, boolean accepted) {
+        Notification notification = new Notification();
+
+        notification.setId(randomGenerator.generateRandomStr(25));
+        notification.setEvent(accepted ? NotificationEvent.BID_ACCEPTED : NotificationEvent.BID_REJECT);
+        notification.setTo(bid.getFrom());
+        notification.setMetadata(bidResponseNotification.convert(bid));
 
         this.entityManager.persist(notification);
 

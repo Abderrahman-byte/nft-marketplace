@@ -26,11 +26,11 @@ import org.stibits.rnft.errors.AuthenticationRequiredError;
 import org.stibits.rnft.errors.DataIntegrityError;
 import org.stibits.rnft.errors.TokenNotFound;
 import org.stibits.rnft.errors.ValidationError;
-import org.stibits.rnft.executors.TransactionSseExecutor;
 import org.stibits.rnft.notifications.NotificationsPublisher;
 import org.stibits.rnft.repositories.NFTokenDAO;
 import org.stibits.rnft.repositories.NotificationDAO;
 import org.stibits.rnft.repositories.TransactionDAO;
+import org.stibits.rnft.streams.TransactionSseExecutor;
 import org.stibits.rnft.validation.CreateTransValidator;
 
 import com.auth0.jwt.JWT;
