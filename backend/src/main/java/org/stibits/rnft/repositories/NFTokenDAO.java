@@ -39,6 +39,15 @@ public class NFTokenDAO {
     }
 
     @Transactional
+    public TokenSettings updateTokenSettings (Token token, Map<String,Object> data) {
+        boolean isForSale = data.containsKey("isForSale") ? (Boolean)data.get("isForSale") : token.getSettings().isForSale();
+        boolean instantSale = data.containsKey("instantSale") ? (Boolean)data.get("instantSale") && isForSale : token.getSettings().isInstantSale();
+        double price = data.containsKey("price") ? (Double)data.get("price") : token.getSettings().getPrice();
+
+        return this.updateTokenSettings(token, isForSale, instantSale, price);
+    }
+
+    @Transactional
     public TokenSettings updateTokenSettings (String tokenId, double price) {
         Token token = this.entityManager.find(Token.class, tokenId);
 
