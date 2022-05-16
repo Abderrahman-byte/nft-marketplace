@@ -10,7 +10,8 @@
     align-self: stretch;
 }
 
-.AppHeader .Left-content, .AppHeader .Actions {
+.AppHeader .Left-content,
+.AppHeader .Actions {
     display: flex;
     align-items: center;
 }
@@ -68,4 +69,110 @@
     align-items: center;
     cursor: pointer;
     background-color: transparent;
+}
+
+.NotificationsBar {
+    position: relative;
+}
+
+.NotificationsBar .click-detector {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    background: transparent;
+}
+
+
+.NotificationsBar .NotificationsBar-popup {
+    padding: 2.5em 0;
+    background-color: #fcfcfd;
+    border: 1px solid var(--divider-clr);
+    border-radius: 1em;
+    position: absolute;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 1.563em 3.125em -0.75em;
+    top: 140%;
+    right: 50%;
+    transform: translateX(50%);
+    width: max-content;
+
+    z-index: 1;
+}
+
+.NotificationCard {
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    padding: 1em 2em;
+    background-color: #fcfcfd;
+    column-gap: 1em;
+    transition: .4s background-color;
+}
+
+.NotificationCard:hover {
+    background-color: var(--divider-clr);
+}
+
+.NotificationCard img {
+    width: 64px;
+    height: 64px;
+    border-radius: .75em;
+    object-fit: cover;
+}
+
+.NotificationCard .info {
+    flex-grow: 1;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.NotificationCard .info .title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #141416;
+}
+
+.NotificationCard .info .detail {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #353945;
+}
+
+.NotificationCard .info .created_date {
+    font-size: .75em;
+    color: #777e90;
+}
+
+.NotificationCard .is-new {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #8f8f8f;
+    align-self: center;
+    margin-left: 1.5em;
+}
+
+.NotificationCard .is-new.active {
+    background-color: #3772ff;
+}
+
+.NotificationsBar .NotificationsBar-popup .popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 2em;
+    column-gap: 2em;
+}
+
+.NotificationsBar .NotificationsBar-popup .popup-header h5 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #23262f;
 }

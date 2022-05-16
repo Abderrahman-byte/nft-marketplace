@@ -5,8 +5,12 @@ export const DEFAULT_ERROR = {
     message: 'Something went wrong, please try again another time'
 }
 
-export const ONE_HOUR = 60 * 60 * 1000
+export const ONE_SECOND = 1000
+export const ONE_MINUTE = 60 * ONE_SECOND
+export const ONE_HOUR = 60 * ONE_MINUTE
 export const ONE_DAY = 24 * ONE_HOUR
+export const ONE_WEEK = 7 * ONE_DAY
+export const ONE_MONTH = 30 * ONE_DAY
 
 export const buildPath = (...args) => {
 	return args
@@ -58,3 +62,28 @@ export const formatBigNumberMoney = (n) => {
 
     return formatMoney(n)
 }   
+
+export const plural = (singular, count) => {
+    const prep = ['a', 'e', 'u', 'i', 'o', 'h'].some(v => singular.startsWith(v)) ? 'an ' : 'a ' 
+    return count === 1 ? prep + singular : count + ' ' + singular + 's'
+}
+
+export const formatLapse = (timestamp) => {
+    const lapse = Date.now() - timestamp
+
+    const minutes = Number.parseInt(lapse / ONE_MINUTE)
+    const hours = Number.parseInt(lapse / ONE_HOUR)
+    const days = Number.parseInt(lapse / ONE_DAY)
+    const weeks = Number.parseInt(lapse / ONE_WEEK)
+    const months = Number.parseInt(lapse / ONE_MONTH)
+
+
+    if (months >= 12) formatDate(timestamp)
+    if (months > 0) return plural('month', months) + ' ago'
+    if (weeks > 0) return plural('week', weeks) + ' ago'
+    if (days > 0) return plural('day', days) + ' ago'
+    if (hours > 0) return plural('hour', hours) + ' ago'
+    if (minutes > 0) return plural('minute', minutes) + ' ago'
+    
+    return 'a few seconds'
+}
