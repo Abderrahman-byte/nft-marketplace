@@ -1,4 +1,4 @@
-import React, { useEffect, createContext, useState, useContext } from 'react'
+import React, { useEffect, createContext, useState, useContext, useCallback } from 'react'
 
 import { EventWebSocket } from '@Utils/EventWebSocket'
 import { AuthContext } from './AuthContext'
@@ -11,6 +11,10 @@ export const NotificationsProvider = ({ children }) => {
     const [socket, setSocket] = useState()
     const [notications, setNotifications] = useState([])
 
+    const addNotification = useCallback (e => setNotifications([JSON.parse(e.data),...notications]), [notications])
+
+    const addNotificationsList = useCallback(e => setNotifications([...e.data, ...notications]), [notications])
+
     useEffect(() => {
         if (!authenticated) return
 
@@ -18,17 +22,9 @@ export const NotificationsProvider = ({ children }) => {
 
         setSocket(socket)
 
-        ws.addEventListener('notifications', e => {
-            setNotifications([...e.data, ...notications])
-        })
+        ws.addEventListener('notifications', addNotificationsList)
 
-        ws.addEventListener('notification', e => {
-            setNotifications([JSON.parse(e.data),...notications])
-        })
-
-        ws.addEventListener('packet', e => {
-            console.log('MESSAGE => ', JSON.parse(e.data))
-        })
+        ws.addEventListener('notification', e => addNotification)
 
         return () => {
             if (ws.readyState !== ws.CLOSED && ws.readyState !== ws.CLOSING) ws.close()
@@ -36,7 +32,7 @@ export const NotificationsProvider = ({ children }) => {
     }, [authenticated])
 
     useEffect(() => {
-        console.log('NOTIFICATIONS', notications)
+        console.log('NOTIFICATIONS =>', notications)
     }, [notications]) 
 
     return (
