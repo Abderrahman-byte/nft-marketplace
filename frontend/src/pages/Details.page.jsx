@@ -1,10 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
 import '@Styles/DetailsPage.css'
-import Icons from "@/components/Details/icons";
-import Detailsbloc from "@/components/Details/detailsbloc";
 import { getDetailsToken } from "@/utils/api";
 import { useParams } from "react-router";
 import { AuthContext } from '@/context/AuthContext'
+
+import DetailsCard from "@/components/DetailsToken/DetailsCard";
+import DetailsIcons from "@/components/DetailsToken/DeatilsIcons";
+
 
 const DetailsPage = () => {
     const { id } = useParams()
@@ -29,16 +31,19 @@ const DetailsPage = () => {
     },[id, account])
 
     return (
+        
         <div className="DetailsPage">
-            {/* <div className="Container">
-             <img src={details?.previewUrl} alt="" />   */}
-             <Detailsbloc details={details} owner= {owner} creator={creator} isOwner={isOwner}/> 
-
-             {console.log(details.liked)}
-             <Icons id ={id} Like={details.liked} account ={account} />  
-              
+           <div className="image">  
+               <div className="labels">                                             
+                   <label className="Art"> <span> ART </span></label>               
+                   <label className="unlockable"> <span> UNLOCKABLE</span></label>
+               </div>
+               <img src={details?.previewUrl} alt="" />
+           </div> 
            
-            </div>
+             <DetailsCard details={details} owner= {owner} creator={creator} isOwner={isOwner} />
+             <DetailsIcons id ={id} Like={details.liked} account ={account}/>
+        </div>
     )
 }
 

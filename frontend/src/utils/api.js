@@ -240,3 +240,20 @@ export const createTransaction = async(data) =>{
     return [null, null]
 }  
 
+export const getBidsToken = async(id, limit=10, offset=0)=>{
+    try{
+        const response = await getRequest(buildApiUrl(`/marketplace/tokens/${id}/bids`)+`?limit=${limit}&offset=${offset}`)
+        if (response && response.success && response.data) return response.data
+
+    }catch{}
+    return[]
+}
+export const getHistoryTransaction = async(id, limit=10, offset=0)=>{
+    try{
+        const response = await getRequest(buildApiUrl(`/marketplace/tokens/${id}/transactions`)+`?limit=${limit}&offset=${offset}`)
+  
+        if (response && response.success && response.data) return response.data
+
+    }catch{}
+    return[]
+}

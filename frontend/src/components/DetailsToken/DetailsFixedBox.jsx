@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
-
-import './styles.css'
+import React, {useState, useEffect} from "react";
 import PurchaseNowBtn from "../PurchaseNowBtn";
 import PlaceBidBtn from "../PlaceBidBtn";
 import { convertRvnToUsd, formatMoney } from "@/utils/currency";
+import './styles.css'
 
-const FixedBox = ({ details, owner }) => {
+
+const DetailsFixedBox=({ details, owner })=>{
+
     const [usdPrice, setUsdPrice] = useState(0)
 
     const updateUsdPrice = async (priceBid) => {
@@ -26,7 +27,9 @@ const FixedBox = ({ details, owner }) => {
     const highestBidbloc = (username, priceRVN, priceUsd, avatar) => {
         return (
             <div className="highest-bid">
-
+                 <div className="avatar-1">
+                    <img src={avatar} alt="" />
+                </div>
                 <div className="frame-959">
                     <div className="row1">
                         <span className="highest">
@@ -40,7 +43,7 @@ const FixedBox = ({ details, owner }) => {
                         <span className="RVN">
                             {priceRVN} RVN
                         </span>
-                        <span className="dolar">
+                        <span className="USD">
                             ${priceUsd}
                         </span>
                     </div>
@@ -48,9 +51,7 @@ const FixedBox = ({ details, owner }) => {
 
                     </div>
                 </div>
-                <div className="avatar">
-                    <img src={avatar} alt="" />
-                </div>
+               
             </div>
         )
 
@@ -83,17 +84,15 @@ const FixedBox = ({ details, owner }) => {
     }
     return (
 
-        <div className="fixed">
+        <div className="FixedBox">
              { /**Highest bid */}
-            {highestBid(details?.highestBid)}
-            {console.log(details)}
+            {(details?.highestBid && details?.isForSale )? highestBid(details?.highestBid)
+            : <span style={{fontfamily :"Inter", fontsize: "14px",color: "#777e90"}}> There's no bids yet. Be the first!</span>}
             
-            <div className="buttons">
+            <div className="Fixed-buttons">
              {
                  ButtonForSell(details?.isForSale, details?.instantSale)
              }
-                {/*<PurchaseNowBtn tokenId={details?.id} />
-                <PlaceBidBtn tokenId={details?.id} ownerId={owner?.id} />*/}
             </div>
 
             <div className="fixed-footer">
@@ -114,6 +113,6 @@ const FixedBox = ({ details, owner }) => {
     )
 
 
-}
 
-export default FixedBox;
+}
+export default DetailsFixedBox;

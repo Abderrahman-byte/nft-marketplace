@@ -3,7 +3,7 @@ import React from 'react'
 
 import './styles.css'
 
-const DetailNavbar = ({ setnext}) => {
+const DetailNavBar = ({ setnext}) => {
     const links = [
         {
             text: 'Info',
@@ -29,4 +29,4 @@ const DetailNavbar = ({ setnext}) => {
     )
 }
 
-export default DetailNavbar
+export default DetailNavBar
