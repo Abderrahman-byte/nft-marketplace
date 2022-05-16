@@ -69,7 +69,7 @@ public class NotificationDAO {
         cu.set(root.get("vued"), true).where(
             cb.and(
                 cb.equal(root.get("to").get("id"), id), 
-                cb.lessThan(root.get("createdDate"), lastSeen)
+                cb.lessThanOrEqualTo(root.get("createdDate"), lastSeen)
             )
         );
 

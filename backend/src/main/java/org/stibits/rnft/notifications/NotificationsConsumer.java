@@ -1,7 +1,6 @@
 package org.stibits.rnft.notifications;
 
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
@@ -88,11 +87,9 @@ public class NotificationsConsumer implements Consumer {
             return ;
         }
 
-        Calendar receivedDate = Calendar.getInstance();
         String eventPayload = new String(body);
         List<Object> eventMessage = List.of("notification", eventPayload);
         this.session.sendMessage(new TextMessage(objectMapper.writeValueAsString(eventMessage)));
-        this.notificationDAO.updateVuedNotifications(this.account.getId(), receivedDate);
         this.rmqChannel.basicAck(envelope.getDeliveryTag(), false);
     }
 
@@ -104,7 +101,6 @@ public class NotificationsConsumer implements Consumer {
     }
 
     private void sendPrevNotifications () throws IOException {
-        Calendar receivedDate = Calendar.getInstance();
         List<Notification> notifications = this.notificationDAO.selectLatestNotifications(this.account.getId());
 
         if (notifications.size() <= 0) return;
@@ -114,7 +110,6 @@ public class NotificationsConsumer implements Consumer {
 
         try {
             this.session.sendMessage(new TextMessage(objectMapper.writeValueAsString(eventMessage)));
-            this.notificationDAO.updateVuedNotifications(this.account.getId(), receivedDate);
         } catch (JsonProcessingException ex) {}
     }
 

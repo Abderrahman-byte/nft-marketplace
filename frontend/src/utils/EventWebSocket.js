@@ -67,6 +67,10 @@ export class EventWebSocket extends EventTarget {
         })
     }
 
+    send (data) {
+        this.ws.send(data)
+    }
+
     close () {
         this.ws.close()
     }
