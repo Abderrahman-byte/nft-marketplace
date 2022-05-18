@@ -12,7 +12,6 @@ const DetailsIcons =({ id, Like, account })=>{
   
     const likeBtnClicked = async (e) => {
       e.preventDefault()
-      console.log('Placing like')
       const done = isLiked ? await deleteLikeToken(id) : await postLikeToken(id)
       if (done) setLiked(!isLiked)
     }

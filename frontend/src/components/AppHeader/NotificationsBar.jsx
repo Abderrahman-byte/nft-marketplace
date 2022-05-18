@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom'
 
 import { NotificationsContext } from '@Context/NotifiactionsContext'
 import SoldNotificationCard from '@Components/NotificationCards/SoldNotificationCard'
+import BidCreatedCard from '@Components/NotificationCards/BidCreatedCard'
+import BidAcceptedCard from '@Components/NotificationCards/BidAcceptedCard'
+import BidRejectedCard from '@Components/NotificationCards/BidRejectedCard'
 
 const getNotificationBars = (notifications, rest) => {
 	return notifications.map((data, i) => {
@@ -11,6 +14,24 @@ const getNotificationBars = (notifications, rest) => {
 		if (data.event === 'SOLD') {
 			return (
 				<SoldNotificationCard key={i} {...props} />
+			)
+		} 
+
+		if (data.event === 'BID_CREATED') {
+			return (
+				<BidCreatedCard key={i} {...props} />
+			)
+		}
+
+		if (data.event === 'BID_ACCEPTED') {
+			return (
+				<BidAcceptedCard key={i} {...props} />
+			)
+		}
+
+		if (data.event === 'BID_REJECT') {
+			return (
+				<BidRejectedCard key={i} {...props} />
 			)
 		}
 

@@ -271,7 +271,7 @@ export const getHistoryTransaction = async(id, limit=10, offset=0)=>{
 export const updateTokenSettings = async (id,data) => {
     try {
         const response = await putRequest(buildApiUrl(`/marketplace/tokens/${id}`), JSON.stringify(data))
-        console.log(response)
+
         if (response && response.success) return [true, response.error]
         else if (response && response.error) return [false, response.error]
     } catch {}
