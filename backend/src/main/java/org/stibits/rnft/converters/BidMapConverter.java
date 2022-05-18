@@ -26,6 +26,7 @@ public class BidMapConverter implements Converter<Bid, Map<String, Object>> {
         data.put("createdDate", timestampConverter.convert(source.getCreatedDate()));
         data.put("response", source.getResponse().toString());
         data.put("from", profileConverter.convert(source.getFrom().getProfile()));
+        data.put("to", profileConverter.convert(source.getTo().getProfile()));
         data.put("tokenId", source.getToken().getId());
         
         return data;
