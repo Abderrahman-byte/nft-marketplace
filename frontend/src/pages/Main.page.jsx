@@ -7,6 +7,7 @@ import CollectionCard from '@Components/CollectionCard'
 import MostPopularToken from '@Components/MostPopularToken'
 
 import '@Styles/MainPage.css'
+import PopularSellersList from '@Components/PopularSellersList'
 
 const MainPage = () => {
     const [popularTokens, setPopularTokens] = useState([])
@@ -47,6 +48,10 @@ const MainPage = () => {
                 <div className='collections-container'>
                     {collections.map((collection, i) => <CollectionCard key={i} link {...collection} />)}
                 </div>
+            </div>
+
+            <div className='section popular-sellers'>
+                <PopularSellersList />
             </div>
         </div>
     )
