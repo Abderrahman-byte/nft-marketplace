@@ -7,7 +7,7 @@ import { AuthContext } from '@Context/AuthContext'
 import '@Styles/EditProfilePage.css'
 
 const EditProfilepage = () => {
-	const { account: profile, setProfileData: setProfile } =useContext(AuthContext)
+	const { account: profile, setProfileData: setProfile } = useContext(AuthContext)
 
 	return (
 		<div className='EditProfilePage'>
