@@ -357,6 +357,8 @@
   border-radius: 48px;
   border: solid 2px #c7c7d6;
   cursor: pointer;
+  transition: .4s;
+  background-color: white;
 }
 
 .Icons .icon-close {
@@ -365,9 +367,7 @@
 }
 
 .Icons .icon:hover {
-  width: 52px;
-  height: 52px;
-  cursor: pointer;
+  transform: scale(1.1);
 }
 
 /**buttons icon heart**/
@@ -380,30 +380,15 @@
   gap: 1em;
 }
 
-
-.Icons .icon .like-btn {
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  box-shadow: 0 8px 16px -8px rgba(15, 15, 15, 0.2);
-  background-color: #fcfcfd;
-  border: none;
-  float: right;
-  cursor: pointer;
-}
-
-
-.Icons .icon-heart .like-btn .heart path {
+.Icons .icon.like-btn .heart path {
   transition: .4s;
 }
 
-.Icons .icon-heart .like-btn.liked {
+.Icons .icon.like-btn.liked {
   display: flex !important;
 }
 
-.Icons .icon-heart .like-btn.liked .heart path {
+.Icons .icon.like-btn.liked .heart path {
   fill: #ff5757;
   fill-rule: nonzero;
 }
