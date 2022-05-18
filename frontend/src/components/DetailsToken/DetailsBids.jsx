@@ -1,47 +1,60 @@
-import React, {useEffect, useState} from "react";
+import React, { cloneElement, useEffect, useState } from 'react'
+
+import { getBidsToken } from '@Utils/api'
+import BidsDiv from './Bidsdiv'
+
 import './styles.css'
-import { getBidsToken } from "@/utils/api";
-import BidsDiv from "./Bidsdiv";
-const DetailsBid=({Id})=>{
-    const [bids, setBids]= useState([])
-    const [page, setPage] = useState(1)
-    const [isMore, setMore] = useState(true)
-    const Bidscalled = 3
 
-    const getBidsForToken = async ()=>{
-        if(page <=0 || !isMore) return
-        const result = await getBidsToken(Id, Bidscalled, (page - 1) * Bidscalled)
-        setBids([...bids, ...result])
+const DetailsBid = ({ Id }) => {
+	const [bids, setBids] = useState([])
+	const [page, setPage] = useState(1)
+	const [isMore, setMore] = useState(true)
+    const [isLoading, setLoading] = useState(false)
+	const Bidscalled = 3
+
+	const getBidsForToken = async () => {
+		if (page <= 0 || !isMore || isLoading) return
+
+        setLoading(true)
+
+		const result = await getBidsToken(Id, Bidscalled,(page - 1) * Bidscalled)
+		setBids([...bids, ...result])
+		
         if (result.length < Bidscalled) setMore(false)
-    }
-
-   
-    useEffect (()=>{
-    
-        getBidsForToken()
-    }, [page])
-    
-    useEffect(()=>{
-        setBids([])
-       setPage(0)
-        setMore(true)
-       setTimeout(() => setPage(1), 0)
-    },[Id, getBidsToken])
-
-    const More=()=>{
-        if(isMore)
-        {
-            setPage(page + 1)
-        }else return
-    }
-    return(
         
-        <div className="bids-cont">
-        <div className="bids-scroll"  onScroll={()=> More()} >
-             {bids.map((bid, i)=> <BidsDiv key ={i} {...bid}/>)}
-         </div>
-         </div>
-    )
+        setLoading(false)
+	}
 
+	useEffect(() => {
+		getBidsForToken()
+	}, [page])
+
+	useEffect(() => {
+		setBids([])
+		setPage(0)
+		setMore(true)
+		setTimeout(() => setPage(1), 0)
+	}, [Id])
+
+	const handleScroll = (e) => {
+        const subElt = e.target.querySelector('.bids-scroll')
+        const realHeight = Number.parseFloat(getComputedStyle(subElt).height)
+        const scrollPosition = e.target.scrollTop
+        const eltHeight = Number.parseFloat(getComputedStyle(e.target).height)
+
+        if (eltHeight + scrollPosition >= realHeight - 1 && !isLoading && isMore) {
+            setPage(page + 1)            
+        }
+	}
+
+	return (
+		<div className='bids-cont' onScroll={handleScroll}>
+			<div className='bids-scroll'>
+				{bids.map((bid, i) => (
+					<BidsDiv key={i} {...bid} />
+				))}
+			</div>
+		</div>
+	)
 }
-export default DetailsBid;
+export default DetailsBid

@@ -1,10 +1,11 @@
+import { formatMoney } from "@Utils/currency";
 import React from "react";
 import './styles.css'
 
 
 
 
-const HistoDiv = ({from, to}) => {
+const HistoDiv = ({from, to, price}) => {
 
     return (
 
@@ -17,18 +18,19 @@ const HistoDiv = ({from, to}) => {
                     </div>
                     <div className="infos-1">
                        <div className="frame-966">
-                        <span className="type">
-                           Transfered
-                        </span>
-                        <span className="type">
-                            to 
-                        </span>
-                        <span className="price">
-                        {to.username}
-                        </span>
+                            <span className="type">
+                            Transfered
+                            </span>
+                            <span className="type">
+                                to 
+                            </span>
+                            <span className="price">
+                            {to?.displayName || to?.username}
+                            </span>
                         </div>
+
                         <span className="FullName">
-                          by {from.username}
+                          by {from?.displayName || from?.username} for {formatMoney(price)} RVN
                         </span>
                     </div>
                 </div>

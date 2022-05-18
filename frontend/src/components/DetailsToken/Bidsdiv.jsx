@@ -30,7 +30,7 @@ const BidsDiv = ({from, price}) => {
                         </span>
                         </div>
                         <span className="FullName">
-                           {from.username} 
+                           {from?.displayName || from?.username} 
                         </span>
                     </div>
                 </div>
