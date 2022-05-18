@@ -68,7 +68,7 @@ public class StorageService {
 
             file.transferTo(targetLocation);
             
-            return subdir != null ? Paths.get(subdir, filename).toString() : filename ;
+            return filename;
         } catch (MagicParseException|MagicMatchNotFoundException|MagicException|IOException ex) {
             System.out.println("[ERROR] " + ex.getMessage());
         }

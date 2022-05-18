@@ -71,8 +71,9 @@ public class CreateCollection {
 
         if (file != null && !file.isEmpty()) {
             try {
-                String imagePath = storageService.storeFile(file, imageTypePattern, "collections/");
-                imageUrl = ServletUriComponentsBuilder.fromRequest(request).replacePath("/").pathSegment("media", imagePath).build().toUriString();
+                String filename = storageService.storeFile(file, imageTypePattern, "collections/");
+                imageUrl = ServletUriComponentsBuilder.fromRequest(request).replacePath("/")
+                        .pathSegment("media/collections", filename).build().toUriString();
             } catch (StorageUnacceptedMediaType ex) {
                 throw new UnacceptedMediaTypeError(ex);
             }

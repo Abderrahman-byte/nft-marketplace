@@ -148,8 +148,9 @@ public class CreateNFTController {
         }
 
         try {
-            String nftContentUrl = storageService.storeFile(file, acceptedFiles, "nft/");
-            String contentFullUrl = ServletUriComponentsBuilder.fromContextPath(request).replacePath("/").pathSegment("media", nftContentUrl).build().toUriString();
+            String filename = storageService.storeFile(file, acceptedFiles, "nft/");
+            String contentFullUrl = ServletUriComponentsBuilder.fromContextPath(request).replacePath("/")
+                    .pathSegment("media/nft", filename).build().toUriString();
             model.addAttribute("contentUrl", contentFullUrl);
         } catch (StorageUnacceptedMediaType ex) {
             throw new UnacceptedMediaTypeError(ex);
