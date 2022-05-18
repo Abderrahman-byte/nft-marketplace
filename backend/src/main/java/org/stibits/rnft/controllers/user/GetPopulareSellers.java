@@ -49,6 +49,7 @@ public class GetPopulareSellers {
         });
 
         response.put("data", data);
+        response.put("success", true);
 
         return response;
     }
