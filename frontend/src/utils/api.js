@@ -281,9 +281,9 @@ export const updateTokenSettings = async (id,data) => {
     return [false, null]
 }
 
-export const getPopularSellersList = async () => {
+export const getPopularSellersList = async (interval) => {
     try {
-        const response = await getRequest(buildApiUrl(`/user/populare`))
+        const response = await getRequest(buildApiUrl(`/user/populare`) + `?interval=${interval}`)
 
         if (response && response.success && response.data) return response.data
     } catch {}
