@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 
 import AppLogo from './AppLogo'
 import SearchBox from './SearchBox'
 import NotificationsBar from './NotificationsBar'
+import { AuthContext } from '@Context/AuthContext'
 
 import './styles.css'
+import ProfileBar from './ProfileBar'
 
 const AppHeader = () => {
+    const { authenticated } = useContext(AuthContext)
+
     return (
         <header className='AppHeader Nav-content'>
             <div className='Left-content'>
@@ -21,7 +25,11 @@ const AppHeader = () => {
                 <NotificationsBar />
                 <div className='buttons'>
                     <Link className='btn btn-blue' to='/upload'>Upload</Link>
-                    <Link className='btn btn-white' to='#'>Connect Wallet</Link>
+                    {authenticated ? (
+                        <ProfileBar />
+                    ) : (
+                        <Link className='btn btn-white' to='/sign-in'>Connect Wallet</Link>
+                    )}
                 </div>
             </div>
         </header>

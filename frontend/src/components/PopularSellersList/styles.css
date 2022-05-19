@@ -49,7 +49,7 @@
     border-radius: 16px;
     background-color: #fcfcfd;
     transition: .4s transform, .4s shadow-box;
-    max-width: 25%;
+    max-width: 20%;
 }
 
 .PopularSellerCard .PopularSellerCard-head {

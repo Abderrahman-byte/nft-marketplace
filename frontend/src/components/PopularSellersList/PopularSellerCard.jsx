@@ -11,7 +11,7 @@ const PopularSellerCard = ({ displayName, totalTransactions, id, avatarUrl, rank
                     <i className={`badge-rank-${rank}`}></i>
                     <span>#{rank}</span>
                 </span>
-                <Link to={`/user/${id}`}>
+                <Link to={`/user/${id}`} className='block'>
                     <i className='link-arrow'></i>
                 </Link>
             </div>

@@ -6,6 +6,7 @@ import SoldNotificationCard from '@Components/NotificationCards/SoldNotification
 import BidCreatedCard from '@Components/NotificationCards/BidCreatedCard'
 import BidAcceptedCard from '@Components/NotificationCards/BidAcceptedCard'
 import BidRejectedCard from '@Components/NotificationCards/BidRejectedCard'
+import { AuthContext } from '@Context/AuthContext'
 
 const getNotificationBars = (notifications, rest) => {
 	return notifications.map((data, i) => {
@@ -40,6 +41,7 @@ const getNotificationBars = (notifications, rest) => {
 }
 
 const NotificationsBar = () => {
+	const { authenticated } = useContext(AuthContext)
 	const { notifications, sendVuedEvent, setVued } = useContext(NotificationsContext)
 	const [isOpen, setOpen] = useState(false)
 
@@ -50,10 +52,11 @@ const NotificationsBar = () => {
 	}, [notifications])
 
 	const openNotifications = useCallback(() => {
+		if (!authenticated) return
 		if (!isOpen && notifications.length > 0) sendVuedEvent(notifications[0]?.createdDate || Date.now())
 
 		setOpen(!isOpen)
-	}, [isOpen, setOpen, notifications])
+	}, [isOpen, setOpen, notifications, authenticated])
 
 	return (
 		<div className='NotificationsBar'>

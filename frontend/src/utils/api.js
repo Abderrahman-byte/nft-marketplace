@@ -290,3 +290,9 @@ export const getPopularSellersList = async (interval) => {
 
     return []
 }
+
+export const sendLogout = async () => {
+    try {
+        await getRequest(buildApiUrl('/auth/logout'))
+    } catch {}
+}
