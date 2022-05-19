@@ -1,14 +1,12 @@
 import React,{useContext, useEffect, useState} from "react"; 
-import './styles.css'
+
 import { AuthContext } from '@Context/AuthContext'
 import { respondOffer } from "@Utils/api";
 
+import './styles.css'
 
-
-
-
-const BidsDiv = ({id,from,response, price, owner, onAcceptedCallback}) => {
-    const { account } = useContext(AuthContext)
+const BidsDiv = ({id,from,response, to, price, owner, onAcceptedCallback}) => {
+    const { account, authenticated } = useContext(AuthContext)
     const [localResponse, setLocalResponse] = useState(response)
     
     const sendResponse=(action)=>{
@@ -28,8 +26,9 @@ const BidsDiv = ({id,from,response, price, owner, onAcceptedCallback}) => {
         }
     }
 
-      const renderButtons=()=>{
-         if((account.id === owner.id)  && !(account.id === from.id) ) 
+      const renderButtons=() => {
+          if (!authenticated || !account) return
+         if(account.id === owner.id && account.id !== from.id && account.id == to.id) 
          {
              if(localResponse === "PENDING"){
              return(

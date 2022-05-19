@@ -29,9 +29,9 @@ const DetailsPage = () => {
     })
 
     const onPlacedBid = (price) => {
-        if (!details || !details?.highestBid) return
+        if (!details) return
 
-        if (details?.highestBid?.price < price) setHighestBid(price)
+        if (!details?.highestBid || details?.highestBid?.price < price) setHighestBid(price)
     }
 
 	const getDetails = async (id) => {
@@ -44,8 +44,6 @@ const DetailsPage = () => {
 	}, [id])
 
     if (!details) return <></>
-
-    // console.log(details)
 
 	return (
 		<div className="DetailsPage">

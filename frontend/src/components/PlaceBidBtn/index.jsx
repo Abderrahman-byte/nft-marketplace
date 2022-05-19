@@ -52,7 +52,7 @@ const PlaceBidBtn = ({ tokenId, ownerId, successCallback }) => {
 
         eventSource.addEventListener('accepted', () => {
             openModel(<MessageCard title='Success' text='The bid has been placed successfully' closeBtnCallback={closeModel} />, closeModel)
-
+            
             if (typeof successCallback === 'function') successCallback(price)
 
             if(eventSource.readyState !== eventSource.CLOSED) eventSource.close()

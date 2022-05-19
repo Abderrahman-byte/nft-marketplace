@@ -17,7 +17,6 @@ const DetailsFixedBoxOwner =({id,isForSale, instantSale, price, onPriceUpdated})
 
     const updateItem = async (data) => {
         openModel(<LoadingCard />)
-        console.log(data)
         const [result, error] = await updateTokenSettings(id, data)
         if(result && !error) {
             setDone(true)
