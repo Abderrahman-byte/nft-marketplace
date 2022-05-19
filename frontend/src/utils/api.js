@@ -259,6 +259,7 @@ export const getBidsToken = async(id, limit=10, offset=0)=>{
     }catch{}
     return[]
 }
+
 export const getHistoryTransaction = async(id, limit=10, offset=0)=>{
     try{
         const response = await getRequest(buildApiUrl(`/marketplace/tokens/${id}/transactions`)+`?limit=${limit}&offset=${offset}`)
@@ -268,16 +269,18 @@ export const getHistoryTransaction = async(id, limit=10, offset=0)=>{
     }catch{}
     return[]
 }
+
 export const updateTokenSettings = async (id,data) => {
     try {
         const response = await putRequest(buildApiUrl(`/marketplace/tokens/${id}`), JSON.stringify(data))
-        console.log(response)
+
         if (response && response.success) return [true, response.error]
         else if (response && response.error) return [false, response.error]
     } catch {}
 
     return [false, null]
 }
+
 export const respondOffer = async (id, data)=>{
     try{
         const response = await postRequest(buildApiUrl(`/marketplace/bids/${id}`), JSON.stringify(data))
@@ -286,4 +289,21 @@ export const respondOffer = async (id, data)=>{
         if(response && response.success) return [true, response.error]
         else if (response && response.error) return [false, response.error]
     }catch{}
+}
+
+export const getPopularSellersList = async (interval) => {
+    try {
+        const response = await getRequest(buildApiUrl(`/user/populare`) + `?interval=${interval}`)
+
+        if (response && response.success && response.data) return response.data
+    } catch {}
+
+    return []
+}
+
+export const sendLogout = async () => {
+    try {
+        await getRequest(buildApiUrl('/auth/logout'))
+    } catch {}
+
 }

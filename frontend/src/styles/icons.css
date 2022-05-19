@@ -171,9 +171,70 @@
     width: 20px;
     height: 20px;
 }
-.close-icon {
+.close-icon::before {
+    content: "";
     display: block;
     background: url('../assets/icons/icons_Close_Line\ (1).svg') no-repeat center;
     width: 20px;
     height: 20px;
+}
+
+.link-arrow::before {
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_arrow_link.svg') no-repeat center;
+    width: 25px;
+    height: 25px;
+}
+
+.icon-user::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    background: url('../assets/icons/icons_User_Line.svg') no-repeat center;
+    display: block;
+}
+
+.icon-image::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    background: url('../assets/icons/icons_Image_Line.svg') no-repeat center;
+    display: block;
+}
+
+.icon-logout::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    background: url('../assets/icons/icons_Sign\ Out_Line.svg') no-repeat center;
+    display: block;
+}
+
+.badge-rank-1,
+.badge-rank-2,
+.badge-rank-3,
+.badge-rank-4,
+.badge-rank-5 {
+    display: block;
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+.badge-rank-1 {
+    background: url('../assets/icons/icons_Cup_Line.svg') no-repeat center;
+}
+
+.badge-rank-2 {
+    background: url('../assets/icons/icons_Donut_Line.svg') no-repeat center;
+}
+
+.badge-rank-3 {
+    background: url('../assets/icons/icons_Lightning_Line.svg') no-repeat center;
+}
+
+.badge-rank-4,
+.badge-rank-5 {
+    background: url('../assets/icons/icons_Doughnut_Line.svg') no-repeat center;
 }

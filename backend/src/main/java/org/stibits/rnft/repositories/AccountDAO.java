@@ -1,5 +1,6 @@
 package org.stibits.rnft.repositories;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TemporalType;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -80,16 +82,17 @@ public class AccountDAO {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Account> getBestSellers (int limit) {
+    public List<Account> getBestSellers (int limit, Calendar lastDate) {
         String sqlString = "select a.id, a.username, a.email, a.password, a.is_admin, a.is_verified, a.created_date, a.updated_date, " +
         "COUNT(t.to_account) as transactions_count, SUM(t.price) as transactions_sum " +
         "from account as a "+ 
-        "join transactions as t on t.from_account = a.id and t.created_date >= DATE_SUB(NOW(), INTERVAL 1 MONTH) "+
+        "join transactions as t on t.from_account = a.id and t.created_date >= :lastDate "+
         "group by a.id, a.username " +
         "order by transactions_count DESC, transactions_sum DESC limit :limit";
 
         Query query = this.entityManager.createNativeQuery(sqlString, Account.class);
         query.setParameter("limit", limit);
+        query.setParameter("lastDate", lastDate, TemporalType.TIMESTAMP);
         
         return (List<Account>)query.getResultList();
     }

@@ -11,6 +11,11 @@
     width: 50%;
 }
 
+.MostPopularToken .info {
+    width: fit-content;
+    min-width: 300px;
+}
+
 .MostPopularToken .info h3 {
     text-align: center;
     width: 100%;

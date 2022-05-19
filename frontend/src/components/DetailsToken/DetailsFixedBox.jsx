@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from "react";
 import PurchaseNowBtn from "../PurchaseNowBtn";
 import PlaceBidBtn from "../PlaceBidBtn";
-import { convertRvnToUsd, formatMoney } from "@/utils/currency";
+import { convertRvnToUsd, FALLBACK_PRICE, formatMoney, getRVNPrice } from "@Utils/currency";
 import './styles.css'
 
 
 const DetailsFixedBox=({ details, owner })=>{
-
     const [usdPrice, setUsdPrice] = useState(0)
+    const serviceFee = 1.5
 
     const updateUsdPrice = async (priceBid) => {
         const price = await convertRvnToUsd(priceBid)
@@ -24,6 +24,7 @@ const DetailsFixedBox=({ details, owner })=>{
                             highestbid?.from.avatarUrl)
         
     }
+
     const highestBidbloc = (username, priceRVN, priceUsd, avatar) => {
         return (
             <div className="highest-bid">
@@ -94,6 +95,7 @@ const DetailsFixedBox=({ details, owner })=>{
            return <span style={{fontfamily :"Inter", fontsize: "1em",color: "#777e90"}}> There's no bids yet. Be the first!</span>
         }
     }
+
     return (
 
         <div className="FixedBox">
@@ -110,16 +112,16 @@ const DetailsFixedBox=({ details, owner })=>{
 
             <div className="fixed-footer">
                 <span>
-                    Service free
+                    Service fee
                 </span>
                 <span>
-                    1.5%
+                    {serviceFee}%
                 </span>
                 <span>
-                    2.563 RVN
+                    {formatMoney(details?.price * serviceFee / 100)} RVN
                 </span>
                 <span>
-                    $4,540.62
+                    ${usdPrice ? formatMoney(usdPrice * serviceFee) : ''}
                 </span>
             </div>
         </div>

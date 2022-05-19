@@ -243,7 +243,7 @@ public class NFTokenDAO {
                 if (accountOwnsToken) token.setOwner(account);
 
                 return accountOwnsToken;
-            }).toList();
+            }).distinct().toList();
             
             return tokens.subList(offset, offset + limit <= tokens.size() ? offset + limit : tokens.size());
         } catch (IndexOutOfBoundsException ex) {
@@ -268,7 +268,7 @@ public class NFTokenDAO {
                 if (accountOwnsToken) token.setOwner(account);
 
                 return accountOwnsToken && token.getSettings().isForSale();
-            }).toList();
+            }).distinct().toList();
 
             return tokens.subList(offset, offset + limit <= tokens.size() ? offset + limit : tokens.size());
         } catch (IndexOutOfBoundsException ex) {

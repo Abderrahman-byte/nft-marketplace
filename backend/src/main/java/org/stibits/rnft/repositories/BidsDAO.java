@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
@@ -107,5 +108,24 @@ public class BidsDAO {
         } catch (NoResultException ex) {
             return null;
         }
+    }
+
+    @Transactional
+    public boolean implicitlyRejectOtherBids (String tokenId, String toId, String acceptedBid) {
+        CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
+        CriteriaUpdate<Bid> cu = cb.createCriteriaUpdate(Bid.class);
+        Root<Bid> root = cu.from(Bid.class);
+
+        cu.set("response", OfferResponse.IMPLICITLY_REJECTED).where(
+            cb.and(
+                cb.equal(root.get("token").get("id"), tokenId),
+                cb.equal(root.get("to").get("id"), toId),
+                cb.notEqual(root.get("id"), acceptedBid)
+            )
+        );
+
+        Query query = this.entityManager.createQuery(cu);
+
+        return query.executeUpdate() > 0;
     }
 }

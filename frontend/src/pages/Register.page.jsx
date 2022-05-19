@@ -25,9 +25,15 @@ const RegisterPage = () => {
             setErrors([ DEFAULT_ERROR ])
         }
 
-        setAuth(done)
-        setDone(done)
-        closeModel()
+        if (!done) setAuth(done)
+
+        setAuth(false)
+
+        setTimeout(() => {
+            setAuth(false)
+            setDone(done)
+            closeModel()
+        }, 100)
     }
 
     if (isDone) return <RegisterSuccessPage />

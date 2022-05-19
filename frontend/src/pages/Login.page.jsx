@@ -29,8 +29,14 @@ const LoginPage = () => {
 			return setError(DEFAULT_ERROR)
 		}
 
-		setAuth(success)
-        Navigate(nextPath)
+		if (!success) setAuth(success)
+
+		setAuth(false)
+		
+		setTimeout(() => {
+			setAuth(true)
+			Navigate(nextPath)
+		}, 100)
 	}
 
 	
