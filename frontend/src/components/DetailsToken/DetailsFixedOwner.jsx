@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 import CheckboxSettingsItem from "@Components/CheckBoxSettingsItem";
 import { updateTokenSettings } from "@Utils/api";
 import { AuthContext } from '@Context/AuthContext'
@@ -8,24 +8,26 @@ import './styles.css'
 
 
 
-const DetailsFixedBoxOwner =({id,isForSale, instantSale, price})=>{
+const DetailsFixedBoxOwner =({id,isForSale, instantSale, price, onPriceUpdated})=>{
     const {openModel, closeModel } = useContext(AuthContext)
     const [ISforSALL, setISFORSELL] = useState(isForSale)
     const [InstantSALe , setInstantSale] = useState(instantSale)
     const [Price, setPrice] =useState(price)
     const [done, setDone] = useState(false)
 
-    const updateItem = async (data)=>{
+    const updateItem = async (data) => {
         openModel(<LoadingCard />)
         const [result, error] = await updateTokenSettings(id, data)
-        if(result && !error) setDone(true)
+        if(result && !error) {
+            setDone(true)
+            if (typeof onPriceUpdated === 'function') onPriceUpdated(Price)
+        }
         closeModel()
-       
     }
 
     
     const UpdateSattings=(e)=>{
-       e.preventDefault();
+       e.preventDefault()
   
       const data ={
           isForSale :ISforSALL
@@ -55,10 +57,7 @@ const DetailsFixedBoxOwner =({id,isForSale, instantSale, price})=>{
                  :null
              } 
             
-                 <button className='btn btn-blue'>
-                    <span> Update </span>
-                 </button>
-                
+                <button className='btn btn-blue'>Update</button>
             </form>
         </div>
     )

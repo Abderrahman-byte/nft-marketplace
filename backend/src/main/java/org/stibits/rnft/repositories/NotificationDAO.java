@@ -40,6 +40,16 @@ public class NotificationDAO {
     @Autowired
     private RandomGenerator randomGenerator;
 
+    public List<Notification> selectLatestNotifications (String id, int min) {
+        List<Notification> notifications = this.selectLatestNotifications(id);
+
+        if (notifications.size() >= min) return notifications;
+        
+        notifications.addAll(this.selectFromAllNotifications(id, min - notifications.size(), 0));
+
+        return notifications;
+    }
+
     @SuppressWarnings("unchecked")
     public List<Notification> selectLatestNotifications (String id) {
         CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
@@ -50,12 +60,33 @@ public class NotificationDAO {
         .where(
             cb.and(
                 cb.equal(root.get("to").get("id"), id), 
-                cb.equal(root.get("vued"), false))
+                cb.equal(root.get("vued"), false)
+            )
         ).orderBy(
             cb.desc(root.get("createdDate"))
         );
 
         Query query = this.entityManager.createQuery(cq);
+
+        return (List<Notification>)query.getResultList();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Notification> selectFromAllNotifications (String id, int limit, int offset) {
+        CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
+        CriteriaQuery<Notification> cq = cb.createQuery(Notification.class);
+        Root<Notification> root = cq.from(Notification.class);
+
+        cq.select(root)
+        .where(
+            cb.equal(root.get("to").get("id"), id)
+        ).orderBy(
+            cb.desc(root.get("createdDate"))
+        );
+
+        Query query = this.entityManager.createQuery(cq);
+        query.setMaxResults(limit);
+        query.setFirstResult(offset);
 
         return (List<Notification>)query.getResultList();
     }

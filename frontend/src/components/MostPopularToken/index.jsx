@@ -5,37 +5,31 @@ import PlaceBidBtn from '@Components/PlaceBidBtn'
 import { convertRvnToUsd, formatMoney } from '@Utils/currency'
 
 import './styles.css'
-
-// TODO : make profile element into its own component
+import AvatarLink from '@Components/AvatarLink'
 
 const MostPopularToken = ({id, previewUrl, title, creator, collection, owner, highestBid }) => {
     const [usdPrice, setUsdPrice] = useState(0)
+    const [localHighestBid, setLocalHighestBid] = useState(highestBid?.price)
 
     const updateUsdPrice = async () => {
-        if (!highestBid || !highestBid?.price) return
+        if (!localHighestBid) return
 
-        const price = await convertRvnToUsd(highestBid?.price || 0)
+        const price = await convertRvnToUsd(localHighestBid || 0)
 
         setUsdPrice(price)
     }
 
+    const onPlaceBidSuccess = (price) => {
+        if (Number(price) > Number(localHighestBid)) setLocalHighestBid(price)
+    }
+
     useEffect(() => {
         updateUsdPrice()
-    }, [highestBid])
+    }, [localHighestBid])
 
-    const getProfileElt = (title, img, name, to = '#') => {
-        return (
-            <div className='profile-elt'>
-                <Link className='block' to={to}>
-                    <img src={img} />
-                </Link>
-                <div className='profile-elt-info'>
-                    <h6>{title}</h6>
-                    <span className='name'>{name}</span>
-                </div>
-            </div>
-        )
-    }
+    useEffect(() => {
+        if(highestBid && highestBid?.price) setLocalHighestBid(highestBid?.price)
+    }, [highestBid])
 
     return (
         <div className='MostPopularToken'>
@@ -44,16 +38,16 @@ const MostPopularToken = ({id, previewUrl, title, creator, collection, owner, hi
                 <h3>{title}</h3>
 
                 <div className='profiles'>
-                    {getProfileElt('Creator', creator?.avatarUrl, creator?.displayName, `/user/${creator?.id}`)}
+                    <AvatarLink title='Creator' img={creator?.avatarUrl} name={creator?.displayName} to={`/user/${creator?.id}`} />
                     {collection ? (
-                        getProfileElt('Collection', collection?.imageUrl, collection?.name, `/collection/${collection?.id}`)
+                        <AvatarLink title='Collection' img={collection?.imageUrl} name={collection?.name} to={`/collection/${collection?.id}`} />
                     ) : null}
                 </div>
                 
-                {highestBid ? (
+                {localHighestBid ? (
                     <div className='bid-panel'>
                         <h6>Current Bid</h6>
-                        <span className='rvn'>{formatMoney(highestBid?.price || 0)} RVN</span>
+                        <span className='rvn'>{formatMoney(localHighestBid || 0)} RVN</span>
                         <span className='dollar'>${formatMoney(usdPrice)}</span>
                         {/* <h6>Auction ending in</h6>
                         <Timer date={new Date()} /> */}
@@ -61,7 +55,7 @@ const MostPopularToken = ({id, previewUrl, title, creator, collection, owner, hi
                 ): null}
 
                 <div className='buttons'>
-                    <PlaceBidBtn tokenId={id} ownerId={owner?.id || creator?.id} />
+                    <PlaceBidBtn tokenId={id} ownerId={owner?.id || creator?.id} successCallback={onPlaceBidSuccess} />
                     <Link to={`/details/${id}`} className='btn btn-white block'>View NFT</Link>
                 </div>
             </div>

@@ -10,7 +10,7 @@ const DetailsHistory = ({ Id }) => {
 	const [page, setPage] = useState(1)
 	const [isMore, setMore] = useState(true)
     const [isLoading, setLoading] = useState(false)
-	const transshwonFirst = 3
+	const transshwonFirst = 4
 
 	const getTransaction = async () => {
 		if (page <= 0 || !isMore) return

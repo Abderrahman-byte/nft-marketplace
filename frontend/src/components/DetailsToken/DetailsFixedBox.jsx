@@ -1,11 +1,12 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
+
 import PurchaseNowBtn from "../PurchaseNowBtn";
 import PlaceBidBtn from "../PlaceBidBtn";
-import { convertRvnToUsd, FALLBACK_PRICE, formatMoney, getRVNPrice } from "@Utils/currency";
+import { convertRvnToUsd, formatMoney } from "@Utils/currency";
+
 import './styles.css'
 
-
-const DetailsFixedBox=({ details, owner })=>{
+const DetailsFixedBox=({ details, owner, onPurchaseSuccess, onPlacedBid})=>{
     const [usdPrice, setUsdPrice] = useState(0)
     const serviceFee = 1.5
 
@@ -22,7 +23,6 @@ const DetailsFixedBox=({ details, owner })=>{
                             formatMoney(highestbid.price || 0), 
                             formatMoney(usdPrice || 0), 
                             highestbid?.from.avatarUrl)
-        
     }
 
     const highestBidbloc = (username, priceRVN, priceUsd, avatar) => {
@@ -59,41 +59,20 @@ const DetailsFixedBox=({ details, owner })=>{
     }
     
     const ButtonForSell=(isForSell, instantSell)=>{
-        if(isForSell && instantSell)
-         {
-             return(
-                <>
-                <PurchaseNowBtn tokenId={details?.id} />
-                <PlaceBidBtn tokenId={details?.id} ownerId={owner?.id} />
-                </>
-                )
-         }
-         else if (isForSell && !instantSell) {
-             return(
-                 <>
-                  <PlaceBidBtn tokenId={details?.id} ownerId={owner?.id} />
-                 </>
-             )
-             
-         }else if(!isForSell && instantSell){
-             return(
-                <>
-                <PurchaseNowBtn tokenId={details?.id} />
-                </>
-             )
-         }
+        return isForSell || instantSell ? (
+            <div className="Fixed-buttons">
+                {instantSell ? (<PurchaseNowBtn onPurchaseSuccess={onPurchaseSuccess} tokenId={details?.id} />) : null}
+                {isForSell? (<PlaceBidBtn successCallback={onPlacedBid} tokenId={details?.id} ownerId={owner?.id} />) : null}
+            </div>) : null
     }
+
     const Content=(hb,ifs,is)=>{
-
-        if(hb && ifs){
-            return highestBid(details?.highestBid)
-        }else if(!ifs && !is){
-
-          return <span style={{fontfamily :"Inter", fontsize: "3em",color: "#777e90"}}> This token is not for sell !!</span>
-
-        }else {
-           return <span style={{fontfamily :"Inter", fontsize: "1em",color: "#777e90"}}> There's no bids yet. Be the first!</span>
+        if (!ifs) {
+            return <span style={{fontsize: "3em",color: "#777e90"}}> This token is not for sell !!</span>
         }
+
+        if (hb) return highestBid(details?.highestBid)
+        else return <span style={{fontsize: "1em",color: "#777e90"}}> There's no bids yet. Be the first!</span>
     }
 
     return (
@@ -104,11 +83,7 @@ const DetailsFixedBox=({ details, owner })=>{
             : <span style={{fontfamily :"Inter", fontsize: "14px",color: "#777e90"}}> There's no bids yet. Be the first!</span>*/
             Content(details?.highestBid,details?.isForSale,details?.instantSale )}
             
-            <div className="Fixed-buttons">
-             {
-                 ButtonForSell(details?.isForSale, details?.instantSale)
-             }
-            </div>
+            {ButtonForSell(details?.isForSale, details?.instantSale)}
 
             <div className="fixed-footer">
                 <span>
@@ -121,7 +96,7 @@ const DetailsFixedBox=({ details, owner })=>{
                     {formatMoney(details?.price * serviceFee / 100)} RVN
                 </span>
                 <span>
-                    ${usdPrice ? formatMoney(usdPrice * serviceFee) : ''}
+                    {usdPrice ? '$' + formatMoney(usdPrice * serviceFee) : ''}
                 </span>
             </div>
         </div>

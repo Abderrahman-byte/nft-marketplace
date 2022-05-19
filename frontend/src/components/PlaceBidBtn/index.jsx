@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react'
+import React, { useCallback, useContext, useState } from 'react'
 import { AuthContext } from '@Context/AuthContext'
 
 import CreateBidForm from '@Components/CreateBidForm'
@@ -8,7 +8,7 @@ import QrCodeCard from '@Components/QrCodeCard'
 import MessageCard from '../MessageCard'
 import { DEFAULT_ERROR } from '@Utils/generic'
 
-const PlaceBidBtn = ({ tokenId, ownerId }) => {
+const PlaceBidBtn = ({ tokenId, ownerId, successCallback }) => {
     const { authenticated, account, openModel, closeModel } = useContext(AuthContext)
 
     const openError = (message) => {
@@ -52,6 +52,8 @@ const PlaceBidBtn = ({ tokenId, ownerId }) => {
 
         eventSource.addEventListener('accepted', () => {
             openModel(<MessageCard title='Success' text='The bid has been placed successfully' closeBtnCallback={closeModel} />, closeModel)
+            
+            if (typeof successCallback === 'function') successCallback(price)
 
             if(eventSource.readyState !== eventSource.CLOSED) eventSource.close()
         })

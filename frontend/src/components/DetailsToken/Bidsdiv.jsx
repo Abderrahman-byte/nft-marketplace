@@ -1,14 +1,13 @@
 import React,{useContext, useEffect, useState} from "react"; 
-import './styles.css'
+
 import { AuthContext } from '@Context/AuthContext'
 import { respondOffer } from "@Utils/api";
 
+import './styles.css'
 
-
-
-
-const BidsDiv = ({id,from,response, price, owner}) => {
-    const { account } = useContext(AuthContext)
+const BidsDiv = ({id,from,response, to, price, owner, onAcceptedCallback}) => {
+    const { account, authenticated } = useContext(AuthContext)
+    const [localResponse, setLocalResponse] = useState(response)
     
     const sendResponse=(action)=>{
         const data={
@@ -17,36 +16,43 @@ const BidsDiv = ({id,from,response, price, owner}) => {
        handlerResponse(data)
 
     }
-    const handlerResponse = async(data)=>{
-       
+    const handlerResponse = async (data) => {
+        const [done, error] = await respondOffer(id, data)
+        
+        if (data.action === 'reject' && done) setLocalResponse('REJECTED')
+        if (data.action === 'accept' && done) {
+            setLocalResponse('ACCEPTED')
+            if (typeof onAcceptedCallback === 'function') onAcceptedCallback(from)
+        }
+    }
 
-        const [result, error] = await respondOffer(id, data)
-       
-        /*console.log(result)*/
-
-      }
-      const renderButtons=()=>{
-         if((account.id === owner.id)  && !(account.id === from.id) ) 
+      const renderButtons=() => {
+          if (!authenticated || !account) return
+         if(account.id === owner.id && account.id !== from.id && account.id == to.id) 
          {
-             if(response === "PENDING"){
+             if(localResponse === "PENDING"){
              return(
                 <div className="Accept-Reject">
-                <button onClick={()=>{sendResponse('accept')}}  className="btn-accept">
+                <button onClick={()=>sendResponse('accept')}  className="btn-accept">
                     Accept
                 </button>
-                <button onClick={()=>{sendResponse('reject')}} className="btn-deny">
+                <button onClick={()=>sendResponse('reject')} className="btn-deny">
                     Reject     
                 </button>
                  </div>
              )
              }
-              else if((response == "REJECTED"))
+              else if((localResponse == "REJECTED"))
              {
                  return <div className="REJECTED"> <span> This bid has been rejected </span> </div>
              }
          }
         
       }
+
+    useEffect(() => {
+        if (response) setLocalResponse(response)
+    }, [response])
       
 
     return (

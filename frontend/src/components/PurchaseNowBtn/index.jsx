@@ -8,7 +8,7 @@ import { AuthContext } from '@Context/AuthContext'
 import { buildApiUrl, createTransaction } from '@Utils/api'
 import { DEFAULT_ERROR } from '@Utils/generic'
 
-const PurchaseNowBtn = ({ tokenId }) => {
+const PurchaseNowBtn = ({ tokenId, onPurchaseSuccess }) => {
 	const { authenticated, account, openModel, closeModel } = useContext(AuthContext)
 
 	const ShowError = (msg) =>
@@ -60,6 +60,8 @@ const PurchaseNowBtn = ({ tokenId }) => {
 				/>,
 				closeModel
 			)
+
+			if (typeof onPurchaseSuccess === 'function') onPurchaseSuccess()
 
 			if (eventSource.readyState !== eventSource.CLOSED) eventSource.close()
 		})

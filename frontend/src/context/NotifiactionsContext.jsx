@@ -32,7 +32,11 @@ export const NotificationsProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        if (!authenticated) return
+        if (!authenticated && socket && (socket.OPEN || ws.CONNECTING)) {
+            socket.close()
+            setNotifications([])
+            return
+        }
 
         const ws = new EventWebSocket(buildWebsocketApiUrl('/notifications'))
 
