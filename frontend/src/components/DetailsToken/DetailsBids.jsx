@@ -10,7 +10,7 @@ const DetailsBid = ({ Id, owner, onAcceptedCallback}) => {
 	const [page, setPage] = useState(1)
 	const [isMore, setMore] = useState(true)
     const [isLoading, setLoading] = useState(false)
-	const Bidscalled = 3
+	const Bidscalled = 4
 
 	const getBidsForToken = async () => {
 		if (page <= 0 || !isMore || isLoading) return
