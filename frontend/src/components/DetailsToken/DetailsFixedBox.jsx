@@ -121,7 +121,7 @@ const DetailsFixedBox=({ details, owner })=>{
                     {formatMoney(details?.price * serviceFee / 100)} RVN
                 </span>
                 <span>
-                    ${usdPrice ? formatMoney(usdPrice * serviceFee) : ''}
+                    {usdPrice ? '$' + formatMoney(usdPrice * serviceFee) : ''}
                 </span>
             </div>
         </div>

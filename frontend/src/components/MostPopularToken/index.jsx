@@ -10,17 +10,26 @@ import './styles.css'
 
 const MostPopularToken = ({id, previewUrl, title, creator, collection, owner, highestBid }) => {
     const [usdPrice, setUsdPrice] = useState(0)
+    const [localHighestBid, setLocalHighestBid] = useState(highestBid?.price)
 
     const updateUsdPrice = async () => {
-        if (!highestBid || !highestBid?.price) return
+        if (!localHighestBid) return
 
-        const price = await convertRvnToUsd(highestBid?.price || 0)
+        const price = await convertRvnToUsd(localHighestBid || 0)
 
         setUsdPrice(price)
     }
 
+    const onPlaceBidSuccess = (price) => {
+        if (Number(price) > Number(localHighestBid)) setLocalHighestBid(price)
+    }
+
     useEffect(() => {
         updateUsdPrice()
+    }, [localHighestBid])
+
+    useEffect(() => {
+        if(highestBid && highestBid?.price) setLocalHighestBid(highestBid?.price)
     }, [highestBid])
 
     const getProfileElt = (title, img, name, to = '#') => {
@@ -50,10 +59,10 @@ const MostPopularToken = ({id, previewUrl, title, creator, collection, owner, hi
                     ) : null}
                 </div>
                 
-                {highestBid ? (
+                {localHighestBid ? (
                     <div className='bid-panel'>
                         <h6>Current Bid</h6>
-                        <span className='rvn'>{formatMoney(highestBid?.price || 0)} RVN</span>
+                        <span className='rvn'>{formatMoney(localHighestBid || 0)} RVN</span>
                         <span className='dollar'>${formatMoney(usdPrice)}</span>
                         {/* <h6>Auction ending in</h6>
                         <Timer date={new Date()} /> */}
@@ -61,7 +70,7 @@ const MostPopularToken = ({id, previewUrl, title, creator, collection, owner, hi
                 ): null}
 
                 <div className='buttons'>
-                    <PlaceBidBtn tokenId={id} ownerId={owner?.id || creator?.id} />
+                    <PlaceBidBtn tokenId={id} ownerId={owner?.id || creator?.id} successCallback={onPlaceBidSuccess} />
                     <Link to={`/details/${id}`} className='btn btn-white block'>View NFT</Link>
                 </div>
             </div>
