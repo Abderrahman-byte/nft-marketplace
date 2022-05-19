@@ -32,9 +32,9 @@ const DetailsFixedBoxOwner =({id,isForSale, instantSale, price})=>{
       }
       if (InstantSALe && Number.parseFloat(Price) > 0) {
         data.price = Number.parseFloat(Price)
-    }
+      }
 
-    data.instantSale = InstantSALe && Number.parseFloat(Price) > 0
+     data.instantSale = InstantSALe && Number.parseFloat(Price) > 0
      updateItem(data)
     }
 

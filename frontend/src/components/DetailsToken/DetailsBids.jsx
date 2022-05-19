@@ -5,7 +5,7 @@ import BidsDiv from './Bidsdiv'
 
 import './styles.css'
 
-const DetailsBid = ({ Id }) => {
+const DetailsBid = ({ Id, owner }) => {
 	const [bids, setBids] = useState([])
 	const [page, setPage] = useState(1)
 	const [isMore, setMore] = useState(true)
@@ -46,12 +46,13 @@ const DetailsBid = ({ Id }) => {
             setPage(page + 1)            
         }
 	}
-
+    /*const removeNode = (idx) => document.getElementById(`id-${idx}`).remove();*/
 	return (
 		<div className='bids-cont' onScroll={handleScroll}>
 			<div className='bids-scroll'>
 				{bids.map((bid, i) => (
-					<BidsDiv key={i} {...bid} />
+					
+					<BidsDiv key={i} {...bid} owner={owner}  />
 				))}
 			</div>
 		</div>

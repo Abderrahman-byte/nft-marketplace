@@ -452,3 +452,41 @@
   justify-content: center;
   gap: 2em;
 }
+.Accept-Reject{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 10%;
+  padding: 0 1em;
+}
+.Accept-Reject .btn-accept{
+  border-radius: 90px;
+	padding: 0.50em 1.15em;
+	border: none;
+	cursor: pointer;
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: none;
+  
+  color: #FFF;
+  background-color: #45b26b;
+  border: none;
+}
+.Accept-Reject .btn-deny{
+  border-radius: 90px;
+	padding: 0.50em 1.15em;
+	border: none;
+	cursor: pointer;
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: none;
+
+  color: #FFF;
+  background-color: #d51d05;
+  border: none;
+}
+.REJECTED span{
+  display: block;
+  font-size: 0.75em;
+  color: #ff5757;
+}

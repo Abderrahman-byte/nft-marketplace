@@ -44,7 +44,7 @@ return(
         <div className="details-container">
             {next === '1' && <DetailsInfo details={details} owner={owner || creator} creator={creator} />}
             {next === '3' && <DetailsHistory Id={details.id}/>}
-            {next === '4'&& <DetailsBid Id={details.id}/>}
+            {next === '4'&& <DetailsBid Id={details.id} owner = {owner}/>}
         </div>
 
         {!isOwner /*&& (details?.isForSale || details?.instantSale)*/? (<DetailsFixedBox details = {details} owner ={owner} creator={creator}/>)

@@ -278,3 +278,12 @@ export const updateTokenSettings = async (id,data) => {
 
     return [false, null]
 }
+export const respondOffer = async (id, data)=>{
+    try{
+        const response = await postRequest(buildApiUrl(`/marketplace/bids/${id}`), JSON.stringify(data))
+        console.log(id)
+        console.log(response)
+        if(response && response.success) return [true, response.error]
+        else if (response && response.error) return [false, response.error]
+    }catch{}
+}
