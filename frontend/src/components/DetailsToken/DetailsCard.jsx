@@ -30,7 +30,7 @@ return(
              <div className="Price-info">
                  <span className="RVN">  {formatMoney(details?.price || 0)} RVN</span>
                  <span className="USD">  ${formatMoney(usdPrice || 0)} </span>
-                 <span className="Stok"> 10 in stock</span>
+                 <span className="Stok"> 1 in stock</span>
              </div>
          </div>
          <div className="Bloc-2">

@@ -44,7 +44,6 @@ public class GetPopulareSellers {
 
         data.forEach(profile -> {
             String id = (String)profile.get("id");
-
             profile.put("totalTransactions", transactionDAO.getTransactionsSumOfAccount(id));
         });
 
