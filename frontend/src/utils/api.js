@@ -224,10 +224,10 @@ export const getDetailsToken = async (id) => {
     try{
         const response = await getRequest(buildApiUrl('marketplace/tokens/'+id))
         
-        if(response && response.data ) return [response.data, response.data.owner, response.data.creator]
+        if(response && response.data ) return response.data
     } catch{}
 
-    return [false, null]
+    return null
 }
 
 export const createBidStream = async (data) => {
@@ -284,8 +284,6 @@ export const updateTokenSettings = async (id,data) => {
 export const respondOffer = async (id, data)=>{
     try{
         const response = await postRequest(buildApiUrl(`/marketplace/bids/${id}`), JSON.stringify(data))
-        console.log(id)
-        console.log(response)
         if(response && response.success) return [true, response.error]
         else if (response && response.error) return [false, response.error]
     }catch{}

@@ -5,7 +5,7 @@ import BidsDiv from './Bidsdiv'
 
 import './styles.css'
 
-const DetailsBid = ({ Id, owner }) => {
+const DetailsBid = ({ Id, owner, onAcceptedCallback}) => {
 	const [bids, setBids] = useState([])
 	const [page, setPage] = useState(1)
 	const [isMore, setMore] = useState(true)
@@ -52,7 +52,7 @@ const DetailsBid = ({ Id, owner }) => {
 			<div className='bids-scroll'>
 				{bids.map((bid, i) => (
 					
-					<BidsDiv key={i} {...bid} owner={owner}  />
+					<BidsDiv onAcceptedCallback={onAcceptedCallback} key={i} {...bid} owner={owner}  />
 				))}
 			</div>
 		</div>
