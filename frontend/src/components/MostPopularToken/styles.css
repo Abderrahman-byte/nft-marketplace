@@ -32,41 +32,6 @@
     column-gap: 5%;
 }
 
-.MostPopularToken .info .profiles .profile-elt {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 1.8em;
-}
-
-.MostPopularToken .info .profiles .profile-elt a {
-    transition: transform .6s;
-    margin-right: .5em;
-    width: 40px;
-    height: 40px;
-}
-
-.MostPopularToken .info .profiles .profile-elt a:hover {
-    transform: translateY(-20%);
-}
-
-.MostPopularToken .info .profiles .profile-elt img {
-    width: 40px;
-    height: 40px;
-    background-color: #c4c4c4;
-    border-radius: 50%;
-}
-
-.MostPopularToken .info .profiles .profile-elt h6 {
-    font-size: .75rem;
-    color: #777e90;
-}
-
-.MostPopularToken .info .profiles .profile-elt .name {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #23262f;
-}
-
 .MostPopularToken .info .bid-panel {
     max-width: 100%;
     width: fit-content;

@@ -30,11 +30,11 @@ const DetailsCard =({details, owner, creator, isOwner, onPriceUpdated, onAccepte
                 <div className="Price-info">
                     <span className="RVN">  {formatMoney(details?.price || 0)} RVN</span>
                     <span className="USD">  ${formatMoney(usdPrice || 0)} </span>
-                    <span className="Stok"> 10 in stock</span>
+                    <span className="Stok"> 1 in stock</span>
                 </div>
             </div>
             <div className="Bloc-2">
-            {details?.description}
+            {details?.description ? (<>{details?.description}<br /></>) : null}
             This NFT Card will give you Access to Special Airdrops.
             To learn more about check out unlockable
             </div>

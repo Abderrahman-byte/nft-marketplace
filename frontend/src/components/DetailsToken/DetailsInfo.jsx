@@ -1,38 +1,17 @@
-import React from "react";
+import React from 'react'
+
+import AvatarLink from '@Components/AvatarLink'
 import './styles.css'
 
 const DetailsInfo = ({ owner, creator }) => {
-
     return (
         <div className="DetailsInfo ">
-            <div className="frame-966">
-                <div className="avatar-1">
-                <img src={owner?.avatarUrl} alt="" />
-                </div>
-                <div className="infos-1">
-                <span className="type">
-                    Owner
-                </span>
-                <span className="FullName">
-                {owner?.displayName || owner?.username}
-                </span>
-                </div>
-            </div>
+            <AvatarLink title='Owner' size="medium" name={owner?.displayName || owner?.username} to={`/user/${owner?.id}`} img={owner?.avatarUrl} />
             
             <div className="horizontal-divider"></div>
-            <div className="frame-966">
-                    <div className="avatar-1">
-                    <img src={creator?.avatarUrl} alt="" />
-                </div>
-                <div className="infos-1">
-                <span className="type">
-                Creator
-                </span>
-                <span className="FullName">
-                {creator?.displayName || creator?.username}
-                </span>
-                </div>
-            </div>
+
+            <AvatarLink title='Creator' size="medium" name={creator?.displayName || creator?.username} to={`/user/${owner?.id}`} img={creator?.avatarUrl} />
+            
             <div className="horizontal-divider"></div>
         </div>
     )

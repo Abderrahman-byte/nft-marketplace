@@ -5,8 +5,7 @@ import PlaceBidBtn from '@Components/PlaceBidBtn'
 import { convertRvnToUsd, formatMoney } from '@Utils/currency'
 
 import './styles.css'
-
-// TODO : make profile element into its own component
+import AvatarLink from '@Components/AvatarLink'
 
 const MostPopularToken = ({id, previewUrl, title, creator, collection, owner, highestBid }) => {
     const [usdPrice, setUsdPrice] = useState(0)
@@ -32,20 +31,6 @@ const MostPopularToken = ({id, previewUrl, title, creator, collection, owner, hi
         if(highestBid && highestBid?.price) setLocalHighestBid(highestBid?.price)
     }, [highestBid])
 
-    const getProfileElt = (title, img, name, to = '#') => {
-        return (
-            <div className='profile-elt'>
-                <Link className='block' to={to}>
-                    <img src={img} />
-                </Link>
-                <div className='profile-elt-info'>
-                    <h6>{title}</h6>
-                    <span className='name'>{name}</span>
-                </div>
-            </div>
-        )
-    }
-
     return (
         <div className='MostPopularToken'>
             <img src={previewUrl} />
@@ -53,9 +38,9 @@ const MostPopularToken = ({id, previewUrl, title, creator, collection, owner, hi
                 <h3>{title}</h3>
 
                 <div className='profiles'>
-                    {getProfileElt('Creator', creator?.avatarUrl, creator?.displayName, `/user/${creator?.id}`)}
+                    <AvatarLink title='Creator' img={creator?.avatarUrl} name={creator?.displayName} to={`/user/${creator?.id}`} />
                     {collection ? (
-                        getProfileElt('Collection', collection?.imageUrl, collection?.name, `/collection/${collection?.id}`)
+                        <AvatarLink title='Collection' img={collection?.imageUrl} name={collection?.name} to={`/collection/${collection?.id}`} />
                     ) : null}
                 </div>
                 
