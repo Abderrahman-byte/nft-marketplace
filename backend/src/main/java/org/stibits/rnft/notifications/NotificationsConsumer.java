@@ -101,7 +101,7 @@ public class NotificationsConsumer implements Consumer {
     }
 
     private void sendPrevNotifications () throws IOException {
-        List<Notification> notifications = this.notificationDAO.selectLatestNotifications(this.account.getId());
+        List<Notification> notifications = this.notificationDAO.selectLatestNotifications(this.account.getId(), 5);
 
         if (notifications.size() <= 0) return;
 
