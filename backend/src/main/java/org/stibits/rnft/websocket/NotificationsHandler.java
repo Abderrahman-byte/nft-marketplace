@@ -7,6 +7,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.Connection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.socket.CloseStatus;
@@ -19,6 +21,8 @@ import org.stibits.rnft.notifications.converters.NotificationJsonConverter;
 import org.stibits.rnft.repositories.NotificationDAO;
 
 public class NotificationsHandler extends TextWebSocketHandler {
+    private static Logger logger = LoggerFactory.getLogger(NotificationsHandler.class);
+
     @Autowired
     private Connection connection;
 
@@ -69,7 +73,7 @@ public class NotificationsHandler extends TextWebSocketHandler {
             try {
                 this.handleEvent(session, eventName, eventPayload);
             } catch (Exception ex) {
-                System.out.println("[ERROR:NotificationsHandler.handleTextMessage] " + ex.getMessage());
+                logger.error("handleTextMessage() - " + ex.getMessage(), ex);
             }
         } catch (JsonProcessingException ex) {}
     }

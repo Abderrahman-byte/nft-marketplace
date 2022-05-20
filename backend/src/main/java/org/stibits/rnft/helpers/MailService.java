@@ -2,6 +2,8 @@ package org.stibits.rnft.helpers;
 
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
@@ -19,7 +21,8 @@ import javax.mail.internet.MimeMultipart;
 
 @Component
 public class MailService {
-	
+	private static final Logger logger = LoggerFactory.getLogger(MailService.class);
+
     private Session mailSession;
     private Environment environment;
 
@@ -57,7 +60,7 @@ public class MailService {
             Transport.send(message);
 
         } catch (Exception ex)  {
-            System.err.println("[sendMail-Exception] " + ex.getMessage());
+            logger.error("sendMail() - " + ex.getMessage(), ex);
         }
     }
 

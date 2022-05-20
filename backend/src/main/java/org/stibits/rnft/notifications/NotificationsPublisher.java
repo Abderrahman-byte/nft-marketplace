@@ -7,6 +7,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -15,6 +17,8 @@ import org.stibits.rnft.notifications.converters.NotificationJsonConverter;
 
 @Component
 public class NotificationsPublisher {
+    private static final Logger logger = LoggerFactory.getLogger(NotificationsPublisher.class);
+
     @Autowired
     private Connection connection;
 
@@ -38,7 +42,7 @@ public class NotificationsPublisher {
 
             this.channel.basicPublish(notificationExchange, routingKey, null, body.getBytes());
         } catch (Exception ex) {
-            System.out.println("[ERROR:NotificationsPublisher.publish] " + ex.getMessage());
+            logger.error("publish() - " + ex.getMessage(), ex);
         }
     }
     

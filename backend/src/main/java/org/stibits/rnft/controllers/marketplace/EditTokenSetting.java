@@ -3,6 +3,8 @@ package org.stibits.rnft.controllers.marketplace;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.validation.MapBindingResult;
@@ -26,6 +28,8 @@ import org.stibits.rnft.validation.EditTokenSettingsValidation;
 @RestController
 @RequestMapping("/api/${api.version}/marketplace/tokens/{id}")
 public class EditTokenSetting {
+    private static final Logger logger = LoggerFactory.getLogger(EditTokenSetting.class);
+
     @Autowired
     private NFTokenDAO tokenDAO;
 
@@ -60,7 +64,7 @@ public class EditTokenSetting {
 
             return response;
         } catch (Exception ex) {
-            System.out.println("[EXCEPTION] " + ex.getMessage());
+            logger.error("UnknownError - " + ex.getMessage(), ex);
             throw new UnknownError();
         }
     }
