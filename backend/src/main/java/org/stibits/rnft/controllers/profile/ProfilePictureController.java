@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.stibits.rnft.domain.Account;
+import org.stibits.rnft.domain.Profile;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.StorageUnacceptedMediaType;
 import org.stibits.rnft.errors.UnacceptedMediaTypeError;
 import org.stibits.rnft.helpers.StorageService;
-import org.stibits.rnft.entities.Account;
-import org.stibits.rnft.entities.Profile;
 import org.stibits.rnft.repositories.ProfileDAO;
 
 @RestController

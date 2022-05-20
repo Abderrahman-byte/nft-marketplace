@@ -1,4 +1,4 @@
-package org.stibits.rnft.entities;
+package org.stibits.rnft.domain;
 
 public enum NotificationEvent {
     SOLD,

@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.stibits.rnft.converters.SimpleCollectionMapConverter;
-import org.stibits.rnft.entities.Account;
-import org.stibits.rnft.entities.NftCollection;
+import org.stibits.rnft.domain.Account;
+import org.stibits.rnft.domain.NftCollection;
 import org.stibits.rnft.repositories.NftCollectionDAO;
 
 @RestController

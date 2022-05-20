@@ -6,8 +6,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.stibits.rnft.converters.ProfileDetailsConverter;
-import org.stibits.rnft.entities.Account;
-import org.stibits.rnft.entities.Profile;
+import org.stibits.rnft.domain.Account;
+import org.stibits.rnft.domain.Profile;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.ValidationError;
 import org.stibits.rnft.repositories.ProfileDAO;

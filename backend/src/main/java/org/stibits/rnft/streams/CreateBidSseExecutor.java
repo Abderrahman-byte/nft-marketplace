@@ -7,9 +7,9 @@ import com.auth0.jwt.interfaces.Claim;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
-import org.stibits.rnft.entities.Account;
-import org.stibits.rnft.entities.Bid;
-import org.stibits.rnft.entities.Notification;
+import org.stibits.rnft.domain.Account;
+import org.stibits.rnft.domain.Bid;
+import org.stibits.rnft.domain.Notification;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.AuthenticationRequiredError;
 import org.stibits.rnft.errors.InvalidData;

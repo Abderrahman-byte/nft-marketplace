@@ -6,8 +6,8 @@ import java.util.Map;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
-import org.stibits.rnft.entities.Account;
-import org.stibits.rnft.entities.Session;
+import org.stibits.rnft.domain.Account;
+import org.stibits.rnft.domain.Session;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.UnverifiedEmailError;
 import org.stibits.rnft.errors.ValidationError;

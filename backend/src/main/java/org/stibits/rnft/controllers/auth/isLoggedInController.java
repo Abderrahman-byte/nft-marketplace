@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.stibits.rnft.entities.Account;
+import org.stibits.rnft.domain.Account;
 
 @RestController
 @RequestMapping("/api/${api.version}/auth/isLoggedIn")

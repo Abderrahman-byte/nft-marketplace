@@ -11,10 +11,10 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
-import org.stibits.rnft.entities.Account;
-import org.stibits.rnft.entities.Token;
-import org.stibits.rnft.entities.TokenSettings;
-import org.stibits.rnft.entities.NftCollection;
+import org.stibits.rnft.domain.Account;
+import org.stibits.rnft.domain.NftCollection;
+import org.stibits.rnft.domain.Token;
+import org.stibits.rnft.domain.TokenSettings;
 import org.stibits.rnft.utils.RandomGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

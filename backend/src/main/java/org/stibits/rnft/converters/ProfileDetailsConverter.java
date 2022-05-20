@@ -7,8 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-import org.stibits.rnft.entities.Account;
-import org.stibits.rnft.entities.Profile;
+import org.stibits.rnft.domain.Account;
+import org.stibits.rnft.domain.Profile;
 
 @Component
 public class ProfileDetailsConverter implements Converter<Profile, Map<String, Object>> {

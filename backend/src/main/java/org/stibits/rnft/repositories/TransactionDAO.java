@@ -12,9 +12,9 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.stibits.rnft.entities.Account;
-import org.stibits.rnft.entities.Token;
-import org.stibits.rnft.entities.Transaction;
+import org.stibits.rnft.domain.Account;
+import org.stibits.rnft.domain.Token;
+import org.stibits.rnft.domain.Transaction;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.NotFoundError;
 import org.stibits.rnft.errors.TokenNotFound;
@@ -81,7 +81,7 @@ public class TransactionDAO {
 	public int getAccountTokenBalance (Token token, String accountId) {
 		int balance = accountId.equals(token.getCreator().getId()) ? 1 : 0;
 
-		List<Transaction> transactions = token.getTransaction().stream().sorted((a, b) -> {
+		List<Transaction> transactions = token.getTransactions().stream().sorted((a, b) -> {
 				return a.getCreatedDate().compareTo(b.getCreatedDate());
 			}).toList();
 
@@ -104,7 +104,7 @@ public class TransactionDAO {
 
 	@Transactional
 	public Account getTokenOwner (Token token) {
-		List<Transaction> transactions = token.getTransaction().stream().sorted(
+		List<Transaction> transactions = token.getTransactions().stream().sorted(
 			(a, b) -> a.getCreatedDate().compareTo(b.getCreatedDate())
 		).toList();
 

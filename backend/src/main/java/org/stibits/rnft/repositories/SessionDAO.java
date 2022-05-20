@@ -12,7 +12,7 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.stibits.rnft.entities.Session;
+import org.stibits.rnft.domain.Session;
 
 // TODO : Delete Expired sessions
 
@@ -34,7 +34,7 @@ public class SessionDAO {
 
         cq.select(root).where(
             cb.and(
-                cb.equal(root.get("id"), sid),
+                cb.equal(root.get("sid"), sid),
                 cb.greaterThan(root.get("expires"), Calendar.getInstance())
             )
         );
@@ -53,7 +53,7 @@ public class SessionDAO {
         Root<Session> root = cd.from(Session.class);
 
         cd.where(
-            cb.equal(root.get("id"), sid)
+            cb.equal(root.get("sid"), sid)
         );
 
         return entityManager.createQuery(cd).executeUpdate() > 0;

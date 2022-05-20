@@ -16,8 +16,8 @@ import com.rabbitmq.client.ShutdownSignalException;
 
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
-import org.stibits.rnft.entities.Account;
-import org.stibits.rnft.entities.Notification;
+import org.stibits.rnft.domain.Account;
+import org.stibits.rnft.domain.Notification;
 import org.stibits.rnft.notifications.converters.NotificationJsonConverter;
 import org.stibits.rnft.repositories.NotificationDAO;
 

@@ -11,7 +11,7 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
-import org.stibits.rnft.entities.Account;
+import org.stibits.rnft.domain.Account;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.DataIntegrityError;
 import org.stibits.rnft.errors.UnknownError;

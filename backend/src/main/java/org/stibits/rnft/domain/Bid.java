@@ -1,4 +1,4 @@
-package org.stibits.rnft.entities;
+package org.stibits.rnft.domain;
 
 import java.util.Calendar;
 
@@ -15,8 +15,15 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name = "bids")
+@Getter
+@Setter
+@NoArgsConstructor
 public class Bid {
     @Id
     private String id;
@@ -44,62 +51,4 @@ public class Bid {
     @Column(name = "created_date")
     @CreationTimestamp
     private Calendar createdDate = Calendar.getInstance();
-
-    public Bid () {}
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public Calendar getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Calendar createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public Account getFrom() {
-        return from;
-    }
-
-    public void setFrom(Account from) {
-        this.from = from;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public Account getTo() {
-        return to;
-    }
-
-    public void setTo(Account to) {
-        this.to = to;
-    }
-
-    public Token getToken() {
-        return token;
-    }
-
-    public void setToken(Token token) {
-        this.token = token;
-    }
-
-    public OfferResponse getResponse() {
-        return response;
-    }
-
-    public void setResponse(OfferResponse response) {
-        this.response = response;
-    }
 }

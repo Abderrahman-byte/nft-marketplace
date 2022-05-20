@@ -1,4 +1,4 @@
-package org.stibits.rnft.entities;
+package org.stibits.rnft.domain;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -14,8 +14,15 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name = "transactions")
+@Getter
+@Setter
+@NoArgsConstructor
 public class Transaction implements Serializable {
 	@Id
 	private String id;
@@ -39,54 +46,4 @@ public class Transaction implements Serializable {
     @Column(nullable = false, name = "created_date")
     @CreationTimestamp
 	private Calendar createdDate = Calendar.getInstance();
-	
-	public Transaction() {}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public Account getTo() {
-		return to;
-	}
-
-	public void setTo(Account to) {
-		this.to = to;
-	}
-
-	public Account getFrom() {
-		return from;
-	}
-
-	public void setFrom(Account from) {
-		this.from = from;
-	}
-
-	public Calendar getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(Calendar createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	public Token getToken() {
-		return token;
-	}
-
-	public void setToken(Token token) {
-		this.token = token;
-	}
 }

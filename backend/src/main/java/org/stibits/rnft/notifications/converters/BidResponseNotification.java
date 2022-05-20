@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.stibits.rnft.converters.DateTimestampConverter;
 import org.stibits.rnft.converters.ProfileDetailsConverter;
 import org.stibits.rnft.converters.SimpleTokenMapConverter;
-import org.stibits.rnft.entities.Bid;
+import org.stibits.rnft.domain.Bid;
 
 @Component
 public class BidResponseNotification implements Converter<Bid, Map<String, Object>> {

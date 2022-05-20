@@ -13,7 +13,7 @@ import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
-import org.stibits.rnft.entities.Account;
+import org.stibits.rnft.domain.Account;
 import org.stibits.rnft.notifications.NotificationsConsumer;
 import org.stibits.rnft.notifications.converters.NotificationJsonConverter;
 import org.stibits.rnft.repositories.NotificationDAO;
