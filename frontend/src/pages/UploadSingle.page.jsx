@@ -29,7 +29,7 @@ const UploadSinglePage = () => {
 			openModel(<MessageCard title='Success' text='NFT Has been created successfully' closeBtnCallback={closeModel} />, closeModel)
 			setTokenData({})
 		} else {
-			openModel(<MessageCard title='Something is wrong' text={error?.detail || DEFAULT_ERROR} closeBtnCallback={closeModel} />, closeModel)
+			openModel(<MessageCard title='Something is wrong' text={error?.detail || DEFAULT_ERROR.message} closeBtnCallback={closeModel} />, closeModel)
 		}
 	}
 
