@@ -20,7 +20,6 @@ import javax.persistence.Column;
 import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 // ! Token id is a random string for now but it can be replaced by rvn asset name
@@ -30,7 +29,6 @@ import lombok.Setter;
 @Table(name = "token")
 @Getter
 @Setter
-@NoArgsConstructor
 public class Token {
 	@Id
 	private String id;
@@ -74,4 +72,9 @@ public class Token {
 	
 	@OneToMany(targetEntity = Transaction.class, cascade = CascadeType.ALL, mappedBy = "token")
 	private List<Transaction> transactions = new ArrayList<>();
+
+	public Token () {
+		this.settings.setTokenId(this.id);
+		this.settings.setToken(this);
+	}
 }
