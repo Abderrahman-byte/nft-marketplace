@@ -12,6 +12,7 @@ import UserProfilePage from '@Pages/UserProfile.page'
 import DiscoverPage from '@Pages/Discover.page'
 import MainPage from '@Pages/Main.page'
 import DetailsPage from '@Pages/Details.page'
+import SearchPages from '@Pages/Search.pages'
 import { NotificationsProvider } from '@Context/NotifiactionsContext'
 
 import '@Styles/App.css'
@@ -44,6 +45,7 @@ const App = () => {
 					
 					<Route path='/profile/*' element={<AuthenticationOnly><ProfilePages /></AuthenticationOnly>} />
 					<Route path='/upload/*' element={<AuthenticationOnly><CreatePages /></AuthenticationOnly>} />
+					<Route path='/search/:query/*' element={<SearchPages />} />
 					<Route path='/user/:id/*' element={<UserProfilePage />} />
 					<Route path='/details/:id' element={<DetailsPage />} />
 

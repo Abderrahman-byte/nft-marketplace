@@ -36,6 +36,8 @@ const TokenProfileList = ({ id, getTokensFunction }) => {
         setTimeout(() => setPage(1), 0)
     }, [id, getTokensFunction])
 
+    // Replace children by token list
+
     return (
         <div className='TokenProfileList profile-content'>
             {tokens.map((token, i) => <TokenCard key={i} likable link {...token} />)}

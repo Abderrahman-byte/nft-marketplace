@@ -305,3 +305,21 @@ export const sendLogout = async () => {
     } catch {}
 
 }
+
+export const makeSearch = (sub) => {
+    return async (query, page) => {
+        try {
+            const response = await getRequest(buildApiUrl(`/search/${sub}`) + `?query=${query}&page=${page}`)
+    
+            if (response.success && response.data) return response.data
+        } catch {}
+    
+        return []
+    }
+}
+
+export const searchItems = makeSearch('items')
+
+export const searchCollections = makeSearch('collections')
+
+export const searchUsers = makeSearch('users')

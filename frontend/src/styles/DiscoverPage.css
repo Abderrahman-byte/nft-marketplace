@@ -2,17 +2,6 @@
     margin-bottom: 2em;
 }
 
-.DiscoverPage .tokens-container {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: calc(10% / 3);
-    row-gap: 32px;
-}
-
-.DiscoverPage .tokens-container .TokenCard {
-    width: calc(90% / 4);
-}
-
 .more-btn-container {
     display: flex;
     justify-content: center;
