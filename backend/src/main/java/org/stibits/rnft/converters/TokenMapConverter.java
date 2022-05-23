@@ -13,13 +13,13 @@ import org.stibits.rnft.domain.Token;
 @Component
 public class TokenMapConverter implements Converter<Token, Map<String, Object>> {
     @Autowired
-    public ProfileDetailsConverter profileDetailsConverter;
+    private ProfileDetailsConverter profileDetailsConverter;
 
     @Autowired
-    public SimpleCollectionMapConverter collectionMapConverter;
+    private SimpleCollectionMapConverter collectionMapConverter;
 
     @Autowired
-    public DateTimestampConverter timestampConverter;
+    private DateTimestampConverter timestampConverter;
 
     public List<Map<String, Object>> convertList (List<Token> nfts, Account account) {
         return nfts.stream().map(nft -> this.convert(nft, account)).toList();
