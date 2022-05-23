@@ -16,6 +16,7 @@ import SearchPages from '@Pages/Search.pages'
 import { NotificationsProvider } from '@Context/NotifiactionsContext'
 
 import '@Styles/App.css'
+import CollectionPage from '@Pages/Collection.page'
 
 const App = () => {
 	const location = useLocation()
@@ -48,7 +49,7 @@ const App = () => {
 					<Route path='/search/:query/*' element={<SearchPages />} />
 					<Route path='/user/:id/*' element={<UserProfilePage />} />
 					<Route path='/details/:id' element={<DetailsPage />} />
-
+					<Route path='/collection/:id' element={<CollectionPage />} />
 				</Routes>
 			
 				<AppFooter />
