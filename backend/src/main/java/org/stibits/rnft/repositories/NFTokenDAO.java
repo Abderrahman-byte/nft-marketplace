@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Stream;
 
 import javax.persistence.EntityManager;
@@ -16,6 +17,7 @@ import org.stibits.rnft.domain.NftCollection;
 import org.stibits.rnft.domain.Token;
 import org.stibits.rnft.domain.TokenSettings;
 import org.stibits.rnft.utils.RandomGenerator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -186,27 +188,115 @@ public class NFTokenDAO {
     }
 
     public List<Token> selectTokensSortedByLikes (String collectionId,int limit, int offset) {
-        return this.selectToken("order by likes DESC, created_date DESC", collectionId, limit, offset);
+        String sqlString = "SELECT t.id, t.title, t.collection_id, t.created_date, t.artist_id, t.preview_url, t.description, "+
+        "count(lk.account_id) as likes "+
+        "FROM token t " +
+        "LEFT JOIN token_likes lk ON lk.token_id = t.id "+
+        "WHERE t.collection_id = :collectionId "+
+        "GROUP BY t.id, t.title, t.collection_id " +
+        "ORDER BY likes DESC, t.created_date DESC " +
+        "LIMIT :limit OFFSET :offset";
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("collectionId", collectionId);
+        params.put("limit", limit);
+        params.put("offset", offset);
+
+        return this.selectTokensByQuery(sqlString, params);
     }
 
     public List<Token> selectTokensSortedByHighPrice (String collectionId, int limit, int offset) {
-        return this.selectToken("order by price DESC, created_date DESC", collectionId, limit, offset);
+        String sqlString = "SELECT t.id, t.title, t.collection_id, t.created_date, t.artist_id, t.preview_url, t.description, " +
+        "settings.price as price " +
+        "FROM token t " +
+        "LEFT JOIN token_settings settings ON settings.token_id = t.id " +
+        "WHERE t.collection_id = :collectionId " +
+        "GROUP BY t.id, t.title, t.collection_id " +
+        "ORDER BY price DESC, t.created_date DESC " +
+        "LIMIT :limit OFFSET :offset";
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("collectionId", collectionId);
+        params.put("limit", limit);
+        params.put("offset", offset);
+
+        return this.selectTokensByQuery(sqlString, params);
     }
 
     public List<Token> selectTokensSortedByLowPrice (String collectionId, int limit, int offset) {
-        return this.selectToken("order by price ASC, created_date DESC", collectionId, limit, offset);
+        String sqlString = "SELECT t.id, t.title, t.collection_id, t.created_date, t.artist_id, t.preview_url, t.description, " +
+        "settings.price as price " +
+        "FROM token t " +
+        "LEFT JOIN token_settings settings ON settings.token_id = t.id " +
+        "WHERE t.collection_id = :collectionId " +
+        "GROUP BY t.id, t.title, t.collection_id " +
+        "ORDER BY price ASC, t.created_date DESC " +
+        "LIMIT :limit OFFSET :offset";
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("collectionId", collectionId);
+        params.put("limit", limit);
+        params.put("offset", offset);
+
+        return this.selectTokensByQuery(sqlString, params);
     }
 
-    public List<Token> selectTokensSortedByLikes (String collectionId,int limit, int offset, double maxPrice) {
-        return this.selectToken("order by likes DESC, created_date DESC", collectionId, limit, offset, maxPrice);
+    public List<Token> selectTokensSortedByLikes (String collectionId, int limit, int offset, double maxPrice) {
+        String sqlString = "SELECT t.id, t.title, t.collection_id, t.created_date, t.artist_id, t.preview_url, t.description, "+
+        "count(lk.account_id) as likes, settings.price as price "+
+        "FROM token t " +
+        "LEFT JOIN token_likes lk ON lk.token_id = t.id "+
+        "LEFT JOIN token_settings settings ON settings.token_id = t.id " +
+        "WHERE t.collection_id = :collectionId and price <= :maxPrice "+
+        "GROUP BY t.id, t.title, t.collection_id " +
+        "ORDER BY likes DESC, t.created_date DESC " +
+        "LIMIT :limit OFFSET :offset";
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("collectionId", collectionId);
+        params.put("limit", limit);
+        params.put("offset", offset);
+        params.put("maxPrice", maxPrice);
+
+        return this.selectTokensByQuery(sqlString, params);
     }
 
     public List<Token> selectTokensSortedByHighPrice (String collectionId, int limit, int offset, double maxPrice) {
-        return this.selectToken("order by price DESC, created_date DESC", collectionId, limit, offset, maxPrice);
+        String sqlString = "SELECT t.id, t.title, t.collection_id, t.created_date, t.artist_id, t.preview_url, t.description, " +
+        "settings.price as price " +
+        "FROM token t " +
+        "LEFT JOIN token_settings settings ON settings.token_id = t.id " +
+        "WHERE t.collection_id = :collectionId and price" +
+        "GROUP BY t.id, t.title, t.collection_id and price <= :maxPrice " +
+        "ORDER BY price DESC, t.created_date DESC " +
+        "LIMIT :limit OFFSET :offset";
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("collectionId", collectionId);
+        params.put("limit", limit);
+        params.put("offset", offset);
+        params.put("maxPrice", maxPrice);
+
+        return this.selectTokensByQuery(sqlString, params);
     }
 
     public List<Token> selectTokensSortedByLowPrice (String collectionId, int limit, int offset, double maxPrice) {
-        return this.selectToken("order by price ASC, created_date DESC", collectionId, limit, offset, maxPrice);
+        String sqlString = "SELECT t.id, t.title, t.collection_id, t.created_date, t.artist_id, t.preview_url, t.description, " +
+        "settings.price as price " +
+        "FROM token t " +
+        "LEFT JOIN token_settings settings ON settings.token_id = t.id " +
+        "WHERE t.collection_id = :collectionId and price" +
+        "GROUP BY t.id, t.title, t.collection_id and price <= :maxPrice " +
+        "ORDER BY price ASC, t.created_date DESC " +
+        "LIMIT :limit OFFSET :offset";
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("collectionId", collectionId);
+        params.put("limit", limit);
+        params.put("offset", offset);
+        params.put("maxPrice", maxPrice);
+
+        return this.selectTokensByQuery(sqlString, params);
     }
 
     @Transactional
@@ -353,41 +443,14 @@ public class NFTokenDAO {
         return tokenslist;
     }
 
-    // FIXME : this maybe unsafe, re-check later
     @SuppressWarnings("unchecked")
-    private List<Token> selectToken (String addSql, String collectionId, int limit, int offset) {
-        String sqlString = "select id, title, preview_url, artist_id, description,collection_id, created_date, " +
-            "(select count(account_id) as likes from token_likes where token_likes.token_id = token.id ) as likes " +
-            "from token where collection_id = :collectionId " + addSql + " limit :limit offset :offset";
+    private List<Token> selectTokensByQuery(String sqlString, Map<String, Object> parameters) {
+        Query query = this.entityManager.createNativeQuery(sqlString, Token.class);
 
-        Query query = entityManager.createNativeQuery(sqlString, Token.class);
-        query.setParameter("offset", offset);
-        query.setParameter("limit", limit);
-        query.setParameter("collectionId", collectionId);
+        for (Entry<String, Object> entry : parameters.entrySet()) {
+            query.setParameter(entry.getKey(), entry.getValue());
+        }
 
-        List<Token> tokenslist = (List<Token>)query.getResultList();
-
-        tokenslist.forEach(token -> token.setOwner(transactionDAO.getTokenOwner(token)));
-    
-        return tokenslist;
-    }
-
-    // FIXME : this maybe unsafe re-check 
-    @SuppressWarnings("unchecked")
-    private List<Token> selectToken (String addSql, String collectionId, int limit, int offset, double maxPrice) {
-        String sqlString = "select id, title, preview_url, artist_id, description,collection_id, created_date " +
-            "from token where collection_id = :collectionId and price <= :max " + addSql + " limit :limit offset :offset";
-
-        Query query = entityManager.createNativeQuery(sqlString, Token.class);
-        query.setParameter("offset", offset);
-        query.setParameter("limit", limit);
-        query.setParameter("max", maxPrice);
-        query.setParameter("collectionId", collectionId);
-
-        List<Token> tokenslist = (List<Token>)query.getResultList();
-
-        tokenslist.forEach(token -> token.setOwner(transactionDAO.getTokenOwner(token)));
-    
-        return tokenslist;
+        return (List<Token>)query.getResultList();
     }
 }
