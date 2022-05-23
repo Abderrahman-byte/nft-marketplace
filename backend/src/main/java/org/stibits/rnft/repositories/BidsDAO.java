@@ -14,10 +14,10 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.stibits.rnft.entities.Account;
-import org.stibits.rnft.entities.Bid;
-import org.stibits.rnft.entities.OfferResponse;
-import org.stibits.rnft.entities.Token;
+import org.stibits.rnft.domain.Account;
+import org.stibits.rnft.domain.Bid;
+import org.stibits.rnft.domain.OfferResponse;
+import org.stibits.rnft.domain.Token;
 import org.stibits.rnft.errors.AccountNotFound;
 import org.stibits.rnft.errors.NotFoundError;
 import org.stibits.rnft.errors.TokenNotFound;

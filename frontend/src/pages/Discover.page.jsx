@@ -5,6 +5,7 @@ import { getTokens } from '@Utils/api'
 import TokensListFilter from '@Components/TokensListFilter'
 
 import '@Styles/DiscoverPage.css'
+import TokensList from '@Components/TokensList'
 
 const DiscoverPage = () => {
     const [tokensList, setTokensList] = useState([])
@@ -47,9 +48,7 @@ const DiscoverPage = () => {
 
             <TokensListFilter onFilterUpdate={onFilterUpdate} />
 
-            <div className='tokens-container'>
-                {tokensList.map((token,i) => <TokenCard key={i} likable link {...token} />)}
-            </div>
+            <TokensList data={tokensList} />
 
             <div className='more-btn-container'>
                 {isLoading ? (

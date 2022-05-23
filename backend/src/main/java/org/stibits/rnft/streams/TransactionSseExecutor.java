@@ -4,9 +4,9 @@ import java.util.Map;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
-import org.stibits.rnft.entities.Account;
-import org.stibits.rnft.entities.Notification;
-import org.stibits.rnft.entities.Transaction;
+import org.stibits.rnft.domain.Account;
+import org.stibits.rnft.domain.Notification;
+import org.stibits.rnft.domain.Transaction;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.AuthenticationRequiredError;
 import org.stibits.rnft.errors.InvalidData;

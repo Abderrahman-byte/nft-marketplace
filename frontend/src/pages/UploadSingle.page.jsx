@@ -5,7 +5,9 @@ import CreateSingleItemForm from '@Components/CreateTokenForm'
 import TokenCard from '@Components/TokenCard'
 import { AuthContext } from '@Context/AuthContext'
 import LoadingCard from '@Components/LoadingCard'
+import MessageCard from '@Components/MessageCard'
 import { createToken } from '@Utils/api'
+import { DEFAULT_ERROR } from '@Utils/generic'
 
 import '@Styles/UploadItem.css'
 
@@ -23,9 +25,12 @@ const UploadSinglePage = () => {
 
 		const [data, error] = await createToken(file, metadata)
 
-		if (data && !error) setTokenData({})
-
-		closeModel()
+		if (data && !error) {
+			openModel(<MessageCard title='Success' text='NFT Has been created successfully' closeBtnCallback={closeModel} />, closeModel)
+			setTokenData({})
+		} else {
+			openModel(<MessageCard title='Something is wrong' text={error?.detail || DEFAULT_ERROR.message} closeBtnCallback={closeModel} />, closeModel)
+		}
 	}
 
 	useEffect(() => {

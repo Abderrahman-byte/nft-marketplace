@@ -13,8 +13,8 @@ import javax.persistence.criteria.Root;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.stibits.rnft.entities.Account;
-import org.stibits.rnft.entities.NftCollection;
+import org.stibits.rnft.domain.Account;
+import org.stibits.rnft.domain.NftCollection;
 import org.stibits.rnft.utils.RandomGenerator;
 
 @Repository

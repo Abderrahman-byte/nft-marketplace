@@ -13,7 +13,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.stibits.rnft.entities.Account;
+import org.stibits.rnft.domain.Account;
 import org.stibits.rnft.utils.PasswordHasher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

@@ -1,0 +1,34 @@
+.UserCard {
+    border: 1px solid var(--divider-clr);
+    padding: 1em;
+    display: block;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    row-gap: 1em;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1em;
+    transition: .4s transform;
+}
+
+.UserCard:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4em 4em -3em rgba(31, 47, 70, 0.12);
+}
+
+.UserCard .avatar {
+    width: 5.2vw;
+    height: 5.2vw;
+    min-width: 64px;
+    min-height: 64px;
+    background-color: #c4c4c4;
+    border-radius: 50%;
+}
+
+.UserCard .name {
+    font-weight: 500;
+    font-size: .825rem;
+    color: #23262f;
+}

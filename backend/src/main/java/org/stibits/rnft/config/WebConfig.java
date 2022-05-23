@@ -86,7 +86,7 @@ public class WebConfig implements WebMvcConfigurer, WebSocketConfigurer {
         entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         entityManagerFactoryBean.setDataSource(dataSource());
         entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
-        entityManagerFactoryBean.setPackagesToScan("org.stibits.rnft.entities");
+        entityManagerFactoryBean.setPackagesToScan("org.stibits.rnft.domain");
         entityManagerFactoryBean.setJpaProperties(addProperties());
 
         return entityManagerFactoryBean;

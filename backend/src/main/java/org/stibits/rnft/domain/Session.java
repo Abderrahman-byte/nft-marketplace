@@ -1,4 +1,4 @@
-package org.stibits.rnft.entities;
+package org.stibits.rnft.domain;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -15,6 +15,10 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import com.vladmihalcea.hibernate.type.json.JsonType;
 
 @Entity
@@ -22,9 +26,13 @@ import com.vladmihalcea.hibernate.type.json.JsonType;
 @TypeDefs({
 	@TypeDef(name="json", typeClass = JsonType.class)
 })
+@Setter
+@NoArgsConstructor
+@Getter
 public class Session {
 	@Id
-	private String id;
+	@Column(name = "id")
+	private String sid;
 	
 	@Type(type="json")
 	@Column(columnDefinition="json")
@@ -34,33 +42,6 @@ public class Session {
 	@Column(nullable = false)
 	private Calendar expires = Calendar.getInstance();
 	
-    public Session() {}
-
-
-	public String getSid() {
-		return id;
-	}
-
-	public void setSid(String sid) {
-		this.id = sid;
-	}
-
-	public Map<String, Object> getPayload() {
-		return payload;
-	}
-
-	public void setPayload(Map<String, Object> payload) {
-		this.payload = payload;
-	}
-
-	public Calendar getExpires() {
-		return expires;
-	}
-
-	public void setExpires(Calendar expires) {
-		this.expires = expires;
-	}
-
 	public long getMaxAge () {
 		if (this.expires == null) return 0;
 

@@ -1,0 +1,41 @@
+.TokensList {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    row-gap: 1em;
+}
+
+.TokensList .TokenCard {
+    width: 100%;
+}
+
+@media screen and (min-width : 600px) {
+    .TokensList {
+        flex-direction: row;
+        column-gap: 10%;
+    }
+
+    .TokensList .TokenCard {
+        width: 45%;
+    }
+}
+
+@media screen and (min-width : 900px) {
+    .TokensList {
+        column-gap: calc(10% / 2);
+    }
+
+    .TokensList .TokenCard {
+        width: 30%;
+    }
+}
+
+@media screen and (min-width : 1200px) {
+    .TokensList {
+        column-gap: calc(10% / 3);
+    }
+
+    .TokensList .TokenCard {
+        width: calc(90% / 4);
+    }
+}

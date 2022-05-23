@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-import org.stibits.rnft.entities.NftCollection;
+import org.stibits.rnft.domain.NftCollection;
 
 @Component
 public class SimpleCollectionMapConverter implements Converter<NftCollection, Map<String, Object>> {

@@ -14,9 +14,9 @@ import org.stibits.rnft.errors.UnacceptedMediaTypeError;
 import org.stibits.rnft.errors.UnknownError;
 import org.stibits.rnft.helpers.StorageService;
 import org.stibits.rnft.converters.NftCreatedResponseConverter;
-import org.stibits.rnft.entities.Account;
-import org.stibits.rnft.entities.Token;
-import org.stibits.rnft.entities.NftCollection;
+import org.stibits.rnft.domain.Account;
+import org.stibits.rnft.domain.NftCollection;
+import org.stibits.rnft.domain.Token;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.CollectionNotFound;
 import org.stibits.rnft.errors.DataIntegrityError;
@@ -25,6 +25,8 @@ import org.stibits.rnft.repositories.NFTokenDAO;
 import org.stibits.rnft.repositories.NftCollectionDAO;
 import org.stibits.rnft.validation.CreateMultipleNFTValidator;
 import org.stibits.rnft.validation.CreateSingleNFTValidator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
@@ -45,6 +47,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RestController
 @RequestMapping("/api/${api.version}/marketplace/tokens")
 public class CreateNFTController {
+    private static final Logger logger = LoggerFactory.getLogger(CreateNFTController.class);
+
     @Autowired
     private StorageService storageService;
 
@@ -92,7 +96,7 @@ public class CreateNFTController {
             List<Token> nfts = nftokenDAO.insertMultipleNFT(account, collection, metadata, contentUrl);
             return responseConverter.convert(nfts, contentUrl);
         } catch (Exception ex) {
-            System.out.println("[" + ex.getClass().getName() + "] " + ex.getMessage());
+            logger.error("createMultipleNFT() unknown error", ex);
             throw new UnknownError();
         }
     }

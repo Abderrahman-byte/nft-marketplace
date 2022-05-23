@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.stibits.rnft.entities.Account;
+import org.stibits.rnft.domain.Account;
 import org.stibits.rnft.errors.ApiError;
 import org.stibits.rnft.errors.AuthenticationRequiredError;
 import org.stibits.rnft.errors.UnverifiedEmailError;

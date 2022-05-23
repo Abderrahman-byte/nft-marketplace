@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.stibits.rnft.converters.DateTimestampConverter;
 import org.stibits.rnft.converters.ProfileDetailsConverter;
 import org.stibits.rnft.converters.SimpleTokenMapConverter;
-import org.stibits.rnft.entities.Transaction;
+import org.stibits.rnft.domain.Transaction;
 
 @Component
 public class SoldNotification implements Converter<Transaction, Map<String, Object>> {

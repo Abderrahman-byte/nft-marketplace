@@ -14,10 +14,10 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.stibits.rnft.entities.Bid;
-import org.stibits.rnft.entities.Notification;
-import org.stibits.rnft.entities.NotificationEvent;
-import org.stibits.rnft.entities.Transaction;
+import org.stibits.rnft.domain.Bid;
+import org.stibits.rnft.domain.Notification;
+import org.stibits.rnft.domain.NotificationEvent;
+import org.stibits.rnft.domain.Transaction;
 import org.stibits.rnft.notifications.converters.BidCreatedNotification;
 import org.stibits.rnft.notifications.converters.BidResponseNotification;
 import org.stibits.rnft.notifications.converters.SoldNotification;

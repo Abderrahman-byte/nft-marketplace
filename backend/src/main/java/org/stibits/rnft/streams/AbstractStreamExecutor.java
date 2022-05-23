@@ -10,6 +10,8 @@ import com.auth0.jwt.interfaces.Claim;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter.SseEventBuilder;
 import org.stibits.rnft.errors.ApiError;
@@ -17,6 +19,8 @@ import org.stibits.rnft.notifications.NotificationsPublisher;
 import org.stibits.rnft.repositories.NotificationDAO;
 
 public abstract class AbstractStreamExecutor implements Runnable {
+    private static final Logger logger = LoggerFactory.getLogger(AbstractStreamExecutor.class);
+
     private ObjectMapper objectMapper = new ObjectMapper();
     protected SseEmitter emitter;
     protected String jwtSecret;
@@ -44,7 +48,7 @@ public abstract class AbstractStreamExecutor implements Runnable {
         try {
             this.execute();
         } catch (Exception ex) {
-            System.err.println("[ERROR] " + ex.getMessage());
+            logger.error("run() - " +ex.getMessage() , ex);
             this.emitter.complete();
         }
     }

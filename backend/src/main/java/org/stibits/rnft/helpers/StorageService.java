@@ -8,6 +8,8 @@ import java.util.regex.Pattern;
 
 import org.stibits.rnft.errors.StorageUnacceptedMediaType;
 import org.stibits.rnft.utils.RandomGenerator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -22,18 +24,20 @@ import net.sf.jmimemagic.MagicParseException;
 
 @Component
 public class StorageService {
+    private static final Logger logger = LoggerFactory.getLogger(StorageService.class);
+
     private final Path uploadDirPath;
     
     @Autowired
     private RandomGenerator randomGenerator;
 
-    StorageService (@Value("${file.uploadDir}") String uploadDir) {
+    public StorageService (@Value("${file.uploadDir}") String uploadDir) {
         this.uploadDirPath = Paths.get(uploadDir).toAbsolutePath().normalize();
 
         try {
             Files.createDirectories(this.uploadDirPath);
         } catch (Exception ex) {
-            System.out.println("[ERROR] Could not create upload dir : " + ex.getMessage());
+            logger.error("StorageService() - Could not create upload dir", ex);
         } 
     }
 
@@ -70,7 +74,7 @@ public class StorageService {
             
             return filename;
         } catch (MagicParseException|MagicMatchNotFoundException|MagicException|IOException ex) {
-            System.out.println("[ERROR] " + ex.getMessage());
+            logger.error("storeFile() - " + ex.getMessage(), ex);
         }
         
         return null;

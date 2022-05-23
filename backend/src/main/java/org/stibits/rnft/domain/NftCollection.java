@@ -1,4 +1,4 @@
-package org.stibits.rnft.entities;
+package org.stibits.rnft.domain;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -18,8 +18,15 @@ import javax.persistence.CascadeType;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name="nft_collection")
+@Getter
+@Setter
+@NoArgsConstructor
 public class NftCollection {
 	@Id
 	private String id;
@@ -44,62 +51,4 @@ public class NftCollection {
 
 	@OneToMany(targetEntity = Token.class, mappedBy = "collection", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Token> nfts = new ArrayList<>();
-
-	public NftCollection () {}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public Account getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(Account createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public Calendar getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(Calendar createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getImageUrl() {
-		return imageUrl;
-	}
-
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public List<Token> getNfts() {
-		return nfts;
-	}
-	
-	public void setNfts(List<Token> nfts) {
-		this.nfts = nfts;
-	}
 }

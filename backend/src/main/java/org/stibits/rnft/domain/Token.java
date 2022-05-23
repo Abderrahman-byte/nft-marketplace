@@ -1,11 +1,10 @@
-package org.stibits.rnft.entities;
+package org.stibits.rnft.domain;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,11 +19,16 @@ import javax.persistence.Column;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import lombok.Getter;
+import lombok.Setter;
+
 // ! Token id is a random string for now but it can be replaced by rvn asset name
 // Or adding a another field for rvn asset name may help
 
 @Entity
 @Table(name = "token")
+@Getter
+@Setter
 public class Token {
 	@Id
 	private String id;
@@ -66,107 +70,11 @@ public class Token {
 	@OneToMany(targetEntity = TokenLike.class, cascade = CascadeType.ALL, mappedBy = "token")
 	private List<TokenLike> likes = new ArrayList<>();
 	
-	@OneToMany(targetEntity = Transaction.class, cascade = CascadeType.ALL, mappedBy = "token", fetch = FetchType.EAGER)
+	@OneToMany(targetEntity = Transaction.class, cascade = CascadeType.ALL, mappedBy = "token")
 	private List<Transaction> transactions = new ArrayList<>();
 
-	public Token() {
+	public Token () {
+		this.settings.setTokenId(this.id);
 		this.settings.setToken(this);
-	}
-
-	public Calendar getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(Calendar createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public Account getOwner() {
-		return owner;
-	}
-
-	public void setOwner(Account owner) {
-		this.owner = owner;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-		this.settings.setTokenId(id);
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public NftCollection getCollection() {
-		return collection;
-	}
-
-	public void setCollection(NftCollection collection) {
-		this.collection = collection;
-	}
-
-	public Account getCreator() {
-		return creator;
-	}
-
-	public void setCreator(Account creator) {
-		this.creator = creator;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getPreviewUrl() {
-		return previewUrl;
-	}
-
-	public void setPreviewUrl(String previewUrl) {
-		this.previewUrl = previewUrl;
-	}
-
-	public List<TokenLike> getLikes() {
-		return likes;
-	}
-
-	public void setLikes(List<TokenLike> likes) {
-		this.likes = likes;
-	}
-
-	public TokenSettings getSettings() {
-		return settings;
-	}
-
-	public void setSettings(TokenSettings settings) {
-		this.settings = settings;
-	}
-
-	public List<Bid> getBids() {
-		return bids;
-	}
-
-	public void setBids(List<Bid> bids) {
-		this.bids = bids;
-	}
-
-	public List<Transaction> getTransaction() {
-		return transactions;
-	}
-
-	public void setTransaction(List<Transaction> transaction) {
-		this.transactions = transaction;
 	}
 }

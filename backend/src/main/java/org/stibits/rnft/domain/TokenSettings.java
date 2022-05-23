@@ -1,4 +1,4 @@
-package org.stibits.rnft.entities;
+package org.stibits.rnft.domain;
 
 import java.util.Calendar;
 
@@ -14,8 +14,15 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.UpdateTimestamp;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name = "token_settings")
+@Getter
+@Setter
+@NoArgsConstructor
 public class TokenSettings {
     @Id
     @Column(name = "token_id")
@@ -39,54 +46,4 @@ public class TokenSettings {
     @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
     private Calendar updatedDate = Calendar.getInstance();
-
-    public TokenSettings () {}
-
-    public String getTokenId() {
-        return tokenId;
-    }
-
-    public void setTokenId(String tokenId) {
-        this.tokenId = tokenId;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public void setForSale(boolean isForSale) {
-        this.isForSale = isForSale;
-    }
-
-    public boolean isForSale() {
-        return isForSale;
-    }
-
-    public Token getToken() {
-        return token;
-    }
-
-    public void setToken(Token token) {
-        this.token = token;
-    }
-
-    public boolean isInstantSale() {
-        return instantSale;
-    }
-
-    public void setInstantSale(boolean instantSale) {
-        this.instantSale = instantSale;
-    }
-
-    public Calendar getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(Calendar updatedDate) {
-        this.updatedDate = updatedDate;
-    }
 }

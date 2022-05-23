@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.stibits.rnft.converters.BidMapConverter;
 import org.stibits.rnft.converters.TokenMapConverter;
-import org.stibits.rnft.entities.Account;
-import org.stibits.rnft.entities.Bid;
-import org.stibits.rnft.entities.Token;
+import org.stibits.rnft.domain.Account;
+import org.stibits.rnft.domain.Bid;
+import org.stibits.rnft.domain.Token;
 import org.stibits.rnft.repositories.BidsDAO;
 import org.stibits.rnft.repositories.NFTokenDAO;
 

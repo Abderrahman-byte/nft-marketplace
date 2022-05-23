@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.stibits.rnft.converters.DateTimestampConverter;
-import org.stibits.rnft.entities.Notification;
+import org.stibits.rnft.domain.Notification;
 
 @Component
 public class NotificationJsonConverter implements Converter<Notification, Map<String, Object>> {

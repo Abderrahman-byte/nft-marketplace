@@ -10,7 +10,7 @@ const CollectionCard = ({ id, imageUrl, link = false, items, name, creator, item
                 <img className='collection-image' src={imageUrl} />
 
                 <div className='first-items'>
-                    {items.slice(0,3).map((token, i) => <img key={i} className='token-img' src={token.previewUrl} />)}
+                    {items?.slice(0,3).map((token, i) => <img key={i} className='token-img' src={token?.previewUrl} />)}
                 </div>
 
                 <div className='info'>

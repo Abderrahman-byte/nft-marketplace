@@ -7,7 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-import org.stibits.rnft.entities.Transaction;
+import org.stibits.rnft.domain.Transaction;
 
 @Component
 public class TransactionMapConverter implements Converter<Transaction, Map<String, Object>> {

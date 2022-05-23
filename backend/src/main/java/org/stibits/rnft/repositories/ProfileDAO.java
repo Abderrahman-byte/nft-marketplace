@@ -7,8 +7,8 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.*;
-import org.stibits.rnft.entities.Account;
-import org.stibits.rnft.entities.Profile;
+import org.stibits.rnft.domain.Account;
+import org.stibits.rnft.domain.Profile;
 
 @Repository
 public class ProfileDAO {
