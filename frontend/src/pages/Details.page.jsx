@@ -47,25 +47,23 @@ const DetailsPage = () => {
 
 	return (
 		<div className="DetailsPage">
-           <div className="image">  
-               <div className="labels">                                             
-                   {/* <label className="Art"> <span> ART </span></label>                */}
-                   {/* <label className="unlockable"> <span> UNLOCKABLE</span></label> */}
-               </div>
+            <div className="Details-Container">
+                <div className='for-res'>
                <img src={details?.previewUrl} alt="" />
-           </div> 
-           
-            <DetailsCard 
-                onPriceUpdated={setPrice} 
-                details={details} 
-                owner={details?.owner} 
-                creator={details?.creator} 
-                isOwner={authenticated && account && details && details?.owner?.id === account?.id} 
-                onAcceptedCallback={setOwner}
-                onPurchaseSuccess={() => setOwner(account)}
-                onPlacedBid={onPlacedBid}
-            />
-            <DetailsIcons id ={id} Like={details.liked} account ={account}/>
+               <DetailsIcons id ={id} Like={details.liked} account ={account}/>
+               </div>
+                <DetailsCard 
+                    onPriceUpdated={setPrice} 
+                    details={details} 
+                    owner={details?.owner} 
+                    creator={details?.creator} 
+                    isOwner={authenticated && account && details && details?.owner?.id === account?.id} 
+                    onAcceptedCallback={setOwner}
+                    onPurchaseSuccess={() => setOwner(account)}
+                    onPlacedBid={onPlacedBid}
+                />
+               <DetailsIcons  id ={id} Like={details.liked} account ={account}/>
+            </div>
         </div>
 	)
 }

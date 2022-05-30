@@ -26,19 +26,20 @@ const DetailsIcons =({ id, Like, account })=>{
   
     return (
       <div className="Icons">
-        <div className="icon icon-close" onClick={Close}>
-          <i className="close-icon" > </i>
-        </div>
-        <div className="icon">
-          <i className="share2-icon"></i>
-        </div>
-        {account ? (<button onClick={likeBtnClicked} className={`icon like-btn ${isLiked ? 'liked' : ''}`} >
-            <HeartIconSVG className='heart' />
-          </button>
-          ) : null}
-        <div className="icon ">
-          <i className="more2-icon"></i>
-        </div>
+      <div  className="icon close" onClick={Close}>
+        <i className="close-icon"></i>
+      </div>
+      <div className="icon">
+        <i className="share2-icon"></i>
+      </div>
+      {account ? (<button onClick={likeBtnClicked} className={`icon like-btn ${isLiked ? 'liked' : ''}`} >
+      <HeartIconSVG className='heart' />
+       </button>
+    ) : null}
+    <div className="icon">
+    
+    </div>
+
       </div>
     )
 

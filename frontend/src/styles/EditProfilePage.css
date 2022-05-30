@@ -3,6 +3,13 @@
 }
 
 .EditProfilePage .container {
-	padding-left: 11%;
-	padding-right: 11%;
+	padding-left: 5%;
+	padding-right: 5%;
+} 
+
+@media screen and (min-width : 700px) {
+	.EditProfilePage .container {
+		padding-left: 11%;
+		padding-right: 11%;
+	}
 }

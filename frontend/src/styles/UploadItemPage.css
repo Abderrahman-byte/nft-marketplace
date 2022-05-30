@@ -28,7 +28,9 @@
 
 .UploadItemPage .options-container {
     display: flex;
-    gap: 2%;
+    flex-wrap: wrap;
+    row-gap: 2em;
+    column-gap: 2%;
     justify-content: center;
 }
 

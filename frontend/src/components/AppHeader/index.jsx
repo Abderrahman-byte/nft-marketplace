@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import AppLogo from './AppLogo'
@@ -11,19 +11,21 @@ import ProfileBar from './ProfileBar'
 
 const AppHeader = () => {
     const { authenticated } = useContext(AuthContext)
-
+    const [isOpenSearch, setOpenSearch] = useState(false)
     return (
         <header className='AppHeader Nav-content'>
             <div className='Left-content'>
-                <AppLogo />
+                <AppLogo isOpenSearch={isOpenSearch} />
                 <div className='vertical-divider' />
                 <Link className='nav-link' to='/discover' >Discover</Link>
                 <Link className='nav-link' to='#' >How it work</Link>
             </div>
-            <div className='Actions'>
-                <SearchBox />
+            <div className={`Actions ${isOpenSearch? 'open':''}`}>
+            {isOpenSearch? <div onClick={() => setOpenSearch(false)} className='click-detector'></div> : null}
+                <SearchBox isOpenSearch={isOpenSearch} setOpenSearch={setOpenSearch}  />
                 <NotificationsBar />
                 <div className='buttons'>
+                <Link className='share' to='/upload'> <i className='share-icon'></i> </Link>
                     <Link className='btn btn-blue' to='/upload'>Upload</Link>
                     {authenticated ? (
                         <ProfileBar />

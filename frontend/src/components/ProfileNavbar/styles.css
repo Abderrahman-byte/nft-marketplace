@@ -1,7 +1,7 @@
 .ProfileNavbar {
     display: flex;
     align-items: center;
-    gap: .75em;
+    gap: .25em;
 }
 
 .ProfileNavbar a {
@@ -19,4 +19,40 @@
     background-color: #353945;
     color: #fcfcfd;
     transition: .4s;
+}
+.ProfileNavbar .select{
+    display: none;
+    
+ }
+@media  screen and(min-width : 700px) {
+    
+    .ProfileNavbar a{
+        font-size: 1vw;
+    }
+    
+    .ProfileNavbar{
+        gap: .75em;
+    }
+   
+}
+@media screen and (max-width : 500px) {
+    .ProfileNavbar{
+       
+        width: 100%;
+        
+    }
+    .ProfileNavbar .select{
+        display: inline;
+      margin-left: 1em;
+        width: 50%;
+       
+    }
+    .ProfileNavbar .for-res{
+        display: none;
+    }
+    .ProfileNavbar a.active, .ProfileNavbar a:hover {
+        background-color: #fcfcfd;
+        color:   #777e90;
+        transition: .4s;
+    }
 }

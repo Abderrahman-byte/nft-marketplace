@@ -1,5 +1,64 @@
 
-.DetailsPage {
+.DetailsPage > div{
+    padding-top: 5em;
+    padding-bottom: 5em;
+    padding-left: 5%;
+    padding-right: 11%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 5%;
+}
+.DetailsPage .Details-Container .for-res{
+    display: flex;
+    flex-direction: row;
+    gap: 0em;
+}
+
+
+.DetailsPage .Details-Container .for-res > img{
+    border-radius: 16px;
+    width: 100%;
+   align-items: stretch;
+}
+.DetailsPage .Details-Container{
+    flex-direction: column;
+}
+.DetailsPage .Details-Container .for-res .Icons{
+    display: flex;
+    position: relative;
+}
+
+.DetailsPage .Details-Container .Icons{
+    display: none;
+}
+
+@media (min-width:700px) {
+
+    .DetailsPage > div{
+        padding-left: 11%;
+        justify-content: space-between;
+        gap: 10%;
+    }
+    .DetailsPage .Details-Container{
+        flex-direction: row;
+    }
+    .DetailsPage .Details-Container .for-res{
+        width: 50%;
+    }
+    .DetailsPage .Details-Container .for-res > img{
+        border-radius: 16px;
+    }
+    .DetailsPage .Details-Container .for-res .Icons{
+        display: none;
+    }
+    .DetailsPage .Details-Container .Icons{
+        display: flex;
+    }
+}
+
+
+/*.DetailsPage {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -63,7 +122,7 @@
 }
 .DetailsPage .image > img{
     border-radius: 16px;
-}
+}*/
 /*.DetailsPage .image{
    align-self: stretch;
    border-radius: 16px;

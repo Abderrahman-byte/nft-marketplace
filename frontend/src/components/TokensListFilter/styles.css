@@ -1,9 +1,19 @@
 .TokensListFilter .filter-controls {
+ 
     display: flex;
     align-items: flex-start;
-    column-gap: 5%;
+    column-gap: 8%;
 }
 
 .TokensListFilter .filter-controls .form-div {
-    width: 30%;
+    width: 100%;
+}
+@media screen and (min-width : 700px) {
+    .TokensListFilter .filter-controls{
+        column-gap: 5%;
+    }
+    .TokensListFilter .filter-controls .form-div {
+        width: 30%;
+    }
+    
 }

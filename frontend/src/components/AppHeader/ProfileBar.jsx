@@ -55,6 +55,9 @@ const ProfileBar = () => {
                             <Link onClick={() => setOpen(false)} to='/profile/collectibles' className='block profile-link'>
                                 <i className='icon-image'></i><span>My items</span>
                             </Link>
+                            <Link to='/discover' className='block profile-link res'> <span>Discover </span></Link>
+                            <Link  to='#' className='block profile-link res'> <span> How it work </span></Link>
+                        
                             <button onClick={logout} className='block profile-link'>
                                 <i className='icon-logout'></i><span>Disconnect</span>
                             </button>

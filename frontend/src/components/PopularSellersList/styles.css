@@ -37,8 +37,12 @@
 
 .PopularSellersList .sellers-container {
     display: flex;
-    gap: 2em;
+    
+    flex-wrap: wrap;
+    row-gap: 2em;
+    column-gap: 2em;
 }
+
 
 .PopularSellersList .sellers-container .PopularSellerCard {
     flex: 1;
@@ -49,7 +53,7 @@
     border-radius: 16px;
     background-color: #fcfcfd;
     transition: .4s transform, .4s shadow-box;
-    max-width: 20%;
+    max-width: 40%;
 }
 
 .PopularSellerCard .PopularSellerCard-head {
@@ -129,4 +133,14 @@
 .PopularSellerCard:hover {
     transform: scale(1.1);
     box-shadow: 0 4em 4em -3em rgba(31, 47, 70, 0.12);
+}
+@media screen and (min-width : 700px) {
+    .PopularSellersList .sellers-container{
+        flex-direction: row;
+        gap : 2em
+    }
+    .PopularSellerCard{
+        max-width: 20%;
+    }
+    
 }

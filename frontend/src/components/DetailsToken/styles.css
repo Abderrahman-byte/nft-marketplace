@@ -129,7 +129,7 @@
   justify-content: flex-start;
   align-items: stretch;
   gap: 10px;
-
+  
 
 }
 
@@ -346,12 +346,18 @@
 
 /**Icons**/
 
-.Icons .icon {
-  width: 48px;
-  height: 48px;
-  flex-grow: 0;
+.Icons{
+  width: fit-content;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1em;
+}
+.Icons .icon{
+  width: 3em;
+  height: 3em;
+  display: flex;
+  flex-direction: row; 
   justify-content: center;
   align-items: center;
   border-radius: 48px;
@@ -360,26 +366,17 @@
   transition: .4s;
   background-color: white;
 }
-
-.Icons .icon-close {
+.Icons .close {
   background-color: #23262f;
   box-shadow: 0 8px 16px -8px rgba(15, 15, 15, 0.2);
 }
-
+.Icons .icon.like-btn {
+width: 3.6em;
+height: 3.6em;
+}
 .Icons .icon:hover {
   transform: scale(1.1);
 }
-
-/**buttons icon heart**/
-
-.Icons {
-  width: fit-content;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1em;
-}
-
 .Icons .icon.like-btn .heart path {
   transition: .4s;
 }
@@ -392,7 +389,7 @@
   fill: #ff5757;
   fill-rule: nonzero;
 }
-
+/*****/
 .DetailsCards .details-container {
   max-height: 250px;
   height: min-content;
@@ -424,8 +421,6 @@
   will-change: transform;
   width: 100%;
 }
-
-
 
 .DetailsInfo .horizontal-divider {
   margin-bottom: 1em;

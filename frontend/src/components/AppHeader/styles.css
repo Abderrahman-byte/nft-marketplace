@@ -1,5 +1,5 @@
 .AppHeader {
-    padding: 1.25em 11%;
+    padding: 1.25em 0% 1.25em 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -28,6 +28,7 @@
     font-weight: 700;
     text-decoration: none;
     color: var(--secondary-text-clr);
+    display: none;
 }
 
 .AppHeader .Actions {
@@ -35,15 +36,21 @@
 }
 
 .AppHeader .Actions .buttons {
+    
     display: flex;
     gap: .95em;
     align-items: center;
+    
+}
+.AppHeader .Actions .buttons .btn.btn-blue{
+   display: none;
 }
 
 .NotificationsBar .NotificationsBar-btn {
     background-color: transparent;
     border: none;
     cursor: pointer;
+  
 }
 
 .SearchBox {
@@ -75,20 +82,7 @@
     position: relative;
 }
 
-.NotificationsBar .NotificationsBar-popup {
-    padding: 2.5em 0;
-    background-color: #fcfcfd;
-    border: 1px solid var(--divider-clr);
-    border-radius: 1em;
-    position: absolute;
-    box-shadow: rgba(0, 0, 0, 0.25) 0 1.563em 3.125em -0.75em;
-    top: 140%;
-    right: 50%;
-    transform: translateX(50%);
-    width: max-content;
 
-    z-index: 1;
-}
 
 .NotificationCard {
     text-decoration: none;
@@ -120,6 +114,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
+    width: 25%;
 }
 
 .NotificationCard .info .title {
@@ -151,12 +146,53 @@
 .NotificationCard .is-new.active {
     background-color: #3772ff;
 }
+.NotificationsBar .NotificationsBar-popup {
+    padding: 2.5em 0;
+    background-color: #fcfcfd;
+    border: 1px solid var(--divider-clr);
+    border-radius: 1em;
+    position: absolute;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 1.563em 3.125em -0.75em;
+    top: 140%;
+    right: 50%;
+    transform: translateX(50%);
+    width: max-content;
+    z-index: 1;
+    
+}
 
 .NotificationsBar .NotificationsBar-popup {
     max-height: 75vh;
+    
     overflow-y: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
+
+    transform: translateX(20vh) ;
+    width: 60vh;
+    /*width: calc(100vw - 10vw);
+    height:  calc(100vh - 10vh);
+    transform: translate(15vh);*/
+}
+
+@media screen and (min-width: 700px) {
+    .NotificationsBar .NotificationsBar-popup {
+        max-height: 75vh;
+        width: 75vh;
+        overflow-y: scroll;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    
+}
+@media screen and (max-width: 500px) {
+    .NotificationsBar .NotificationsBar-popup {
+        width: calc(100vw - 10vw);
+       height:  calc(100vh - 20vh);
+        transform: translate(15vh);
+    }
+    
+    
 }
 
 .NotificationsBar .NotificationsBar-popup::-webkit-scrollbar {
@@ -182,8 +218,7 @@
 }
 
 .ProfileBar .ProfileBar-btn {
-    padding: .25em;
-    padding-right: .75em;
+    
     border: solid 2px var(--divider-clr);
     background-color: transparent;
     border-radius: 90px;
@@ -192,6 +227,7 @@
     align-items: center;
     gap: .75em;
     cursor: pointer;
+    padding: 3px;
 }
 
 .ProfileBar .ProfileBar-btn .avatar {
@@ -205,6 +241,7 @@
     font-size: 0.875rem;
     font-weight: bold;
     color: #23262f;
+    display: none;
 }
 
 .ProfileBar .ProfileBar-btn .balance .currency {
@@ -221,10 +258,11 @@
     background-color: #fcfcfd;
     /* border: 1px solid var(--divider-clr); */
     border-radius: 1em;
-    transform: translateX(-50%);
+    transform: translateX(-95%);
     box-shadow: rgba(0, 0, 0, 0.25) 0 1.563em 3.125em -0.75em;
     width: max-content;
 }
+
 
 .ProfileBar .ProfileBar-popup .name {
     font-size: 1.5em;
@@ -271,6 +309,7 @@
     width: 100%;
     text-align: center;
     padding: .5em 0;
+    border: none;
 }
 
 .ProfileBar .ProfileBar-popup .account-navbar button.profile-link {
@@ -297,3 +336,86 @@
     margin-bottom: 0;
     border-bottom: none;
 }
+@media screen and (min-width: 800px) {
+    .ProfileBar .ProfileBar-popup .account-navbar .profile-link.res{
+        display: none;
+    }
+    
+}
+.AppHeader .Left-content .vertical-divider{
+    display: none;
+}
+
+@media screen and (min-width: 1064px) {
+    .AppHeader{
+        padding: 1.25em 11%;
+    }
+    .AppHeader .Left-content .nav-link {
+        display: inline;
+    }
+    .AppHeader .Actions .buttons .btn{
+        display: inline;
+    }
+    .AppHeader .Actions .buttons .share-icon{
+        display: none;
+    }
+   
+   
+    .ProfileBar .ProfileBar-btn{
+        padding: .25em;
+        padding-right: .75em;
+    }
+}
+@media screen and (min-width: 800px) {
+    .AppHeader .Left-content .nav-link {
+        display: inline;
+    }
+    
+}
+@media screen and (min-width: 700px) {
+
+    .ProfileBar .ProfileBar-btn .balance{
+        display: inline;
+    }
+}
+@media screen and (min-width: 700px) {
+    .ProfileBar .ProfileBar-popup{
+        transform: translateX(-50%);
+    }
+    
+}
+@media screen and (max-width: 480px) {
+
+    .AppHeader{
+        padding: 1.25em 5% 1.25em 5%;
+    }
+    .SearchBox .SearchBox-input {
+      width: 10px; 
+      border: none;
+    }
+    .SearchBox .SearchBox-input.open {
+        width: 100%; 
+        border: solid 2px var(--divider-clr);
+        outline: none;
+        z-index: 9;
+    }
+    .SearchBox .SearchBox-button{
+        z-index: 9;
+    }
+    .AppHeader .Actions {
+        gap: 1em;
+    }
+    .AppHeader .Actions.open .buttons {
+        width: 40%;
+    }
+    .AppHeader .Actions.open {
+       width: 100%;
+        gap: 1em;
+    }
+    .SearchBox .SearchBox-button{
+        padding: 0;
+    }
+    
+
+}
+

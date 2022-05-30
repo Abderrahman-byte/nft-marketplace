@@ -26,7 +26,7 @@ const ProfilePage = () => {
 				<div className='profile-pages'>
 					<ProfileNavbar />
 					
-					{profile && profile.id ? (
+					 {profile && profile.id ? (
 						<Routes>
 							<Route index element={<Navigate to='./sale' />} />
 							<Route path='sale' element={<ProfileTokenList getTokensFunction={getUserForSaleTokens} id={profile.id} />} />
@@ -34,7 +34,7 @@ const ProfilePage = () => {
 							<Route path='created' element={<ProfileTokenList getTokensFunction={getUserCreatedTokens} id={profile.id} />} />
 							<Route path='likes' element={<ProfileTokenList getTokensFunction={getUserFavoriteTokens} id={profile.id} />} />
 						</Routes>
-					) : null}
+					 ) : null}
 				</div>
 			</div>
 		</div>

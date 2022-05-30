@@ -3,6 +3,7 @@
     padding: 2.5em 11% 0;
 }
 
+
 .AppFooter .AppFooter-container .bottom-bar {
     padding: 2.65em 0;
     font-size: .75em;
@@ -11,9 +12,13 @@
 }
 
 .AppFooter .AppFooter-container .top-bar {
+    
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    flex-wrap: wrap;
+    column-gap: 1em;
+    row-gap: 1em;
     margin-bottom: 2.6em;
 }
 
@@ -82,4 +87,10 @@
 	background-color: #3772ff;
     border: none;
     cursor: pointer;
+}
+@media screen and (min-width: 700px) {
+    .AppFooter .AppFooter-container .top-bar{
+        flex-direction: row;
+    }
+    
 }

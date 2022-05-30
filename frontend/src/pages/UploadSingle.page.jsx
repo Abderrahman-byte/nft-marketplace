@@ -45,16 +45,26 @@ const UploadSinglePage = () => {
                         <h2>Create Single collectible</h2>
                         <Link className='btn btn-white' to='#'>Switch to multiple</Link>
                     </div>
-                    <CreateSingleItemForm onSubmitCallback={createItemCallback} onUpdateCallback={onUpdateCallback} />
-				</div>
-				<div className='preview'>
+				
+					<div className='preview'>
 					<h2>Preview</h2>
 					<TokenCard {...tokenData} />
 					<button className='btn clean-all-btn'>
 						<i className='timer-icon'></i>
 						<span>Clean all</span>
 					</button>
+
 				</div>
+                    <CreateSingleItemForm onSubmitCallback={createItemCallback} onUpdateCallback={onUpdateCallback} />
+				</div>
+				<div className='preview test'>
+				<h2>Preview</h2>
+				<TokenCard {...tokenData} />
+				<button className='btn clean-all-btn'>
+					<i className='timer-icon'></i>
+					<span>Clean all</span>
+				</button>
+			</div>
 			</div>
 		</div>
 	)
