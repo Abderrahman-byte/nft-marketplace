@@ -306,6 +306,26 @@ export const sendLogout = async () => {
 
 }
 
+export const getCollectionDetails = async (id) => {
+    try {
+        const response = await getRequest(buildApiUrl(`/marketplace/collections/${id}`))
+
+        if (response && response.success && response.data) return response.data
+    } catch {}
+
+    return null
+}
+
+export const getCollectionTokens = async (id, limit, offset) => {
+    try {
+        const response = await getRequest(buildApiUrl(`/marketplace/collections/${id}/tokens`) + `?limit=${limit}&offset=${offset}`)
+
+        if (response && response.success && response.data) return response.data
+    } catch {}
+
+    return []
+}
+
 export const makeSearch = (sub) => {
     return async (query, page) => {
         try {

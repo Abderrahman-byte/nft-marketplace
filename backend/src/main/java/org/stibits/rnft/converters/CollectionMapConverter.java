@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.stibits.rnft.domain.NftCollection;
+import org.stibits.rnft.domain.Token;
 
 @Component
 public class CollectionMapConverter implements Converter<NftCollection, Map<String, Object>> {
@@ -17,12 +18,15 @@ public class CollectionMapConverter implements Converter<NftCollection, Map<Stri
     @Autowired
     public SimpleTokenMapConverter tokenMapConverter;
 
+    private int itemsPreviewCount = 8;
+
     @Override
     public Map<String, Object> convert(NftCollection source) {
         Map<String, Object> data = this.convertSimple(source);
+        List<Token> items = source.getNfts();
 
-        data.put("itemsCount", source.getNfts().size());
-        data.put("totalPrice", source.getNfts().stream().reduce(0.0, (subtotal, token) -> subtotal + token.getSettings().getPrice(), Double::sum));
+        data.put("itemsCount", items.size());
+        data.put("totalPrice", items.stream().reduce(0.0, (subtotal, token) -> subtotal + token.getSettings().getPrice(), Double::sum));
 
         if (source.getCreatedBy().getProfile() != null) {
             data.put("creator", profileDetailsConverter.convert(source.getCreatedBy().getProfile()));
@@ -30,7 +34,7 @@ public class CollectionMapConverter implements Converter<NftCollection, Map<Stri
             data.put("createdId", source.getCreatedBy().getId());
         }
 
-        data.put("items", tokenMapConverter.convertList(source.getNfts()));
+        data.put("items", tokenMapConverter.convertList(items.subList(0, items.size() >= itemsPreviewCount ? itemsPreviewCount : items.size())));
 
         return data;
     }

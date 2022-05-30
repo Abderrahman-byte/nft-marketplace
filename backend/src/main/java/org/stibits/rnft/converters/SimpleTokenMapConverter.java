@@ -29,6 +29,8 @@ public class SimpleTokenMapConverter implements Converter<Token, Map<String, Obj
         data.put("price", source.getSettings().getPrice());
         data.put("description", source.getDescription());
         data.put("likesCount", source.getLikes().size());
+        data.put("isForSale", source.getSettings().isForSale());
+        data.put("instantSale", source.getSettings().isInstantSale());
 
         return data;
     }
