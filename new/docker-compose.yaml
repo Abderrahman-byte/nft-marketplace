@@ -1,0 +1,37 @@
+version: '3.8'
+
+name: 'rnft'
+
+services:
+  api-gateway:
+    build: ./api-gateway
+    depends_on:
+      - postgres
+      - discovery-service
+    environment:
+      - PG_PASSWORD=${PG_PASSWORD}
+      - MAIL_SMTP_HOST=${MAIL_SMTP_HOST}
+      - MAIL_SMTP_PORT=${MAIL_SMTP_PORT}
+      - MAIL_SMTP_USER=${MAIL_SMTP_USER}
+      - MAIL_SMTP_FROM=${MAIL_SMTP_FROM}
+      - MAIL_SMTP_PASSWORD=${MAIL_SMTP_PASSWORD}
+      - JWT_GATEWAY_SECRET=${JWT_GATEWAY_SECRET}
+      - PG_HOST=postgres
+      - EUREKA_HOST=discovery-service
+    ports:
+      - "8080:8080"
+  discovery-service:
+    build: ./discovery-service
+    ports:
+      - "8761:8761"
+  postgres:
+    build: ./postgres
+    volumes:
+      - rnft_db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
+    ports:
+      - "5432:5432"
+
+volumes:
+  rnft_db: {}
