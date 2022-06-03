@@ -15,4 +15,5 @@ public class ProfileDetails {
     private String cover;
     private Calendar createdDate;
     private String website;
+    private boolean verified;
 }

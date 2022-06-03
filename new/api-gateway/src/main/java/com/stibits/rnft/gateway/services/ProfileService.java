@@ -1,5 +1,6 @@
 package com.stibits.rnft.gateway.services;
 
+import com.stibits.rnft.common.api.ProfileDetails;
 import com.stibits.rnft.gateway.api.UpdateProfileRequest;
 import com.stibits.rnft.gateway.domain.Account;
 import com.stibits.rnft.gateway.domain.Profile;
@@ -26,4 +27,22 @@ public class ProfileService {
 
         return this.profileRepository.save(profile);
     } 
+
+    public ProfileDetails getProfileDetails (Account account) {
+        Profile profile = account.getProfile();
+        ProfileDetails profileDetails = new ProfileDetails();
+
+        profileDetails.setId(account.getId());
+        profileDetails.setUsername(account.getUsername());
+        profileDetails.setDisplayName(profile.getDisplayName());
+        profileDetails.setCustomUrl(profile.getCustomUrl());
+        profileDetails.setCreatedDate(account.getCreatedDate());
+        profileDetails.setCover(profile.getCoverUrl());
+        profileDetails.setBio(profile.getBio());
+        profileDetails.setAvatarUrl(profile.getAvatarUrl());
+        profileDetails.setWebsite(profile.getWebsite());
+        profileDetails.setVerified(account.isVerified());
+
+        return profileDetails;
+    }
 }

@@ -36,7 +36,7 @@ public class ApiGatewaySecurityConfig {
             .addFilterAt(jwtSecurityWebFilter, SecurityWebFiltersOrder.HTTP_BASIC)
             .authenticationManager(authenticationManager())
             .authorizeExchange()
-            .pathMatchers("/api/*/auth/**", "/auth/**").permitAll()
+            .pathMatchers("/api/*/auth/**", "/auth/**", "/api/*/marketplace/**").permitAll()
             .anyExchange().authenticated();
 
         return http.build();

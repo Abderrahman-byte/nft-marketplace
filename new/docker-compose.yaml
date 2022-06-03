@@ -3,6 +3,18 @@ version: '3.8'
 name: 'rnft'
 
 services:
+  marketplace-service:
+    build: ./marketplace-service
+    ports:
+      - "7000:8081"
+    depends_on:
+      - postgres
+      - discovery-service
+    environment:
+      - PG_PASSWORD=${PG_PASSWORD}
+      - JWT_SHARED_SECRET=${JWT_SHARED_SECRET}
+      - PG_HOST=postgres
+      - EUREKA_HOST=discovery-service
   api-gateway:
     build: ./api-gateway
     depends_on:
@@ -16,6 +28,7 @@ services:
       - MAIL_SMTP_FROM=${MAIL_SMTP_FROM}
       - MAIL_SMTP_PASSWORD=${MAIL_SMTP_PASSWORD}
       - JWT_GATEWAY_SECRET=${JWT_GATEWAY_SECRET}
+      - JWT_SHARED_SECRET=${JWT_SHARED_SECRET}
       - PG_HOST=postgres
       - EUREKA_HOST=discovery-service
     ports:

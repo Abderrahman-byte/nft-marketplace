@@ -17,6 +17,6 @@ function create_user_and_database() {
 EOSQL
 }
 
-for service in auth_service; do
+for service in auth_service marketplace; do
     create_user_and_database ${service}_db ${service}_user ${POSTGRES_PASSWORD}
 done

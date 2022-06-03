@@ -15,7 +15,7 @@ import reactor.core.publisher.Mono;
 
 @Component
 public class JwtSecurityWebFilter implements WebFilter {
-    private static final String BEARER_PREFIX = "Bearer ";
+    public static final String BEARER_PREFIX = "Bearer ";
 
     @Autowired
     private JwtProvider jwtProvider;
