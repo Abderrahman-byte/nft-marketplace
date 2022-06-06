@@ -6,6 +6,7 @@ import com.stibits.rnft.gateway.services.AccountDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.authentication.UserDetailsRepositoryReactiveAuthenticationManager;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
@@ -36,7 +37,13 @@ public class ApiGatewaySecurityConfig {
             .addFilterAt(jwtSecurityWebFilter, SecurityWebFiltersOrder.HTTP_BASIC)
             .authenticationManager(authenticationManager())
             .authorizeExchange()
-            .pathMatchers("/api/*/auth/**", "/auth/**", "/api/*/marketplace/**").permitAll()
+            .pathMatchers(HttpMethod.PUT, "/api/*/auth/profile").authenticated()
+            .pathMatchers(
+                "/api/*/auth/**", 
+                "/auth/**", 
+                "/api/*/marketplace/**", 
+                "/api/*/users/**"
+            ).permitAll()
             .anyExchange().authenticated();
 
         return http.build();
