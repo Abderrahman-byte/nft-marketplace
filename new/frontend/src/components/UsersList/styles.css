@@ -1,0 +1,54 @@
+.UsersList {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+    flex-wrap: wrap;
+}
+
+.UsersList .UserCard {
+    width: 100%;
+}
+
+@media screen and (min-width: 400px) {
+    .UsersList {
+        flex-direction: row;
+        column-gap: 10%;
+    }
+    
+    .UsersList .UserCard {
+        width: 45%;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .UsersList {
+        flex-direction: row;
+        column-gap: calc(10% / 2);
+    }
+    
+    .UsersList .UserCard {
+        width: calc(90% / 3);
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .UsersList {
+        flex-direction: row;
+        column-gap: calc(10% / 3);
+    }
+    
+    .UsersList .UserCard {
+        width: calc(90% / 4);
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .UsersList {
+        flex-direction: row;
+        column-gap: calc(10% / 4);
+    }
+    
+    .UsersList .UserCard {
+        width: calc(90% / 5);
+    }
+}

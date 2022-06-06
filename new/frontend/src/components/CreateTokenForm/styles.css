@@ -1,0 +1,137 @@
+.CreateSingleItemForm .CheckboxSettingsItem .CheckboxSettingsItem-label {
+    font-weight: 600;
+}
+
+.CreateSingleItemForm .CheckboxSettingsItem {
+    margin-bottom: 1.9em;
+}
+
+
+.CreateSingleItemForm .input-elt {
+    padding: 0.9em 1.2em;
+    border-radius: 12px;
+    border: solid 2px #e6e8ec;
+    width: 100%;
+}
+
+.CreateSingleItemForm .input-elt[type=number] {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.CreateSingleItemForm .form-subdiv {
+    margin-bottom: 1.9em;
+}
+
+.CreateSingleItemForm .horizontal-divider {
+    margin-bottom: 1.9em;
+}
+
+.CreateSingleItemForm .btn {
+    display: flex !important;
+    align-items: center;
+    gap: 0.7em;
+}
+
+.ChooseCollectionInput label {
+	font-size: 1rem;
+	font-weight: 600;
+	color: #23262f;
+	display: block;
+	margin-bottom: 0.25em;
+}
+
+.ChooseCollectionInput .collections-list {
+	margin-top: 1.4em;
+	display: flex;
+	justify-content: flex-start;
+    gap: .75em;
+    flex-wrap: wrap;
+}
+
+.ChooseCollectionInput .collections-list .collection {
+	border-radius: 16px;
+	background-color: #f4f5f6;
+	padding: 1.5em;
+    min-width: 150px;
+    cursor: pointer;
+    transition: .4s;
+}
+
+.ChooseCollectionInput .collections-list .collection.selected {
+    background-color: #d7d7d8;
+}
+
+.ChooseCollectionInput .collections-list .collection:hover {
+    background-color: #d7d7d8;
+}
+
+.ChooseCollectionInput .collections-list .collection img {
+    width: 40px;
+    height: 40px; 
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.ChooseCollectionInput .collections-list .collection .image-placeholder {
+    width: 40px;
+    height: 40px; 
+    display: block;
+    border-radius: 50%;
+    background-color: #e5e5e5;
+}
+
+.ChooseCollectionInput .collections-list .collection .title {
+	color: #23262f;
+    font-size: 0.87em;
+    font-weight: bold;
+    display: block;
+    margin-top: 0.84em;
+}
+
+.ChooseCollectionInput .collections-list .add-collection-btn .image-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #23262f;
+}
+
+.ItemDetails .section-label {
+    margin-bottom: 1.9em !important;
+}
+
+.ItemDetails .form-label {
+    text-transform: uppercase;
+}
+
+.UploadFileInput input {
+    display: none;
+}
+
+.UploadFileInput .upload-btn {
+    display: block;
+    width: 100%;
+    padding: 4.8em 0.6em;
+    margin-top: 1.2em;
+    cursor: pointer;
+    background-color: #f4f5f6;
+    border: none;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: .4s;
+}
+
+.UploadFileInput .upload-btn:hover {
+    background-color: #e3e4e6;
+}
+
+.UploadFileInput .upload-btn p {
+    margin: 0;
+    color: #777e90;
+    font-size: 0.75rem;
+    margin-top: 0.85em;
+}

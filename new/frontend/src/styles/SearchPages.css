@@ -1,0 +1,38 @@
+.SearchPages h2 {
+    font-size: 3em;
+    font-weight: bold;
+    color: #23262f;
+    margin-bottom: .9em;
+}
+
+.SearchPages .more-btn {
+    margin-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 3em;
+    padding-right: 3em;
+}
+
+.SearchPages .navbar {
+    display: flex;
+    column-gap: 1.5em;
+    margin-bottom: 1em;
+}
+
+.SearchPages .navbar .NavLink {
+    display: block;
+    gap: 0.625em;
+    padding: 0.375em .75em;
+    border-radius: 6.25em;
+    color: #777e90;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: bold;
+    transition: .4s;
+}
+
+.SearchPages .navbar .NavLink.active,
+.SearchPages .navbar .NavLink:hover {
+    background-color: #353945;
+    color: #fcfcfd;
+}

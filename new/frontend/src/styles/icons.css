@@ -1,0 +1,255 @@
+.search-icon::before {
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Search_Line.svg') no-repeat center;
+    width: 30px;
+    height: 30px;
+}
+
+.notification-icon {
+    position: relative;
+}
+
+.notification-icon::before {
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Bell_Line.svg') no-repeat center;
+    width: 40px;
+    height: 40px;
+}
+
+.notification-icon.active::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #45b26b;
+    top: -40px;
+    right: -40px;
+} 
+
+.arrow-right-icon::before {
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Arrow\ Right\ 2_Line.svg') no-repeat center;
+    width: 14px;
+    height: 9px;
+}
+
+.arrow-left-icon::before {
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Arrow\ Left\ 2_Line.svg') no-repeat center;
+    width: 14px;
+    height: 9px;
+}
+
+.big-arrow-right-icon::before {
+    content: "";
+    display: block;
+    background: url('../assets/icons/Right\ arrow.svg') no-repeat center;
+    width: 24px;
+    height: 24px;
+}
+
+.big-arrow-left-icon::before {
+    content: "";
+    display: block;
+    background: url('../assets/icons/Left\ arrow.svg') no-repeat center;
+    width: 24px;
+    height: 24px;
+}
+
+.timer-icon::before {
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Close\ Circle_Line.svg') no-repeat center;
+    width: 20px;
+    height: 20px;  
+}
+
+.arrow-simple-icon::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Arrow\ Right\ Simple_Line\ (1).svg') no-repeat center;
+    width: 14px;
+    height: 9px;
+}
+
+.globe-icon::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Globe_Line.svg') no-repeat center;
+    width: 14px;
+    height: 19px;
+}
+
+.upload-icon::before {
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_File\ Upload_Line.svg') no-repeat center;
+    width: 24px;
+    height: 24px;
+}
+
+.plus-icon::before {
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Plus\ 2_Line.svg') no-repeat center;
+    width: 30px;
+    height: 30px;
+
+}
+
+.share-icon::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/share\ icon.svg') no-repeat center;
+    width: 40px;
+    height: 40px;
+}
+
+.share2-icon::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Share\ Square_Line.svg') no-repeat center;
+    width: 20px;
+    height: 20px;
+}
+.more-icon::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/share\ icon\ (1).svg') no-repeat center;
+     height: 40px;
+     width: 40px;
+}
+
+.facebook-icon::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/Icons_Facebook_Line.svg') no-repeat center;
+    width: 30px;
+    height: 30px;
+}
+
+.instagram-icon::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/Icons_Instagram_Line.svg') no-repeat center;
+    width: 30px;
+    height: 30px;
+}
+
+.twitter-icon::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/Icons_Twitter_Line.svg') no-repeat center;
+    width: 30px;
+    height: 30px;
+}
+
+.candle-sticks-icon::before {
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Candlesticks\ Up_Line.svg') no-repeat center;
+    width: 20px;
+    height: 20px;
+}
+
+.heart-icon::before {
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Heart_Line.svg') no-repeat center;
+    width: 20px;
+    height: 20px;
+}
+
+.loading-icon::before {
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Loading_Line.svg') no-repeat center;
+    width: 20px;
+    height: 20px;
+}
+.close-icon::before {
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Close_Line\ (1).svg') no-repeat center;
+    width: 20px;
+    height: 20px;
+}
+
+.link-arrow::before {
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_arrow_link.svg') no-repeat center;
+    width: 25px;
+    height: 25px;
+}
+.edit-icon::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Edit_Line.svg') no-repeat center;
+    width: 20px;
+    height: 20px;
+}
+.image-icon::before{
+    content: "";
+    display: block;
+    background: url('../assets/icons/icons_Image_Line.svg') no-repeat center;
+    width: 20px;
+    height: 20px;
+}
+
+.icon-user::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    background: url('../assets/icons/icons_User_Line.svg') no-repeat center;
+    display: block;
+}
+
+.icon-image::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    background: url('../assets/icons/icons_Image_Line.svg') no-repeat center;
+    display: block;
+}
+
+.icon-logout::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    background: url('../assets/icons/icons_Sign\ Out_Line.svg') no-repeat center;
+    display: block;
+}
+
+.badge-rank-1,
+.badge-rank-2,
+.badge-rank-3,
+.badge-rank-4,
+.badge-rank-5 {
+    display: block;
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+.badge-rank-1 {
+    background: url('../assets/icons/icons_Cup_Line.svg') no-repeat center;
+}
+
+.badge-rank-2 {
+    background: url('../assets/icons/icons_Donut_Line.svg') no-repeat center;
+}
+
+.badge-rank-3 {
+    background: url('../assets/icons/icons_Lightning_Line.svg') no-repeat center;
+}
+
+.badge-rank-4,
+.badge-rank-5 {
+    background: url('../assets/icons/icons_Doughnut_Line.svg') no-repeat center;
+}

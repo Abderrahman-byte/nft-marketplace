@@ -1,0 +1,151 @@
+.Edit-profile {
+	width: 90%;
+	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 4em;
+}
+
+.Edit-profile .Headline {
+	margin-bottom: 3em;
+}
+
+.Edit-profile .Headline h2 {
+	font-size: 3rem;
+	font-weight: bold;
+	color: #23262f;
+}
+
+.Edit-profile .Headline .Headline-span {
+	font-size: 0.875rem;
+	color: #777e90;
+}
+
+.Edit-profile .Headline .Headline-span .text-style-1 {
+	font-weight: 500;
+	color: #23262f;
+}
+
+.ProfileSettings {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	flex-direction: column;
+
+	/* gap: 32px; */
+}
+
+@media screen and (min-width : 700px) {
+    .ProfileSettings {
+		flex-direction: row;
+	}
+	.ProfileForm {
+		max-width: 53%;
+	}
+}
+
+.ProfilePhoto {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: space-between;
+}
+
+.ProfilePhoto .Avatar {
+	width: 128px;
+	height: 128px;
+	border-radius: 50%;
+	margin-right: 1.9em;
+	background-color: #45b26b;
+}
+
+.ProfilePhoto .Avatar .Pic {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	object-fit: cover;
+	object-position: center;
+}
+
+.ProfilePhoto .Frame-944 div .inputfile {
+	display: none;
+}
+
+.ProfilePhoto .Frame-944 {
+	max-width: 160px;
+}
+
+.ProfilePhoto .Frame-944 .Frame-945 {
+	margin-bottom: 0.982em;
+}
+
+.ProfilePhoto .Frame-944 .Frame-945 .Profile {
+	font-size: 1em;
+	font-weight: 500;
+	color: #23262f;
+	margin-bottom: .5em;
+}
+
+.ProfilePhoto .Frame-944 label {
+	display: block;
+	width: fit-content;
+}
+
+.ProfilePhoto .Frame-944 .Frame-945 .Recomendation {
+	width: max-content;
+	font-size: .75rem;
+	color: #777e90;
+}
+
+
+.ProfileForm .form-div {
+	margin-bottom: 2.454em;
+}
+
+.ProfileForm .form-div h3 {
+	margin-bottom: 32px;
+	font-weight: 500;
+	color: #23262f;
+}
+
+.ProfileForm .form-div .form-subdiv {
+	margin-bottom: 1.5em;
+}
+
+.ProfileForm .form-div .form-label {
+	text-transform: uppercase;
+}
+
+.ProfileForm .form-div .form-input {
+	font-weight: 500;
+}
+
+.ProfileForm .form-div textarea.form-input {
+	height: 96px;
+}
+
+.ProfileForm .social-info-div .btn {
+	color: #777e90;
+}
+
+.ProfileForm .bottom-msg-div {
+	font-size: .8rem;
+	color: #777e90;
+	line-height: 1.71;
+}
+
+.ProfileForm .buttons {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.ProfileForm .clear-all-btn {
+	display: flex;
+	align-items: center;
+	color:  #777e90;
+}
+
+.ProfileForm .clear-all-btn i {
+	margin-right: 0.6em;
+}

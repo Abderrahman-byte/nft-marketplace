@@ -17,8 +17,8 @@ public class CommonSecurityConfig extends WebSecurityConfigurerAdapter {
         return http.csrf().disable()
             .logout().disable()
             .httpBasic().disable()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and()
+            .cors().and()
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 

@@ -18,7 +18,6 @@ import org.springframework.cloud.gateway.route.builder.UriSpec;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.web.reactive.config.CorsRegistry;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
 
 import io.jsonwebtoken.security.Keys;
@@ -29,9 +28,6 @@ import io.jsonwebtoken.security.Keys;
 public class ApiGatewayConfig  implements WebFluxConfigurer {
     @Value("${jwt.gateway.secret}")
     private String jwtSecret;
-
-    @Value("#{'${cors.allowOrigins}'.split(',')}")                                  
-    String corsAllowOrigins[]; 
 
     @Autowired
     private MailSmtpPropertiesConfig mailConfig;
@@ -63,15 +59,5 @@ public class ApiGatewayConfig  implements WebFluxConfigurer {
     @Bean
     public JwtGatewayWebFilter jwtGatewayWebFilter () {
         return new JwtGatewayWebFilter();
-    }
-
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/**")
-            .allowedOrigins(corsAllowOrigins)
-            .allowCredentials(true)
-            .allowedMethods("*")
-            .allowedHeaders("*")
-            .maxAge(3600);
     }
 }

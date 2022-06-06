@@ -1,0 +1,153 @@
+
+.DetailsPage > div{
+    padding-top: 5em;
+    padding-bottom: 5em;
+    padding-left: 5%;
+    padding-right: 11%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 5%;
+}
+.DetailsPage .Details-Container .for-res{
+    display: flex;
+    flex-direction: row;
+    gap: 0em;
+}
+
+
+.DetailsPage .Details-Container .for-res > img{
+    border-radius: 16px;
+    width: 100%;
+   align-items: stretch;
+}
+.DetailsPage .Details-Container{
+    flex-direction: column;
+}
+.DetailsPage .Details-Container .for-res .Icons{
+    display: flex;
+    position: relative;
+}
+
+.DetailsPage .Details-Container .Icons{
+    display: none;
+}
+
+@media (min-width:700px) {
+
+    .DetailsPage > div{
+        padding-left: 11%;
+        justify-content: space-between;
+        gap: 10%;
+    }
+    .DetailsPage .Details-Container{
+        flex-direction: row;
+    }
+    .DetailsPage .Details-Container .for-res{
+        width: 50%;
+    }
+    .DetailsPage .Details-Container .for-res > img{
+        border-radius: 16px;
+    }
+    .DetailsPage .Details-Container .for-res .Icons{
+        display: none;
+    }
+    .DetailsPage .Details-Container .Icons{
+        display: flex;
+    }
+}
+
+
+/*.DetailsPage {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10%;
+    padding: 96px 160px 96px 160px;
+}
+.DetailsPage .image .labels{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 0;
+}
+.DetailsPage .image .labels .Art{
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 8px 6px;
+    border-radius: 4px;
+    background-color: #23262f;
+}
+.DetailsPage .image .labels .Art span{
+    flex-grow: 0;
+    font-family: Poppins;
+    font-size: 12px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-align: left;
+    color: #fcfcfd;
+}
+.DetailsPage .image .labels .unlockable{
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 8px 6px;
+    border-radius: 4px;
+    background-color: #9757d7;
+}
+.DetailsPage .image .labels .unlockable span{
+  flex-grow: 0;
+  font-family: Poppins;
+  font-size: 12px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-align: left;
+  color: #fcfcfd;
+}
+.DetailsPage .image > img{
+    border-radius: 16px;
+}*/
+/*.DetailsPage .image{
+   align-self: stretch;
+   border-radius: 16px;
+   margin-left: 10%;
+ 
+}
+.DetailsPage .image > img{
+    border-radius: 16px;
+}
+.DetailsPage .image .labels{
+    position: absolute;
+    top:0%;
+    left: 0%;
+}
+.DetailsPage .frame-971{
+    
+    align-self: stretch;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 0;
+     max-width: 384px;
+     max-height:448px; 
+     background-color: burlywood;
+  
+}*/

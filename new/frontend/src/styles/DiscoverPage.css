@@ -1,0 +1,14 @@
+.DiscoverPage .page-title {
+    margin-bottom: 2em;
+}
+
+.more-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2em;
+}
+
+.DiscoverPage .TokensListFilter {
+    margin-bottom: 2em;
+}

@@ -1,0 +1,60 @@
+.CheckboxSettingsItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    /* border: 1px solid saddlebrown; */
+}
+
+.CheckboxSettingsItem .CheckboxSettingsItem-label {
+    color: #23262f;
+    font-size: 1rem;
+    margin-bottom: .25em;
+}
+
+.CheckboxSettingsItem .CheckboxSettingsItem-label, .CheckboxSettingsItem .CheckboxSettingsItem-subtitle {
+    display: block;
+}
+
+.CheckboxSettingsItem .input .checkbox {
+    display: none;
+}
+
+.CheckboxSettingsItem .input {
+    position: relative;
+    display: inline-block;
+    width: 48px;
+    height: 24px;
+}
+
+.CheckboxSettingsItem .input .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #e6e8ec;
+    border-radius: 32px;
+    transition: .4s;
+}
+
+.CheckboxSettingsItem .input .slider::before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #3772ff;
+    border-radius: 50%;
+    transition: .4s;
+}
+
+.CheckboxSettingsItem .input .checkbox:checked + .slider {
+    background-color: #3772ff;
+}
+
+.CheckboxSettingsItem .input .checkbox:checked + .slider:before {
+    transform: translateX(24px);
+    background-color: #fcfcfd;
+}

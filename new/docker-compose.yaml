@@ -15,6 +15,7 @@ services:
       - JWT_SHARED_SECRET=${JWT_SHARED_SECRET}
       - PG_HOST=postgres
       - EUREKA_HOST=discovery-service
+      - CORS_ALLOW_ORIGIN=${CORS_ALLOW_ORIGIN}
   api-gateway:
     build: ./api-gateway
     depends_on:
@@ -31,6 +32,7 @@ services:
       - JWT_SHARED_SECRET=${JWT_SHARED_SECRET}
       - PG_HOST=postgres
       - EUREKA_HOST=discovery-service
+      - CORS_ALLOW_ORIGIN=${CORS_ALLOW_ORIGIN}
     ports:
       - "8080:8080"
   discovery-service:
