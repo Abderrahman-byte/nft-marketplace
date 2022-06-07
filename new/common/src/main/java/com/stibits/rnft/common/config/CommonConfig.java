@@ -4,6 +4,7 @@ import com.stibits.rnft.common.clients.ClientsFallback;
 import com.stibits.rnft.common.clients.GatewayClient;
 import com.stibits.rnft.common.handlers.ApiErrorHandler;
 import com.stibits.rnft.common.handlers.MethodArgumentNotValidHandler;
+import com.stibits.rnft.common.utils.FileTypeService;
 import com.stibits.rnft.common.utils.RandomStringGenerator;
 
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -15,6 +16,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableFeignClients(clients = GatewayClient.class)
 public class CommonConfig {
+    @Bean
+    public FileTypeService fileTypeService () {
+        return new FileTypeService();
+    }
+
     @Bean
     public RandomStringGenerator randomStringGenerator () {
         return new RandomStringGenerator();

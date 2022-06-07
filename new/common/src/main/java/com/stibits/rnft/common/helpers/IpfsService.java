@@ -6,6 +6,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Map.Entry;
 
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.InputStreamSource;
@@ -37,6 +38,16 @@ public class IpfsService {
         this.apiAuth = config.getApiAuthorization();
         this.endpointUrl = UriComponentsBuilder.fromHttpUrl(this.apiUrl).build().toUri();
         this.ipfsGateway = config.getGateway();
+    }
+
+    public Mono<String> uploadData (String data) {
+        MultipartBodyBuilder multipartBuilder = new MultipartBodyBuilder();
+
+        multipartBuilder.part("file1", new ByteArrayResource(data.getBytes()))
+            .contentType(MediaType.APPLICATION_OCTET_STREAM)
+            .filename("data.json"); 
+
+        return this.uploadFile(multipartBuilder);
     }
 
     public Mono<String> uploadFile (InputStream inputStream) {

@@ -44,9 +44,11 @@ public class Token {
 	@Column
 	private String description;
 
-	// TODO : this should be replaced by IPFS
 	@Column(nullable = false)
 	private String previewUrl;
+
+	@Column(nullable = false)
+	private String ipfs;
 
 	@Column
 	private String sourceUrl;

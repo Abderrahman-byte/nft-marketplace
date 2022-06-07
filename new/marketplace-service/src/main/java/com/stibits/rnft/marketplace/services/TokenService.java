@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.stibits.rnft.common.helpers.IpfsService;
+import com.stibits.rnft.marketplace.api.CreateTokenMetadata;
 import com.stibits.rnft.marketplace.api.TokenDetails;
 import com.stibits.rnft.marketplace.domain.Token;
 import com.stibits.rnft.marketplace.repositories.TokenRepository;
@@ -14,6 +16,25 @@ import com.stibits.rnft.marketplace.web.TokensSortBy;
 public class TokenService {
     @Autowired
     private TokenRepository tokenRepository;
+
+    @Autowired
+    private IpfsService ipfsService;
+
+    public Token createToken (CreateTokenMetadata metadata, String assetName, String preview, String ipfs, String creatorId) {
+        Token token = new Token();
+
+        token.setTitle(metadata.getTitle());
+        token.setDescription(metadata.getDescription());
+        token.getSettings().setForSale(metadata.isForSale() || metadata.isInstantSale());
+        token.getSettings().setInstantSale(metadata.isInstantSale());
+        token.getSettings().setPrice(metadata.getPrice().doubleValue());
+        token.setAssetPath(assetName);
+        token.setIpfs(ipfs);
+        token.setPreviewUrl(preview);
+        token.setCreatorId(creatorId);
+
+        return this.tokenRepository.save(token);
+    }
 
     public List<TokenDetails> getTokensList (TokensSortBy sortBy, int limit, int offset, double maxPrice) {
         List<Token> tokens = List.of();
@@ -45,7 +66,7 @@ public class TokenService {
         details.setId(token.getId());
         details.setTitle(token.getTitle());
         details.setQuantity(token.getQuantity());
-        details.setPreviewUrl(token.getPreviewUrl());
+        details.setPreviewUrl(ipfsService.resolveHashUrl(token.getPreviewUrl()));
         details.setDescription(token.getDescription());
         details.setCreatorId(token.getCreatorId());
         details.setCreatedDate(token.getCreatedDate());

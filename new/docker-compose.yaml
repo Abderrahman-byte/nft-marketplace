@@ -16,6 +16,9 @@ services:
       - PG_HOST=postgres
       - EUREKA_HOST=discovery-service
       - CORS_ALLOW_ORIGIN=${CORS_ALLOW_ORIGIN}
+      - IPFS_API_AUTHORIZATION=${IPFS_API_AUTHORIZATION}
+      - IPFS_API_URL=${IPFS_API_URL}
+      - IPFS_GATEWAY=${IPFS_GATEWAY}
   api-gateway:
     build: ./api-gateway
     depends_on:
