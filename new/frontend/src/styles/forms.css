@@ -55,13 +55,13 @@
 }
 
 .form .form-div.errors-div {
-    color: red;
+    color: whitesmoke;
 }
 
 .form .form-div.errors-div span {
     display: block;
     margin-bottom: .5em;
     font-size: 1rem;
-    color: red;
+    color: whitesmoke;
     margin-left: .7em;
 }

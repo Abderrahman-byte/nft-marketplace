@@ -38,6 +38,7 @@ public class ApiGatewaySecurityConfig {
             .authenticationManager(authenticationManager())
             .authorizeExchange()
             .pathMatchers(HttpMethod.PUT, "/api/*/auth/profile").authenticated()
+            .pathMatchers(HttpMethod.POST, "/api/*/auth/profile/picture").authenticated()
             .pathMatchers(
                 "/api/*/auth/**", 
                 "/auth/**", 

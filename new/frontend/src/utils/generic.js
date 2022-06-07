@@ -32,6 +32,10 @@ export const translateError = (error) => {
         })
     } 
 
+    if (error.title === 'wrong_credentials') {
+        return [{field: null, message: 'Username or password are wrong.' }]
+    }
+
     if (error.title === 'data_integrety_error') {
         return [{ field: error.field, message: error.detail }]
     }

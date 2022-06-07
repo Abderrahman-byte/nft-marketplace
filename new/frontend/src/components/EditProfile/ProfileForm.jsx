@@ -15,6 +15,7 @@ const ProfileForm = ({ profile, saveProfileCallback }) => {
 			displayName: elts.displayName.value,
 			customUrl: elts.customUrl.value,
 			bio: elts.bio.value,
+			website: elts.website.value
 		}
 
 		saveProfileCallback(data)
@@ -29,7 +30,7 @@ const ProfileForm = ({ profile, saveProfileCallback }) => {
 
 				<div className='form-subdiv'>
 					<label className='form-label'>portfolio or website</label>
-					<input placeholder='Enter Url' className='form-input' autoComplete='off' />
+					<input defaultValue={profile?.website} name='website' placeholder='Enter Url' className='form-input' autoComplete='off' />
 				</div>
 
 				<button type='button' className='btn btn-white'>Add more social account</button>

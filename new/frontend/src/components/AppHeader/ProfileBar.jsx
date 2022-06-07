@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import LoadingCard from '@Components/LoadingCard'
 import { AuthContext } from '@Context/AuthContext'
 import { formatMoney } from '@Utils/currency'
-import { sendLogout } from '@Utils/api'
 
 const ProfileBar = () => {
 	const { account, setAuth, openModel, closeModel } = useContext(AuthContext)
@@ -14,7 +13,7 @@ const ProfileBar = () => {
         setOpen(false)
 
         openModel(<LoadingCard />)
-        await sendLogout()
+        localStorage.removeItem('access_token')
         
         closeModel()
         setAuth(false)

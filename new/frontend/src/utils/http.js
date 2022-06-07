@@ -1,6 +1,10 @@
 export const DEFAULT_HEADERS = { 'Content-Type': 'application/json' }
 
 export const httpRequest = async (url, method, data = null, headers = {}, options = {}) => {
+    const accessToken = localStorage.getItem('access_token')
+
+    if (accessToken && accessToken !== '') headers['Authorization'] = `Bearer ${accessToken}`
+
     const requestOptions = {
         credentials: 'include',
         headers : { ...DEFAULT_HEADERS, ...headers},
@@ -20,10 +24,16 @@ export const httpRequest = async (url, method, data = null, headers = {}, option
 }
 
 export const multipartPostRequest = async (url, data, options) => {
+    const accessToken = localStorage.getItem('access_token')
+    const headers = {}
+
+    if (accessToken && accessToken !== '') headers['Authorization'] = `Bearer ${accessToken}`
+
     const response = await fetch(url, {
         credentials: 'include',
         method:  'POST',
         body: data,
+        headers,
         ...options
     })
 

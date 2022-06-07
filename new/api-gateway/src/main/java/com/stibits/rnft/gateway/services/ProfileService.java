@@ -1,6 +1,7 @@
 package com.stibits.rnft.gateway.services;
 
 import com.stibits.rnft.common.api.ProfileDetails;
+import com.stibits.rnft.common.helpers.IpfsService;
 import com.stibits.rnft.gateway.api.UpdateProfileRequest;
 import com.stibits.rnft.gateway.domain.Account;
 import com.stibits.rnft.gateway.domain.Profile;
@@ -18,6 +19,9 @@ public class ProfileService {
 
     @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired
+    private IpfsService ipfsService;
 
     public Profile updateProfile (Account account, UpdateProfileRequest request) {
         return this.updateProfile(account.getProfile(), request);
@@ -49,11 +53,17 @@ public class ProfileService {
         profileDetails.setDisplayName(profile.getDisplayName());
         profileDetails.setCustomUrl(profile.getCustomUrl());
         profileDetails.setCreatedDate(account.getCreatedDate());
-        profileDetails.setCover(profile.getCoverUrl());
         profileDetails.setBio(profile.getBio());
-        profileDetails.setAvatarUrl(profile.getAvatarUrl());
         profileDetails.setWebsite(profile.getWebsite());
         profileDetails.setVerified(account.isVerified());
+        
+        if (StringUtils.hasText(profile.getAvatarUrl())) {
+            profileDetails.setAvatarUrl(ipfsService.resolveHashUrl(profile.getAvatarUrl()));
+        }
+
+        if (StringUtils.hasText(profile.getCoverUrl())) {
+            profileDetails.setCover(ipfsService.resolveHashUrl(profile.getCoverUrl()));
+        }
 
         return profileDetails;
     }

@@ -48,7 +48,7 @@
     }
     .ProfilePage .ProfileInfoCard{
      margin-top: -11em;
-     margin-left: 5em;
+     margin-left: 0;
     }
     .ProfilePage .container .profile-pages .profile-content .TokenCard {
      width: 30%;

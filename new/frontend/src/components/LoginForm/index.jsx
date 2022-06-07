@@ -26,9 +26,20 @@ const LoginForm = ({ submitCallback }) => {
 	}
 
 	const handleSubmit = (event) => {
+		const localErrors = []
+		const data = { username, password }
+
 		event.preventDefault();
 
-		const data = { username, password }
+		if (username === null || username === '') {
+			localErrors.push({field: 'username', message: 'Username field is required.'})
+		}
+
+		if (password === null || password === '') {
+			localErrors.push({field: 'password', message: 'Password field is required.'})
+		}
+
+		if (localErrors.length > 0) return setErrorMessages(localErrors)
 
 		setErrorMessages([])
 

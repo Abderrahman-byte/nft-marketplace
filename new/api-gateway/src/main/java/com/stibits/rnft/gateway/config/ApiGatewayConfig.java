@@ -5,6 +5,7 @@ import java.util.function.Function;
 import javax.crypto.SecretKey;
 
 import com.stibits.rnft.common.config.CommonConfig;
+import com.stibits.rnft.common.helpers.IpfsService;
 import com.stibits.rnft.common.helpers.MailService;
 import com.stibits.rnft.gateway.security.jwt.JwtGatewayWebFilter;
 
@@ -31,6 +32,14 @@ public class ApiGatewayConfig  implements WebFluxConfigurer {
 
     @Autowired
     private MailSmtpPropertiesConfig mailConfig;
+
+    @Autowired
+    private IpfsProperties ipfsConfig;
+
+    @Bean
+    public IpfsService ipfsService () {
+        return new IpfsService(ipfsConfig);
+    }
 
     @Bean
     public MailService mailService () {

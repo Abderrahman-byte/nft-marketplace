@@ -41,11 +41,11 @@ export const sendLogin = async (username, password) => {
     try {
         const response = await postRequest(buildApiUrl('/auth/login'), JSON.stringify({ username, password }))
         
-        if (response && response.success) return [true, null]
-        else if (response && response.error) return [false, response.error]
+        if (response && response.success && response.data) return [response.data, null]
+        else if (response && response.error) return [null, response.error]
     } catch {}
 
-    return [false, null]
+    return [null, null]
 }
 
 export const isUserLoggedIn = async () => {
@@ -60,9 +60,9 @@ export const isUserLoggedIn = async () => {
 
 export const getProfile = async()=>{
     try{
-        const response = await getRequest(buildApiUrl('/profile'))
+        const response = await getRequest(buildApiUrl('/auth/profile'))
         
-        if (response && response.profile) return response.profile
+        if (response && response.data) return response.data
     } catch {}
 
     return null
@@ -70,7 +70,7 @@ export const getProfile = async()=>{
 
 export const updateProfile = async (data) => {
     try {
-        const response = await postRequest(buildApiUrl('/profile'), JSON.stringify(data))
+        const response = await putRequest(buildApiUrl('/auth/profile'), JSON.stringify(data))
         if (response && response.success) return [true, response.error]
         else if (response && response.error) return [false, response.error]
     } catch {}
@@ -82,9 +82,9 @@ export const saveProfilePicture = async (file, type) => {
     try {
         const formData = new FormData()
         formData.append('file', file)
-        formData.append('Type',type)
+        formData.append('type',type)
 
-        const response = await multipartPostRequest(buildApiUrl('/profile/picture'), formData)
+        const response = await multipartPostRequest(buildApiUrl('/auth/profile/picture'), formData)
         
         if (response && response.success) return [true, null]
         else if (response && response.error) return [false, response.error]
@@ -95,7 +95,7 @@ export const saveProfilePicture = async (file, type) => {
 
 export const getUserData = async (id) => {
     try {
-        const response = await getRequest(buildApiUrl(`/user/${id}`))
+        const response = await getRequest(buildApiUrl(`/users/${id}`))
 
         if (response && response.success && response.data) return response.data
     } catch {}
@@ -297,13 +297,6 @@ export const getPopularSellersList = async (interval) => {
     } catch {}
 
     return []
-}
-
-export const sendLogout = async () => {
-    try {
-        await getRequest(buildApiUrl('/auth/logout'))
-    } catch {}
-
 }
 
 export const getCollectionDetails = async (id) => {

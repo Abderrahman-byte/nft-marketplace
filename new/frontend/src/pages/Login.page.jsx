@@ -19,19 +19,21 @@ const LoginPage = () => {
 	const submitCallback = async (data, setError) => {
         openModel(<LoadingCard />)
 
-		const [success, error] = await sendLogin(data.username, data.password)
+		const [response, error] = await sendLogin(data.username, data.password)
+
+		console.log('response => ', response)
+		console.log('Error => ', error)
 
         closeModel()
 
 		if (error) {
 			return setError(translateError(error))
-		} else if (!success) {
+		} else if (!response || !response.access_token) {
 			return setError(DEFAULT_ERROR)
 		}
 
-		if (!success) setAuth(success)
-
 		setAuth(false)
+		localStorage.setItem('access_token', response.access_token)
 		
 		setTimeout(() => {
 			setAuth(true)

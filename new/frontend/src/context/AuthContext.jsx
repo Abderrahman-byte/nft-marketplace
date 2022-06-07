@@ -27,11 +27,14 @@ export const AuthProvider = ({ children }) => {
         setOnExistCallback(null)
     }
 
+    // TODO : this results in requesting the profile twice
     const getAuthState = async () => {
         openModel(<LoadingCard />)
 
-        const isLoggedIn = await isUserLoggedIn()
-        setAuth(isLoggedIn)
+        const profile = await getProfile()
+
+        if (profile != null) setAuth(true)
+        else setAuth(false)
         
         closeModel()
     }
