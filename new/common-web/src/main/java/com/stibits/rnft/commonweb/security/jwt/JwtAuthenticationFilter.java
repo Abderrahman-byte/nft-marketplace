@@ -41,7 +41,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private JwtParser jwtParser;
 
-
     @PostConstruct
     public void generateSecretKey () {
         this.secretKey = Keys.hmacShaKeyFor(jwtSecret.getBytes());
