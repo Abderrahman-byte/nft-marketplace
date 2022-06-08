@@ -24,6 +24,9 @@ public class TokenService {
     private TokenRepository tokenRepository;
 
     @Autowired
+    private TransactionService transactionService;
+
+    @Autowired
     private IpfsService ipfsService;
 
     @Autowired
@@ -86,10 +89,27 @@ public class TokenService {
         return this.getTokenDetails(token, account);
     }
 
-    // TODO : get token owner
     // TODO : get token higest bid
     public TokenDetails getTokenDetails (Token token, ProfileDetails account) {
-        ApiSuccessResponse<ProfileDetails> response = gatewayClient.getUserDetails(token.getCreatorId());
+        ApiSuccessResponse<ProfileDetails> creator = gatewayClient.getUserDetails(token.getCreatorId());
+        ApiSuccessResponse<ProfileDetails> owner = gatewayClient.getUserDetails(this.transactionService.getTokenOwner(token));
+        TokenDetails details = this.getTokenSimpleDetails(token);
+
+        details.setLikesCount(token.getLikes().size());
+        details.setCreator(creator.getData());
+        details.setOwner(owner.getData());
+
+        if (account != null ) {
+            details.setLiked(token.getLikes().stream().anyMatch(like -> like.getAccountId().equals(account.getId())));
+        }
+
+        if (token.getCollection() != null) 
+            details.setCollection(this.getCollectionSimpleDetails(token.getCollection()));
+
+        return details;
+    }
+
+    public TokenDetails getTokenSimpleDetails (Token token) {
         TokenDetails details = new TokenDetails();
 
         details.setId(token.getId());
@@ -101,15 +121,6 @@ public class TokenService {
         details.setForSale(token.getSettings().isForSale());
         details.setInstantSale(token.getSettings().isInstantSale());
         details.setPrice(token.getSettings().getPrice());
-        details.setLikesCount(token.getLikes().size());
-        details.setCreator(response.getData());
-
-        if (account != null ) {
-            details.setLiked(token.getLikes().stream().anyMatch(like -> like.getAccountId().equals(account.getId())));
-        }
-
-        if (token.getCollection() != null) 
-            details.setCollection(this.getCollectionSimpleDetails(token.getCollection()));
 
         return details;
     }

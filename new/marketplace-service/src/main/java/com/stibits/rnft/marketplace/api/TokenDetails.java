@@ -23,5 +23,5 @@ public class TokenDetails {
 
     private ProfileDetails creator;
     private CollectionDetails collection;
-    // Object owner;
+    private ProfileDetails owner;
 }
