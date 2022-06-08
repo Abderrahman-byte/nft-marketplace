@@ -2,6 +2,8 @@ package com.stibits.rnft.marketplace.api;
 
 import java.util.Calendar;
 
+import com.stibits.rnft.common.api.ProfileDetails;
+
 import lombok.Data;
 
 @Data
@@ -10,15 +12,16 @@ public class TokenDetails {
     private String title;
     private String description;
     private String previewUrl;
-    private String creatorId;
     private Calendar createdDate;
     private boolean isForSale;
     private boolean instantSale;
     private double price;
     private int quantity;
+    
     private int likesCount;
     private boolean liked = false;
-    // Object collection;
-    // Object creator;
+
+    private ProfileDetails creator;
+    private CollectionDetails collection;
     // Object owner;
 }

@@ -9,7 +9,7 @@ import { formatMoney } from '@Utils/currency'
 
 import './styles.css'
 
-const TokenCard = ({ id, title, price, creator, owner, collection, previewUrl, liked, createdDate, isForSale, instantSale, highestBid, likable = false, link = false, style={}, ...rest }) => {
+const TokenCard = ({ id, title, price, creator, owner, collection, previewUrl, liked, createdDate, forSale, instantSale, highestBid, likable = false, link = false, style={}, ...rest }) => {
     const { account } = useContext(AuthContext)
     const [isLiked, setLiked] = useState(liked)
     const [isLoading, setLoading] = useState(false)
@@ -82,7 +82,7 @@ const TokenCard = ({ id, title, price, creator, owner, collection, previewUrl, l
                             <div className='flex'><i className='candle-sticks-icon'></i><span>higest bid</span><span className='bold'>{formatBigNumberMoney(highestBid?.price)} RVN</span></div>
                         ) : null}
 
-                        {!isForSale ? (
+                        {!forSale ? (
 							<span className='new-bid-span'>Not for sale</span>
                         ) : highestBid && Date.now() - highestBid.createdDate <= ONE_HOUR ? (
                             <span className='new-bid-span'>New bid 🔥</span>

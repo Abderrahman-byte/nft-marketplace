@@ -18,7 +18,7 @@ const MainPage = () => {
     const [childrenGap, setChildrenGap] = useState(0)
 
     const fetchData = async () => {
-        const tokens = await getTokens('POPULARE', 100000, 100)
+        const tokens = await getTokens('POPULARITY', 100000, 100)
         const forSaleTokens = tokens.filter(token => token.isForSale && !token.instantSale)
 
         setPopularTokens(tokens)

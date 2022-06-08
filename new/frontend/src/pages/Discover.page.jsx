@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
-import TokenCard from '@Components/TokenCard'
 import { getTokens } from '@Utils/api'
 import TokensListFilter from '@Components/TokensListFilter'
+import TokensList from '@Components/TokensList'
 
 import '@Styles/DiscoverPage.css'
-import TokensList from '@Components/TokensList'
 
 const DiscoverPage = () => {
     const [tokensList, setTokensList] = useState([])
