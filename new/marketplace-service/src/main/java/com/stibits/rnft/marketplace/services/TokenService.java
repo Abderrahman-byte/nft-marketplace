@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.stibits.rnft.common.api.ApiSuccessResponse;
 import com.stibits.rnft.common.api.ProfileDetails;
 import com.stibits.rnft.common.clients.GatewayClient;
+import com.stibits.rnft.common.errors.ApiError;
 import com.stibits.rnft.common.helpers.IpfsService;
 import com.stibits.rnft.marketplace.api.CollectionDetails;
 import com.stibits.rnft.marketplace.api.CreateTokenMetadata;
@@ -28,7 +29,7 @@ public class TokenService {
     @Autowired
     private GatewayClient gatewayClient;
 
-    public Token createToken (CreateTokenMetadata metadata, String assetName, String preview, String ipfs, String creatorId) {
+    public Token createToken (CreateTokenMetadata metadata, Collection collection, String assetName, String preview, String ipfs, String creatorId) throws ApiError {
         Token token = new Token();
 
         token.setTitle(metadata.getTitle());
@@ -40,11 +41,12 @@ public class TokenService {
         token.setIpfs(ipfs);
         token.setPreviewUrl(preview);
         token.setCreatorId(creatorId);
+        token.setCollection(collection);
 
         return this.tokenRepository.save(token);
     }
 
-    public List<TokenDetails> getTokensList (TokensSortBy sortBy, int limit, int offset, double maxPrice) {
+    public List<TokenDetails> getTokensList (ProfileDetails account, TokensSortBy sortBy, int limit, int offset, double maxPrice) {
         List<Token> tokens = List.of();
 
         if (sortBy.equals(TokensSortBy.HIGH_PRICE)) {
@@ -57,10 +59,10 @@ public class TokenService {
             tokens = tokenRepository.selectTokensSortedByLikes(limit, offset, maxPrice);
         }
 
-        return tokens.stream().map(token -> this.getTokenDetails(token)).toList();
+        return tokens.stream().map(token -> this.getTokenDetails(token, account)).toList();
     }
 
-    public List<TokenDetails> getTokensList (String collectionId, TokensSortBy sortBy, int limit, int offset, double maxPrice) {
+    public List<TokenDetails> getTokensList (ProfileDetails account, String collectionId, TokensSortBy sortBy, int limit, int offset, double maxPrice) {
         List<Token> tokens = List.of();
 
         if (sortBy.equals(TokensSortBy.HIGH_PRICE)) {
@@ -73,20 +75,20 @@ public class TokenService {
             tokens = tokenRepository.selectTokensSortedByLikes(collectionId, limit, offset, maxPrice);
         }
 
-        return tokens.stream().map(token -> this.getTokenDetails(token)).toList();
+        return tokens.stream().map(token -> this.getTokenDetails(token, account)).toList();
     }
 
-    public TokenDetails getTokenDetails (String id) {
+    public TokenDetails getTokenDetails (String id, ProfileDetails account) {
         Token token = this.tokenRepository.selectById(id);
 
         if (token == null) return null;
 
-        return this.getTokenDetails(token);
+        return this.getTokenDetails(token, account);
     }
 
     // TODO : get token owner
     // TODO : get token higest bid
-    public TokenDetails getTokenDetails (Token token) {
+    public TokenDetails getTokenDetails (Token token, ProfileDetails account) {
         ApiSuccessResponse<ProfileDetails> response = gatewayClient.getUserDetails(token.getCreatorId());
         TokenDetails details = new TokenDetails();
 
@@ -101,6 +103,10 @@ public class TokenService {
         details.setPrice(token.getSettings().getPrice());
         details.setLikesCount(token.getLikes().size());
         details.setCreator(response.getData());
+
+        if (account != null ) {
+            details.setLiked(token.getLikes().stream().anyMatch(like -> like.getAccountId().equals(account.getId())));
+        }
 
         if (token.getCollection() != null) 
             details.setCollection(this.getCollectionSimpleDetails(token.getCollection()));

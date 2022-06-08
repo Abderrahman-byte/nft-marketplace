@@ -16,6 +16,7 @@ const MainPage = () => {
     const [trendToken, setTrendToken] = useState(null)
     const [childrenWidth, setChildrenWidth] = useState(100)
     const [childrenGap, setChildrenGap] = useState(0)
+    const [itemsPerLine, setItemsPerLine] = useState(4)
 
     const fetchData = async () => {
         const tokens = await getTokens('POPULARITY', 100000, 100)
@@ -24,12 +25,24 @@ const MainPage = () => {
         setPopularTokens(tokens)
         setTrendToken(forSaleTokens.length > 0 ? forSaleTokens[0] : null)
 
-        const collectionsList = await getCollectionsList(3, true)
+        const collectionsList = await getCollectionsList(3)
         setCollections(collectionsList)
+    }
+
+    const adaptItemsPerLine = () => {
+        if (window.innerWidth <= 400) setItemsPerLine(1)
+        else if (window.innerWidth <= 700) setItemsPerLine(2)
+        else if (window.innerWidth <= 1000) setItemsPerLine(3)
+        else setItemsPerLine(4)
     }
 
     useEffect(() => {
         fetchData()
+        adaptItemsPerLine()
+
+        window.addEventListener('resize', adaptItemsPerLine)
+
+        return () => window.removeEventListener('resize', adaptItemsPerLine)
     }, [])
 
     return (
@@ -40,7 +53,7 @@ const MainPage = () => {
                 </div>
             ): null}
 
-            <Carossel title='Popular' childrenWidthPercentage={22.85} gapPersentage={2.84} setGap={setChildrenGap} setChildrenWidth={setChildrenWidth}>
+            <Carossel title='Popular' childrenWidthPercentage={91 / itemsPerLine} gapPersentage={9 / itemsPerLine} setGap={setChildrenGap} setChildrenWidth={setChildrenWidth}>
                 {popularTokens.map((token, i) => <TokenCard style={{ minWidth: childrenWidth + 'px', marginRight: childrenGap + 'px'}} key={i} likable link {...token} />)}
             </Carossel>
 

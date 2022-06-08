@@ -145,7 +145,7 @@ export const getUserFavoriteTokens = async (id, limit = 10, offset = 0) => {
 
 export const postLikeToken = async (id) => {
     try {
-        const response = await postRequest(buildApiUrl('/marketplace/like'), JSON.stringify({ id }))
+        const response = await postRequest(buildApiUrl(`/marketplace/tokens/${id}/like`), JSON.stringify({}))
 
         if (response && response.success) return true
     } catch {}
@@ -155,7 +155,7 @@ export const postLikeToken = async (id) => {
 
 export const deleteLikeToken = async (id) => {
     try {
-        const response = await deleteRequest(buildApiUrl('/marketplace/like') + `?id=${id}`)
+        const response = await deleteRequest(buildApiUrl(`/marketplace/tokens/${id}/like`), JSON.stringify({}))
 
         if (response && response.success) return true
     } catch {}
@@ -176,7 +176,7 @@ export const createCollection = async (formData) => {
 
 export const getUserCollections = async () => {
     try {
-        const response = await getRequest(buildApiUrl('/user/collections'))
+        const response = await getRequest(buildApiUrl('/marketplace/user/collections'))
 
         if (response && response.success && response.data) return response.data
     } catch {}
@@ -184,12 +184,11 @@ export const getUserCollections = async () => {
     return []
 }
 
-export const createToken = async (file, metadata, multi = false) => {
+export const createToken = async (file, metadata) => {
     try {
         const formData = new FormData()
         formData.append('file', file)
         formData.append('metadata', JSON.stringify(metadata))
-        formData.append('multi', multi)
 
         const response = await multipartPostRequest(buildApiUrl('/marketplace/tokens'), formData)
 
@@ -210,9 +209,9 @@ export const getTokens = async (sort = 'LIKES', maxPrice = 10000, limit = 10, of
     return []
 }
 
-export const getCollectionsList = async (limit, withDetails = false) => {
+export const getCollectionsList = async (limit = 10) => {
     try {
-        const response = await getRequest(buildApiUrl('/marketplace/collections') + `?limit=${limit}&details=${withDetails}`)
+        const response = await getRequest(buildApiUrl('/marketplace/collections') + `?limit=${limit}`)
 
         if (response && response.success && response.data) return response.data
     } catch {}

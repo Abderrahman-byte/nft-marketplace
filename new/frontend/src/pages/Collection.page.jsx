@@ -6,6 +6,8 @@ import { getCollectionDetails, getCollectionTokens } from '@Utils/api'
 
 import '@Styles/CollectionPage.css'
 
+// TODO : stuff changed
+
 const CollectionPage = ({ }) => {
     const params = useParams()
     const id = useMemo(() => params?.id, [params])

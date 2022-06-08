@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -31,7 +32,10 @@ import com.stibits.rnft.common.utils.FileTypeService;
 import com.stibits.rnft.common.utils.RandomStringGenerator;
 import com.stibits.rnft.marketplace.api.AssetContent;
 import com.stibits.rnft.marketplace.api.CreateTokenMetadata;
+import com.stibits.rnft.marketplace.domain.Collection;
 import com.stibits.rnft.marketplace.domain.Token;
+import com.stibits.rnft.marketplace.errors.CollectionNotFoundError;
+import com.stibits.rnft.marketplace.repositories.CollectionRepository;
 import com.stibits.rnft.marketplace.repositories.TokenRepository;
 import com.stibits.rnft.marketplace.services.TokenService;
 
@@ -45,6 +49,9 @@ public class CreateTokenController {
 
     @Autowired
     private TokenRepository tokenRepository;
+
+    @Autowired
+    private CollectionRepository collectionRepository;
 
     @Autowired
     private TokenService tokenService;
@@ -67,6 +74,17 @@ public class CreateTokenController {
         @ModelAttribute(name = "metadata") @Valid CreateTokenMetadata metadata) throws IOException, ApiError {
         
         if (profileDetails == null) return ApiResponse.getFailureResponse();
+
+        Collection collection = null;
+
+        if (metadata.getCollectionId() != null) {
+            collection = collectionRepository.selectCollectionById(metadata.getCollectionId());
+
+            if (collection == null) throw new CollectionNotFoundError();
+
+            if (!collection.getCreatedById().equals(profileDetails.getId())) 
+                throw new AccessDeniedException("Collection is not owner by you.");
+        }
 
         if (tokenRepository.selectByTitle(metadata.getTitle()) != null) {
             throw new DuplicationError("Token with same title already exists.", "title");
@@ -92,7 +110,7 @@ public class CreateTokenController {
             throw new UnknownError();
         }
 
-        Token token = tokenService.createToken(metadata, assetName, tokenHash, metadataHash, profileDetails.getId());
+        Token token = tokenService.createToken(metadata, collection, assetName, tokenHash, metadataHash, profileDetails.getId());
 
         return new ApiSuccessResponse<>(Map.of("id", token.getId(), "previewUrl", ipfsService.resolveHashUrl(tokenHash)));
     } 

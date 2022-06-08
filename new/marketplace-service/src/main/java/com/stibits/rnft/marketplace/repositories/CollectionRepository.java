@@ -2,9 +2,13 @@ package com.stibits.rnft.marketplace.repositories;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -15,6 +19,13 @@ import com.stibits.rnft.marketplace.domain.Collection;
 public class CollectionRepository {
     @PersistenceContext
     private EntityManager entityManager;
+
+    private CriteriaBuilder criteriaBuilder;
+
+    @PostConstruct
+    public void getCriteriaBuilder () {
+        this.criteriaBuilder = this.entityManager.getCriteriaBuilder();
+    }
 
     @Transactional
     public Collection insertCollection (String name, String description, String creatorId, String imageUrl) {
@@ -32,6 +43,19 @@ public class CollectionRepository {
 
     public Collection selectCollectionById (String id) {
         return this.entityManager.find(Collection.class, id);
+    }
+
+    public List<Collection> selectCollectionsByCreator (String id) {
+        CriteriaQuery<Collection> query = this.criteriaBuilder.createQuery(Collection.class);
+        Root<Collection> collection = query.from(Collection.class);
+
+        query.select(collection).where(
+            this.criteriaBuilder.equal(collection.get("createdById"), id)
+        ).orderBy(
+            this.criteriaBuilder.desc(collection.get("createdDate"))
+        );
+
+        return this.entityManager.createQuery(query).getResultList();
     }
 
     @SuppressWarnings("unchecked")

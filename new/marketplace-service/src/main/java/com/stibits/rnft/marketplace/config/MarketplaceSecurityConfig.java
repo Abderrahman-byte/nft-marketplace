@@ -12,6 +12,7 @@ public class MarketplaceSecurityConfig extends CommonSecurityConfig {
     protected void configure(HttpSecurity http) throws Exception {
         this.commonConfig(http)
             .authorizeHttpRequests()
+            .antMatchers("/user/collections").authenticated()
             .antMatchers(HttpMethod.OPTIONS).permitAll()
             .antMatchers(HttpMethod.GET).permitAll()
             .anyRequest().authenticated();

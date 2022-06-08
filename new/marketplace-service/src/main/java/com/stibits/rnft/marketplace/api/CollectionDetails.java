@@ -15,5 +15,5 @@ public class CollectionDetails {
     private String imageUrl;
     private Calendar createdDate;
     private ProfileDetails creator;
-    private List<TokenDetails> Tokens;
+    private List<TokenDetails> items;
 }

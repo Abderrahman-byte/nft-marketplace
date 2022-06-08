@@ -32,6 +32,12 @@ public class CollectionService {
         return collections.stream().map(collection -> this.getCollectionDetails(collection)).toList();
     }
 
+    public List<CollectionDetails> getUserCollections (String id) {
+        List<Collection> collections = collectionRepository.selectCollectionsByCreator(id);
+
+        return collections.stream().map(collection -> this.getCollectionSimpleDetails(collection)).toList();
+    }
+
     public CollectionDetails getCollectionDetails (String id) {
         Collection collection = this.collectionRepository.selectCollectionById(id);
 
@@ -41,22 +47,28 @@ public class CollectionService {
     }
 
     public CollectionDetails getCollectionDetails (Collection collection) {
-        CollectionDetails details = new CollectionDetails();
+        CollectionDetails details = this.getCollectionSimpleDetails(collection);
         ApiSuccessResponse<ProfileDetails> response = gatewayClient.getUserDetails(collection.getCreatedById());
         List<Token> items = collection.getNfts();
 
-        details.setName(collection.getName());
-        details.setId(collection.getId());
-        details.setDescription(collection.getDescription());
-        details.setImageUrl(ipfsService.resolveHashUrl(collection.getImageUrl()));
-        details.setCreatedDate(collection.getCreatedDate());
-        details.setTokens(collection.getNfts()
-            .subList(0, items.size() <= 3 ? items.size() : 3)
+        details.setItems(items.subList(0, items.size() <= 3 ? items.size() : 3)
             .stream()
             .map(token -> this.getTokenDetails(token))
             .toList());
         
         if (response != null) details.setCreator(response.getData());
+
+        return details;
+    }
+
+    public CollectionDetails getCollectionSimpleDetails (Collection collection) {
+        CollectionDetails details = new CollectionDetails();
+        
+        details.setName(collection.getName());
+        details.setId(collection.getId());
+        details.setDescription(collection.getDescription());
+        details.setImageUrl(ipfsService.resolveHashUrl(collection.getImageUrl()));
+        details.setCreatedDate(collection.getCreatedDate());
 
         return details;
     }

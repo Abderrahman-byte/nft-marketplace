@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import CreateSingleItemForm from '@Components/CreateTokenForm'
 import TokenCard from '@Components/TokenCard'
@@ -13,6 +13,7 @@ import '@Styles/UploadItem.css'
 
 const UploadSinglePage = () => {
 	const { account, openModel, closeModel } = useContext(AuthContext)
+	const Navigate = useNavigate()
 
 	const [tokenData, setTokenData] = useState({ price: 0.0 })
 
@@ -26,6 +27,7 @@ const UploadSinglePage = () => {
 		const [data, error] = await createToken(file, metadata)
 
 		if (data && !error) {
+			if (data?.id) Navigate(`/details/${data.id}`)
 			openModel(<MessageCard title='Success' text='NFT Has been created successfully' closeBtnCallback={closeModel} />, closeModel)
 			setTokenData({})
 		} else {
