@@ -244,7 +244,7 @@ export const createTransaction = async(data) =>{
     try{
         const response = await postRequest(buildApiUrl('/marketplace/buy'), JSON.stringify(data))
 
-        if(response && response.success && response.ref) return [response.ref, null]
+        if(response && response.success && response.data?.ref) return [response.data.ref, null]
         else if (response && response.error) return [null, response.error]
     } catch {}
     return [null, null]

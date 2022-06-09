@@ -5,15 +5,35 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.stibits.rnft.common.api.ApiSuccessResponse;
+import com.stibits.rnft.common.api.ProfileDetails;
+import com.stibits.rnft.common.clients.GatewayClient;
+import com.stibits.rnft.common.errors.ApiError;
 import com.stibits.rnft.marketplace.api.TransactionDetails;
 import com.stibits.rnft.marketplace.domain.Token;
 import com.stibits.rnft.marketplace.domain.Transaction;
+import com.stibits.rnft.marketplace.errors.TokenNotFoundError;
+import com.stibits.rnft.marketplace.repositories.TokenRepository;
 import com.stibits.rnft.marketplace.repositories.TransactionRespository;
 
 @Service
 public class TransactionService {
     @Autowired
     private TransactionRespository transactionRespository;
+
+    @Autowired
+    private TokenRepository tokenRepository;
+
+    @Autowired
+    private GatewayClient gatewayClient;
+
+    public Transaction createTransaction (String tokenId, String accountFrom, String accountTo, double price) throws ApiError {
+        Token token = tokenRepository.selectById(tokenId);
+
+        if (token == null) throw new TokenNotFoundError();
+
+        return this.transactionRespository.insertTransaction(token, accountFrom, accountTo, price);
+    }
 
     public List<TransactionDetails> getTokenTransactions (String id, int limit, int offset) {
         return transactionRespository.getTransactionsOfToken(id, limit, offset)
@@ -50,12 +70,14 @@ public class TransactionService {
 
     public TransactionDetails getTransactionDetails (Transaction transaction) {
         TransactionDetails transactionDetails = new TransactionDetails();
+        ApiSuccessResponse<ProfileDetails> fromAccount = gatewayClient.getUserDetails(transaction.getFromId());
+        ApiSuccessResponse<ProfileDetails> toAccount = gatewayClient.getUserDetails(transaction.getToId());
 
         transactionDetails.setId(transaction.getId());
         transactionDetails.setPrice(transaction.getPrice());
         transactionDetails.setTokenId(transaction.getToken().getId());
-        transactionDetails.setToId(transaction.getToId());
-        transactionDetails.setFromId(transaction.getFromId());
+        transactionDetails.setTo(toAccount.getData());
+        transactionDetails.setFrom(fromAccount.getData());
         transactionDetails.setCreatedDate(transaction.getCreatedDate());
 
         return transactionDetails;

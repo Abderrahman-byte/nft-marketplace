@@ -7,6 +7,7 @@ import QrCodeCard from '@Components/QrCodeCard'
 import { AuthContext } from '@Context/AuthContext'
 import { buildApiUrl, createTransaction } from '@Utils/api'
 import { DEFAULT_ERROR } from '@Utils/generic'
+import { EventSourcePolyfill } from 'event-source-polyfill'
 
 const PurchaseNowBtn = ({ tokenId, onPurchaseSuccess }) => {
 	const { authenticated, account, openModel, closeModel } = useContext(AuthContext)
@@ -26,7 +27,11 @@ const PurchaseNowBtn = ({ tokenId, onPurchaseSuccess }) => {
 
 		if (ref === null) return ShowError(error?.detail || DEFAULT_ERROR.message)
 
-		const eventSource = new EventSource(buildApiUrl('/marketplace/buy') + `?ref=${ref}`, { withCredentials: true })
+		const eventSource = new EventSourcePolyfill(buildApiUrl('/marketplace/buy') + `?ref=${ref}`, { 
+			headers: {
+				'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+			}
+		})
 
         const closeModelQr = () => {
 			if (eventSource.readyState !== eventSource.CLOSED) eventSource.close()
@@ -37,6 +42,8 @@ const PurchaseNowBtn = ({ tokenId, onPurchaseSuccess }) => {
 			const data = event.data
 
             if (data) {
+				console.log('Qr code : ' + data)
+				
                 openModel(
                     <QrCodeCard
                         title='Scan to confirm'
@@ -69,10 +76,12 @@ const PurchaseNowBtn = ({ tokenId, onPurchaseSuccess }) => {
 		eventSource.addEventListener('error', (event) => {
 			const error = JSON.parse(event.data || '{}')
 
-			if (event.readyState !== event.CLOSED) event.close()
-
-			ShowError(error.detail)
+			ShowError(error?.detail || DEFAULT_ERROR.message)
+			
+			eventSource.close()
 		})
+
+		eventSource.addEventListener('close', () => eventSource.close())
 	}, [tokenId, authenticated, account])
 
 	return (

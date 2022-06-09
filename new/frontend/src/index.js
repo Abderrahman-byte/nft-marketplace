@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
+import { NativeEventSource, EventSourcePolyfill } from 'event-source-polyfill';
 
 import App from './App'
 import { AuthProvider } from '@Context/AuthContext'
@@ -9,6 +10,7 @@ import '@Styles/index.css'
 import '@Styles/icons.css'
 
 // import reportWebVitals from './reportWebVitals';
+global.EventSource = NativeEventSource || EventSourcePolyfill
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 

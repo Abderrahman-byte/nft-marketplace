@@ -50,7 +50,9 @@ public class TransactionRespository {
         transaction.setToId(accountTo);
         transaction.setPrice(price);
 
-        return entityManager.merge(transaction);
+        entityManager.persist(transaction);
+
+        return transaction;
     }
 
     public List<Transaction> selectTransactionsByTokenId(String id) {

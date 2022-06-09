@@ -8,13 +8,11 @@ import './styles.css'
 const HistoDiv = ({from, to, price}) => {
 
     return (
-
-
         <div className="DetailsInfo ">
 
                 <div className="frame-966">
                     <div className="avatar-1">
-                        <img src={to.avatarUrl} alt="" />
+                        <img src={to?.avatarUrl} alt="" />
                     </div>
                     <div className="infos-1">
                        <div className="frame-966">

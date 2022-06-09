@@ -19,6 +19,11 @@ services:
       - IPFS_API_AUTHORIZATION=${IPFS_API_AUTHORIZATION}
       - IPFS_API_URL=${IPFS_API_URL}
       - IPFS_GATEWAY=${IPFS_GATEWAY}
+      - RABBITMQ_VHOST=${RABBITMQ_VHOST}
+      - RABBITMQ_USER=${RABBITMQ_USER}
+      - RABBITMQ_PASS=${RABBITMQ_PASS}
+      - RABBITMQ_HOST=rabbitmq
+      - AES_PASSWORD=${AES_PASSWORD}
   api-gateway:
     build: ./api-gateway
     depends_on:
@@ -53,6 +58,15 @@ services:
       - POSTGRES_PASSWORD=${PG_PASSWORD}
     ports:
       - "5432:5432"
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      - RABBITMQ_DEFAULT_VHOST=${RABBITMQ_VHOST}
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASS}
 
 volumes:
   rnft_db: {}

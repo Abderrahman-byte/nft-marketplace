@@ -10,6 +10,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
 import com.stibits.rnft.common.config.CommonConfig;
 import com.stibits.rnft.common.helpers.IpfsService;
 
@@ -19,7 +21,10 @@ import com.stibits.rnft.common.helpers.IpfsService;
 @Import({ CommonConfig.class })
 public class MaraketplaceConfig  implements WebMvcConfigurer {
     @Value("#{'${cors.allowOrigins}'.split(',')}")                                  
-    String corsAllowOrigins[]; 
+    private String corsAllowOrigins[]; 
+
+    @Value("${rmq.uri}")
+    private String rmqUri;
 
     @Autowired
     private IpfsProperties ipfsConfig;
@@ -37,5 +42,19 @@ public class MaraketplaceConfig  implements WebMvcConfigurer {
             .allowedMethods("*")
             .allowedHeaders("*")
             .maxAge(3600);
+    }
+
+    @Bean
+    public Connection rmqConnection () throws Exception {
+        return rmqConnectionFactory().newConnection();
+    }
+
+    @Bean
+    public ConnectionFactory rmqConnectionFactory () throws Exception {
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+
+        connectionFactory.setUri(rmqUri);
+
+        return connectionFactory;
     }
 }
