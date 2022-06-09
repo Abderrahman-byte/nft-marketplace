@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,16 +21,22 @@ import com.stibits.rnft.common.api.ApiSuccessResponse;
 import com.stibits.rnft.common.api.ProfileDetails;
 import com.stibits.rnft.common.errors.ApiError;
 import com.stibits.rnft.marketplace.api.BidDetails;
+import com.stibits.rnft.marketplace.api.UpdateSettingsRequest;
+import com.stibits.rnft.marketplace.domain.Token;
 import com.stibits.rnft.marketplace.api.TokenDetails;
 import com.stibits.rnft.marketplace.api.TransactionDetails;
 import com.stibits.rnft.marketplace.errors.TokenNotFoundError;
 import com.stibits.rnft.marketplace.repositories.LikeRepository;
+import com.stibits.rnft.marketplace.repositories.TokenRepository;
 import com.stibits.rnft.marketplace.services.BidService;
 import com.stibits.rnft.marketplace.services.TokenService;
 import com.stibits.rnft.marketplace.services.TransactionService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/tokens")
+@Slf4j
 public class TokensController {
     // TODO : check if user likes the tokens
     
@@ -40,6 +48,9 @@ public class TokensController {
 
     @Autowired
     private BidService bidService;
+
+    @Autowired
+    private TokenRepository tokenRepository;
 
     @Autowired
     private TransactionService transactionService;
@@ -65,6 +76,30 @@ public class TokensController {
         if (tokenDetails == null) throw new TokenNotFoundError();
 
         return new ApiSuccessResponse<>(tokenDetails);
+    }
+
+    @PutMapping("/{id}")
+    public ApiResponse updateTokenSettings (@PathVariable String id, @AuthenticationPrincipal ProfileDetails account, @RequestBody UpdateSettingsRequest request) throws ApiError {
+        if (account == null) return ApiResponse.getFailureResponse();
+
+        Token token = this.tokenRepository.selectById(id);
+
+        if (token == null) throw new TokenNotFoundError();
+
+        String ownerId = this.transactionService.getTokenOwner(token);
+
+        if (!ownerId.equals(account.getId())) throw new AccessDeniedException("You dont own this token.");
+
+        log.info("request => " + request);
+        log.info("Is for sale : " + request.getIsForSale());
+
+        if (request.getPrice() != null) token.getSettings().setPrice(request.getPrice());
+        if (request.getInstantSale() != null) token.getSettings().setInstantSale(request.getInstantSale());
+        if (request.getIsForSale() != null) token.getSettings().setForSale(request.getIsForSale());
+
+        this.tokenRepository.save(token);
+
+        return ApiResponse.getFailureResponse();
     }
 
     @PostMapping("/{id}/like")

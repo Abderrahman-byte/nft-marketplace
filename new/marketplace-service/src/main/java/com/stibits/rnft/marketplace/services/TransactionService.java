@@ -57,7 +57,7 @@ public class TransactionService {
         return balance;
     }
 
-    // FIXME : this is only for single token
+    // FIXME : this works only for single token
     public String getTokenOwner (Token token) {
         List<Transaction> transactions = token.getTransactions().stream().sorted(
                 (a, b) -> a.getCreatedDate().compareTo(b.getCreatedDate())

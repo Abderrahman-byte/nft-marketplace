@@ -1,12 +1,11 @@
-import React, { useEffect, useState, useContext, useCallback } from "react";
+import React, { useState, useContext } from "react";
+
 import CheckboxSettingsItem from "@Components/CheckBoxSettingsItem";
 import { updateTokenSettings } from "@Utils/api";
 import { AuthContext } from '@Context/AuthContext'
 import LoadingCard from '@Components/LoadingCard'
 
 import './styles.css'
-
-
 
 const DetailsFixedBoxOwner =({id,isForSale, instantSale, price, onPriceUpdated})=>{
     const {openModel, closeModel } = useContext(AuthContext)

@@ -51,7 +51,7 @@ const DetailsCard =({details, owner, creator, isOwner, onPriceUpdated, onAccepte
             {!isOwner ? (
                 <DetailsFixedBox onPlacedBid={onPlacedBid} onPurchaseSuccess={onPurchaseSuccess} details = {details} owner ={owner} creator={creator}/>
             ) :(
-                <DetailsFixedBoxOwner id={details.id} isForSale ={details?.isForSale } instantSale = {details?.instantSale} price ={details?.price} onPriceUpdated={onPriceUpdated} />
+                <DetailsFixedBoxOwner id={details.id} isForSale ={details?.forSale } instantSale = {details?.instantSale} price ={details?.price} onPriceUpdated={onPriceUpdated} />
             )}
         </div>
     )
