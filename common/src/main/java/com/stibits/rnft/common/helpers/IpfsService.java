@@ -10,6 +10,7 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.InputStreamSource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -65,6 +66,15 @@ public class IpfsService {
             for (Entry<String, List<String>> entry : filePart.headers().entrySet())
                 headers.addAll(entry.getKey(), entry.getValue());
         });
+
+        return this.uploadFile(multipartBuilder);
+    }
+
+    public Mono<String> uploadToken (Resource resource, String fields) {
+        MultipartBodyBuilder multipartBuilder = new MultipartBodyBuilder();
+
+        multipartBuilder.part("file1", resource);
+        multipartBuilder.part("fields", fields);
 
         return this.uploadFile(multipartBuilder);
     }
