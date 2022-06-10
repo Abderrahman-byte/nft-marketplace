@@ -50,7 +50,6 @@
 }
 
 .ProfileInfoCard .info .website-link {
-	
 	display: none;
 }
 
@@ -66,24 +65,28 @@
 .ProfileInfoCard .card-footer {
 	display: none;
 }
+
 @media screen and (min-width : 900px) {
 	.ProfileInfoCard{
 		margin-bottom: 0%;
 	}
+
 	.ProfileInfoCard .horizontal-divider{
 		display: inline;
 	}
+
 	.ProfileInfoCard .info .website-link {
 		display: inline;
 		display: flex;
 		width: fit-content;
-		align-items: center;
+		align-items: flex-start;
 		justify-content: center;
 		gap: .5em;
 		text-decoration: none;
 		color: #23262f;
 		font-size: .875rem;
 	}
+
 	.ProfileInfoCard .controll-btns, .ProfileInfoCard .social-media-icons {
 		
 		display: inline;

@@ -350,12 +350,15 @@
     .AppHeader{
         padding: 1.25em 11%;
     }
+
     .AppHeader .Left-content .nav-link {
         display: inline;
     }
+
     .AppHeader .Actions .buttons .btn{
         display: inline;
     }
+    
     .AppHeader .Actions .buttons .share-icon{
         display: none;
     }

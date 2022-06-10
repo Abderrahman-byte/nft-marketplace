@@ -12,10 +12,12 @@ const ProfileInfoCard = ({ profile }) => {
          <div className='info'>
             <h2 className='name'>{profile?.displayName || profile?.username}</h2>
             <p className='bio'>{profile?.bio}</p>
-            <a href='#' className='website-link'>
-               <i className='globe-icon'></i>
-               www.ArtStartion.com
-            </a>
+            {profile?.website ? (
+               <a href={profile?.website} target='_blank' className='website-link'>
+                  <i className='globe-icon'></i>
+                  {profile?.website}
+               </a>
+            ) : null}
          </div>
 
          <div className='controll-btns'>
