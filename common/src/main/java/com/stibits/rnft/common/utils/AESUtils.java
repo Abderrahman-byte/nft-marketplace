@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class AESUtils {
-    private static final String DEFAULT_ALGORITHM = "AES/CBC/PKCS5Padding";
+    private static final String DEFAULT_ALGORITHM = "AES/CBC/PKCS7Padding";
     private static final byte[] DEFAULT_IV_BYTES = new byte[16];
     private static final IvParameterSpec DEFAULT_PARAMETER_SPEC;
 
@@ -31,7 +31,7 @@ public class AESUtils {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] passwordHash = digest.digest(password.getBytes());
-            SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+            SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
             KeySpec spec = new PBEKeySpec(password.toCharArray(), passwordHash, 65536, 256);
             SecretKey secretKey = new SecretKeySpec(factory.generateSecret(spec).getEncoded(), "AES");
 
