@@ -23,7 +23,7 @@ public class PasswordConstraintValidator implements ConstraintValidator<StrongPa
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         PasswordValidator validator = new PasswordValidator(List.of(
-            new LengthRule(8),
+            new LengthRule(8, 100),
             new UppercaseCharacterRule(1),
             new DigitCharacterRule(1),
             new LowercaseCharacterRule(1)
